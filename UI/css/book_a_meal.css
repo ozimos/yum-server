@@ -8,7 +8,8 @@ body {
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-button{
+
+button {
   background-color: #2f80ed;
   border-radius: 10px;
   padding: 0.5em 0;
@@ -16,66 +17,90 @@ button{
   color: #aaa;
   font-weight: bold;
 }
+
 main,
 main div {
   width: 100%;
 }
-.title, .title-element{
+
+.title,
+.title-element {
   display: flex;
   justify-content: space-between;
   background-color: #f2994a;
   padding-left: 1em;
   padding-right: 0;
 }
-.title{
+
+.title {
   background-color: #f2984a;
 }
-.title-element{
+
+.title-element {
   background-color: #f2b94a;
   margin: 1em 0;
   border-radius: 10px;
   line-height: 2;
   /* padding-right: 0 !important; */
 }
-.title-button{
+
+.title-button {
   padding: 0;
   margin: 1em 0;
   min-width: 6em;
 }
-.title-element *{
+
+.title-element * {
   margin: 0;
 }
-.form-box{
+
+.form-box {
   width: 80%;
   margin: 40px auto;
-
 }
-.stacked-text{
+
+.hide {
+  display: none
+}
+
+.stacked-text {
   margin-top: 20px;
 }
-.stacked-text>*{
+
+.stacked-text>* {
   margin: 0;
 }
-form>*{
+
+form>* {
   display: block;
   width: 100%;
   font-size: 20px;
   border-width: 0 0 1px 0;
   margin-top: 20px;
 }
-#meal_image{
-  width: 320px;
+
+form>label {
+  font-size: 16px;
+  text-align: left;
+  margin: 0;
 }
+
+#meal_image {
+  max-width: 320px;
+}
+
 .fluid-img {
   width: 100%;
   height: auto;
   object-fit: cover;
 }
-a{
+
+a {
   text-decoration: none;
   color: #2f80ed;
   margin-left: 10px;
 }
+
 .welcome {
   min-height: calc(100vh / 3);
   background: #fafafa url(../assets/Food.jpg);
@@ -89,32 +114,32 @@ a{
   color: #f2994a;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-.modal-trigger{
+
+.modal-trigger {
   cursor: pointer;
 }
 
-/* The Modal (background) */
 .modal {
   border-radius: 10px;
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   max-width: 400px;
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: #f2b94a; /* Black w/ opacity */
+  overflow: auto;
+  background-color: #f2b94a;
 }
 
 /* Modal Content/Box */
+
 .modal-content {
   background-color: #f2b94a60;
-  margin: 5% auto; /* 15% from the top and centered */
-  padding: 0 20px;
+  padding: 0;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 100%;
+  margin: 0;
 }
 
 button:hover,
@@ -129,5 +154,10 @@ button:focus {
   body {
     margin: 0 auto;
     padding: 0;
+  }
+  .modal-content {
+    margin: 5% auto;
+  padding: 0 20px;
+  width: 80%;
   }
 }
