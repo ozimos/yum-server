@@ -32,45 +32,52 @@
         </button>
       </div>
       <div class="title-element">
-          <h3 class="element-name modal-trigger">
-            Some random meal
-          </h3>
-          <button class="title-button">
-            <p>X</p>
-          </button>
-        </div>
-        <div class="title-element">
-            <h3 class="element-name modal-trigger">
-              Some random meal
-            </h3>
-            <button class="title-button">
-              <p>X</p>
-            </button>
-          </div>
+        <h3 class="element-name modal-trigger">
+          Some random meal
+        </h3>
+        <button class="title-button">
+          <p>X</p>
+        </button>
+      </div>
+      <div class="title-element">
+        <h3 class="element-name modal-trigger">
+          Some random meal
+        </h3>
+        <button class="title-button">
+          <p>X</p>
+        </button>
+      </div>
     </div>
   </main>
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="form-box">
-      <form action="">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="form-box">
+        <form id="form_menu" action="">
 
-        <input type="text" name="mealName" placeholder="Meal Name">
-        <textarea  name="password" placeholder="Details"></textarea>
-        <input type="text" name="price" placeholder="Price">
-        <button type="submit">Create Meal</button>
-      </form>
+          <input type="text" name="mealName" placeholder="Meal Name">
+          <input type="text" name="price" placeholder="Price">
+          <textarea name="password" placeholder="Description"></textarea>
+          <input type="file" name="image" >
+        </form>
+      </div>
+      <div id="meal_image">
+        <img src="assets/Food.jpg" alt="Picture of meal" class="fluid-img">
+      </div>
+      <button class="title-button" form="form_menu" type="submit">
+        <p>Create Meal</p>
+      </button>
     </div>
+
+
   </div>
 
-</div>
-
-    <script src="js/modal.js"></script>
+  <script src="js/modal.js"></script>
 </body>
 
 </html>
