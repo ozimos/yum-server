@@ -1,0 +1,68 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  max-width: 500px;
+  height: 100vh;
+  text-align: center;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button{
+  background-color: #2f80ed;
+  border-radius: 10px;
+  padding: 0.5em 0;
+}
+main,
+main div {
+  width: 100%;
+}
+.form-box{
+  width: 80%;
+  margin: 40px auto;
+
+}
+.stacked-text{
+  margin-top: 20px;
+}
+.stacked-text>*{
+  margin: 0;
+}
+form>*{
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  border-width: 0 0 1px 0;
+  margin-top: 20px;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+}
+a{
+  text-decoration: none;
+  color: #2f80ed;
+  margin-left: 10px;
+}
+.welcome {
+  min-height: calc(100vh / 3);
+  background: #fafafa url(../assets/Food.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.welcome-text {
+  padding: 0 50px;
+  color: #f2994a;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+@media (min-width: 500px) {
+  html,
+  body {
+    margin: 0 auto;
+    padding: 0;
+  }
+}
