@@ -32,7 +32,33 @@ a {
   padding: 0.5em;
 
 }
+.flexbox {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.nowrap {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+.clr {
+  border: none;
+  background-color: transparent;
+  height: 1.6rem;
+  margin: 0;
+}
+li>.svg-inline--fa {
+  font-size: 1.5rem;
+  margin: 0.6em;
+  font-weight: 0;
+  vertical-align: middle;
+}
+.grow {
+  min-width: 7rem;
+  flex: 1 1;
+}
 button,
 .btn {
   background-color: #2f80ed;
