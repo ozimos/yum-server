@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
     crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
     <h1>Book A Meal</h1>
   </header>
   <main>
-    <div class="title">
+    <div class="title flexbox2">
       <h3>
         Menu Editor
       </h3>
@@ -25,24 +25,24 @@
     <div class="form-box">
       <form action="" id="form_date">
         <label for="dateSearch">Enter the date on which the menu will be served</label>
-        <input id="dateSearch" type="date" name="date" >
+        <input id="dateSearch" type="date" name="date">
       </form>
 
       <form action="">
         <input id="mealSelector" list="meals" placeholder="Enter meal search then select an option">
         <div id="meals_datalist">
-            <datalist id="meals">
-              <option value="Fried Rice">
-                <option value="Eba and Soup">
-                  <option value="Jollof Rice">
-            </datalist>
-          </div>
+          <datalist id="meals">
+            <option value="Fried Rice">
+              <option value="Eba and Soup">
+                <option value="Jollof Rice">
+          </datalist>
+        </div>
 
         <button type="submit">Save to Menu</button>
       </form>
     </div>
     <div>
-      <div class="title-element">
+      <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
@@ -50,7 +50,7 @@
           <p>X</p>
         </button>
       </div>
-      <div class="title-element">
+      <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
@@ -58,7 +58,7 @@
           <p>X</p>
         </button>
       </div>
-      <div class="title-element">
+      <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
@@ -75,7 +75,7 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-      <div class="title">
+      <div class="title flexbox2">
         <h3>
           Meal Viewer
         </h3>
@@ -89,7 +89,7 @@
           <input hidden type="text" name="mealId" placeholder="123456">
           <input disabled type="text" name="mealName" placeholder="Meal Name">
           <input disabled type="text" name="price" placeholder="Price">
-          <input  type="text" name="quantity" placeholder="No of meals">
+          <input type="text" name="quantity" placeholder="No of meals">
           <textarea disabled name="password" placeholder="Description"></textarea>
           <input class="hide" disabled type="file" name="image">
         </form>

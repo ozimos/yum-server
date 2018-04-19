@@ -9,36 +9,29 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-}
 .nowrap {
   white-space: nowrap;
   flex-wrap: nowrap;
-}
-.nav {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 a {
   text-decoration: none;
   color: #000 !important;
-  background-color: #2f80ed;
-  border-radius: 5px;
   padding: 0.5em;
-
 }
-.flexbox {
+.blue{
+  border-radius: 5px;
+  background-color: #2f80ed;
+}
+.flexbox, .flexbox2 {
   flex-wrap: wrap;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
-
+.flexbox2{
+  justify-content: space-between !important;
+}
 .nowrap {
   white-space: nowrap;
   flex-wrap: nowrap;
@@ -49,7 +42,7 @@ a {
   height: 1.6rem;
   margin: 0;
 }
-li>.svg-inline--fa {
+a>.svg-inline--fa {
   font-size: 1.5rem;
   margin: 0.6em;
   font-weight: 0;
@@ -74,15 +67,6 @@ main div {
   width: 100%;
 }
 
-.title,
-.title-element {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f2994a;
-  /* padding-left: 1em;
-  padding-right: 0; */
-}
-
 .title {
   background-color: #f2984a;
 }
@@ -92,7 +76,6 @@ main div {
 }
 
 .title-element {
-  justify-content: flex-start;
   background-color: #f2b94a;
   margin: 1em 0;
   border-radius: 10px;
