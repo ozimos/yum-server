@@ -9,7 +9,32 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button {
+header {
+  display: flex;
+  justify-content: space-between;
+}
+.nowrap {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+.nav {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #000 !important;
+  background-color: #2f80ed;
+  border-radius: 5px;
+  padding: 0.5em;
+
+}
+
+button,
+.btn {
   background-color: #2f80ed;
   border-radius: 10px;
   padding: 0.5em 0;
@@ -35,9 +60,11 @@ main div {
 .title {
   background-color: #f2984a;
 }
-.title>*:first-child{
+
+.title>*:first-child {
   margin-left: 10px;
 }
+
 .title-element {
   justify-content: flex-start;
   background-color: #f2b94a;
@@ -56,10 +83,12 @@ main div {
   margin: 0;
   margin-left: 10px;
 }
-.title-element>*:firsth-child{
+
+.title-element>*:firsth-child {
   flex-grow: 1;
 }
-.title-element>*:nth-child(2){
+
+.title-element>*:nth-child(2) {
   margin-left: auto;
 }
 
@@ -75,17 +104,21 @@ main div {
 .stacked-text {
   margin-top: 20px;
 }
-.summary{
+
+.summary {
   text-align: left;
 }
-.summary *{
+
+.summary * {
   margin: 0;
-padding: 0;
+  padding: 0;
 }
-.summary_info{
+
+.summary_info {
   display: flex;
   justify-content: space-evenly;
 }
+
 .stacked-text>* {
   margin: 0;
 }
@@ -98,9 +131,11 @@ form>* {
   border-color: #000;
   margin-top: 20px;
 }
-form>button{
+
+form>button {
   border-width: 0;
 }
+
 form>label {
   font-size: 16px;
   text-align: left;
@@ -179,8 +214,8 @@ button:focus {
   }
   .modal-content {
     margin: 5% auto;
-  padding: 0 20px;
-  width: 80%;
+    padding: 0 20px;
+    width: 80%;
   }
   .form-box {
     width: 80%;
