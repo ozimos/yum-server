@@ -56,13 +56,16 @@ main div {
   margin: 0;
   margin-left: 10px;
 }
+.title-element>*:firsth-child{
+  flex-grow: 1;
+}
 .title-element>*:nth-child(2){
   margin-left: auto;
 }
 
 .form-box {
-  width: 80%;
-  margin: 40px auto;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .hide {
@@ -72,7 +75,17 @@ main div {
 .stacked-text {
   margin-top: 20px;
 }
-
+.summary{
+  text-align: left;
+}
+.summary *{
+  margin: 0;
+padding: 0;
+}
+.summary_info{
+  display: flex;
+  justify-content: space-evenly;
+}
 .stacked-text>* {
   margin: 0;
 }
@@ -168,5 +181,9 @@ button:focus {
     margin: 5% auto;
   padding: 0 20px;
   width: 80%;
+  }
+  .form-box {
+    width: 80%;
+    margin: 40px auto;
   }
 }

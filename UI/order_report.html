@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/book_a_meal.css">
+  <title>Book A Meal</title>
+</head>
+
+<body>
+  <header>
+    <h1>Book A Meal</h1>
+  </header>
+  <main>
+    <div class="title">
+      <h3>
+        Order Report
+      </h3>
+
+    </div>
+
+    <div class="form-box">
+      <form action="" id="form_date">
+        <label for="dateSearch">Enter the date for your order</label>
+        <input id="dateSearch" type="date" name="date">
+      </form>
+      <div class="summary">
+          <h3>Summary</h3>
+          <div class="summary_info">
+            <h4>Orders 100</h4>
+            <h4>Customers 50</h4>
+            <h4>Average % Sold 90</h4>
+            <h4>Total 100000</h4>
+          </div>
+
+        </div>
+      <form action="">
+        <input id="mealSelector" list="meals" placeholder="Enter search term">
+        <div>
+          <datalist id="meals">
+            <option value="1">
+              <option value="2">
+                <option value="3">
+          </datalist>
+        </div>
+
+      </form>
+    </div>
+    <div class="title">
+      <h3>
+        Click Order To View Details
+      </h3>
+
+    </div>
+    <div>
+      <div class="title-element">
+        <h3 class="element-name modal-trigger">
+          Order 1
+        </h3>
+        <p>&#8358;1000</p>
+        <button class="title-button modal-trigger2">
+          <p>V</p>
+        </button>
+      </div>
+      <div class="title-element">
+        <h3 class="element-name modal-trigger">
+          Order 2
+        </h3>
+        <p>&#8358;1000</p>
+        <button class="title-button modal-trigger2">
+          <p>V</p>
+        </button>
+      </div>
+      <div class="title-element">
+        <h3 class="element-name modal-trigger">
+          Order 3
+        </h3>
+        <p>&#8358;1000</p>
+        <button class="title-button modal-trigger2">
+          <p>V</p>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="title">
+        <h3>
+          Order Details
+        </h3>
+        <button class="title-button close">
+          X
+        </button>
+      </div>
+      <div class="form-box">
+        <h3>Order ID: 12345</h3>
+        <h3>Customer: Alice Zed</h3>
+        <h3>Amount: &#8358;1200</h3>
+        <h3>Time: 12.50PM</h3>
+        <h3>Meal: Fried Rice</h3>
+      </div>
+
+    </div>
+
+
+  </div>
+  <script src="js/modal.js"></script>
+</body>
+
+</html>
