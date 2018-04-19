@@ -28,20 +28,22 @@ main div {
   display: flex;
   justify-content: space-between;
   background-color: #f2994a;
-  padding-left: 1em;
-  padding-right: 0;
+  /* padding-left: 1em;
+  padding-right: 0; */
 }
 
 .title {
   background-color: #f2984a;
 }
-
+.title>*:first-child{
+  margin-left: 10px;
+}
 .title-element {
+  justify-content: flex-start;
   background-color: #f2b94a;
   margin: 1em 0;
   border-radius: 10px;
   line-height: 2;
-  /* padding-right: 0 !important; */
 }
 
 .title-button {
@@ -50,8 +52,12 @@ main div {
   min-width: 6em;
 }
 
-.title-element * {
+.title-element>* {
   margin: 0;
+  margin-left: 10px;
+}
+.title-element>*:nth-child(2){
+  margin-left: auto;
 }
 
 .form-box {
@@ -76,9 +82,12 @@ form>* {
   width: 100%;
   font-size: 20px;
   border-width: 0 0 1px 0;
+  border-color: #000;
   margin-top: 20px;
 }
-
+form>button{
+  border-width: 0;
+}
 form>label {
   font-size: 16px;
   text-align: left;
