@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+    crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,11 +12,36 @@
 </head>
 
 <body>
-  <header>
-    <h1>Book A Meal</h1>
+  <header class="header">
+    <nav class="container flexbox">
+      <h2 class="shrink">Book A Meal</h2>
+      <div class="flexbox nowrap">
+        <a href="meal_list.html" class="tooltip">
+          <i class="fas fa-archive"></i>
+          <span class="tooltiptext">Manage Meal Lists</span>
+        </a>
+
+        <a href="menu_editor.html" class="tooltip">
+          <i class="far fa-list-alt fa-lg clr"></i>
+          <span class="tooltiptext">Edit Meal Menu</span>
+        </a>
+
+        <a href="meal_booking.html" class="tooltip">
+          <i class="fas fa-utensils fa-lg"></i>
+          <span class="tooltiptext">Book Your Meal</span>
+        </a>
+        <a href="sign_in.html" class="tooltip">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="tooltiptext">Log Out</span>
+          </a>
+      </div>
+    </nav>
   </header>
-  <main>
-    <div class="title flexbox2">
+  <main class="container">
+    <div>
+      <h3>Welcome Caterer Sanni</h3>
+    </div>
+    <div class="title flexbox">
       <h3>
         Order Report
       </h3>
@@ -48,39 +75,47 @@
 
       </form>
     </div>
-    <div class="title flexbox2">
+    <div class="title flexbox">
       <h3>
         Click Order To View Details
       </h3>
 
     </div>
+
+    <!-- element list -->
     <div>
       <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Order 1
         </h3>
-        <p>&#8358;1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+        <div class="flexbox">
+          <p>&#8358;1000</p>
+          <button class="title-button modal-trigger2">
+            <p>V</p>
+          </button>
+        </div>
       </div>
       <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Order 2
         </h3>
-        <p>&#8358;1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+        <div class="flexbox">
+            <p>&#8358;1000</p>
+            <button class="title-button modal-trigger2">
+              <p>V</p>
+            </button>
+          </div>
       </div>
       <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Order 3
         </h3>
-        <p>&#8358;1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+        <div class="flexbox">
+            <p>&#8358;1000</p>
+            <button class="title-button modal-trigger2">
+              <p>V</p>
+            </button>
+          </div>
       </div>
     </div>
 
@@ -91,14 +126,16 @@
   <div id="myModal" class="modal">
 
     <!-- Modal content -->
-    <div class="modal-content">
-      <div class="title flexbox2">
+    <div class="modal-content container">
+      <div class="title flexbox">
         <h3>
           Order Details
         </h3>
-        <button class="title-button close">
-          X
-        </button>
+        <div class="flexbox">
+            <button class="title-button close">
+              <p>X</p>
+            </button>
+          </div>
       </div>
       <div class="form-box">
         <h3>Order ID: 12345</h3>

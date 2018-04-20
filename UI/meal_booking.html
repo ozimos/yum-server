@@ -12,11 +12,34 @@
 </head>
 
 <body>
-  <header>
-    <h1>Book A Meal</h1>
+  <header class="header">
+    <nav class="container flexbox">
+      <h2 class="shrink">Book A Meal</h2>
+      <div class="flexbox nowrap">
+        <a href="meal_list.html" class="tooltip">
+          <i class="fas fa-archive"></i>
+          <span class="tooltiptext">Manage Meal Lists</span>
+        </a>
+        <a href="menu_editor.html" class="tooltip">
+          <i class="far fa-list-alt fa-lg clr"></i>
+          <span class="tooltiptext">Edit Meal Menu</span>
+        </a>
+        <a href="order_report.html" class="tooltip">
+          <i class="fas fa-chart-line fa-lg"></i>
+          <span class="tooltiptext">View Order Reports</span>
+        </a>
+        <a href="sign_in.html" class="tooltip">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="tooltiptext">Log Out</span>
+          </a>
+      </div>
+    </nav>
   </header>
-  <main>
-    <div class="title flexbox2">
+  <main class="container">
+    <div>
+      <h3>Welcome Customer Sanni</h3>
+    </div>
+    <div class="title flexbox">
       <h3>
         Meal Booking
       </h3>
@@ -41,7 +64,7 @@
         <button type="submit">Place Order</button>
       </form>
     </div>
-    <div class="title flexbox2">
+    <div class="title flexbox">
       <h3>
         Click Meal To View Details
       </h3>
@@ -52,28 +75,36 @@
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
-        <p>N1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+        <div class="flexbox">
+            <p>N1000</p>
+            <button class="title-button modal-trigger2">
+              <p>V</p>
+            </button>
+        </div>
+
+
       </div>
       <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
-        <p>N1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+       <div class="flexbox">
+            <p>N1000</p>
+            <button class="title-button modal-trigger2">
+              <p>V</p>
+            </button>
+        </div>
       </div>
       <div class="title-element flexbox">
         <h3 class="element-name modal-trigger">
           Some random meal
         </h3>
-        <p>N1000</p>
-        <button class="title-button modal-trigger2">
-          <p>V</p>
-        </button>
+       <div class="flexbox">
+            <p>N1000</p>
+            <button class="title-button modal-trigger2">
+              <p>V</p>
+            </button>
+        </div>
       </div>
     </div>
 
@@ -85,13 +116,15 @@
 
     <!-- Modal content -->
     <div class="modal-content">
-      <div class="title flexbox2">
+      <div class="title flexbox">
         <h3>
           Meal Viewer
         </h3>
-        <button class="title-button close">
-          X
-        </button>
+        <div class="flexbox">
+            <button class="title-button close">
+              <p>X</p>
+            </button>
+          </div>
       </div>
       <div class="form-box">
         <form id="form_menu" action="">
@@ -116,8 +149,8 @@
   <div id="myModal2" class="modal">
 
     <!-- Modal content -->
-    <div class="modal-content">
-      <div class="title flexbox2">
+    <div class="modal-content container">
+      <div class="title flexbox">
         <h3>
           Your Order has been saved
         </h3>
@@ -125,9 +158,6 @@
           X
         </button>
       </div>
-
-
-
     </div>
 
 
