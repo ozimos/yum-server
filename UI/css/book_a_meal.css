@@ -2,11 +2,24 @@ html,
 body {
   padding: 0;
   margin: 0;
-  max-width: 500px;
-  height: 100vh;
-  text-align: center;
   box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-color: #fafafa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+  border-bottom: solid 1px #b8abab;
+  background-color: white;
+}
+
+.container {
+  max-width: 736px;
+  min-width: 100px;
+  margin: 0;
 }
 
 .nowrap {
@@ -19,39 +32,50 @@ a {
   color: #000 !important;
   padding: 0.5em;
 }
-.blue{
+
+.blue {
   border-radius: 5px;
   background-color: #2f80ed;
 }
-.flexbox, .flexbox2 {
-  flex-wrap: wrap;
+
+.flexbox,
+.flexbox2 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.flexbox2{
+
+.flexbox2 {
   justify-content: space-between !important;
 }
+
 .nowrap {
   white-space: nowrap;
   flex-wrap: nowrap;
 }
+
 .clr {
   border: none;
   background-color: transparent;
   height: 1.6rem;
   margin: 0;
 }
+
 a>.svg-inline--fa {
   font-size: 1.5rem;
   margin: 0.6em;
   font-weight: 0;
   vertical-align: middle;
 }
-.grow {
-  min-width: 7rem;
-  flex: 1 1;
+
+.shrink {
+  min-width: 1rem;
+  flex: 0 1 auto;
+  overflow-x: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
 }
+
 button,
 .btn {
   background-color: #2f80ed;
@@ -60,11 +84,6 @@ button,
   min-width: 20px;
   color: #aaa;
   font-weight: bold;
-}
-
-main,
-main div {
-  width: 100%;
 }
 
 .title {
@@ -93,13 +112,10 @@ main div {
   margin-left: 10px;
 }
 
-.title-element>*:firsth-child {
-  flex-grow: 1;
-}
-
+/*
 .title-element>*:nth-child(2) {
   margin-left: auto;
-}
+} */
 
 .form-box {
   width: 100%;
@@ -190,22 +206,21 @@ a {
   display: none;
   position: fixed;
   z-index: 1;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  max-width: 400px;
+  left: 0;
+  top: 0;
+  margin: 5% auto;
+  width: 100%;
+  height: 100%;
   overflow: auto;
-  background-color: #f2b94a;
+  background-color: #fafafa60;
 }
 
 /* Modal Content/Box */
 
 .modal-content {
-  background-color: #f2b94a60;
-  padding: 0;
+  background-color: #f2b94a;
+  padding: 10px 0;
   border: 1px solid #888;
-  width: 100%;
-  margin: 0;
 }
 
 button:hover,
@@ -215,19 +230,23 @@ button:focus {
   cursor: pointer;
 }
 
-@media (min-width: 500px) {
+@media screen and (min-width: 736px) {
   html,
   body {
     margin: 0 auto;
     padding: 0;
   }
   .modal-content {
-    margin: 5% auto;
-    padding: 0 20px;
-    width: 80%;
+    padding: 10px 20px;
   }
   .form-box {
     width: 80%;
     margin: 40px auto;
+  }
+  .container {
+    margin: 0 auto;
+  }
+  .shrink {
+    min-width: unset;
   }
 }

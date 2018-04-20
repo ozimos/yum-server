@@ -12,11 +12,12 @@
 </head>
 
 <body>
-  <header class="flexbox2">
-    <h2>Book A Meal</h2>
-    <div class="flexbox nowrap">
-      <a href="menu_editor.html">
-        <i class="far fa-list-alt fa-lg clr"></i>
+  <header class="header">
+    <nav class="container flexbox2">
+      <h2 class="shrink">Book A Meal</h2>
+      <div class="flexbox nowrap">
+        <a href="menu_editor.html">
+          <i class="far fa-list-alt fa-lg clr"></i>
       </a>
       <a href="order_report.html">
         <i class="fas fa-chart-line fa-lg"></i>
@@ -24,11 +25,12 @@
       <a href="meal_booking.html">
         <i class="fas fa-utensils fa-lg"></i>
       </a>
-      </ul>
+    </div>
+  </nav>
   </header>
-  <main>
+  <main class="container">
     <div class="title flexbox2">
-      <h3>
+      <h3 class="shrink">
         Meal List
       </h3>
       <button class="title-button modal-trigger">
@@ -36,46 +38,55 @@
       </button>
     </div>
     <div>
-      <div class="title-element flexbox">
-        <h3 class="element-name modal-trigger">
+      <div class="title-element flexbox2">
+        <h3 class="element-name modal-trigger shrink">
           Some random meal
         </h3>
-        <button class="title-button">
-          <p>X</p>
-        </button>
+        <div class="flexbox">
+            <button class="title-button">
+                <p>X</p>
+              </button>
+        </div>
+
       </div>
-      <div class="title-element flexbox">
-        <h3 class="element-name modal-trigger">
+      <div class="title-element flexbox2">
+        <h3 class="element-name modal-trigger shrink">
           Some random meal
         </h3>
-        <button class="title-button">
-          <p>X</p>
-        </button>
+        <div class="flexbox">
+            <button class="title-button">
+                <p>X</p>
+              </button>
+        </div>
       </div>
-      <div class="title-element flexbox">
-        <h3 class="element-name modal-trigger">
+      <div class="title-element flexbox2">
+        <h3 class="element-name modal-trigger shrink">
           Some random meal
         </h3>
-        <button class="title-button">
-          <p>X</p>
-        </button>
+        <div class="flexbox">
+            <button class="title-button">
+                <p>X</p>
+              </button>
+        </div>
       </div>
     </div>
   </main>
 
 
-  <!-- The Modal -->
+   <!-- The Modal -->
   <div id="myModal" class="modal">
 
     <!-- Modal content -->
-    <div class="modal-content">
+    <div class="modal-content container">
       <div class="title flexbox2">
-        <h3>
+        <h3 class="shrink">
           Meal Editor
         </h3>
-        <button class="title-button close">
-          X
-        </button>
+        <div class="flexbox">
+            <button class="title-button close">
+                <p>X</p>
+              </button>
+        </div>
       </div>
       <div class="form-box">
         <form id="form_menu" action="">
