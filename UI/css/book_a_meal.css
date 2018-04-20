@@ -64,6 +64,13 @@ a>.svg-inline--fa {
   vertical-align: middle;
 }
 
+button>.svg-inline--fa {
+  font-size: 1rem;
+  margin: 0.6em;
+  font-weight: 0;
+  vertical-align: middle;
+}
+
 .shrink {
   min-width: 1rem;
   flex: 0 1 auto;
@@ -106,6 +113,7 @@ button,
 .title-element>* {
   margin: 0;
   margin-left: 10px;
+  font-weight: lighter;
 }
 
 
