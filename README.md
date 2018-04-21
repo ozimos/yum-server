@@ -1,11 +1,9 @@
 # Book-A-Meal
 
-
 Book-A-Meal is an application that allows customers to make food orders and helps the food
 vendor know what the customers want to eat.
 
 ## Features
-
 
 ### Caterer (Admin)
 
@@ -20,5 +18,5 @@ vendor know what the customers want to eat.
 
 ## Getting Started
 
-[View UI Templates] (https://ozimos.github.io/Book-A-Meal/UI)
-[Track progress on application features with Pivotal Tracker] (https://www.pivotaltracker.com/n/projects/2165548)
+[View UI Templates] (<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
+[Track progress on application features with Pivotal Tracker] (<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
