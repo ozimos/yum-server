@@ -13,11 +13,11 @@ vendor know what the customers want to eat.
 
 ### All Users
 
-* sign Up and sign in
+* sign up and sign in
 * place a meal order from the menu for a specific day
 
 ## Getting Started
 
 * [View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
 
-*[Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
+* [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
