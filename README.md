@@ -18,5 +18,6 @@ vendor know what the customers want to eat.
 
 ## Getting Started
 
-[View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
-[Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
+* [View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
+
+*[Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
