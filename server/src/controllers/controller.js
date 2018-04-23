@@ -1,6 +1,7 @@
 export default class Controller {
   constructor(model) {
     this.model = model;
+
   }
 
   /**
@@ -22,7 +23,7 @@ export default class Controller {
   /**
    *
    * Get All Records
-   * @returns {any} all model
+   * @returns {any} all records
    * @memberof Controller
    */
   getAllRecords() {
@@ -45,14 +46,14 @@ export default class Controller {
         return Controller.response(this.model[i]);
       }
     }
-    return Controller.response('Record not Found', 404);
+    return Controller.response(null, 404);
   }
 
   /**
    *
    * Creates a new record
    * @param {obj} req
-   * @returns {any} success, all model
+   * @returns {any} success, created record
    * @memberof Controller
    */
   postRecord(req) {
@@ -71,7 +72,7 @@ export default class Controller {
    *
    *  Update a record
    * @param {obj} req
-   * @returns {any} sucess, all model
+   * @returns {any} success, updated record
    * @memberof Controller
    */
   updateRecord(req) {
@@ -83,7 +84,23 @@ export default class Controller {
 
         return Controller.response(this.model[i]);
       }
-      return Controller.response(null, 400);
     }
+    return Controller.response(null, 400);
+  }
+  /**
+   *
+   *  Delete a record
+   * @param {obj} req
+   * @returns {any} success, updated record
+   * @memberof Controller
+   */
+  deleteRecord(req) {
+    for (let i = 0; i < this.model.length; i += 1) {
+      if (this.model[i].id === req.params.id) {
+        delete this.model[i];
+        return Controller.response('Record deleted');
+      }
+    }
+    return Controller.response(null, 400);
   }
 }
