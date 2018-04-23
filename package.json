@@ -4,9 +4,11 @@
   "description": "Book-A-Meal is an application that allows customers to make food orders and helps the food",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --watch server -r esm server/src/bin/www.js",
     "build": "babel server/src -d server/lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "postbuild": "node server/lib/bin/www.js",
+    "test": "mocha server/tests --recursive -r esm"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ozimos/Book-A-Meal.git"
@@ -25,5 +27,12 @@
     "eslint-plugin-import": "^2.7.0",
     "mocha": "^5.1.1",
     "nodemon": "^1.17.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "esm": "^3.0.24",
+    "express": "^4.16.3",
+    "express-joi-validation": "^0.2.1",
+    "joi": "^13.2.0"
   }
 }
