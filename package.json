@@ -21,14 +21,17 @@
   "homepage": "https://github.com/ozimos/Book-A-Meal#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.7.0",
     "mocha": "^5.1.1",
     "nodemon": "^1.17.3",
     "nyc": "^11.7.1",
+    "supertest": "^3.0.0",
     "testdouble": "^3.7.0"
   },
   "dependencies": {
