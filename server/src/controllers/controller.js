@@ -9,21 +9,7 @@ export default class Controller {
     this.deleteRecord = this.deleteRecord.bind(this);
   }
 
-  /**
-   *
-   *
-   * @static
-   * @param {any} message endpoint response
-   * @param {number} [statusCode=200]
-   * @returns {object} object
-   * @memberof Controller
-   */
-  static response(message = 'records unavailable', statusCode = 200) {
-    return {
-      message,
-      statusCode,
-    };
-  }
+
 
   /**
    *

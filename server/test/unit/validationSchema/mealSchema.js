@@ -6,7 +6,7 @@ import schema from '../../../src/middleware/mealSchemas.js';
 
 context('Validation with Joi schemas', () => {
   // sample request body data
-  const newMeal = {
+  const meal = {
     title: 'Spaghetti',
     description: 'very good',
     price: 1500,
@@ -14,27 +14,27 @@ context('Validation with Joi schemas', () => {
 
   describe('for POST requests on /api/v1/meals, validation', () => {
     it('throws error when some required fields are not in request body', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       delete modified.title;
       const result = schema.createMeal.validate(modified);
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
     it('throws error when unknown fields are in request body', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       modified.volume = 'high';
       const result = schema.createMeal.validate(modified);
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
     it('does not throw error when all required fields are in request body', () => {
-      const result = schema.createMeal.validate(newMeal);
+      const result = schema.createMeal.validate(meal);
       assert.equal(result.error, null, `Joi output: ${result.error}`);
     });
     it('converts strings to number data types in request body for number fields', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       modified.price = '1500'; // Make price a string
       const result = schema.createMeal.validate(modified);
       assert.equal(result.error, null, `Joi output: ${result.error}`);
-      assert.deepEqual(result.value, newMeal, `Joi output: ${result.error}`);
+      assert.deepEqual(result.value, meal, `Joi output: ${result.error}`);
     });
   });
 
@@ -44,24 +44,24 @@ context('Validation with Joi schemas', () => {
       assert.equal(result.error, null, `Joi output: ${result.error}`);
     });
     it('does not throw error when not all available fields are in request body', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       delete modified.price;
       const result = schema.modifyMeal.validate(modified);
       assert.equal(result.error, null, `Joi output: ${result.error}`);
     });
     it('throws error when unknown fields are in request body', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       modified.volume = 'high';
       const result = schema.modifyMeal.validate(modified);
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
 
     it('converts strings to number data types in request body for number fields', () => {
-      const modified = { ...newMeal };
+      const modified = { ...meal };
       modified.price = '1500'; // Make price a string
       const result = schema.modifyMeal.validate(modified);
       assert.equal(result.error, null, `Joi output: ${result.error}`);
-      assert.deepEqual(result.value, newMeal, `Joi output: ${result.error}`);
+      assert.deepEqual(result.value, meal, `Joi output: ${result.error}`);
     });
   });
 
