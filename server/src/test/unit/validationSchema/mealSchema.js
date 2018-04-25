@@ -2,7 +2,7 @@
 import {
   assert
 } from 'chai';
-import schema from '../../../src/middleware/mealSchemas.js';
+import schema from '../../../middleware/mealSchemas.js';
 
 context('Validation with Joi schemas', () => {
   // sample request body data
