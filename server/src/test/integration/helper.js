@@ -13,6 +13,7 @@ export const request = chai.request(app).keepOpen();
 const rootURL = '/api/v1';
 export const mealsUrl = `${rootURL}/meals`;
 export const mealIdUrl = `${rootURL}/meals/1`;
+export const menuUrl = `${rootURL}/menu`;
 
 // sample data for test
 

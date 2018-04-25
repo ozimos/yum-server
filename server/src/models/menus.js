@@ -19,7 +19,7 @@ const menus = [{
 },
 {
   id: 2,
-  date: new Date(Date.UTC(2018, 4, 20)),
+  date: new Date(),
   description: 'Continental, Local',
   meals: [
     {
