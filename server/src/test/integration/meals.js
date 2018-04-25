@@ -3,10 +3,15 @@ import {
   request,
   mealsUrl,
   mealIdUrl,
-  defaultMeal,
   templateTest
 } from './helper';
 
+const defaultMeal = {
+  id: 1,
+  title: 'Beef with Rice',
+  description: 'plain rice with ground beef',
+  price: 1500,
+};
 
 // Get All Meals
 describe('GET /meals', () => {
@@ -44,12 +49,17 @@ describe('PUT /meals/:id', () => {
 
 // Create A Meal
 describe('POST /meals', () => {
+  const newMeal = {
+    title: 'Beef with Rice',
+    description: 'plain rice with ground beef',
+    price: 1500,
+  };
   it('should create a meal', () => request.post(mealsUrl)
-    .send(defaultMeal).then((res) => {
-      expect(res.body.title).to.equal(defaultMeal.title);
-      expect(res.body.id).to.equal(defaultMeal.id);
+    .send(newMeal).then((res) => {
+      expect(res.body.title).to.equal(newMeal.title);
+      expect(res.body.id).to.equal(newMeal.id);
     }));
-  templateTest('Add Meal', 'post', mealsUrl, defaultMeal, 'price', 'object', '201');
+  templateTest('Add Meal', 'post', mealsUrl, newMeal, 'price', 'object', '201');
 });
 
 // Delete A Meal

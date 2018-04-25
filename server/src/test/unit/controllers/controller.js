@@ -20,7 +20,7 @@ describe('Center Controllers', () => {
       price: 2000,
     },
   ];
-  const noModel = null;
+  const noModel = undefined;
   const errorResponse = {
     message: 'records unavailable',
     statusCode: 404
@@ -42,7 +42,7 @@ describe('Center Controllers', () => {
     it('should return an error message if no data in database', () => {
 
       const controller = new Controller(noModel);
-      expect(controller.getAllRecords()).to.equal(errorResponse);
+      expect(controller.getAllRecords()).to.eql(errorResponse);
     });
   });
 
@@ -105,11 +105,12 @@ describe('Center Controllers', () => {
           price: 1500,
         },
         params: {
-          id: '2'
+          id: 2
         }
       };
       const controller = new Controller(model);
-      expect(controller.updateRecord(req)[req.params.id - 1].title).to.eql(req.body.title);
+      const { message } = controller.updateRecord(req);
+      expect(message[1].title).to.eql(req.body.title);
 
     });
     it('should return an error message if error occurs when accessing database', () => {
@@ -119,7 +120,7 @@ describe('Center Controllers', () => {
           price: 1500,
         },
         params: {
-          id: '4'
+          id: 4
         }
       };
       const controller = new Controller(model);
@@ -132,10 +133,10 @@ describe('Center Controllers', () => {
       message: null,
       statusCode: 200
     };
-    it('should delete an record', () => {
+    it('should delete a record', () => {
       const req = {
         params: {
-          id: '2'
+          id: 2
         }
       };
       const controller = new Controller(model);
@@ -146,7 +147,7 @@ describe('Center Controllers', () => {
     it('should return an error message if error occurs when accessing database', () => {
       const req = {
         params: {
-          id: '4'
+          id: 4
         }
       };
       const controller = new Controller(model);

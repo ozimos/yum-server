@@ -16,14 +16,6 @@ export const mealIdUrl = `${rootURL}/meals/1`;
 
 // sample data for test
 
-export const defaultMeal = {
-  id: 1,
-  title: 'Beef with Rice',
-  description: 'plain rice with ground beef',
-  price: 1500,
-};
-
-
 /**
  * Generates new tests with a template
  * @param {string} title
