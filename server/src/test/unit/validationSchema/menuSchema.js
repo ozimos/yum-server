@@ -38,6 +38,12 @@ context('Validation with Joi schemas', () => {
       const result = schema.validate(modified);
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
+    it('throws error when date field is in the past', () => {
+      const modified = { ...menu };
+      modified.date = '2014-3-4';
+      const result = schema.validate(modified);
+      assert.notEqual(result.error, null, `Joi output: ${result.error}`);
+    });
     it('does not throw error when all required fields are in request body', () => {
       const result = schema.validate(menu);
       assert.equal(result.error, null, `Joi output: ${result.error}`);

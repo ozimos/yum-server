@@ -19,6 +19,7 @@ export default class MenuController extends Controller {
   }
   postRecord(req) {
     const now = new Date();
+    req.body.date = now;
     for (let i = 0; i < this.model.length; i += 1) {
       if (MenuController.sameDay(this.model[i].date, now)) {
         this.model.splice(i, 1);

@@ -4,7 +4,7 @@ import {
 } from 'chai';
 import Controller from '../../../controllers/controller.js';
 
-describe('Center Controllers', () => {
+describe('Controller', () => {
 
   const model = [
     {
