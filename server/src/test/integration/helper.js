@@ -14,18 +14,20 @@ const rootURL = '/api/v1';
 export const mealsUrl = `${rootURL}/meals`;
 export const mealIdUrl = `${rootURL}/meals/1`;
 export const menuUrl = `${rootURL}/menu`;
+export const ordersUrl = `${rootURL}/orders`;
+export const orderIdUrl = `${rootURL}/orders/1`;
 
 // sample data for test
 
 /**
  * Generates new tests with a template
- * @param {string} title
- * @param {string} method
- * @param {string} url
- * @param {object} payload
- * @param {string} key
- * @param {string} type
- * @param {string} status
+ * @param {string} title name of test
+ * @param {string} method HTTP verb
+ * @param {string} url API Endpoint
+ * @param {object} payload req.body content
+ * @param {string} key one key in res.body
+ * @param {string} type data type in res.body
+ * @param {string} status HTTP response status
  * @returns {function} mocha test suite
  */
 
