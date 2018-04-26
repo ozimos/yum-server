@@ -57,7 +57,7 @@ describe('POST /meals', () => {
   it('should create a meal', () => request.post(mealsUrl)
     .send(newMeal).then((res) => {
       expect(res.body.title).to.equal(newMeal.title);
-      expect(res.body.id).to.equal(newMeal.id);
+      expect(res.body.description).to.equal(newMeal.description);
     }));
   templateTest('Add Meal', 'post', mealsUrl, newMeal, 'price', 'object', '201');
 });

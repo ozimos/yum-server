@@ -62,7 +62,7 @@ export default class Controller {
    * @memberof Controller
    */
   getAllRecords() {
-    if (this.model) {
+    if (this.model && this.model[0]) {
       return Controller.defaultResponse(this.model);
     }
     return Controller.errorResponse();
@@ -99,7 +99,7 @@ export default class Controller {
         id: newId,
         ...req.body
       });
-      return Controller.defaultResponse(this.model[len - 1], 201);
+      return Controller.defaultResponse(this.model[len], 201);
     }
     return Controller.errorResponse();
   }
