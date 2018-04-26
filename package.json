@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server -r esm server/src/bin/www.js",
-    "build": "babel server/src -d server/lib",
+    "build": "babel server/src -d server/lib -s inline",
     "postbuild": "node server/lib/bin/www.js",
-    "test": "mocha server/tests --recursive -r esm"
-    },
+    "test": "nyc mocha server/src/test --exit --recursive -r esm",
+    "test2": "nyc mocha server/lib/test --exit --recursive"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ozimos/Book-A-Meal.git"
@@ -21,12 +22,19 @@
   "homepage": "https://github.com/ozimos/Book-A-Meal#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.7.0",
     "mocha": "^5.1.1",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.3",
+    "nyc": "^11.7.1",
+    "testdouble": "^3.7.0"
   },
   "dependencies": {
     "body-parser": "^1.18.2",

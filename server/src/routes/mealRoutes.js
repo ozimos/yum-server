@@ -15,13 +15,13 @@ const controller = new Controller(meals);
 router.param('id', validator.params(schemas.params));
 
 router.route('/')
-  .get(controller.getAllRecords)
-  .post(validator.body(schemas.createMeal), controller.postRecord);
+  .get(Controller.select(controller, 'getAllRecords'))
+  .post(validator.body(schemas.createMeal), Controller.select(controller, 'postRecord'));
 
 router.route('/:id')
-  .get(controller.getSingleRecord)
-  .put(validator.body(schemas.modifyMeal), controller.updateRecord)
-  .delete(controller.deleteRecord);
+  .get(Controller.select(controller, 'getSingleRecord'))
+  .put(validator.body(schemas.modifyMeal), Controller.select(controller, 'updateRecord'))
+  .delete(Controller.select(controller, 'deleteRecord'));
 
 
 // Return router
