@@ -77,7 +77,7 @@ export default class Controller {
    */
   getSingleRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === parseInt(req.params.id, 10)) {
+      if (this.model[i].id === req.params.id) {
         return Controller.defaultResponse(this.model[i]);
       }
     }
@@ -113,7 +113,7 @@ export default class Controller {
    */
   updateRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === parseInt(req.params.id, 10)) {
+      if (this.model[i].id === req.params.id) {
         Object.keys(req.body).forEach((element) => {
           this.model[i][element] = req.body[element];
         });
@@ -132,8 +132,8 @@ export default class Controller {
    */
   deleteRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === parseInt(req.params.id, 10)) {
-        delete this.model[i];
+      if (this.model[i].id === req.params.id) {
+        this.model.splice(i, 1);
         return Controller.defaultResponse('Record deleted');
       }
     }

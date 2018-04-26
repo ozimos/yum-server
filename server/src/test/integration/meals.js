@@ -15,7 +15,7 @@ const defaultMeal = {
 
 // Get All Meals
 describe('GET /meals', () => {
-  it('should return a list of meals', () => request.get(mealsUrl)
+  it('should return all meals', () => request.get(mealsUrl)
     .then((res) => {
       expect(res.body[0].id).to.equal(defaultMeal.id);
       expect(res.body[0].price).to.equal(defaultMeal.price);
