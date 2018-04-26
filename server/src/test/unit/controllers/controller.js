@@ -55,7 +55,7 @@ describe('Controller', () => {
     it('should return a record if data is returned from database', () => {
       const req = {
         params: {
-          id: '1'
+          id: 1
         }
       };
       const controller = new Controller(model);
@@ -66,7 +66,7 @@ describe('Controller', () => {
     it('should return an error message if no data in database', () => {
       const req = {
         params: {
-          id: '4'
+          id: 4
         }
       };
       const controller = new Controller(model);

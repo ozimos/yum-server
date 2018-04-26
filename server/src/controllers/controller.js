@@ -133,7 +133,7 @@ export default class Controller {
   deleteRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
       if (this.model[i].id === req.params.id) {
-        delete this.model[i];
+        this.model.splice(i, 1);
         return Controller.defaultResponse('Record deleted');
       }
     }
