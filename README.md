@@ -1,5 +1,9 @@
 # Book-A-Meal
 
+[![Coverage Status](https://coveralls.io/repos/github/ozimos/Book-A-Meal/badge.svg?branch=157119216-CI-codeCoverage-dummy)](https://coveralls.io/github/ozimos/Book-A-Meal?branch=157119216-CI-codeCoverage-dummy)
+[![Maintainability](https://api.codeclimate.com/v1/badges/77dae76840f23281165a/maintainability)](https://codeclimate.com/github/ozimos/Book-A-Meal/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/77dae76840f23281165a/test_coverage)](https://codeclimate.com/github/ozimos/Book-A-Meal/test_coverage)
+
 Book-A-Meal is an application that allows customers to make food orders and helps the food
 vendor know what the customers want to eat.
 

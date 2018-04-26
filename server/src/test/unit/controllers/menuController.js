@@ -52,6 +52,7 @@ describe('postRecord()', () => {
 
     expect(menuController
       .postRecord(req)
-      .message.date).to.eql(new Date());
+      .message.date.toISOString()
+      .substring(0, 10)).to.eql(new Date().toISOString().substring(0, 10));
   });
 });

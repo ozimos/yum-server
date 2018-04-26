@@ -4,7 +4,7 @@ server/lib/
 # VSCode Directory
 .vscode/
 
-#My debug folder
+# My debug folder
 debug/
 
 # Logs
