@@ -8,7 +8,9 @@
     "build": "babel server/src -d server/lib -s inline",
     "postbuild": "node server/lib/bin/www.js",
     "test": "nyc mocha server/src/test --exit --recursive -r esm",
-    "test2": "nyc mocha server/lib/test --exit --recursive"
+    "test2": "nyc mocha server/lib/test --exit --recursive",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "report": "nyc report --reporter=text-lcov"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
+    "coveralls": "^3.0.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.7.0",

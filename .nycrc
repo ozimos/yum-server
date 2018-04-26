@@ -1,0 +1,19 @@
+{
+  "reporter": [
+    "lcov",
+    "text"
+  ],
+  "include": [
+    "server/**/*.js"
+  ],
+  "require": [
+    "esm"
+  ],
+  "extension": [
+    ".js"
+  ],
+  "check-coverage": false,
+  "cache": true,
+  "sourceMap": true,
+  "instrument": true
+}
