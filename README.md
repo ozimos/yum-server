@@ -34,8 +34,8 @@ Given you manage an catering business, this app will help you manage meals and m
 * [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
 * Requirements
 
-    * Back-end: Node/Expressjs
-    * Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
+  * Back-end: Node/Expressjs
+  * Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
 
 * How to setup the project/Installation/Configuration
 
