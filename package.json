@@ -1,12 +1,16 @@
 {
   "name": "book-a-meal",
   "version": "1.0.0",
+  "engines": {
+    "node": "9.11.1"
+  },
   "description": "Book-A-Meal is an application that allows customers to make food orders and helps the food",
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server -r esm server/src/bin/www.js",
     "build": "babel server/src -d server/lib -s inline",
     "postbuild": "node server/lib/bin/www.js",
+    "heroku-postbuild": "babel server/src -d server/lib",
     "test": "nyc mocha server/src/test --exit --recursive -r esm",
     "test2": "nyc mocha server/lib/test --exit --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -44,6 +48,7 @@
     "esm": "^3.0.24",
     "express": "^4.16.3",
     "express-joi-validation": "^0.2.1",
-    "joi": "^13.2.0"
+    "joi": "^13.2.0",
+    "npm": "^6.0.0"
   }
 }
