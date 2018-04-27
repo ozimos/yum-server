@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ozimos/Book-A-Meal.svg?branch=157119216-CI-codeCoverage-dummy)](https://travis-ci.org/ozimos/Book-A-Meal)
 [![Coverage Status](https://coveralls.io/repos/github/ozimos/Book-A-Meal/badge.svg?branch=157119216-CI-codeCoverage-dummy)](https://coveralls.io/github/ozimos/Book-A-Meal?branch=157119216-CI-codeCoverage-dummy)
 [![Maintainability](https://api.codeclimate.com/v1/badges/77dae76840f23281165a/maintainability)](https://codeclimate.com/github/ozimos/Book-A-Meal/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/77dae76840f23281165a/test_coverage)](https://codeclimate.com/github/ozimos/Book-A-Meal/test_coverage)
 
 ## What the project does
 
@@ -33,8 +34,8 @@ Given you manage an catering business, this app will help you manage meals and m
 * [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
 * Requirements
 
-    Back-end: Node/Expressjs
-    Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
+    * Back-end: Node/Expressjs
+    * Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
 
 * How to setup the project/Installation/Configuration
 
