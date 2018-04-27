@@ -1,7 +1,6 @@
 export default class Controller {
   constructor(model) {
     this.model = model;
-
   }
 
   /**
@@ -15,13 +14,8 @@ export default class Controller {
    */
   static select(instance, method) {
     return (req, res) => {
-
-      const {
-        message,
-        statusCode
-      } = instance[method](req);
+      const { message, statusCode } = instance[method](req);
       res.status(statusCode).json(message);
-
     };
   }
   /**
@@ -36,7 +30,7 @@ export default class Controller {
   static defaultResponse(message, statusCode = 200) {
     return {
       message,
-      statusCode,
+      statusCode
     };
   }
   /**
@@ -51,7 +45,7 @@ export default class Controller {
   static errorResponse(message = 'records unavailable', statusCode = 404) {
     return {
       message,
-      statusCode,
+      statusCode
     };
   }
 
@@ -76,9 +70,10 @@ export default class Controller {
    * @memberof Controller
    */
   getSingleRecord(req) {
-    for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === req.params.id) {
-        return Controller.defaultResponse(this.model[i]);
+    if (this.model && this.model[0]) {
+      const record = this.model.find(elem => elem.id === req.params.id);
+      if (record) {
+        return Controller.defaultResponse(record);
       }
     }
     return Controller.errorResponse();
@@ -112,10 +107,11 @@ export default class Controller {
    * @memberof Controller
    */
   updateRecord(req) {
-    for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === req.params.id) {
+    if (this.model && this.model[0]) {
+      const record = this.model.find(elem => elem.id === req.params.id);
+      if (record) {
         Object.keys(req.body).forEach((element) => {
-          this.model[i][element] = req.body[element];
+          record[element] = req.body[element];
         });
 
         return Controller.defaultResponse(this.model);
@@ -131,9 +127,10 @@ export default class Controller {
    * @memberof Controller
    */
   deleteRecord(req) {
-    for (let i = 0; i < this.model.length; i += 1) {
-      if (this.model[i].id === req.params.id) {
-        this.model.splice(i, 1);
+    if (this.model && this.model[0]) {
+      const recordIndex = this.model.findIndex(elem => elem.id === req.params.id);
+      if (recordIndex >= 0) {
+        this.model.splice(recordIndex, 1);
         return Controller.defaultResponse('Record deleted');
       }
     }
