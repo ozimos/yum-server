@@ -12,7 +12,7 @@ vendor know what the customers want to eat.
 
 ## Why the project is useful
 
-Given you manage an catering business, this app will help you manage meals and menus, and will enable customers to make bookings and show a dashboard summary of bookings made and profits accrued.
+Given you manage a catering business, this app will help you manage meals and menus, and will enable customers to make bookings and show a dashboard summary of bookings made and profits accrued.
 
 ## Features
 
@@ -27,15 +27,28 @@ Given you manage an catering business, this app will help you manage meals and m
 * sign up and sign in
 * place a meal order from the menu for a specific day
 
+API Endpoints
+
+* Get All Meals  - GET /api/v1/meals
+* Add a Meal  - POST /api/v1/meals
+* Update a Meal  - PUT /api/v1/meals/:mealId
+* Delete - DELETE /api/v1/meals/:mealId
+* Get the menu for the day - GET /api/v1/menu
+* Setup the menu for the day - POST /api/v1/menu
+* Get All Orders  - GET /api/v1/orders
+* Select the meal option from the menu  - POST /api/v1/orders
+* Modify an order  - PUT /api/v1/orders/:orderId
+
 ## Getting Started
 
 * [View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
+* [View the application server side hosted on Heroku](https://book-a-meal-andela-31.herokuapp.com/)
 
 * [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
 * Requirements
 
-    * Back-end: Node/Expressjs
-    * Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
+  * Back-end: Node/Expressjs
+  * Libraries: ES6, Babel-CLI, eslint, Mocha/Chai, Postman
 
 * How to setup the project/Installation/Configuration
 
@@ -44,5 +57,7 @@ Given you manage an catering business, this app will help you manage meals and m
   * npm run start - to run the app
 
 * How to run tests
-
+  * Setup the app as detailed above
   * npm run test - to test the app
+  * Using Postman import this endpoint collection link <https://www.getpostman.com/collections/85eee7927738b7112a13>
+  * Test the API Endponts with Postman
