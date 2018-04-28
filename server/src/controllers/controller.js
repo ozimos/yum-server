@@ -2,23 +2,53 @@ export default class Controller {
   constructor(model) {
     this.model = model;
 
-    this.getAllRecords = this.getAllRecords.bind(this);
-    this.getSingleRecord = this.getSingleRecord.bind(this);
-    this.postRecord = this.postRecord.bind(this);
-    this.updateRecord = this.updateRecord.bind(this);
-    this.deleteRecord = this.deleteRecord.bind(this);
   }
 
   /**
    *
    *
    * @static
-   * @param {any} message endpoint response
+   * @param {object} instance
+   * @param {String} method
+   * @returns {function} Express middleware
+   * @memberof Controller
+   */
+  static select(instance, method) {
+    return (req, res) => {
+
+      const {
+        message,
+        statusCode
+      } = instance[method](req);
+      res.status(statusCode).json(message);
+
+    };
+  }
+  /**
+   *
+   *
+   * @static
+   * @param {any} message a model instance
    * @param {number} [statusCode=200]
    * @returns {object} object
    * @memberof Controller
    */
-  static response(message = 'records unavailable', statusCode = 200) {
+  static defaultResponse(message, statusCode = 200) {
+    return {
+      message,
+      statusCode,
+    };
+  }
+  /**
+   *
+   *
+   * @static
+   * @param {any} message
+   * @param {number} [statusCode=400]
+   * @returns {object} object
+   * @memberof Controller
+   */
+  static errorResponse(message = 'records unavailable', statusCode = 404) {
     return {
       message,
       statusCode,
@@ -28,90 +58,85 @@ export default class Controller {
   /**
    *
    * Get All Records
-   * @param {any} req
-   * @param {any} res
    * @returns {any} all records
    * @memberof Controller
    */
-  getAllRecords(req, res) {
-    if (this.model) {
-      return res.status(200).json(this.model);
+  getAllRecords() {
+    if (this.model && this.model[0]) {
+      return Controller.defaultResponse(this.model);
     }
-    return res.status(400).send('records unavailable');
+    return Controller.errorResponse();
   }
 
   /**
    *
    *  Get a single record
    * @param {obj} req
-   * @param {any} res
    * @returns {any} A single record
    * @memberof Controller
    */
-  getSingleRecord(req, res) {
+  getSingleRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
       if (this.model[i].id === req.params.id) {
-        return res.status(200).json(this.model[i]);
+        return Controller.defaultResponse(this.model[i]);
       }
     }
-    return res.status(404).send('records unavailable');
+    return Controller.errorResponse();
   }
 
   /**
    *
    * Creates a new record
    * @param {obj} req
-   * @param {any} res
    * @returns {any} success, created record
    * @memberof Controller
    */
-  postRecord(req, res) {
+  postRecord(req) {
     if (this.model) {
-      const newId = this.model.length + 1;
+      const len = this.model.length;
+      const newId = len + 1;
       this.model.push({
         id: newId,
         ...req.body
       });
-      return res.status(200).json(this.model[this.model.length - 1]);
+      return Controller.defaultResponse(this.model[len], 201);
     }
-    return res.status(400).send('records unavailable');
+    return Controller.errorResponse();
   }
 
   /**
    *
    *  Update a record
    * @param {obj} req
-   * @param {any} res
    * @returns {any} success, updated record
    * @memberof Controller
    */
-  updateRecord(req, res) {
+  updateRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
       if (this.model[i].id === req.params.id) {
         Object.keys(req.body).forEach((element) => {
           this.model[i][element] = req.body[element];
         });
 
-        return res.status(200).json(this.model[i]);
+        return Controller.defaultResponse(this.model);
       }
     }
-    return res.status(400).send('records unavailable');
+    return Controller.errorResponse();
   }
   /**
    *
    *  Delete a record
    * @param {obj} req
-   * @param {any} res
    * @returns {any} success, updated record
    * @memberof Controller
    */
-  deleteRecord(req, res) {
+  deleteRecord(req) {
     for (let i = 0; i < this.model.length; i += 1) {
       if (this.model[i].id === req.params.id) {
-        delete this.model[i];
-        return res.status(200).send('Record deleted');
+        this.model.splice(i, 1);
+        return Controller.defaultResponse('Record deleted');
       }
     }
-    return res.status(400).send('records unavailable');
+    return Controller.errorResponse();
   }
 }

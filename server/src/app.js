@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import mealRoutes from './routes/mealRoutes.js';
+import routers from './routes';
 
 const app = express();
 
@@ -10,7 +10,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/api/v1/meals', mealRoutes);
+app.use('/api/v1/meals', routers.mealRoutes);
+app.use('/api/v1/menu', routers.menuRoutes);
+app.use('/api/v1/orders', routers.orderRoutes);
 
 app.get('/', (req, res) => {
   res.send('Welcome To Book-A-Meal API!!!');

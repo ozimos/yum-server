@@ -1,6 +1,12 @@
 # Babel build directories
 server/lib/
 
+# VSCode Directory
+.vscode/
+
+# My debug folder
+debug/
+
 # Logs
 logs
 *.log

@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - "lts/*"
+env:
+  global:
+    - CC_TEST_REPORTER_ID=147f28703d3ae0d7c498d8dbedbcb1adb912ffb4873e0b0c644fb78346404a93
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+before_script:
+  - chmod 0755 ./node_modules/.bin/mocha
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+script:
+  - npm test
+after_success:
+  - npm run coverage
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
