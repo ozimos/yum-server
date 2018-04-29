@@ -1,5 +1,7 @@
 import { expect, request, ordersUrl, orderIdUrl, templateTest } from './helper';
 
+import app from '../../src/app';
+
 const defaultOrder = {
   id: 1,
   userId: 1,
@@ -10,7 +12,7 @@ const defaultOrder = {
 // Get All Orders
 describe('GET /orders', () => {
   it('should return all orders', () =>
-    request.get(ordersUrl).then((res) => {
+    request(app).get(ordersUrl).then((res) => {
       expect(res.body[0].id).to.equal(defaultOrder.id);
       expect(res.body[0].menuId).to.equal(defaultOrder.menuId);
     }));
@@ -19,7 +21,7 @@ describe('GET /orders', () => {
 // Get One Order
 describe('GET /orders/:id', () => {
   it('should return an order', () =>
-    request.get(orderIdUrl).then((res) => {
+    request(app).get(orderIdUrl).then((res) => {
       expect(res.body.menuId).to.equal(defaultOrder.menuId);
       expect(res.body.mealId).to.equal(defaultOrder.mealId);
     }));
@@ -33,7 +35,7 @@ describe('PUT /orders/:id', () => {
   };
 
   it('should update an order', () =>
-    request
+    request(app)
       .put(orderIdUrl)
       .send(updatedOrder)
       .then((res) => {
@@ -51,7 +53,7 @@ describe('POST /orders', () => {
     mealId: 3
   };
   it('should create a order', () =>
-    request
+    request(app)
       .post(ordersUrl)
       .send(newOrder)
       .then((res) => {
@@ -72,7 +74,7 @@ describe('POST /orders', () => {
 // Delete A Order
 describe('DELETE /orders', () => {
   it('should delete an order', () =>
-    request.delete(orderIdUrl).then((res) => {
+    request(app).delete(orderIdUrl).then((res) => {
       expect(res).to.have.status(200);
     }));
 });

@@ -1,10 +1,11 @@
 import { expect, request, menuUrl, templateTest } from './helper';
 
+import app from '../../src/app';
 
 // Get  Menu
 describe('GET /menu', () => {
   it('should return the menu for today', () =>
-    request.get(menuUrl).then((res) => {
+    request(app).get(menuUrl).then((res) => {
       expect(res.body.date.toString().substring(0, 10))
         .to.equal(new Date().toISOString().substring(0, 10));
     }));
@@ -20,7 +21,7 @@ describe('POST /menu', () => {
     meals: [1, 2]
   };
   it('should create a menu', () =>
-    request
+    request(app)
       .post(menuUrl)
       .send(newMenu)
       .then((res) => {

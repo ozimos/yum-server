@@ -5,10 +5,9 @@ import app from '../../src/app';
 
 chai.use(chaiHttp);
 export const {
-  expect
+  expect, request
 } = chai;
-export const request = chai.request(app).keepOpen();
-
+// export const request = chai.request(app).keepOpen();
 // endpoint urls
 const rootURL = '/api/v1';
 export const mealsUrl = `${rootURL}/meals`;
@@ -32,8 +31,13 @@ export const orderIdUrl = `${rootURL}/orders/1`;
  */
 
 export const templateTest = function generateTest(title, method, url, payload, key, type, status = '200') {
+  let requester, boundRequest;
+  beforeEach('create http server', () => {
+    requester = request(app);
+    boundRequest = requester[method].bind(request, url);
+  });
+
   describe(title, () => {
-    const boundRequest = request[method].bind(request, url);
     it('return 200 for successful', async () => {
       try {
         const res = await boundRequest().send(payload);
