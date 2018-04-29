@@ -14,12 +14,14 @@
     "no-param-reassign": 0,
     "comma-dangle": 0,
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }],
+    "import/no-unresolved": 0,
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": 0,
     "require-jsdoc": 0,
-    "linebreak-style":"off",
-    "eol-last":"off",
-    "padded-blocks": "off"
+    "linebreak-style":0,
+    "eol-last": 0,
+    "padded-blocks": 0,
+    "object-curly-newline": 0,
+    "import/extensions": 0
   }
 }
