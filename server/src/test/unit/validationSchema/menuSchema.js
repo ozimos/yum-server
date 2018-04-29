@@ -2,14 +2,14 @@
 import {
   assert
 } from 'chai';
-import schema from '../../../middleware/menuSchemas.js';
+import schema from '../../../middleware/menuSchemas';
 
 context('Validation with Joi schemas', () => {
   // sample request body data
   const menu = {
     date: new Date(Date.UTC(2018, 4, 20)),
     description: 'Continental, Local',
-    meals: [1, 2 ],
+    meals: [1, 2],
   };
 
   describe('for POST requests on /api/v1/menu, validation', () => {

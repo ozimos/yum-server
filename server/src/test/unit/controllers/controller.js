@@ -2,7 +2,7 @@
 import {
   expect
 } from 'chai';
-import Controller from '../../../controllers/controller.js';
+import Controller from '../../../controllers/controller';
 
 describe('Controller', () => {
 

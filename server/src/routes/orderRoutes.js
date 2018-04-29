@@ -2,9 +2,9 @@
 import express from 'express';
 import Validator from 'express-joi-validation';
 
-import Controller from '../controllers/controller.js';
-import schemas from '../middleware/orderSchemas.js';
-import orders from '../models/orders.js';
+import Controller from '../controllers/controller';
+import schemas from '../middleware/orderSchemas';
+import orders from '../models/orders';
 
 const router = express.Router();
 const validator = Validator({});

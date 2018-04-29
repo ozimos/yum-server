@@ -20,7 +20,6 @@
     "require-jsdoc": 0,
     "linebreak-style":"off",
     "eol-last":"off",
-    "import/extensions": "off",
     "padded-blocks": "off"
   }
 }

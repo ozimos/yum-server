@@ -14,7 +14,8 @@
     "test": "nyc mocha server/src/test --exit --recursive -r esm",
     "test2": "nyc mocha server/lib/test --exit --recursive",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "report": "nyc report --reporter=text-lcov"
+    "report": "nyc report --reporter=text-lcov",
+    "lint": "eslint server/src/*"
   },
   "repository": {
     "type": "git",

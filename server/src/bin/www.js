@@ -1,5 +1,5 @@
 import http from 'http';
-import app from '../app.js';
+import app from '../app';
 
 // Get port from environment and store in Express.
 const PORT = parseInt(process.env.PORT, 10) || 3000;
