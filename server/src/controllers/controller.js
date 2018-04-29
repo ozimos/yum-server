@@ -53,11 +53,13 @@ export default class Controller {
    *
    * Get All Records
    * @returns {any} all records
+   * @param {obj} req express object
+   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
    * @memberof Controller
    */
-  getAllRecords() {
-    if (this.model && this.model[0]) {
-      return Controller.defaultResponse(this.model);
+  getAllRecords(req, currentModel = this.model) {
+    if (currentModel && currentModel[0]) {
+      return Controller.defaultResponse(currentModel);
     }
     return Controller.errorResponse();
   }
@@ -65,13 +67,14 @@ export default class Controller {
   /**
    *
    *  Get a single record
-   * @param {obj} req
+   * @param {obj} req express object
+   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
    * @returns {any} A single record
    * @memberof Controller
    */
-  getSingleRecord(req) {
-    if (this.model && this.model[0]) {
-      const record = this.model.find(elem => elem.id === req.params.id);
+  getSingleRecord(req, currentModel = this.model) {
+    if (currentModel && currentModel[0]) {
+      const record = currentModel.find(elem => elem.id === req.params.id);
       if (record) {
         return Controller.defaultResponse(record);
       }
@@ -82,19 +85,20 @@ export default class Controller {
   /**
    *
    * Creates a new record
-   * @param {obj} req
+   * @param {obj} req express object
+   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
    * @returns {any} success, created record
    * @memberof Controller
    */
-  postRecord(req) {
-    if (this.model) {
-      const len = this.model.length;
+  postRecord(req, currentModel = this.model) {
+    if (currentModel) {
+      const len = currentModel.length;
       const newId = len + 1;
-      this.model.push({
+      currentModel.push({
         id: newId,
         ...req.body
       });
-      return Controller.defaultResponse(this.model[len], 201);
+      return Controller.defaultResponse(currentModel[len], 201);
     }
     return Controller.errorResponse();
   }
@@ -102,19 +106,20 @@ export default class Controller {
   /**
    *
    *  Update a record
-   * @param {obj} req
+   * @param {obj} req express object
+   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
    * @returns {any} success, updated record
    * @memberof Controller
    */
-  updateRecord(req) {
-    if (this.model && this.model[0]) {
-      const record = this.model.find(elem => elem.id === req.params.id);
+  updateRecord(req, currentModel = this.model) {
+    if (currentModel && currentModel[0]) {
+      const record = currentModel.find(elem => elem.id === req.params.id);
       if (record) {
         Object.keys(req.body).forEach((element) => {
           record[element] = req.body[element];
         });
 
-        return Controller.defaultResponse(this.model);
+        return Controller.defaultResponse(currentModel);
       }
     }
     return Controller.errorResponse();
@@ -122,15 +127,16 @@ export default class Controller {
   /**
    *
    *  Delete a record
-   * @param {obj} req
+   * @param {obj} req express object
+   * @param {obj} currentModel for subclasses to inject new database dependencies   *
    * @returns {any} success, updated record
    * @memberof Controller
    */
-  deleteRecord(req) {
-    if (this.model && this.model[0]) {
-      const recordIndex = this.model.findIndex(elem => elem.id === req.params.id);
+  deleteRecord(req, currentModel = this.model) {
+    if (currentModel && currentModel[0]) {
+      const recordIndex = currentModel.findIndex(elem => elem.id === req.params.id);
       if (recordIndex >= 0) {
-        this.model.splice(recordIndex, 1);
+        currentModel.splice(recordIndex, 1);
         return Controller.defaultResponse('Record deleted');
       }
     }
