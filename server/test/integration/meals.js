@@ -5,6 +5,8 @@ import {
   mealIdUrl,
   templateTest
 } from './helper';
+import app from '../../src/app';
+
 
 const defaultMeal = {
   id: 1,
@@ -15,7 +17,7 @@ const defaultMeal = {
 
 // Get All Meals
 describe('GET /meals', () => {
-  it('should return all meals', () => request.get(mealsUrl)
+  it('should return all meals', () => request(app).get(mealsUrl)
     .then((res) => {
       expect(res.body[0].id).to.equal(defaultMeal.id);
       expect(res.body[0].price).to.equal(defaultMeal.price);
@@ -25,7 +27,7 @@ describe('GET /meals', () => {
 // Get One Meal
 describe('GET /meals/:id', () => {
   it('should return a meal', () =>
-    request.get(mealIdUrl)
+    request(app).get(mealIdUrl)
       .then((res) => {
         expect(res.body.title).to.equal(defaultMeal.title);
         expect(res.body.price).to.equal(defaultMeal.price);
@@ -39,7 +41,7 @@ describe('PUT /meals/:id', () => {
     price: 1500,
   };
 
-  it('should update a meal', () => request.put(mealIdUrl)
+  it('should update a meal', () => request(app).put(mealIdUrl)
     .send(updatedMeal).then((res) => {
       expect(res.body[0].title).to.equal(updatedMeal.title);
       expect(res.body[0].price).to.equal(updatedMeal.price);
@@ -54,7 +56,7 @@ describe('POST /meals', () => {
     description: 'plain rice with ground beef',
     price: 1500,
   };
-  it('should create a meal', () => request.post(mealsUrl)
+  it('should create a meal', () => request(app).post(mealsUrl)
     .send(newMeal).then((res) => {
       expect(res.body.title).to.equal(newMeal.title);
       expect(res.body.description).to.equal(newMeal.description);
@@ -64,7 +66,7 @@ describe('POST /meals', () => {
 
 // Delete A Meal
 describe('DELETE /meals', () => {
-  it('should delete a meal', () => request.delete(mealIdUrl)
+  it('should delete a meal', () => request(app).delete(mealIdUrl)
     .then((res) => {
       expect(res).to.have.status(200);
     }));
