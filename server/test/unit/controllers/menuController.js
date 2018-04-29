@@ -1,6 +1,6 @@
 /* eslint import/no-extraneous-dependencies: off */
 import { expect } from 'chai';
-import MenuController from '../../../controllers/menuController';
+import MenuController from '../../../src/controllers/menuController';
 
 const errorResponse = {
   message: 'records unavailable',

@@ -8,11 +8,12 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch server -r esm server/src/bin/www.js",
+    "start:babel": "nodemon --watch server --exec babel-node server/src/bin/www.js",
     "build": "babel server/src -d server/lib -s inline",
     "postbuild": "node server/lib/bin/www.js",
     "heroku-postbuild": "babel server/src -d server/lib",
-    "test": "nyc mocha server/src/test --exit --recursive -r esm",
-    "test2": "nyc mocha server/lib/test --exit --recursive",
+    "test": "nyc mocha server/test --exit --recursive -r esm",
+    "test:babel": "nyc mocha server/test --exit --recursive -r babel-polyfill -r babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "report": "nyc report --reporter=text-lcov",
     "lint": "eslint server/src/*"
@@ -33,6 +34,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "coveralls": "^3.0.0",
