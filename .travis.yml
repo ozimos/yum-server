@@ -1,15 +1,27 @@
 language: node_js
 node_js:
   - "lts/*"
+sudo: required
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
 env:
   global:
     - CC_TEST_REPORTER_ID=147f28703d3ae0d7c498d8dbedbcb1adb912ffb4873e0b0c644fb78346404a93
+    - PGPORT=5433
 cache:
   directories:
     - "node_modules"
 install:
   - npm install
 before_script:
+  - cp server/src/config/database.yml.travis config/database.yml
+  - sudo psql -c 'create database Book-A-Meal_test;' -U postgres
+  - sudo psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
+  - sequelize db:migrate:all
   - chmod 0755 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
