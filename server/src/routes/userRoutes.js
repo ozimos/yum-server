@@ -3,14 +3,14 @@ import Validator from 'express-joi-validation';
 
 import UserController from '../controllers/controller';
 import schemas from '../middleware/userSchemas';
-import users from '../models/users';
+import db from '../models';
 
 const router = express.Router();
 const validator = Validator({});
-const userController = new UserController(users);
+const userController = new UserController(db.Users);
 
 router.post(
-  '/', validator.body(schemas.postUsers),
+  '/signup', validator.body(schemas.signup),
   UserController.select(userController, 'signUp')
 );
 
