@@ -6,70 +6,68 @@ const errorResponse = {
   message: 'records unavailable',
   statusCode: 404
 };
-const menuList = [
-  {
-    id: 1,
-    date: new Date(2019, 11, 1),
-    meals: [1, 2]
-  },
-  {
-    id: 2,
-    date: new Date(),
-    meals: [2, 1]
-  }
-];
-const meals = [
-  {
-    id: 1,
-    title: 'Beef with Rice',
-    description: 'plain rice with ground beef',
-    price: 1500,
-  },
-  {
-    id: 2,
-    title: 'Beef with Fries',
-    description: 'beef slab with fried potato slivers',
-    price: 2000,
-  },
-];
-describe('getTodaysMenu()', () => {
-  const req = {};
-  it('should return a menu when menu with current date exists', () => {
-    const listCopy = [...menuList];
-    const menuController = new MenuController(listCopy, meals);
-    expect(menuController.getTodaysMenu(req).message.id).to.eql(listCopy[1].id);
-  });
-  it('should return error message when no menu with current date exists', () => {
-    const listCopy = [...menuList];
-    listCopy[1].date = new Date(2014, 8, 1);
+const menu = {
+  description: 'Friday Menu',
+  meals: [
+    {
+      id: 1,
+      title: 'Beef with Rice',
+      description: 'plain rice with ground beef',
+      price: 1500
+    },
+    {
+      id: 2,
+      title: 'Beef with Fries',
+      description: 'beef slab with fried potato slivers',
+      price: 2000
+    }
+  ]
+};
 
-    const menuController = new MenuController(listCopy, meals);
-    expect(menuController.getTodaysMenu(req)).to.eql(errorResponse);
+describe('getMenu()', () => {
+  const req = {};
+  it('should return a menu when menu model exists', () => {
+    const menuCopy = { ...menu };
+    const menuController = new MenuController(menuCopy);
+    const expected = {
+      message: { ...menuCopy },
+      statusCode: 200
+    };
+    expect(menuController.getMenu()).to.eql(expected);
+  });
+  it('should return error message when no menu model exists', () => {
+    const menuCopy = null;
+    const menuController = new MenuController(menuCopy);
+    expect(menuController.getMenu(req)).to.eql(errorResponse);
   });
 });
-describe('postRecord()', () => {
-  it('should remove menu with current date before posting another menu with current date', () => {
-    const listCopy = [...menuList];
+describe('postMenu()', () => {
+  it('should set the menu for the day', () => {
     const req = {
-      body: { date: new Date() }
+      body: {
+        description: 'Thursday Menu',
+        meals: [
+          {
+            id: 3,
+            title: 'Beef with Spaghetti',
+            description: 'spaghetti with ground beef',
+            price: 1500
+          },
+          {
+            id: 2,
+            title: 'Beef with Fries',
+            description: 'beef slab with fried potato slivers',
+            price: 2000
+          }
+        ]
+      }
     };
-
-    const menuController = new MenuController(listCopy, meals);
-    const firstPost = menuController.postRecord(req).message.id;
-    const secondPost = menuController.postRecord(req).message.id;
-    expect(firstPost).to.equal(secondPost);
-  });
-  it('should set the date on the menu to the current date', () => {
-    const listCopy = [...menuList];
-    const req = {
-      body: { date: new Date(2020, 3, 4) }
+    const menuCopy = { ...menu };
+    const menuController = new MenuController(menuCopy);
+    const expected = {
+      message: { ...req.body },
+      statusCode: 201
     };
-
-    const menuController = new MenuController(listCopy, meals);
-
-    expect(menuController
-      .postRecord(req)
-      .message.date.toISOString()
-      .substring(0, 10)).to.eql(new Date().toISOString().substring(0, 10));
+    expect(menuController.postMenu(req)).to.eql(expected);
   });
 });
