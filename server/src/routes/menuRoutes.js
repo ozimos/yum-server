@@ -5,16 +5,15 @@ import Validator from 'express-joi-validation';
 import MenuController from '../controllers/menuController';
 import menuSchema from '../middleware/menuSchemas';
 import menus from '../models/menus';
-import meals from '../models/meals';
 
 const router = express.Router();
 const validator = Validator({});
-const menuController = new MenuController(menus, meals);
+const menuController = new MenuController(menus);
 
 
 router.route('/')
-  .get(MenuController.select(menuController, 'getTodaysMenu'))
-  .post(validator.body(menuSchema), MenuController.select(menuController, 'postRecord'));
+  .get(MenuController.select(menuController, 'getMenu'))
+  .post(validator.body(menuSchema), MenuController.select(menuController, 'postMenu'));
 
 // Return router
 export default router;
