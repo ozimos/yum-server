@@ -1,6 +1,16 @@
-export default class Controller {
-  constructor(model) {
-    this.model = model;
+/**
+ *
+ *
+ * @class Controller
+ */
+class Controller {
+  /**
+   * Creates an instance of Controller.
+   * @param {any} Model
+   * @memberof Controller
+   */
+  constructor(Model) {
+    this.Model = Model;
   }
 
   /**
@@ -14,23 +24,32 @@ export default class Controller {
    */
   static select(instance, method) {
     return (req, res) => {
-      const { message, statusCode } = instance[method](req);
-      res.status(statusCode).json(message);
+      instance[method](req).then((response) => {
+        const {
+          statusCode,
+          ...rest
+        } = response;
+        res.status(statusCode).json(rest);
+      });
     };
   }
   /**
    *
    *
    * @static
-   * @param {any} message a model instance
+   * @param {any} data a table instance
    * @param {number} [statusCode=200]
+   * @param {string} message optional
+   * @param {string} token optional
    * @returns {object} object
    * @memberof Controller
    */
-  static defaultResponse(message, statusCode = 200) {
+  static defaultResponse(data, statusCode = 200, message, token) {
     return {
+      data,
+      statusCode,
       message,
-      statusCode
+      token
     };
   }
   /**
@@ -42,104 +61,99 @@ export default class Controller {
    * @returns {object} object
    * @memberof Controller
    */
-  static errorResponse(message = 'records unavailable', statusCode = 404) {
+  static errorResponse(message, statusCode = 400) {
     return {
       message,
-      statusCode
+      statusCode,
     };
   }
 
-  /**
-   *
-   * Get All Records
-   * @returns {any} all records
-   * @param {obj} req express object
-   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
-   * @memberof Controller
-   */
-  getAllRecords(req, currentModel = this.model) {
-    if (currentModel && currentModel[0]) {
-      return Controller.defaultResponse(currentModel);
-    }
-    return Controller.errorResponse();
-  }
 
   /**
    *
-   *  Get a single record
-   * @param {obj} req express object
-   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
-   * @returns {any} A single record
-   * @memberof Controller
-   */
-  getSingleRecord(req, currentModel = this.model) {
-    if (currentModel && currentModel[0]) {
-      const record = currentModel.find(elem => elem.id === req.params.id);
-      if (record) {
-        return Controller.defaultResponse(record);
-      }
-    }
-    return Controller.errorResponse();
-  }
-
-  /**
    *
-   * Creates a new record
-   * @param {obj} req express object
-   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
-   * @returns {any} success, created record
+   * @param {any} req
+   * @returns {obj} HTTP Response
    * @memberof Controller
    */
-  postRecord(req, currentModel = this.model) {
-    if (currentModel) {
-      const len = currentModel.length;
-      const newId = len + 1;
-      currentModel.push({
-        id: newId,
-        ...req.body
-      });
-      return Controller.defaultResponse(currentModel[len], 201);
-    }
-    return Controller.errorResponse();
-  }
-
-  /**
-   *
-   *  Update a record
-   * @param {obj} req express object
-   * @param {obj} currentModel allow injection of different database dependencies, for subclasses
-   * @returns {any} success, updated record
-   * @memberof Controller
-   */
-  updateRecord(req, currentModel = this.model) {
-    if (currentModel && currentModel[0]) {
-      const record = currentModel.find(elem => elem.id === req.params.id);
-      if (record) {
-        Object.keys(req.body).forEach((element) => {
-          record[element] = req.body[element];
-        });
-
-        return Controller.defaultResponse(currentModel);
-      }
-    }
-    return Controller.errorResponse();
+  createRow(req) {
+    return this.Model
+      .create(req.body)
+      .then(result => Controller.defaultResponse(result, 201))
+      .catch(error => Controller.errorResponse(error.message));
   }
   /**
    *
-   *  Delete a record
-   * @param {obj} req express object
-   * @param {obj} currentModel for subclasses to inject new database dependencies   *
-   * @returns {any} success, updated record
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {obj} Model
    * @memberof Controller
    */
-  deleteRecord(req, currentModel = this.model) {
-    if (currentModel && currentModel[0]) {
-      const recordIndex = currentModel.findIndex(elem => elem.id === req.params.id);
-      if (recordIndex >= 0) {
-        currentModel.splice(recordIndex, 1);
-        return Controller.defaultResponse('Record deleted');
-      }
-    }
-    return Controller.errorResponse();
+  getAllRows() {
+    return this.Model
+      .findAll()
+      .then((result) => {
+        if (result.length > 0) {
+          return Controller.defaultResponse(result);
+        }
+        return Controller.errorResponse('no records available', 404);
+      })
+      .catch(error => Controller.errorResponse(error.message));
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {obj} Model
+   * @memberof Controller
+   */
+  getRowById(req) {
+    return this.Model.findById(req.params.id)
+      .then((result) => {
+        if (!result) {
+          return Controller.errorResponse('no records available', 404);
+        }
+        return Controller.defaultResponse(result);
+      })
+      .catch(error => Controller.errorResponse(error.message));
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {obj} Model
+   * @memberof Controller
+   */
+  updateRow(req) {
+    return this.Model.update(req.body, {
+      where: {
+        id: req.params.id
+      },
+      returning: true
+    }).then(result => Controller.defaultResponse(result))
+      .catch(error => Controller.errorResponse(error.message, 422));
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {obj} Model
+   * @memberof Controller
+   */
+  deleteRow(req) {
+    return this.Model
+      .destroy({
+        where: {
+          id: req.params.id
+        },
+      })
+      .then(result => Controller.defaultResponse(result))
+      .catch(error => Controller.errorResponse(error.message, 422));
   }
 }
+
+export default Controller;
