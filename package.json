@@ -30,6 +30,7 @@
   "homepage": "https://github.com/ozimos/Book-A-Meal#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
@@ -50,9 +51,15 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "date-fns": "^1.29.0",
+    "dotenv": "^5.0.1",
     "esm": "^3.0.24",
     "express": "^4.16.3",
     "express-joi-validation": "^0.2.1",
-    "joi": "^13.2.0"
+    "joi": "^13.2.0",
+    "jsonwebtoken": "^8.2.1",
+    "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.6",
+    "sequelize-cli": "^4.0.0"
   }
 }
