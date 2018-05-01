@@ -12,15 +12,15 @@ env:
   global:
     - CC_TEST_REPORTER_ID=147f28703d3ae0d7c498d8dbedbcb1adb912ffb4873e0b0c644fb78346404a93
     - PGPORT=5433
+    - NODE_ENV=test
 cache:
   directories:
     - "node_modules"
 install:
   - npm install
 before_script:
-  - sudo -u postgres psql -c 'create database BookAMeal_test;'
-  - sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
-  - sequelize db:migrate:all
+  - psql -c 'create database BookAMeal_test;'
+  - psql -c "CREATE USER root WITH PASSWORD 'password';"
   - chmod 0755 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
