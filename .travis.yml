@@ -18,7 +18,7 @@ cache:
 install:
   - npm install
 before_script:
-  - sudo -u postgres psql -c 'create database Book-A-Meal_test;'
+  - sudo -u postgres psql -c 'create database BookAMeal_test;'
   - sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
   - sequelize db:migrate:all
   - chmod 0755 ./node_modules/.bin/mocha
