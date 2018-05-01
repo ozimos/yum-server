@@ -18,8 +18,8 @@ cache:
 install:
   - npm install
 before_script:
-  - sudo psql -c 'create database Book-A-Meal_test;' -U postgres
-  - sudo psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
+  - sudo -u postgres psql -c 'create database Book-A-Meal_test;'
+  - sudo -u postgres psql -c "CREATE USER root WITH PASSWORD 'password';"
   - sequelize db:migrate:all
   - chmod 0755 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
