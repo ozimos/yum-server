@@ -6,7 +6,7 @@ const login = Joi.object({
     .required(),
   password: Joi.string().required()
 });
-const postUsers = Joi.object({
+const signup = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   email: Joi.string()
@@ -20,6 +20,6 @@ const postUsers = Joi.object({
 });
 
 export default {
-  postUsers,
+  signup,
   login
 };
