@@ -7,8 +7,10 @@ import schema from '../../../src/middleware/mealSchemas';
 context('Validation with Joi schemas', () => {
   // sample request body data
   const meal = {
+    userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
     title: 'Spaghetti',
     description: 'very good',
+    imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
     price: 1500,
   };
 
@@ -66,26 +68,27 @@ context('Validation with Joi schemas', () => {
   });
 
   describe('for request.params on GET, PUT and DELETE', () => {
-    const test = [
-      { id: 'add' },
-      { id: '3.5' },
-      { id: 3.5 }
-    ];
-    const test2 = [
-      { id: 3 },
-      { id: '3' }
-    ];
-    test.forEach((item) => {
-      it(`throws error for non-integer ${typeof item.id} parameter: ${item.id}`, () => {
-        const result = schema.params.validate(item);
+    const test = [{
+      id: 'add'
+    }, {
+      id: '3.5'
+    }, {
+      id: 3.5
+    }];
+    const item = {
+      id: 'c848bf5c-27ab-4882-9e43-ffe178c82602'
+    };
+
+    test.forEach((elem) => {
+      it(`throws error for non-uuid ${typeof elem.id} parameter: ${elem.id}`, () => {
+        const result = schema.params.validate(elem);
         assert.notEqual(result.error, null, `Joi output: ${result.error}`);
       });
     });
-    test2.forEach((item) => {
-      it(`does not throw error for integer ${typeof item.id} parameter: ${item.id}`, () => {
-        const result = schema.params.validate(item);
-        assert.equal(result.error, null, `Joi output: ${result.error}`);
-      });
+
+    it('does not throw error for uuid string parameter c848bf5c-27ab-4882-9e43-ffe178c82602', () => {
+      const result = schema.params.validate(item);
+      assert.equal(result.error, null, `Joi output: ${result.error}`);
     });
   });
 });

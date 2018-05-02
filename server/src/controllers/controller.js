@@ -76,7 +76,7 @@ class Controller {
    * @returns {obj} HTTP Response
    * @memberof Controller
    */
-  createRow(req) {
+  postRecord(req) {
     return this.Model
       .create(req.body)
       .then(result => Controller.defaultResponse(result, 201))
@@ -90,7 +90,7 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  getAllRows() {
+  getAllRecords() {
     return this.Model
       .findAll()
       .then((result) => {
@@ -109,7 +109,7 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  getRowById(req) {
+  getSingleRecord(req) {
     return this.Model.findById(req.params.id)
       .then((result) => {
         if (!result) {
@@ -127,7 +127,7 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  updateRow(req) {
+  updateRecord(req) {
     return this.Model.update(req.body, {
       where: {
         id: req.params.id
@@ -144,7 +144,7 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  deleteRow(req) {
+  deleteRecord(req) {
     return this.Model
       .destroy({
         where: {

@@ -3,7 +3,6 @@ import chai from 'chai';
 import bcrypt from 'bcryptjs';
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
-import token from 'jsonwebtoken';
 import app from '../../src/app';
 import db from '../../src/models';
 
@@ -17,10 +16,8 @@ const salt = bcrypt.genSaltSync(10);
 const passwordHash = bcrypt.hashSync(defaultPassword, salt);
 
 export const {
-  User
+  User, Meal
 } = db;
-
-export const jwt = token;
 
 export const defaultUser = {
   id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
@@ -30,7 +27,14 @@ export const defaultUser = {
   passwordHash,
   isCaterer: true
 };
-
+export const defaultMeal = {
+  id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  title: 'Beef with Rice',
+  description: 'plain rice with ground beef',
+  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  price: 1500,
+};
 export const payload = {
   isCaterer: defaultUser.isCaterer,
   id: defaultUser.id
@@ -38,8 +42,6 @@ export const payload = {
 
 // endpoint urls
 export const rootURL = '/api/v1';
-export const mealsUrl = `${rootURL}/meals`;
-export const mealIdUrl = `${rootURL}/meals/1`;
 export const menuUrl = `${rootURL}/menu`;
 export const ordersUrl = `${rootURL}/orders`;
 export const orderIdUrl = `${rootURL}/orders/1`;
@@ -86,15 +88,15 @@ export const templateTest = function generateTest(title, method, url, content, k
     it('response should have required keys', async () => {
       try {
         const res = await boundRequest().send(content);
-        return expect(res.body).to.include.all.keys(key);
+        return expect(res.body.data).to.include.all.keys(key);
       } catch (err) {
         throw err;
       }
     });
-    it('response message to be of required type', async () => {
+    it('response data to be of required type', async () => {
       try {
         const res = await boundRequest().send(content);
-        return expect(res.body).to.be.an(type);
+        return expect(res.body.data).to.be.an(type);
       } catch (err) {
         throw err;
       }

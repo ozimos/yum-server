@@ -1,39 +1,35 @@
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const Meal = sequelize.define('Meal', {
     id: {
       type: DataTypes.UUID,
-      primaryKey: true,
       defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     },
-    email: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'email'
+      unique: 'title'
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
+    description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    passwordHash: {
+    imageUrl: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isCaterer: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   });
 
   // Relations
-  User.associate = (models) => {
-    User.hasMany(models.Meal, {
+  Meal.associate = (models) => {
+    Meal.belongsTo(models.User, {
       foreignKey: 'userId',
     });
   };
 
-  return User;
+  return Meal;
 };
