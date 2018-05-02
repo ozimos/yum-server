@@ -4,11 +4,11 @@ import Validator from 'express-joi-validation';
 
 import Controller from '../controllers/controller';
 import schemas from '../middleware/mealSchemas';
-import meals from '../models/meals';
+import db from '../models';
 
 const router = express.Router();
 const validator = Validator({});
-const controller = new Controller(meals);
+const controller = new Controller(db.Meal);
 
 
 // Params validation
