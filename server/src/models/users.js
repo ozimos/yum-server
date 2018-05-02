@@ -29,7 +29,11 @@ export default (sequelize, DataTypes) => {
   });
 
   // Relations
-
+  User.associate = (models) => {
+    User.hasMany(models.Meal, {
+      foreignKey: 'userId',
+    });
+  };
 
   return User;
 };
