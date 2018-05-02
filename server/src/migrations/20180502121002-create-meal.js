@@ -1,30 +1,37 @@
 export default {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable(
-      'Users',
+      'Meals',
       {
         id: {
           type: Sequelize.UUID,
           primaryKey: true,
           defaultValue: Sequelize.UUIDV4
         },
-        email: {
+        userId: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'Users',
+            key: 'id',
+            as: 'userId',
+          },
+        },
+        title: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: 'email'
+          unique: 'title'
         },
-        firstName: {
+        description: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
         },
-        lastName: {
+        imageUrl: {
           type: Sequelize.STRING,
-          allowNull: false
+          allowNull: false,
         },
-
-        passwordHash: {
-          type: Sequelize.STRING,
-          allowNull: false
+        price: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
         },
         isCaterer: {
           type: Sequelize.BOOLEAN,
@@ -45,12 +52,12 @@ export default {
       // sometimes and fails inexplicably at others. uniqueKeys preferrable
       {
         uniqueKeys: {
-          email: {
-            fields: ['email']
+          title: {
+            fields: ['title']
           }
         }
       }
     ),
 
-  down: queryInterface => queryInterface.dropTable('Users')
+  down: queryInterface => queryInterface.dropTable('Meals')
 };
