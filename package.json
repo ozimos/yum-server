@@ -13,10 +13,12 @@
     "postbuild": "node server/lib/bin/www.js",
     "heroku-postbuild": "babel server/src -d server/lib",
     "test": "nyc mocha server/test --exit --recursive -r esm",
+    "test2": "nyc mocha server/test/unit/controllers/userController.js --exit -r esm",
     "test:babel": "nyc mocha server/test --exit --recursive -r babel-polyfill -r babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "report": "nyc report --reporter=text-lcov",
-    "lint": "eslint server/src/*"
+    "lint": "eslint server/src/*",
+    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate"
   },
   "repository": {
     "type": "git",

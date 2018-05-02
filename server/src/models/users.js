@@ -1,37 +1,35 @@
-const users = [
-  {
-    id: 1,
-    email: 'AliceZed@gmail.com',
-    firstName: 'Alice',
-    lastName: 'Zed',
-    passwordHash: 'alicezed',
-    isCaterer: true,
-  },
-  {
-    id: 2,
-    email: 'BeatriceYomi@gmail.com',
-    firstName: 'Beatrice',
-    lastName: 'Yomi',
-    passwordHash: 'beatriceyomi',
-    isCaterer: false,
-  },
+export default (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    id: {
+      type: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: 'email'
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isCaterer: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  });
 
-  {
-    id: 3,
-    email: 'CharlesXavier@gmail.com',
-    firstName: 'Charles',
-    lastName: 'Xavier',
-    passwordHash: 'charlesxavier',
-    isCaterer: false,
-  },
-  {
-    id: 4,
-    email: 'DicksonWaikumo@gmail.com',
-    firstName: 'Dickson',
-    lastName: 'Waikumo',
-    passwordHash: 'dicksonwaikumo',
-    isCaterer: true,
-  },
-];
+  // Relations
 
-export default users;
+
+  return User;
+};
