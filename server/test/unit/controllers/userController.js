@@ -28,7 +28,7 @@ describe('User Controllers', () => {
     userController = new UserController(User);
   });
   afterEach('Remove stubbing', () => td.reset());
-  describe.skip('login(req)', () => {
+  describe('login(req)', () => {
     it('should return an error message if no data in database', () => {
       const expectedResponse = 'Account does not exist! Visit /api/v1/users/signup and register.';
 

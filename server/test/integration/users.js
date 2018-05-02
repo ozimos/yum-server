@@ -42,7 +42,7 @@ describe('Routes Users', () => {
   });
 
   // Login A User
-  describe.skip('POST /auth/login', () => {
+  describe('POST /auth/login', () => {
     const credentials = {
       email: defaultUser.email,
       password: defaultPassword,

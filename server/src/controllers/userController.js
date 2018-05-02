@@ -8,6 +8,33 @@ import Controller from './controller';
  * @class UserController
  */
 class UserController extends Controller {
+  /**
+   *
+   *
+   * @param {any} req
+   * @returns {obj} HTTP Response
+   * @memberof UserController
+   */
+  login(req) {
+    // get user details from db
+    return this.Model
+      .findOne({
+        where: {
+          email: req.body.email
+        }
+      }).then((response) => {
+        if (!response) {
+          return UserController.errorResponse('Account does not exist! Visit /api/v1/users/signup and register.', 404);
+        }
+        // check if password is correct
+        const isCorrectPassword = bcrypt.compareSync(req.body.password, response.passwordHash);
+
+        if (isCorrectPassword) {
+          return UserController.sendResponseWithToken(response);
+        }
+        return UserController.errorResponse('Incorrect password', 406);
+      }).catch(error => UserController.errorResponse(error.message));
+  }
 
 
   /**
