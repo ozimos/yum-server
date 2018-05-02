@@ -8,7 +8,7 @@ import Controller from './controller';
  * @class UserController
  */
 class UserController extends Controller {
- 
+
 
   /**
    *
@@ -36,7 +36,7 @@ class UserController extends Controller {
       // create user in db
       return this.Model.create(req.body)
         .then(data => UserController
-          .sendResponseWithToken(data, 'Signup Successful '))
+          .sendResponseWithToken(data, 'Signup Successful, '))
         .catch(error => UserController.errorResponse(error.message));
     }).catch(error => UserController.errorResponse(error.message));
   }
@@ -66,7 +66,7 @@ class UserController extends Controller {
       message = `${message}Login Successful`;
       return UserController.defaultResponse(data, 200, message, token);
     }
-    message = `${message} but No token found`;
+    message = `${message}No token found`;
     return UserController.errorResponse(message, 406);
   }
 }
