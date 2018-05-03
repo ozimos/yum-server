@@ -16,7 +16,7 @@ const salt = bcrypt.genSaltSync(10);
 const passwordHash = bcrypt.hashSync(defaultPassword, salt);
 
 export const {
-  User, Meal
+  User, Meal, Menu
 } = db;
 
 export const defaultUser = {
@@ -28,8 +28,9 @@ export const defaultUser = {
   isCaterer: true
 };
 export const defaultMeal = {
-  id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  id: '6066e6ad-6ebd-4861-b932-b72c095f69e6',
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  menuTitle: 'Today',
   title: 'Beef with Rice',
   description: 'plain rice with ground beef',
   imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
