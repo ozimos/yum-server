@@ -25,7 +25,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - npm run migrate
+  - npm run refresh
   - npm test
 after_success:
   - npm run coverage
