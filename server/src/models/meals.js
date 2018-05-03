@@ -29,6 +29,11 @@ export default (sequelize, DataTypes) => {
     Meal.belongsTo(models.User, {
       foreignKey: 'userId',
     });
+    Meal.belongsTo(models.Menu, {
+      foreignKey: 'menuTitle',
+      as: 'Meals',
+      onUpdate: 'CASCADE'
+    });
   };
 
   return Meal;

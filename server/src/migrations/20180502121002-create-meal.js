@@ -16,6 +16,15 @@ export default {
             as: 'userId',
           },
         },
+        menuTitle: {
+          type: Sequelize.STRING,
+          allowNull: true,
+          references: {
+            model: 'Menus',
+            key: 'title',
+            as: 'menuTitle',
+          },
+        },
         title: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -32,10 +41,6 @@ export default {
         price: {
           type: Sequelize.INTEGER,
           allowNull: false,
-        },
-        isCaterer: {
-          type: Sequelize.BOOLEAN,
-          defaultValue: false
         },
         createdAt: {
           allowNull: false,
