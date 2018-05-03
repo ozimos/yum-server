@@ -4,11 +4,11 @@ import Validator from 'express-joi-validation';
 
 import MenuController from '../controllers/menuController';
 import menuSchema from '../middleware/menuSchemas';
-import menus from '../models/menus';
+import db from '../models';
 
 const router = express.Router();
 const validator = Validator({});
-const menuController = new MenuController(menus);
+const menuController = new MenuController(db.Menu, db.Meal);
 
 
 router.route('/')
