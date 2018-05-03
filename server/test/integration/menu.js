@@ -40,17 +40,6 @@ context('menu integration test', () => {
     }
   });
 
-  // Get  Menu
-  describe('GET /menu', () => {
-    it('should return the menu for today', () =>
-      request(app)
-        .get(menuUrl)
-        .then((res) => {
-          expect(res.body.data.description).to.equal(defaultMenu.description);
-        }));
-    templateTest('Get Menu', 'get', menuUrl, null, 'description', 'object');
-  });
-
   // Post Menu
   describe('POST /menu', () => {
     const newMenu = {
@@ -67,5 +56,16 @@ context('menu integration test', () => {
           expect(res.body.data.description).to.equal(newMenu.description);
         }));
     templateTest('Add Menu', 'post', menuUrl, newMenu, 'description', 'object', '201');
+  });
+
+  // Get  Menu
+  describe('GET /menu', () => {
+    it('should return the menu for today', () =>
+      request(app)
+        .get(menuUrl)
+        .then((res) => {
+          expect(res.body.data.Meals[0].id).to.equal(defaultMeal.id);
+        }));
+    templateTest('Get Menu', 'get', menuUrl, null, 'Meals', 'object');
   });
 });
