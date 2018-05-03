@@ -1,6 +1,9 @@
 /* eslint import/no-extraneous-dependencies: off */
 import { expect } from 'chai';
+import td from 'testdouble';
 import MenuController from '../../../src/controllers/menuController';
+
+const Menu = td.object();
 
 const errorResponse = {
   message: 'records unavailable',
@@ -23,6 +26,7 @@ const menu = {
     }
   ]
 };
+afterEach(() => td.reset());
 
 describe('getMenu()', () => {
   const req = {};
