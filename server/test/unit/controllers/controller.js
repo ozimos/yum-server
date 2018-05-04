@@ -6,10 +6,13 @@ import {
 import td from 'testdouble';
 import Controller from '../../../src/controllers/controller.js';
 
-const Table = td.object();
-const controller = new Controller(Table);
+let Table, controller;
 describe('Center Controllers', () => {
-  afterEach(() => td.reset());
+  beforeEach('Stub Database', () => {
+    Table = td.object();
+    controller = new Controller(Table);
+  });
+  afterEach('Remove Stubbing', () => td.reset());
   describe('getAllRecords()', () => {
     it('should return a list of rows if data is returned from database', () => {
       const expectedResponse = [
@@ -29,14 +32,14 @@ describe('Center Controllers', () => {
 
       td.when(Table.findAll()).thenResolve(expectedResponse);
 
-      controller.getAllRecords()
+      return controller.getAllRecords()
         .then(response => expect(response.data).to.eql(expectedResponse));
     });
     it('should return an error message if no data in database', () => {
       const expectedResponse = 'no records available';
 
       td.when(Table.findAll()).thenResolve([]);
-      controller.getAllRecords()
+      return controller.getAllRecords()
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
     it('should return an error message if error occurs when accessing database', () => {
@@ -44,7 +47,7 @@ describe('Center Controllers', () => {
         message: 'database error'
       };
       td.when(Table.findAll()).thenReject(error);
-      controller.getAllRecords()
+      return controller.getAllRecords()
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
@@ -66,14 +69,14 @@ describe('Center Controllers', () => {
       td.when(Table.findById(req.params.id)).thenResolve(expectedResponse);
 
 
-      controller.getSingleRecord(req)
+      return controller.getSingleRecord(req)
         .then(response => expect(response.data).to.eql(expectedResponse));
     });
     it('should return an error message if no data in database', () => {
       const expectedResponse = 'no records available';
 
       td.when(Table.findById(req.params.id)).thenResolve(null);
-      controller.getSingleRecord(req)
+      return controller.getSingleRecord(req)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
     it('should return an error message if error occurs when accessing database', () => {
@@ -81,7 +84,7 @@ describe('Center Controllers', () => {
         message: 'database error'
       };
       td.when(Table.findById(req.params.id)).thenReject(error);
-      controller.getSingleRecord(req)
+      return controller.getSingleRecord(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
@@ -104,7 +107,7 @@ describe('Center Controllers', () => {
         }
       };
       td.when(Table.create(req.body)).thenResolve(returnValue.body);
-      controller.postRecord(req)
+      return controller.postRecord(req)
         .then((response) => {
           expect(response.statusCode).to.equal(201);
           expect(response.data).to.eql(returnValue.body);
@@ -118,7 +121,7 @@ describe('Center Controllers', () => {
         message: 'database error'
       };
       td.when(Table.create(req.body)).thenReject(error);
-      controller.postRecord(req)
+      return controller.postRecord(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
@@ -143,7 +146,7 @@ describe('Center Controllers', () => {
         returning: true
       })).thenResolve(req.body);
 
-      controller.updateRecord(req)
+      return controller.updateRecord(req)
         .then(response =>
           expect(response.data).to.eql(req.body));
     });
@@ -157,7 +160,7 @@ describe('Center Controllers', () => {
         },
         returning: true
       })).thenReject(error);
-      controller.updateRecord(req)
+      return controller.updateRecord(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
@@ -178,7 +181,7 @@ describe('Center Controllers', () => {
           id: req.params.id
         },
       })).thenResolve(1);
-      controller.deleteRecord(req)
+      return controller.deleteRecord(req)
         .then(response =>
           expect(response.data).to.eql(1));
     });
@@ -191,7 +194,7 @@ describe('Center Controllers', () => {
           id: req.params.id
         },
       })).thenReject(error);
-      controller.deleteRecord(req)
+      return controller.deleteRecord(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });

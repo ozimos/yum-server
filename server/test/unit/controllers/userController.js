@@ -33,7 +33,7 @@ describe('User Controllers', () => {
       const expectedResponse = 'Account does not exist! Visit /api/v1/users/signup and register.';
 
       td.when(User.findOne(input)).thenResolve(null);
-      userController.login(req)
+      return userController.login(req)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
     it('should return an error message if password is incorrect', () => {
@@ -47,7 +47,7 @@ describe('User Controllers', () => {
 
       td.when(User.findOne(input)).thenResolve(response);
       td.when(bcrypt.compareSync(req.body.password, response.passwordHash)).thenResolve(false);
-      userController.login(req)
+      return userController.login(req)
         .then(response2 => expect(response2.message).to.equal(expectedResponse));
     });
     it('should return an error message if error occurs when accessing database', () => {
@@ -56,7 +56,7 @@ describe('User Controllers', () => {
       };
 
       td.when(User.findOne(input)).thenReject(error);
-      userController.login(req)
+      return userController.login(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
@@ -68,7 +68,7 @@ describe('User Controllers', () => {
         email: req.body.email,
       };
       td.when(User.findOne(input)).thenResolve(dummyUser);
-      userController.signUp(req)
+      return userController.signUp(req)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
 
@@ -78,7 +78,7 @@ describe('User Controllers', () => {
       };
 
       td.when(User.findOne(input)).thenReject(error);
-      userController.signUp(req)
+      return userController.signUp(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
   });
