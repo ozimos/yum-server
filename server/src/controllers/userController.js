@@ -45,20 +45,24 @@ class UserController extends Controller {
    * @memberof UserController
    */
   signUp(req) {
+    const {
+      email,
+      ...rest
+    } = req.body;
     // check if email is available
-    return this.Model.findOne({
+    return this.Model.findOrCreate({
       where: {
-        email: req.body.email
+        email
+      },
+      defaults: rest
+    }).then(([response, created]) => {
+      if (!created) {
+        return UserController.errorResponse('email has been used');
       }
-    }).then((response) => {
-      if (response) {
-        return UserController.errorResponse('email has been used', 404);
-      }
-      return this.Model.create(req.body)
-        .then(data => UserController
-          .sendResponseWithToken(data, 'Signup Successful, '))
-        .catch(error => UserController.errorResponse(error.message));
-    }).catch(error => UserController.errorResponse(error.message));
+      return UserController
+        .sendResponseWithToken(response, 'Signup Successful, ');
+    })
+      .catch(error => UserController.errorResponse(error.message));
   }
 
 

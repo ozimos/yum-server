@@ -67,7 +67,7 @@ describe('User Controllers', () => {
       const dummyUser = {
         email: req.body.email,
       };
-      td.when(User.findOne(input)).thenResolve(dummyUser);
+      td.when(User.findOrCreate(td.matchers.anything())).thenResolve([dummyUser, false]);
       return userController.signUp(req)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
@@ -77,7 +77,7 @@ describe('User Controllers', () => {
         message: 'database error'
       };
 
-      td.when(User.findOne(input)).thenReject(error);
+      td.when(User.findOrCreate(td.matchers.anything())).thenReject(error);
       return userController.signUp(req)
         .catch(response => expect(response.message).to.equal(error.message));
     });
