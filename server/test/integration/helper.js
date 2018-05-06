@@ -1,6 +1,5 @@
 /* eslint import/no-extraneous-dependencies: off */
 import chai from 'chai';
-import bcrypt from 'bcryptjs';
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
 import app from '../../src/app';
@@ -12,8 +11,6 @@ export const {
 } = chai;
 dotenv.config();
 export const defaultPassword = 'test123';
-const salt = bcrypt.genSaltSync(10);
-const passwordHash = bcrypt.hashSync(defaultPassword, salt);
 
 export const {
   User, Meal, Menu
@@ -24,7 +21,7 @@ export const defaultUser = {
   firstName: 'Tovieye',
   lastName: 'Ozi',
   email: 'ad.min@gmail.com',
-  passwordHash,
+  password: 'test123',
   isCaterer: true
 };
 export const defaultMeal = {

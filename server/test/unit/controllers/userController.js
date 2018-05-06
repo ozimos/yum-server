@@ -38,7 +38,7 @@ describe('User Controllers', () => {
     });
     it('should return an error message if password is incorrect', () => {
       const response = {
-        passwordHash: 'some Hash'
+        password: 'some Hash'
       };
       const expectedResponse = 'Incorrect password';
       const bcrypt = {
@@ -46,7 +46,7 @@ describe('User Controllers', () => {
       };
 
       td.when(User.findOne(input)).thenResolve(response);
-      td.when(bcrypt.compareSync(req.body.password, response.passwordHash)).thenResolve(false);
+      td.when(bcrypt.compareSync(req.body.password, response.password)).thenResolve(false);
       return userController.login(req)
         .then(response2 => expect(response2.message).to.equal(expectedResponse));
     });
@@ -85,7 +85,7 @@ describe('User Controllers', () => {
 
   describe('sendResponseWithToken(data)', () => {
     const data = {
-      passwordHash: 'abc123',
+      password: 'abc123',
       isCaterer: true,
       id: 'some id'
     };
@@ -107,17 +107,18 @@ describe('User Controllers', () => {
       expect(response.statusCode).to.equal(200);
       expect(response.data).to.eql(data);
     });
-    // it('should return error message when token creation fails', () => {
-    //   td.when(jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-    //     expiresIn: '1h'
-    //   })).thenReturn(null);
+  //   it('should return error message when token creation fails', () => {
+  //     const jwtResponse = {
+  //       message: 'Error Message'
+  //     };
+  //     td.when(jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+  //       expiresIn: '1h'
+  //     })).thenReturn(jwtResponse);
 
+  //     const response = UserController.sendResponseWithToken(data, inputMessage);
 
-    //   const response = UserController.sendResponseWithToken(data, inputMessage);
-
-    //   expect(response.message).to.equal('Signup Successful No token found');
-    //   expect(response.statusCode).to.equal(406);
-    //   expect(response.data).to.eql(data);
-    // });
+  //     expect(response.message).to.equal(`Signup Successful, ${jwtResponse.message}`);
+  //     expect(response.statusCode).to.equal(500);
+  //   });
   });
 });
