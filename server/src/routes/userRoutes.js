@@ -15,6 +15,7 @@ router.post(
 );
 
 router.post('/login', validator.body(schemas.login), UserController.select(userController, 'login'));
+router.get('/', UserController.select(userController, 'getAllRecords'));
 
 // Return router
 export default router;

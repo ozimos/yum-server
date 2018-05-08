@@ -63,6 +63,7 @@ context('menu integration test', () => {
     it('should return the menu for today', () =>
       request(app)
         .get(menuUrl)
+        .set('authorization', `JWT ${token}`)
         .then((res) => {
           expect(res.body.data.Meals[0].id).to.equal(defaultMeal.id);
         }));

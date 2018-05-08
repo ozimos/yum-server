@@ -4,6 +4,7 @@ import Validator from 'express-joi-validation';
 
 import MenuController from '../controllers/menuController';
 import menuSchema from '../middleware/menuSchemas';
+import IsUser from '../middleware/authenticate';
 import db from '../models';
 
 const router = express.Router();
@@ -12,8 +13,8 @@ const menuController = new MenuController(db.Menu, db.Meal);
 
 
 router.route('/')
-  .get(MenuController.select(menuController, 'getMenu'))
-  .post(validator.body(menuSchema), MenuController.select(menuController, 'postMenu'));
+  .get(IsUser.verify, MenuController.select(menuController, 'getMenu'))
+  .post(IsUser.verify, IsUser.admin, validator.body(menuSchema), MenuController.select(menuController, 'postMenu'));
 
 // Return router
 export default router;
