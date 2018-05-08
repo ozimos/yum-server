@@ -82,7 +82,7 @@ class UserController extends Controller {
       userId: data.id
     };
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-      expiresIn: '1h'
+      expiresIn: '2h'
     });
     if (typeof token === 'string') {
       message = `${message}Login Successful`;
