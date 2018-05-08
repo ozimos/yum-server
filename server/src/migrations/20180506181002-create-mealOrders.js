@@ -3,11 +3,6 @@ export default {
     queryInterface.createTable(
       'MealOrders',
       {
-        id: {
-          type: Sequelize.UUID,
-          primaryKey: true,
-          defaultValue: Sequelize.UUIDV4
-        },
         mealId: {
           type: Sequelize.UUID,
           references: {
