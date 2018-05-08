@@ -1,5 +1,5 @@
 const path = require('path');
-/*
+
 if (process.env.NODE_ENV === 'production'){
 module.exports =  {
   "config": path.resolve('./server/lib/config', 'config.js'),
@@ -8,7 +8,7 @@ module.exports =  {
   "migrations-path": path.resolve('./server/lib/migrations')
 };
 }
-*/
+
 
 
 module.exports = {
