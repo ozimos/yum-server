@@ -1,37 +1,61 @@
-import { expect, request, ordersUrl, orderIdUrl, templateTest } from './helper';
+/* eslint-disable no-console */
+import jwt from 'jsonwebtoken';
+import {
+  expect,
+  request,
+  rootURL,
+  Meal,
+  Order,
+  defaultUser,
+  defaultMeal,
+  payload,
+  templateTest
+} from './helper';
 
 import app from '../../src/app';
 
-const defaultOrder = {
-  id: 1,
-  userId: 1,
-  menuId: 2,
-  mealId: 2
-};
+const orderUrl = `${rootURL}/orders`;
+const orderIdUrl = `${rootURL}/orders/${defaultOrder.id}`;
 
+const defaultOrder = {
+  id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  userId: defaultUser.id,
+};
+context('orders integration test', () => {
+// truncates Meal & Order and creates new row entries before test
+// Creates JWT before test
+  let token;
+  before(async () => {
+    try {
+      await Meal.truncate({
+        cascade: true
+      });
+      await Order.truncate({
+        cascade: true
+      });
+      await Order.create(defaultOrder);
+      await Meal.create(defaultMeal);
+      token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+        expiresIn: '1h'
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 // Get All Orders
 describe('GET /orders', () => {
   it('should return all orders', () =>
     request(app).get(ordersUrl).then((res) => {
-      expect(res.body[0].id).to.equal(defaultOrder.id);
-      expect(res.body[0].menuId).to.equal(defaultOrder.menuId);
+      expect(res.body.data[0].id).to.equal(defaultOrder.id);
+      expect(res.body.data[0].userId).to.equal(defaultOrder.userId);
     }));
   templateTest('Get All Orders', 'get', ordersUrl, null, '0', 'array');
 });
-// Get One Order
-describe('GET /orders/:id', () => {
-  it('should return an order', () =>
-    request(app).get(orderIdUrl).then((res) => {
-      expect(res.body.menuId).to.equal(defaultOrder.menuId);
-      expect(res.body.mealId).to.equal(defaultOrder.mealId);
-    }));
-  templateTest('Get Order', 'get', orderIdUrl, null, 'menuId', 'object');
-});
+
 // Update A Order
 describe('PUT /orders/:id', () => {
   const updatedOrder = {
-    menuId: 1,
-    mealId: 1
+    meals: [defaultMeal.id]
   };
 
   it('should update an order', () =>
@@ -39,20 +63,19 @@ describe('PUT /orders/:id', () => {
       .put(orderIdUrl)
       .send(updatedOrder)
       .then((res) => {
-        expect(res.body[0].menuId).to.equal(updatedOrder.menuId);
-        expect(res.body[0].mealId).to.equal(updatedOrder.mealId);
+        expect(res.body.userId).to.equal(req.decoded.id);
+        
       }));
-  templateTest('Modify Order', 'put', orderIdUrl, updatedOrder, '0', 'array');
+  
 });
 
 // Create A Order
 describe('POST /orders', () => {
   const newOrder = {
-    userId: 1,
-    menuId: 2,
-    mealId: 3
+    userId: defaultUser.id,
+   meals: [defaultMeal.id]
   };
-  it('should create a order', () =>
+  it('should create an order', () =>
     request(app)
       .post(ordersUrl)
       .send(newOrder)
@@ -70,11 +93,4 @@ describe('POST /orders', () => {
     '201'
   );
 });
-
-// Delete A Order
-describe('DELETE /orders', () => {
-  it('should delete an order', () =>
-    request(app).delete(orderIdUrl).then((res) => {
-      expect(res).to.have.status(200);
-    }));
 });
