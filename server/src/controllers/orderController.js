@@ -31,10 +31,10 @@ export default class OrderController extends Controller {
     const {
       userId
     } = req.decoded;
-    return this.Model.build({
+    return this.Model.create({
       userId
     })
-      .then(([order]) => {
+      .then((order) => {
         order.setMeals(req.body.meals);
         return order.save();
       })
@@ -44,11 +44,11 @@ export default class OrderController extends Controller {
   updateOrder(req) {
 
     return this.Model.findById(req.params.id)
-      .then(([menu]) => {
-        menu.setMeals(req.body.meals);
-        return menu.save();
+      .then((order) => {
+        order.setMeals(req.body.meals);
+        return order.save();
       })
-      .then(savedMenu => Controller.defaultResponse(savedMenu, 201))
+      .then(savedOrder => Controller.defaultResponse(savedOrder))
       .catch(err => Controller.errorResponse(err));
   }
 }
