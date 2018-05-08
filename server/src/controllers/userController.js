@@ -79,7 +79,7 @@ class UserController extends Controller {
     let message = extraMessage;
     const payload = {
       isCaterer: data.isCaterer,
-      id: data.id
+      userId: data.id
     };
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
       expiresIn: '1h'

@@ -6,10 +6,7 @@ export default class MenuController extends Controller {
     this.Meal = Meal;
   }
   getMenu() {
-    return this.Model.findOne({
-      where: {
-        title: 'Today'
-      },
+    return this.Model.findById('Today', {
       include: [
         {
           model: this.Meal,
