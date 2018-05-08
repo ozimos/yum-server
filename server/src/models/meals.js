@@ -34,6 +34,12 @@ export default (sequelize, DataTypes) => {
       as: 'Meals',
       onUpdate: 'CASCADE'
     });
+    Meal.belongsToMany(models.Order, {
+      through: 'MealOrders',
+      foreignKey: 'mealId',
+      as: 'Orders',
+      onUpdate: 'CASCADE'
+    });
   };
 
   return Meal;
