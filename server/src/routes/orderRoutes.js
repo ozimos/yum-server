@@ -2,33 +2,27 @@
 import express from 'express';
 import Validator from 'express-joi-validation';
 
-import Controller from '../controllers/controller';
-import schemas from '../middleware/orderSchemas';
-import orders from '../models/orders';
+import OrderController from '../controllers/orderController';
+import params from '../middleware/paramSchema';
+import orderSchema from '../middleware/orderSchemas';
+import IsUser from '../middleware/authenticate';
+import db from '../models';
 
 const router = express.Router();
 const validator = Validator({});
-const controller = new Controller(orders);
+const orderController = new OrderController(db.Order, db.Meal);
 
 // Params validation
-router.param('id', validator.params(schemas.params));
+router.param('id', validator.params(params));
 
 router
   .route('/')
-  .get(Controller.select(controller, 'getAllRecords'))
-  .post(
-    validator.body(schemas.createOrder),
-    Controller.select(controller, 'postRecord')
-  );
+  .get(IsUser.verify, IsUser.admin, OrderController.select(orderController, 'getAllOrders'))
+  .post(IsUser.verify, validator.body(orderSchema), OrderController.select(orderController, 'postOrder'));
 
 router
   .route('/:id')
-  .get(Controller.select(controller, 'getSingleRecord'))
-  .put(
-    validator.body(schemas.modifyOrder),
-    Controller.select(controller, 'updateRecord')
-  )
-  .delete(Controller.select(controller, 'deleteRecord'));
+  .put(IsUser.verify, IsUser.admin, validator.body(orderSchema), OrderController.select(orderController, 'updateOrder'));
 
 // Return router
 export default router;
