@@ -18,8 +18,8 @@ const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
 
 context('meals integration test', () => {
 
-// truncates Meal & User and creates new row entries before test
-// Creates JWT before test
+  // truncates Meal & User and creates new row entries before test
+  // Creates JWT before test
   let token;
   before(async () => {
     try {
@@ -41,6 +41,7 @@ context('meals integration test', () => {
   // Get All Meals
   describe('GET /meals', () => {
     it('should return all meals', () => request(app).get(mealsUrl)
+      .set('authorization', `JWT ${token}`)
       .then((res) => {
         expect(res.body.data[0].id).to.equal(defaultMeal.id);
         expect(res.body.data[0].price).to.equal(defaultMeal.price);
@@ -52,6 +53,7 @@ context('meals integration test', () => {
   describe('GET /meals/:id', () => {
     it('should return a meal', () =>
       request(app).get(mealIdUrl)
+        .set('authorization', `JWT ${token}`)
         .then((res) => {
           expect(res.body.data.title).to.equal(defaultMeal.title);
           expect(res.body.data.price).to.equal(defaultMeal.price);
@@ -102,4 +104,3 @@ context('meals integration test', () => {
       }));
   });
 });
-

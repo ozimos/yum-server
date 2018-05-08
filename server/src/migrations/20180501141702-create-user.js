@@ -22,7 +22,7 @@ export default {
           allowNull: false
         },
 
-        passwordHash: {
+        password: {
           type: Sequelize.STRING,
           allowNull: false
         },

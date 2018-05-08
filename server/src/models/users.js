@@ -1,3 +1,10 @@
+import bcrypt from 'bcryptjs';
+
+const hashPassword = user =>
+  bcrypt.hash(user.password, 10)
+    .then(hash =>
+      user.setDataValue('password', hash));
+
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: {
@@ -18,19 +25,24 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    passwordHash: {
+    password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
+
     },
     isCaterer: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
+    }
   });
 
+  User.beforeCreate(hashPassword);
   // Relations
   User.associate = (models) => {
     User.hasMany(models.Meal, {
+      foreignKey: 'userId',
+    });
+    User.hasMany(models.Order, {
       foreignKey: 'userId',
     });
   };

@@ -1,7 +1,8 @@
 /* eslint import/no-extraneous-dependencies: off */
 import chai from 'chai';
-import bcrypt from 'bcryptjs';
 import chaiHttp from 'chai-http';
+import jwt from 'jsonwebtoken';
+
 import dotenv from 'dotenv';
 import app from '../../src/app';
 import db from '../../src/models';
@@ -12,11 +13,9 @@ export const {
 } = chai;
 dotenv.config();
 export const defaultPassword = 'test123';
-const salt = bcrypt.genSaltSync(10);
-const passwordHash = bcrypt.hashSync(defaultPassword, salt);
 
 export const {
-  User, Meal, Menu
+  User, Meal, Menu, Order
 } = db;
 
 export const defaultUser = {
@@ -24,7 +23,7 @@ export const defaultUser = {
   firstName: 'Tovieye',
   lastName: 'Ozi',
   email: 'ad.min@gmail.com',
-  passwordHash,
+  password: 'test123',
   isCaterer: true
 };
 export const defaultMeal = {
@@ -61,16 +60,21 @@ export const orderIdUrl = `${rootURL}/orders/1`;
  */
 
 export const templateTest = function generateTest(title, method, url, content, key, type, status = '200') {
-  let requester, boundRequest;
+  let requester, boundRequest, token;
   beforeEach('create http server', () => {
     requester = request(app);
     boundRequest = requester[method].bind(request, url);
+    token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+      expiresIn: '1h'
+    });
   });
 
   describe(title, () => {
     it('return 200 for successful', async () => {
       try {
-        const res = await boundRequest().send(content);
+        const res = await boundRequest()
+          .set('authorization', `JWT ${token}`)
+          .send(content);
         return expect(res).to.have.status(status);
       } catch (err) {
         throw err;
@@ -79,7 +83,9 @@ export const templateTest = function generateTest(title, method, url, content, k
 
     it('response should be json', async () => {
       try {
-        const res = await boundRequest().send(content);
+        const res = await boundRequest()
+          .set('authorization', `JWT ${token}`)
+          .send(content);
         return expect(res).to.have.header('content-type', /json/);
       } catch (err) {
         throw err;
@@ -87,7 +93,9 @@ export const templateTest = function generateTest(title, method, url, content, k
     });
     it('response should have required keys', async () => {
       try {
-        const res = await boundRequest().send(content);
+        const res = await boundRequest()
+          .set('authorization', `JWT ${token}`)
+          .send(content);
         return expect(res.body.data).to.include.all.keys(key);
       } catch (err) {
         throw err;
@@ -95,7 +103,9 @@ export const templateTest = function generateTest(title, method, url, content, k
     });
     it('response data to be of required type', async () => {
       try {
-        const res = await boundRequest().send(content);
+        const res = await boundRequest()
+          .set('authorization', `JWT ${token}`)
+          .send(content);
         return expect(res.body.data).to.be.an(type);
       } catch (err) {
         throw err;

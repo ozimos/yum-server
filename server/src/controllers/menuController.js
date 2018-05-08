@@ -6,10 +6,7 @@ export default class MenuController extends Controller {
     this.Meal = Meal;
   }
   getMenu() {
-    return this.Model.findOne({
-      where: {
-        title: 'Today'
-      },
+    return this.Model.findById('Today', {
       include: [
         {
           model: this.Meal,
@@ -24,12 +21,12 @@ export default class MenuController extends Controller {
       .catch(err => Controller.errorResponse(err));
   }
   postMenu(req) {
-    return this.Model.findOrCreate({
+    return this.Model.findOrBuild({
       where: {
         title: 'Today'
       }
     })
-      .spread((menu) => {
+      .then(([menu]) => {
         menu.setMeals(req.body.meals);
         menu.description = req.body.description;
         return menu.save();

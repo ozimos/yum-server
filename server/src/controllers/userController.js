@@ -27,12 +27,12 @@ class UserController extends Controller {
           return UserController.errorResponse('Account does not exist! Visit /api/v1/users/signup and register.', 404);
         }
         // check if password is correct
-        const isCorrectPassword = bcrypt.compareSync(req.body.password, response.passwordHash);
+        const isCorrectPassword = bcrypt.compareSync(req.body.password, response.password);
 
         if (isCorrectPassword) {
           return UserController.sendResponseWithToken(response);
         }
-        return UserController.errorResponse('Incorrect password', 406);
+        return UserController.errorResponse('Incorrect password', 401);
       }).catch(error => UserController.errorResponse(error.message));
   }
 
@@ -45,27 +45,24 @@ class UserController extends Controller {
    * @memberof UserController
    */
   signUp(req) {
+    const {
+      email,
+      ...rest
+    } = req.body;
     // check if email is available
-    return this.Model.findOne({
+    return this.Model.findOrCreate({
       where: {
-        email: req.body.email
+        email
+      },
+      defaults: rest
+    }).then(([response, created]) => {
+      if (!created) {
+        return UserController.errorResponse('email has been used');
       }
-    }).then((response) => {
-      if (response) {
-        const duplicate = response.userName === (req.body.userName || req.body.email) ? 'userName' : 'email';
-        return UserController.errorResponse(`${duplicate} has been used`, 406);
-      }
-      // create hash of password
-      const salt = bcrypt.genSaltSync(10);
-      req.body.passwordHash = bcrypt.hashSync(req.body.password, salt);
-      // remove plaintext password from record to write to db
-      delete req.body.password;
-      // create user in db
-      return this.Model.create(req.body)
-        .then(data => UserController
-          .sendResponseWithToken(data, 'Signup Successful, '))
-        .catch(error => UserController.errorResponse(error.message));
-    }).catch(error => UserController.errorResponse(error.message));
+      return UserController
+        .sendResponseWithToken(response, 'Signup Successful, ');
+    })
+      .catch(error => UserController.errorResponse(error.message));
   }
 
 
@@ -78,23 +75,21 @@ class UserController extends Controller {
    * @memberof UserController
    */
   static sendResponseWithToken(data, extraMessage = '') {
-    // remove password info
-    delete data.passwordHash;
 
     let message = extraMessage;
     const payload = {
       isCaterer: data.isCaterer,
-      id: data.id
+      userId: data.id
     };
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-      expiresIn: '1h'
+      expiresIn: '2h'
     });
-    if (token) {
+    if (typeof token === 'string') {
       message = `${message}Login Successful`;
       return UserController.defaultResponse(data, 200, message, token);
     }
-    message = `${message}No token found`;
-    return UserController.errorResponse(message, 406);
+    message = `${message}token.message`;
+    return UserController.errorResponse(message, 500);
   }
 }
 

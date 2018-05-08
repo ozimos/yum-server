@@ -12,18 +12,10 @@ const modifyMeal = Joi.object({
   price: Joi.number(),
 });
 
-const params = Joi.object({
-  id: Joi.string().guid({
-    version: [
-      'uuidv4'
-    ]
-  })
-});
 
 export default {
   modifyMeal,
   createMeal: modifyMeal.options({
     presence: 'required'
-  }),
-  params
+  })
 };
