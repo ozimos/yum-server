@@ -5,6 +5,16 @@ export default class OrderController extends Controller {
     super(Model);
     this.Meal = Meal;
   }
+  static orderClose(req, res, next) {
+    const closeHour = parseInt(process.env.ORDER_CLOSE, 10) || 12;
+    const closeDate = new Date().setHours(closeHour, 0, 0);
+    const date = new Date();
+    if ((date - closeDate) >= 0) {
+      const message = `Orders for the day have closed. Please place your order before ${closeHour}00 Hours`;
+      return OrderController.errorResponse(message, 403);
+    }
+    return next();
+  }
   getAllOrders() {
     const options = {
       include: [{
