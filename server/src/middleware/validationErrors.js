@@ -1,10 +1,10 @@
-const validationErrors = (err, req, res) => {
+const validationErrors = (err, req, res, next) => {
   if (err.error.isJoi) {
     res.status(400).json({
       type: err.type,
-      message: err.error.toString()
+      message: err.error
     });
-  } else res.status(400).json({ message: err.message });
+  } else next(err);
 };
 
 export default validationErrors;
