@@ -54,7 +54,6 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
-    "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
     "esm": "^3.0.24",
     "express": "^4.16.3",

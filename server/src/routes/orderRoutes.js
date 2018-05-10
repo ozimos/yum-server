@@ -18,11 +18,11 @@ router.param('id', validator.params(params));
 router
   .route('/')
   .get(IsUser.verify, IsUser.admin, OrderController.select(orderController, 'getAllOrders'))
-  .post(IsUser.verify, validator.body(orderSchema), OrderController.select(orderController, 'postOrder'));
+  .post(IsUser.verify, validator.body(orderSchema), OrderController.orderClose, OrderController.select(orderController, 'postOrder'));
 
 router
   .route('/:id')
-  .put(IsUser.verify, IsUser.admin, validator.body(orderSchema), OrderController.select(orderController, 'updateOrder'));
+  .put(IsUser.verify, IsUser.admin, validator.body(orderSchema), OrderController.orderClose, OrderController.select(orderController, 'updateOrder'));
 
 // Return router
 export default router;
