@@ -44,20 +44,14 @@ export default class OrderController extends Controller {
     return this.Model.create({
       userId
     })
-      .then((order) => {
-        order.setMeals(req.body.meals);
-        return order.save();
-      })
+      .then(order => order.setMeals(req.body.meals))
       .then(savedOrder => Controller.defaultResponse(savedOrder, 201))
       .catch(err => Controller.errorResponse(err));
   }
   updateOrder(req) {
 
     return this.Model.findById(req.params.id)
-      .then((order) => {
-        order.setMeals(req.body.meals);
-        return order.save();
-      })
+      .then(order => order.setMeals(req.body.meals))
       .then(savedOrder => Controller.defaultResponse(savedOrder))
       .catch(err => Controller.errorResponse(err));
   }

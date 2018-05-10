@@ -7,15 +7,13 @@ export default class MenuController extends Controller {
   }
   getMenu() {
     return this.Model.findById('Today', {
-      include: [
-        {
-          model: this.Meal,
-          as: 'Meals',
-          where: {
-            menuTitle: 'Today'
-          }
+      include: [{
+        model: this.Meal,
+        as: 'Meals',
+        where: {
+          menuTitle: 'Today'
         }
-      ]
+      }]
     })
       .then(response => Controller.defaultResponse(response))
       .catch(err => Controller.errorResponse(err));
@@ -27,9 +25,13 @@ export default class MenuController extends Controller {
       }
     })
       .then(([menu]) => {
-        menu.setMeals(req.body.meals);
-        menu.description = req.body.description;
-        return menu.save();
+        try {
+          menu.description = req.body.description;
+          menu.setMeals(req.body.meals);
+          return menu.save();
+        } catch (err) {
+          throw err;
+        }
       })
       .then(savedMenu => Controller.defaultResponse(savedMenu, 201))
       .catch(err => Controller.errorResponse(err));
