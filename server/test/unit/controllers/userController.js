@@ -107,18 +107,5 @@ describe('User Controllers', () => {
       expect(response.statusCode).to.equal(200);
       expect(response.data).to.eql(data);
     });
-  //   it('should return error message when token creation fails', () => {
-  //     const jwtResponse = {
-  //       message: 'Error Message'
-  //     };
-  //     td.when(jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-  //       expiresIn: '1h'
-  //     })).thenReturn(jwtResponse);
-
-  //     const response = UserController.sendResponseWithToken(data, inputMessage);
-
-  //     expect(response.message).to.equal(`Signup Successful, ${jwtResponse.message}`);
-  //     expect(response.statusCode).to.equal(500);
-  //   });
   });
 });
