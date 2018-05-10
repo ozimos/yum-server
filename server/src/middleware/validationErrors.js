@@ -4,7 +4,7 @@ const validationErrors = (err, req, res) => {
       type: err.type,
       message: err.error.toString()
     });
-  }
+  } else res.status(400).json({ message: err.message });
 };
 
 export default validationErrors;
