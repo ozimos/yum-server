@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import validationErrors from './middleware/validationErrors';
 
 import routers from './routes';
 
@@ -14,6 +15,7 @@ app.use('/api/v1/meals', routers.mealRoutes);
 app.use('/api/v1/menu', routers.menuRoutes);
 app.use('/api/v1/orders', routers.orderRoutes);
 app.use('/api/v1/auth', routers.userRoutes);
+app.use(validationErrors);
 
 app.get('/', (req, res) => {
   res.send('Welcome To Book-A-Meal API!!!');
