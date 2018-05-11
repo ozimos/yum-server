@@ -8,7 +8,7 @@ import IsUser from '../middleware/authenticate';
 import db from '../models';
 
 const router = express.Router();
-const validator = Validator({});
+const validator = Validator({ passError: true });
 const menuController = new MenuController(db.Menu, db.Meal);
 
 

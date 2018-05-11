@@ -6,7 +6,7 @@ import schemas from '../middleware/userSchemas';
 import db from '../models';
 
 const router = express.Router();
-const validator = Validator({});
+const validator = Validator({ passError: true });
 const userController = new UserController(db.User);
 
 router.post(

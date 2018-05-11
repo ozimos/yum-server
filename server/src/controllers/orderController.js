@@ -11,7 +11,7 @@ export default class OrderController extends Controller {
     const date = new Date();
     if ((date - closeDate) >= 0) {
       const message = `Orders for the day have closed. Please place your order before ${closeHour}00 Hours`;
-      return OrderController.errorResponse(message, 403);
+      return res.status(403).json({ message });
     }
     return next();
   }

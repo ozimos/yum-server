@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import routers from './routes';
+import validationErrors from './middleware/validationErrors';
 
 const app = express();
 
@@ -19,4 +20,5 @@ app.get('/', (req, res) => {
   res.send('Welcome To Book-A-Meal API!!!');
 });
 
+app.use(validationErrors);
 export default app;

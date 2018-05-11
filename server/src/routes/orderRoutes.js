@@ -9,7 +9,7 @@ import IsUser from '../middleware/authenticate';
 import db from '../models';
 
 const router = express.Router();
-const validator = Validator({});
+const validator = Validator({ passError: true });
 const orderController = new OrderController(db.Order, db.Meal);
 
 // Params validation
