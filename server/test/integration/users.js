@@ -33,7 +33,7 @@ describe('Routes Users', () => {
       password: 'abc123',
       confirmPassword: 'abc123',
     };
-    it('should signup new user', () => request(app).post(signUpUrl)
+    it('should signup a new user', () => request(app).post(signUpUrl)
       .send(newUser).then((res) => {
         expect(res.body.data.email).to.equal(newUser.email);
         // eslint-disable-next-line

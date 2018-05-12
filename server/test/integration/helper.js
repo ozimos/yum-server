@@ -3,7 +3,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
-import dotenv from 'dotenv';
 import app from '../../src/app';
 import db from '../../src/models';
 
@@ -11,7 +10,6 @@ chai.use(chaiHttp);
 export const {
   expect, request
 } = chai;
-dotenv.config();
 export const defaultPassword = 'test123';
 
 export const {
@@ -36,7 +34,7 @@ export const defaultMeal = {
 };
 export const payload = {
   isCaterer: defaultUser.isCaterer,
-  id: defaultUser.id
+  userId: defaultUser.id
 };
 
 // endpoint urls
@@ -65,7 +63,7 @@ export const templateTest = function generateTest(title, method, url, content, k
     requester = request(app);
     boundRequest = requester[method].bind(request, url);
     token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-      expiresIn: '1h'
+      expiresIn: '100d'
     });
   });
 
