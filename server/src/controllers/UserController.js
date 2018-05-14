@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Controller from './controller';
+import Controller from './Controller';
 
 /**
  *
