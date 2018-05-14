@@ -82,9 +82,11 @@ describe('User Controllers', () => {
 
   describe('sendResponseWithToken(data)', () => {
     const data = {
-      password: 'abc123',
-      isCaterer: true,
-      id: 'some id'
+      dataValues: {
+        password: 'abc123',
+        isCaterer: true,
+        id: 'some id'
+      }
     };
     const inputMessage = 'Signup Successful, ';
     it('should create a token', () => {
@@ -98,7 +100,7 @@ describe('User Controllers', () => {
     });
     it('should not return the password in the response', () => {
 
-      const strippedData = { ...data
+      const strippedData = { ...data.dataValues
       };
       delete strippedData.password;
 

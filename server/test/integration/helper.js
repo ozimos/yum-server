@@ -10,7 +10,6 @@ chai.use(chaiHttp);
 export const {
   expect, request
 } = chai;
-export const defaultPassword = 'test123';
 
 export const {
   User, Meal, Menu, Order
@@ -21,7 +20,7 @@ export const defaultUser = {
   firstName: 'Tovieye',
   lastName: 'Ozi',
   email: 'ad.min@gmail.com',
-  password: 'test123',
+  password: 'test',
   isCaterer: true
 };
 export const defaultMeal = {

@@ -5,8 +5,6 @@ import {
   request,
   rootURL,
   Meal,
-  User,
-  defaultUser,
   defaultMeal,
   payload,
   templateTest
@@ -26,10 +24,6 @@ context('meals integration test', () => {
       await Meal.truncate({
         cascade: true
       });
-      await User.truncate({
-        cascade: true
-      });
-      await User.create(defaultUser);
       await Meal.create(defaultMeal);
       token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
         expiresIn: '1h'

@@ -75,20 +75,19 @@ class UserController extends Controller {
    * @memberof UserController
    */
   static sendResponseWithToken(user, extraMessage = '') {
-    // const data = { ...user };
-
+    const data = { ...user.dataValues };
     let message = extraMessage;
     const payload = {
-      isCaterer: user.isCaterer,
-      userId: user.id
+      isCaterer: data.isCaterer,
+      userId: data.id
     };
-    // delete user.password;
+    delete data.password;
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
       expiresIn: '2h'
     });
     if (token) {
       message = `${message}Login Successful`;
-      return UserController.defaultResponse(user, 200, message, token);
+      return UserController.defaultResponse(data, 200, message, token);
     }
   }
 }
