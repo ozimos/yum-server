@@ -4,11 +4,11 @@ export default class MealController extends Controller {
 
   postRecord(req) {
     req.body.userId = req.decoded.userId;
-    super.postRecord(req);
+    return super.postRecord(req);
   }
 
   updateRecord(req) {
     req.body.userId = req.decoded.userId;
-    super.updateRecord(req);
+    return super.updateRecord(req);
   }
 }
