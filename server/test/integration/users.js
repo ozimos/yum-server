@@ -13,7 +13,6 @@ describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;
   const logInUrl = `${rootURL}/auth/login`;
 
-
   before(async () => {
     try {
       await User.truncate({

@@ -4,15 +4,12 @@ import {
   expect
 } from 'chai';
 import td from 'testdouble';
-import UserController from '../../../src/controllers/userController.js';
+import UserController from '../../../src/controllers/UserController.js';
 
-let User;
-let userController;
+let User, userController;
 const req = {
-  // provide either email or userName
   body: {
     email: 'some email',
-    // userName: 'some userName',
     password: 'some password',
   }
 };
@@ -63,7 +60,7 @@ describe('User Controllers', () => {
 
   describe('signUp(req)', () => {
     it('should return an error message if email already in database', () => {
-      const expectedResponse = 'email has been used';
+      const expectedResponse = 'Email is not available';
       const dummyUser = {
         email: req.body.email,
       };
@@ -89,23 +86,25 @@ describe('User Controllers', () => {
       isCaterer: true,
       id: 'some id'
     };
-    const jwt = {
-      sign: td.func()
-    };
-    const payload = td.object();
-    process.env.TOKEN_PASSWORD = 'abc123';
     const inputMessage = 'Signup Successful, ';
     it('should create a token', () => {
-      td.when(jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-        expiresIn: '1h'
-      })).thenReturn('token');
-
 
       const response = UserController.sendResponseWithToken(data, inputMessage);
 
       expect(response.message).to.equal('Signup Successful, Login Successful');
       expect(response.statusCode).to.equal(200);
-      expect(response.data).to.eql(data);
+      // eslint-disable-next-line
+      expect(response.token).to.exist;
+    });
+    it('should not return the password in the response', () => {
+
+      const strippedData = { ...data
+      };
+      delete strippedData.password;
+
+      const response = UserController.sendResponseWithToken(data, inputMessage);
+
+      expect(response.data).to.eql(strippedData);
     });
   });
 });

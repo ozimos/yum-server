@@ -1,21 +1,21 @@
 import express from 'express';
 import Validator from 'express-joi-validation';
 
-import UserController from '../controllers/userController';
+import UserController from '../controllers/UserController';
 import schemas from '../middleware/userSchemas';
 import db from '../models';
 
-const router = express.Router();
+const authRouter = express.Router();
 const validator = Validator({ passError: true });
 const userController = new UserController(db.User);
 
-router.post(
+authRouter.post(
   '/signup', validator.body(schemas.signup),
   UserController.select(userController, 'signUp')
 );
 
-router.post('/login', validator.body(schemas.login), UserController.select(userController, 'login'));
-router.get('/', UserController.select(userController, 'getAllRecords'));
+authRouter.post('/login', validator.body(schemas.login), UserController.select(userController, 'login'));
+authRouter.get('/', UserController.select(userController, 'getAllRecords'));
 
-// Return router
-export default router;
+// Return authRouter
+export default authRouter;

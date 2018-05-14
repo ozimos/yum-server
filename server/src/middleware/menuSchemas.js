@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const menu = Joi.object({
+const menuSchemas = Joi.object({
   description: Joi.string(),
   meals: Joi.array().items(Joi.string().guid({
     version: [
@@ -9,4 +9,4 @@ const menu = Joi.object({
   })).required(),
 });
 
-export default menu;
+export default menuSchemas;
