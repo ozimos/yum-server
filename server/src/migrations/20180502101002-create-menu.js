@@ -10,7 +10,7 @@ export default {
         },
         description: {
           type: Sequelize.STRING,
-          defaultValue: 'Standard Menu',
+          defaultValue: 'Default Menu',
         },
         createdAt: {
           type: Sequelize.DATE,

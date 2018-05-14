@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
-import jwt from 'jsonwebtoken';
 import {
   expect,
   request,
   rootURL,
-  Meal,
   defaultMeal,
-  payload,
+  token,
   templateTest
 } from './helper';
 import app from '../../src/app';
@@ -16,22 +14,6 @@ const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
 
 context('meals integration test', () => {
 
-  // truncates Meal & User and creates new row entries before test
-  // Creates JWT before test
-  let token;
-  before(async () => {
-    try {
-      await Meal.truncate({
-        cascade: true
-      });
-      await Meal.create(defaultMeal);
-      token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-        expiresIn: '1h'
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
   // Get All Meals
   describe('GET /meals', () => {
     it('should return all meals', () => request(app).get(mealsUrl)

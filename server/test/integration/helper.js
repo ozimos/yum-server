@@ -4,16 +4,12 @@ import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
 import app from '../../src/app';
-import db from '../../src/models';
 
 chai.use(chaiHttp);
 export const {
   expect, request
 } = chai;
 
-export const {
-  User, Meal, Menu, Order
-} = db;
 
 export const defaultUser = {
   id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
@@ -29,13 +25,16 @@ export const defaultMeal = {
   title: 'Beef with Rice',
   description: 'plain rice with ground beef',
   imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
-  price: 1500,
+  price: 2000,
 };
 export const payload = {
   isCaterer: defaultUser.isCaterer,
   userId: defaultUser.id
 };
 
+export const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+  expiresIn: '1h'
+});
 // endpoint urls
 export const rootURL = '/api/v1';
 export const menuUrl = `${rootURL}/menu`;
@@ -57,13 +56,11 @@ export const orderIdUrl = `${rootURL}/orders/1`;
  */
 
 export const templateTest = function generateTest(title, method, url, content, key, type, status = '200') {
-  let requester, boundRequest, token;
+  let requester, boundRequest;
   beforeEach('create http server', () => {
     requester = request(app);
     boundRequest = requester[method].bind(request, url);
-    token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-      expiresIn: '100d'
-    });
+
   });
 
   describe(title, () => {
