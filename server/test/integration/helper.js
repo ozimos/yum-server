@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
 import app from '../../src/app';
+import { seedUsers, seedMeals } from '../../src/seedFiles';
 
 chai.use(chaiHttp);
 export const {
@@ -11,22 +12,10 @@ export const {
 } = chai;
 
 
-export const defaultUser = {
-  id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
-  firstName: 'Tovieye',
-  lastName: 'Ozi',
-  email: 'ad.min@gmail.com',
-  password: 'test',
-  isCaterer: true
-};
-export const defaultMeal = {
-  id: '6066e6ad-6ebd-4861-b932-b72c095f69e6',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
-  title: 'Beef with Rice',
-  description: 'plain rice with ground beef',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
-  price: 2000,
-};
+export const defaultUser = seedUsers[0];
+export const defaultMeal = seedMeals[0];
+export const menuMeal = seedMeals[1];
+export const deleteMeal = seedMeals[2];
 export const payload = {
   isCaterer: defaultUser.isCaterer,
   userId: defaultUser.id
