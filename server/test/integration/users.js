@@ -10,7 +10,7 @@ import app from '../../src/app';
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;
   const logInUrl = `${rootURL}/auth/login`;
-
+  const defaultPassword = 'test';
 
   // SignUp A User
   describe('POST /auth/signup', () => {
@@ -33,7 +33,7 @@ describe('Routes Users', () => {
   describe('POST /auth/login', () => {
     const credentials = {
       email: defaultUser.email,
-      password: defaultUser.password,
+      password: defaultPassword,
     };
     it('should login new user', () => request(app).post(logInUrl).send(credentials).then((res) => {
       expect(res.body.data.email).to.equal(defaultUser.email);

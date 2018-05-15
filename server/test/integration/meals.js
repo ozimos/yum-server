@@ -4,6 +4,7 @@ import {
   request,
   rootURL,
   defaultMeal,
+  deleteMeal,
   token,
   templateTest
 } from './helper';
@@ -11,6 +12,7 @@ import app from '../../src/app';
 
 const mealsUrl = `${rootURL}/meals`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
+const mealIdUrl2 = `${rootURL}/meals/${deleteMeal.id}`;
 
 context('meals integration test', () => {
 
@@ -72,7 +74,7 @@ context('meals integration test', () => {
 
   // Delete A Meal
   describe('DELETE /meals', () => {
-    it('should delete a meal', () => request(app).delete(mealIdUrl)
+    it('should delete a meal', () => request(app).delete(mealIdUrl2)
       .set('authorization', `JWT ${token}`)
       .then((res) => {
         expect(res).to.have.status(200);

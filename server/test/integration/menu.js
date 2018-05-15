@@ -3,7 +3,7 @@ import {
   expect,
   request,
   rootURL,
-  defaultMeal,
+  menuMeal,
   token,
   templateTest
 } from './helper';
@@ -17,7 +17,7 @@ context('menu integration test', () => {
   describe('POST /menu', () => {
     const newMenu = {
       description: 'Thursday Menu',
-      meals: [defaultMeal.id]
+      meals: [menuMeal.id]
     };
 
     it('should create a menu', () =>
@@ -37,7 +37,7 @@ context('menu integration test', () => {
         .get(menuUrl)
         .set('authorization', `JWT ${token}`)
         .then((res) => {
-          expect(res.body.data.Meals[0].id).to.equal(defaultMeal.id);
+          expect(res.body.data.Meals[0].id).to.equal(menuMeal.id);
         }));
     templateTest('Get Menu', 'get', menuUrl, null, 'Meals', 'object');
   });
