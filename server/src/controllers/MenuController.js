@@ -18,8 +18,8 @@ export default class MenuController extends Controller {
         }
       }]
     })
-      .then(response => Controller.defaultResponse(response))
-      .catch(err => Controller.errorResponse(err));
+      .then(response => MenuController.defaultResponse(response))
+      .catch(err => MenuController.errorResponse(err));
   }
   postMenu(req) {
     return this.Model.findOrBuild({
@@ -36,7 +36,7 @@ export default class MenuController extends Controller {
           throw err;
         }
       })
-      .then(savedMenu => Controller.defaultResponse(savedMenu, 201))
-      .catch(err => Controller.errorResponse(err));
+      .then(savedMenu => MenuController.defaultResponse(savedMenu, 201))
+      .catch(err => MenuController.errorResponse(err));
   }
 }
