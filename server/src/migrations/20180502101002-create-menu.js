@@ -13,12 +13,14 @@ export default {
           defaultValue: 'Default Menu',
         },
         createdAt: {
+          allowNull: false,
           type: Sequelize.DATE,
-          defaultValue: Sequelize.DATE
+          defaultValue: Sequelize.fn('NOW')
         },
         updatedAt: {
+          allowNull: false,
           type: Sequelize.DATE,
-          defaultValue: Sequelize.DATE
+          defaultValue: Sequelize.fn('NOW')
         }
       }
     ),
