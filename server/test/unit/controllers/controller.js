@@ -4,7 +4,7 @@ import {
   expect
 } from 'chai';
 import td from 'testdouble';
-import Controller from '../../../src/controllers/controller.js';
+import Controller from '../../../src/controllers/Controller.js';
 
 let Table, controller;
 describe('Center Controllers', () => {

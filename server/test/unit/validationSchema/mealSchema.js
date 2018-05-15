@@ -7,7 +7,6 @@ import schema from '../../../src/middleware/mealSchemas';
 context('Validation with Joi schemas', () => {
   // sample request body data
   const meal = {
-    userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
     title: 'Spaghetti',
     description: 'very good',
     imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',

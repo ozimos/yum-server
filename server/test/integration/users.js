@@ -1,10 +1,8 @@
 /* eslint-disable no-console */
 import {
-  User,
   expect,
   request,
   defaultUser,
-  defaultPassword,
   rootURL
 } from './helper';
 import app from '../../src/app';
@@ -12,28 +10,18 @@ import app from '../../src/app';
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;
   const logInUrl = `${rootURL}/auth/login`;
+  const defaultPassword = 'test';
 
-
-  before(async () => {
-    try {
-      await User.truncate({
-        cascade: true
-      });
-      await User.create(defaultUser);
-    } catch (error) {
-      console.log(error);
-    }
-  });
   // SignUp A User
   describe('POST /auth/signup', () => {
     const newUser = {
       firstName: 'Tovieye',
       lastName: 'Ozi',
       email: 'tovieye.ozi@gmail.com',
-      password: 'abc123',
-      confirmPassword: 'abc123',
+      password: 'test',
+      confirmPassword: 'test',
     };
-    it('should signup new user', () => request(app).post(signUpUrl)
+    it('should signup a new user', () => request(app).post(signUpUrl)
       .send(newUser).then((res) => {
         expect(res.body.data.email).to.equal(newUser.email);
         // eslint-disable-next-line

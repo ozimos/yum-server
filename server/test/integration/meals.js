@@ -1,43 +1,21 @@
 /* eslint-disable no-console */
-import jwt from 'jsonwebtoken';
 import {
   expect,
   request,
   rootURL,
-  Meal,
-  User,
-  defaultUser,
   defaultMeal,
-  payload,
+  deleteMeal,
+  token,
   templateTest
 } from './helper';
 import app from '../../src/app';
 
 const mealsUrl = `${rootURL}/meals`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
+const mealIdUrl2 = `${rootURL}/meals/${deleteMeal.id}`;
 
 context('meals integration test', () => {
 
-  // truncates Meal & User and creates new row entries before test
-  // Creates JWT before test
-  let token;
-  before(async () => {
-    try {
-      await Meal.truncate({
-        cascade: true
-      });
-      await User.truncate({
-        cascade: true
-      });
-      await User.create(defaultUser);
-      await Meal.create(defaultMeal);
-      token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-        expiresIn: '1h'
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  });
   // Get All Meals
   describe('GET /meals', () => {
     it('should return all meals', () => request(app).get(mealsUrl)
@@ -80,7 +58,6 @@ context('meals integration test', () => {
   // Create A Meal
   describe('POST /meals', () => {
     const newMeal = {
-      userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
       title: 'Beef with Rice',
       description: 'plain rice with ground beef',
       imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
@@ -97,7 +74,7 @@ context('meals integration test', () => {
 
   // Delete A Meal
   describe('DELETE /meals', () => {
-    it('should delete a meal', () => request(app).delete(mealIdUrl)
+    it('should delete a meal', () => request(app).delete(mealIdUrl2)
       .set('authorization', `JWT ${token}`)
       .then((res) => {
         expect(res).to.have.status(200);

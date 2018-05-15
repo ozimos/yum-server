@@ -1,5 +1,5 @@
 const validationErrors = (err, req, res, next) => {
-  if (err.error.isJoi) {
+  if (err.error && err.error.isJoi) {
     res.status(400).json({
       type: err.type,
       message: err.error

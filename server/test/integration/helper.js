@@ -3,42 +3,27 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
-import dotenv from 'dotenv';
 import app from '../../src/app';
-import db from '../../src/models';
+import { seedUsers, seedMeals } from '../../src/seedFiles';
 
 chai.use(chaiHttp);
 export const {
   expect, request
 } = chai;
-dotenv.config();
-export const defaultPassword = 'test123';
 
-export const {
-  User, Meal, Menu, Order
-} = db;
 
-export const defaultUser = {
-  id: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
-  firstName: 'Tovieye',
-  lastName: 'Ozi',
-  email: 'ad.min@gmail.com',
-  password: 'test123',
-  isCaterer: true
-};
-export const defaultMeal = {
-  id: '6066e6ad-6ebd-4861-b932-b72c095f69e6',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
-  title: 'Beef with Rice',
-  description: 'plain rice with ground beef',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
-  price: 1500,
-};
+export const defaultUser = seedUsers[0];
+export const defaultMeal = seedMeals[0];
+export const menuMeal = seedMeals[1];
+export const deleteMeal = seedMeals[2];
 export const payload = {
   isCaterer: defaultUser.isCaterer,
-  id: defaultUser.id
+  userId: defaultUser.id
 };
 
+export const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+  expiresIn: '1h'
+});
 // endpoint urls
 export const rootURL = '/api/v1';
 export const menuUrl = `${rootURL}/menu`;
@@ -60,13 +45,11 @@ export const orderIdUrl = `${rootURL}/orders/1`;
  */
 
 export const templateTest = function generateTest(title, method, url, content, key, type, status = '200') {
-  let requester, boundRequest, token;
+  let requester, boundRequest;
   beforeEach('create http server', () => {
     requester = request(app);
     boundRequest = requester[method].bind(request, url);
-    token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-      expiresIn: '1h'
-    });
+
   });
 
   describe(title, () => {

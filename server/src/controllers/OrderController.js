@@ -1,4 +1,4 @@
-import Controller from './controller';
+import Controller from './Controller';
 
 export default class OrderController extends Controller {
   constructor(Model, Meal) {

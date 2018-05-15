@@ -5,5 +5,4 @@ require('babel-register')({
     'add-module-exports'
   ]
 });
-require('dotenv').config();
 module.exports = require('./config.js');

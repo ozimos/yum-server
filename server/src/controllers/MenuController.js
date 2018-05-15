@@ -1,4 +1,4 @@
-import Controller from './controller';
+import Controller from './Controller';
 
 export default class MenuController extends Controller {
   constructor(Model, Meal) {
@@ -10,13 +10,16 @@ export default class MenuController extends Controller {
       include: [{
         model: this.Meal,
         as: 'Meals',
-        where: {
-          menuTitle: 'Today'
+        required: false,
+        through: {
+          where: {
+            menuTitle: 'Today'
+          }
         }
       }]
     })
-      .then(response => Controller.defaultResponse(response))
-      .catch(err => Controller.errorResponse(err));
+      .then(response => MenuController.defaultResponse(response))
+      .catch(err => MenuController.errorResponse(err));
   }
   postMenu(req) {
     return this.Model.findOrBuild({
@@ -33,7 +36,7 @@ export default class MenuController extends Controller {
           throw err;
         }
       })
-      .then(savedMenu => Controller.defaultResponse(savedMenu, 201))
-      .catch(err => Controller.errorResponse(err));
+      .then(savedMenu => MenuController.defaultResponse(savedMenu, 201))
+      .catch(err => MenuController.errorResponse(err));
   }
 }

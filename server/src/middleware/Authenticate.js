@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
  * @export
  * @class authenticate
  */
-export default class IsUser {
+export default class Authenticate {
   /**
    *
    *
@@ -17,7 +17,7 @@ export default class IsUser {
    * @returns {function} any
    * @memberof authenticate
    */
-  static verify(req, res, next) {
+  static isUser(req, res, next) {
     const bearerHeader = req.headers.authorization;
     if (typeof bearerHeader === 'undefined') {
       return res.status(401).send({
@@ -47,7 +47,7 @@ export default class IsUser {
    * @returns {function} any
    * @memberof authenticate
    */
-  static admin(req, res, next) {
+  static isAdmin(req, res, next) {
     if (req.decoded && req.decoded.isCaterer) {
       return next();
     }

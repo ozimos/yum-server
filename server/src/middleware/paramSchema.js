@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const params = Joi.object({
+const paramSchema = Joi.object({
   id: Joi.string().guid({
     version: [
       'uuidv4'
@@ -8,4 +8,4 @@ const params = Joi.object({
   })
 });
 
-export default params;
+export default paramSchema;

@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Controller from './controller';
+import Controller from './Controller';
 
 /**
  *
@@ -32,7 +32,7 @@ class UserController extends Controller {
         if (isCorrectPassword) {
           return UserController.sendResponseWithToken(response);
         }
-        return UserController.errorResponse('Incorrect password', 401);
+        return UserController.errorResponse('Incorrect password', 404);
       }).catch(error => UserController.errorResponse(error.message));
   }
 
@@ -57,7 +57,7 @@ class UserController extends Controller {
       defaults: rest
     }).then(([response, created]) => {
       if (!created) {
-        return UserController.errorResponse('email has been used');
+        return UserController.errorResponse('Email is not available');
       }
       return UserController
         .sendResponseWithToken(response, 'Signup Successful, ');
@@ -74,22 +74,21 @@ class UserController extends Controller {
    * @returns {obj} HTTP Response
    * @memberof UserController
    */
-  static sendResponseWithToken(data, extraMessage = '') {
-
+  static sendResponseWithToken(user, extraMessage = '') {
+    const data = { ...user.dataValues };
     let message = extraMessage;
     const payload = {
       isCaterer: data.isCaterer,
       userId: data.id
     };
+    delete data.password;
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
       expiresIn: '2h'
     });
-    if (typeof token === 'string') {
+    if (token) {
       message = `${message}Login Successful`;
       return UserController.defaultResponse(data, 200, message, token);
     }
-    message = `${message}token.message`;
-    return UserController.errorResponse(message, 500);
   }
 }
 

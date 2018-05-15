@@ -1,20 +1,22 @@
 export default {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable(
-      'MealOrders',
+      'MealMenus',
       {
         mealId: {
           type: Sequelize.UUID,
+          allowNull: true,
           references: {
             model: 'Meals',
             key: 'id',
           },
         },
-        orderId: {
-          type: Sequelize.UUID,
+        menuTitle: {
+          type: Sequelize.STRING,
+          allowNull: true,
           references: {
-            model: 'Orders',
-            key: 'id',
+            model: 'Menus',
+            key: 'title',
           },
         },
         createdAt: {
@@ -30,5 +32,5 @@ export default {
       }
     ),
 
-  down: queryInterface => queryInterface.dropTable('MealOrders')
+  down: queryInterface => queryInterface.dropTable('MealMenus')
 };

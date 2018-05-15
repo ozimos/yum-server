@@ -16,15 +16,6 @@ export default {
             as: 'userId',
           },
         },
-        menuTitle: {
-          type: Sequelize.STRING,
-          allowNull: true,
-          references: {
-            model: 'Menus',
-            key: 'title',
-            as: 'menuTitle',
-          },
-        },
         title: {
           type: Sequelize.STRING,
           allowNull: false,
@@ -44,11 +35,13 @@ export default {
         },
         createdAt: {
           allowNull: false,
-          type: Sequelize.DATE
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.fn('NOW')
         },
         updatedAt: {
           allowNull: false,
-          type: Sequelize.DATE
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.fn('NOW')
         }
       },
       // migration files do not add unique constraints in the same way as model definitions
