@@ -25,7 +25,7 @@
     "drop:test": "sequelize db:migrate:undo:all --env=test",
     "seed": "sequelize db:seed:all",
     "seed:test": "sequelize db:seed:all --env=test",
-    "refresh": "npm run drop && npm run migrate",
+    "refresh": "npm run drop && npm run migrate && npm run seed",
     "refresh:test": "npm run drop:test && npm run migrate:test && npm run seed:test"
   },
   "repository": {
