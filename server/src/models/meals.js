@@ -29,9 +29,10 @@ export default (sequelize, DataTypes) => {
     Meal.belongsTo(models.User, {
       foreignKey: 'userId',
     });
-    Meal.belongsTo(models.Menu, {
-      foreignKey: 'menuTitle',
-      as: 'Meals',
+    Meal.belongsToMany(models.Menu, {
+      through: 'MealMenus',
+      foreignKey: 'mealId',
+      as: 'Menus',
       onUpdate: 'CASCADE'
     });
     Meal.belongsToMany(models.Order, {

@@ -10,8 +10,11 @@ export default class MenuController extends Controller {
       include: [{
         model: this.Meal,
         as: 'Meals',
-        where: {
-          menuTitle: 'Today'
+        required: false,
+        through: {
+          where: {
+            menuTitle: 'Today'
+          }
         }
       }]
     })
