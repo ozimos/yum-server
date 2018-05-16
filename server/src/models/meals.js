@@ -8,7 +8,6 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: 'title'
     },
     description: {
       type: DataTypes.STRING,
@@ -22,24 +21,30 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     }
+  }, {
+    timestamps: true,
+    paranoid: true,
+    indexes: [{
+      unique: true,
+      fields: ['title', 'userId']
+    }]
   });
 
   // Relations
   Meal.associate = (models) => {
     Meal.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE'
     });
     Meal.belongsToMany(models.Menu, {
       through: 'MealMenus',
       foreignKey: 'mealId',
       as: 'Menus',
-      onUpdate: 'CASCADE'
     });
     Meal.belongsToMany(models.Order, {
       through: 'MealOrders',
       foreignKey: 'mealId',
       as: 'Orders',
-      onUpdate: 'CASCADE'
     });
   };
 
