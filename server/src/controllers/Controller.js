@@ -133,7 +133,7 @@ class Controller {
         id: req.params.id
       },
       returning: true
-    }).then(result => Controller.defaultResponse(result))
+    }).then(([, [result]]) => Controller.defaultResponse(result))
       .catch(error => Controller.errorResponse(error.message, 422));
   }
   /**

@@ -7,7 +7,7 @@ import td from 'testdouble';
 import Controller from '../../../src/controllers/Controller.js';
 
 let Table, controller;
-describe('Center Controllers', () => {
+describe('Controllers', () => {
   beforeEach('Stub Database', () => {
     Table = td.object();
     controller = new Controller(Table);
@@ -144,7 +144,7 @@ describe('Center Controllers', () => {
           id: req.params.id
         },
         returning: true
-      })).thenResolve(req.body);
+      })).thenResolve([1, [req.body]]);
 
       return controller.updateRecord(req)
         .then(response =>
