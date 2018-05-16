@@ -18,7 +18,6 @@ export default (sequelize, DataTypes) => {
       through: 'MealMenus',
       foreignKey: 'menuTitle',
       as: 'Meals',
-      onUpdate: 'CASCADE'
     });
   };
   return Menu;

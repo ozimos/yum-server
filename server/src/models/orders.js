@@ -16,7 +16,6 @@ export default (sequelize, DataTypes) => {
       through: 'MealOrders',
       foreignKey: 'orderId',
       as: 'Meals',
-      onUpdate: 'CASCADE'
     });
   };
 
