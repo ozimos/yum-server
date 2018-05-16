@@ -5,7 +5,7 @@ import {
   defaultUser,
   rootURL
 } from './helper';
-import app from '../../src/app';
+import app from '../../../src/app';
 
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;

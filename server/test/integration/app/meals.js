@@ -8,7 +8,7 @@ import {
   token,
   templateTest
 } from './helper';
-import app from '../../src/app';
+import app from '../../../src/app';
 
 const mealsUrl = `${rootURL}/meals`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;

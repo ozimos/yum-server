@@ -8,7 +8,7 @@ import {
   templateTest
 } from './helper';
 
-import app from '../../src/app';
+import app from '../../../src/app';
 
 const menuUrl = `${rootURL}/menu`;
 context('menu integration test', () => {
