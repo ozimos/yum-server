@@ -176,14 +176,15 @@ describe('Controllers', () => {
           id: 'c848bf5c-27ab-4882-9e43-ffe178c82602'
         }
       };
+      const result = 1;
       td.when(Table.destroy({
         where: {
           id: req.params.id
         },
-      })).thenResolve(1);
+      })).thenResolve(result);
       return controller.deleteRecord(req)
         .then(response =>
-          expect(response.data).to.eql(1));
+          expect(response.data).to.equal(`${result} record(s) deleted`));
     });
     it('should return an error message if error occurs when accessing database', () => {
       const error = {
