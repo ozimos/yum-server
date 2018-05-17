@@ -133,7 +133,12 @@ class Controller {
         id: req.params.id
       },
       returning: true
-    }).then(([, [result]]) => Controller.defaultResponse(result))
+    }).then(([count, [result]]) => {
+      if (count > 0) {
+        return Controller.defaultResponse(result);
+      }
+      return Controller.errorResponse('no records available', 404);
+    })
       .catch(error => Controller.errorResponse(error.message, 422));
   }
   /**
@@ -151,7 +156,10 @@ class Controller {
           id: req.params.id
         },
       })
-      .then(result => Controller.defaultResponse(result))
+      .then((result) => {
+        if (result > 0) { return Controller.defaultResponse(`${result} record(s) deleted`); }
+        return Controller.errorResponse('no records available', 404);
+      })
       .catch(error => Controller.errorResponse(error.message, 422));
   }
 }
