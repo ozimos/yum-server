@@ -36,7 +36,15 @@ export const seedMeals = [{
   id: 'a30194b2-7925-48bf-99f2-5847042f34fd',
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Amala and Ewedu',
-  description: 'plain rice with ground beef',
+  description: 'traditional',
+  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  price: 1800,
+},
+{
+  id: '226ecfc3-82bf-4075-b623-ea0c1fe1bb25',
+  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  title: 'Starch and Owho',
+  description: 'affordable',
   imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
   price: 1800,
 }
