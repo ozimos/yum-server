@@ -55,20 +55,21 @@
     "mocha": "^5.1.1",
     "nodemon": "^1.17.3",
     "nyc": "^11.7.1",
+    "sequelize-cli": "^4.0.0",
     "testdouble": "^3.7.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
     "esm": "^3.0.24",
     "express": "^4.16.3",
     "express-joi-validation": "^0.2.1",
     "joi": "^13.2.0",
     "jsonwebtoken": "^8.2.1",
-    "pg": "^7.4.1",
+    "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.37.6",
-    "sequelize-cli": "^4.0.0"
+    "sequelize": "^4.37.7"
   }
 }
