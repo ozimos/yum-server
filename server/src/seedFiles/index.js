@@ -47,5 +47,21 @@ export const seedMeals = [{
   description: 'affordable',
   imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
   price: 1800,
+},
+{
+  id: '443b76e7-b152-4937-890e-492c842b45a8',
+  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  title: 'Starch and Owho',
+  description: 'affordable',
+  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  price: 1800,
+},
+{
+  id: 'a49498b3-889a-43f9-8582-058da7b8402a',
+  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  title: 'Starch and Owho',
+  description: 'affordable',
+  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  price: 1800,
 }
 ];

@@ -11,8 +11,8 @@ import db from '../../../../src/models';
 const {
   expect
 } = chai;
-const defaultMeal = seedMeals[0];
-const defaultMeal2 = seedMeals[1];
+const defaultMeal = seedMeals[4];
+const defaultMeal2 = seedMeals[5];
 const menuController = new MenuController(db.Menu, db.Meal);
 
 const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';

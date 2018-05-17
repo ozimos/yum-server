@@ -20,7 +20,7 @@ export default class MenuController extends Controller {
         const today = new Date().setHours(0, 0, 0);
         const menuDate = new Date(response.updatedAt);
         const isTodayMenu = (menuDate - today) > 0;
-        if (response.Meals.length > 0 && isTodayMenu) {
+        if ((response.Meals.length > 0) && isTodayMenu) {
           return MenuController.defaultResponse(response);
         }
         return MenuController.errorResponse('menu for the day has not been set', 404);
