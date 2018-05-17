@@ -6,12 +6,19 @@ export default class OrderController extends Controller {
     this.Meal = Meal;
   }
   static orderClose(req, res, next) {
-    const closeHour = parseInt(process.env.ORDER_CLOSE, 10) || 12;
-    const closeDate = new Date().setHours(closeHour, 0, 0);
+    const computedCloseHour = parseInt(process.env.ORDER_START_HOUR, 10) +
+      parseInt(process.env.ORDER_INTERVAL_HOUR, 10);
+    const computedCloseMin = parseInt(process.env.ORDER_START_MIN, 10) +
+      parseInt(process.env.ORDER_INTERVAL_MIN, 10);
+    const closeHour = parseInt(process.env.ORDER_CLOSE_HOUR, 10) || computedCloseHour || 12;
+    const closeMin = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 0;
+    const closeDate = new Date().setHours(closeHour, closeMin, 0);
     const date = new Date();
     if ((date - closeDate) >= 0) {
       const message = `Orders for the day have closed. Please place your order before ${closeHour}00 Hours`;
-      return res.status(403).json({ message });
+      return res.status(403).json({
+        message
+      });
     }
     return next();
   }
@@ -44,7 +51,16 @@ export default class OrderController extends Controller {
     return this.Model.create({
       userId
     })
-      .then(order => order.setMeals(req.body.meals))
+      .then((order) => {
+        req.body.meals.forEach((meal) => {
+          order.addMeal(meal.id, {
+            through: {
+              quantity: meal.quantity
+            }
+          });
+        });
+        return order.save();
+      })
       .then(savedOrder => Controller.defaultResponse(savedOrder, 201))
       .catch(err => Controller.errorResponse(err));
   }
