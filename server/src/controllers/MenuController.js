@@ -1,15 +1,10 @@
 import Controller from './Controller';
 
 export default class MenuController extends Controller {
-  constructor(Model, Meal) {
-    super(Model);
-    this.Meal = Meal;
-  }
   getMenu() {
     return this.Model.findById('Today', {
       include: [{
-        model: this.Meal,
-        as: 'Meals',
+        association: 'Meals',
         required: false,
         through: {
           attributes: []
