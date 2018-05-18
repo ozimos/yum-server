@@ -5,7 +5,7 @@ import {
   defaultUser,
   defaultUser2,
   mealController
-} from './helper';
+} from '../../../../testHelpers/controllerHelper';
 
 const decoded = {
   userId: defaultUser.id

@@ -4,7 +4,7 @@ import {
   request,
   defaultUser,
   rootURL
-} from './helper';
+} from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
 
 describe('Routes Users', () => {

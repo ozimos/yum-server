@@ -6,7 +6,7 @@ import {
   menuMeal,
   token,
   templateTest
-} from './helper';
+} from '../../../testHelpers/appHelper';
 
 import app from '../../../src/app';
 

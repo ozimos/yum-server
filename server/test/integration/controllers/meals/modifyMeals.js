@@ -3,7 +3,7 @@ import {
   expect,
   defaultMeal2,
   mealController
-} from './helper';
+} from '../../../../testHelpers/controllerHelper';
 
 const params = {
   id: defaultMeal2.id

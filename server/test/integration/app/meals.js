@@ -7,7 +7,7 @@ import {
   deleteMeal,
   token,
   templateTest
-} from './helper';
+} from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
 
 const mealsUrl = `${rootURL}/meals`;

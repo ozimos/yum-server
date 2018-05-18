@@ -4,7 +4,7 @@ import {
   defaultPassword,
   defaultUser,
   userController
-} from './helper';
+} from '../../../../testHelpers/controllerHelper';
 
 const sampleBody = {
   email: defaultUser.email,

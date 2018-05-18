@@ -3,7 +3,7 @@ import {
   expect,
   deleteMeal,
   mealController
-} from './helper';
+} from '../../../../testHelpers/controllerHelper';
 
 const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';
 
