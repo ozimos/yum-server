@@ -2,7 +2,7 @@
   "name": "book-a-meal",
   "version": "1.0.0",
   "engines": {
-    "node": "9.11.1"
+    "node": "10.1.0"
   },
   "description": "Book-A-Meal is an application that allows customers to make food orders and helps the food",
   "main": "index.js",
@@ -70,6 +70,7 @@
     "jsonwebtoken": "^8.2.1",
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
+    "pg-native": "^3.0.0",
     "sequelize": "^4.37.7"
   }
 }
