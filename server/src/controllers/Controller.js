@@ -160,7 +160,7 @@ class Controller {
         if (result > 0) { return Controller.defaultResponse(`${result} record(s) deleted`); }
         return Controller.errorResponse('no records available', 404);
       })
-      .catch(error => Controller.errorResponse(error.message, 422));
+      .catch(error => Controller.errorResponse(error.message));
   }
 }
 

@@ -60,7 +60,7 @@ class UserController extends Controller {
         return UserController.errorResponse('Email is not available');
       }
       return UserController
-        .sendResponseWithToken(response, 'Signup Successful, ');
+        .sendResponseWithToken(response, 'Signup Successful, ', 201);
     })
       .catch(error => UserController.errorResponse(error.message));
   }
@@ -74,7 +74,7 @@ class UserController extends Controller {
    * @returns {obj} HTTP Response
    * @memberof UserController
    */
-  static sendResponseWithToken(user, extraMessage = '') {
+  static sendResponseWithToken(user, extraMessage = '', code = 200) {
     const data = { ...user.dataValues };
     let message = extraMessage;
     const payload = {
@@ -87,7 +87,7 @@ class UserController extends Controller {
     });
     if (token) {
       message = `${message}Login Successful`;
-      return UserController.defaultResponse(data, 200, message, token);
+      return UserController.defaultResponse(data, code, message, token);
     }
   }
 }
