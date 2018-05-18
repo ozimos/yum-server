@@ -38,7 +38,7 @@ describe('Integration Controller User SignUp', () => {
     expect(response.data.email).to.equal(req.body.email);
     expect(response.data.firstName).to.equal(req.body.firstName);
     expect(response.message).to.equal('Signup Successful, Login Successful');
-    expect(response.statusCode).to.equal(200);
+    expect(response.statusCode).to.equal(201);
     // eslint-disable-next-line
     expect(response.token).to.exist;
   });

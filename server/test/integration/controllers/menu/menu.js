@@ -70,7 +70,7 @@ describe('Integration Controller Menu', () => {
     });
 
   });
-  describe('Post Menu: Fail', () => {
+  describe.skip('Post Menu: Fail', () => {
     it('postMenu returns error message if meal is not in db', async () => {
       const req = {
         body: {
