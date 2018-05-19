@@ -7,7 +7,7 @@ import td from 'testdouble';
 import Controller from '../../../src/controllers/Controller.js';
 
 let Table, controller;
-describe('Center Controllers', () => {
+describe('Controllers', () => {
   beforeEach('Stub Database', () => {
     Table = td.object();
     controller = new Controller(Table);
@@ -144,7 +144,7 @@ describe('Center Controllers', () => {
           id: req.params.id
         },
         returning: true
-      })).thenResolve(req.body);
+      })).thenResolve([1, [req.body]]);
 
       return controller.updateRecord(req)
         .then(response =>
@@ -176,14 +176,15 @@ describe('Center Controllers', () => {
           id: 'c848bf5c-27ab-4882-9e43-ffe178c82602'
         }
       };
+      const result = 1;
       td.when(Table.destroy({
         where: {
           id: req.params.id
         },
-      })).thenResolve(1);
+      })).thenResolve(result);
       return controller.deleteRecord(req)
         .then(response =>
-          expect(response.data).to.eql(1));
+          expect(response.data).to.equal(`${result} record(s) deleted`));
     });
     it('should return an error message if error occurs when accessing database', () => {
       const error = {

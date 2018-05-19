@@ -3,8 +3,8 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
-import app from '../../src/app';
-import { seedUsers, seedMeals } from '../../src/seedFiles';
+import app from '../src/app';
+import { seedUsers, seedMeals } from '../src/seedFiles';
 
 chai.use(chaiHttp);
 export const {

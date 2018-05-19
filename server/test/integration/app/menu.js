@@ -6,9 +6,9 @@ import {
   menuMeal,
   token,
   templateTest
-} from './helper';
+} from '../../../testHelpers/appHelper';
 
-import app from '../../src/app';
+import app from '../../../src/app';
 
 const menuUrl = `${rootURL}/menu`;
 context('menu integration test', () => {

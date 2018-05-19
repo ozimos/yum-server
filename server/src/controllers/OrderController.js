@@ -1,29 +1,34 @@
 import Controller from './Controller';
 
 export default class OrderController extends Controller {
-  constructor(Model, Meal) {
-    super(Model);
-    this.Meal = Meal;
-  }
+
   static orderClose(req, res, next) {
-    const closeHour = parseInt(process.env.ORDER_CLOSE, 10) || 12;
-    const closeDate = new Date().setHours(closeHour, 0, 0);
+    const hourInterval = parseInt(process.env.ORDER_INTERVAL_HOUR, 10) || 4;
+    const minuteInterval = parseInt(process.env.ORDER_INTERVAL_MIN, 10) || 30;
+    const computedCloseHour = parseInt(process.env.ORDER_START_HOUR, 10) + hourInterval;
+    const computedCloseMin = parseInt(process.env.ORDER_START_MIN, 10) +
+      minuteInterval;
+    const closeHour = parseInt(process.env.ORDER_CLOSE_HOUR, 10) || computedCloseHour || 23;
+    const closeMin = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 0;
+    const closeDate = new Date().setHours(closeHour, closeMin, 0);
     const date = new Date();
     if ((date - closeDate) >= 0) {
-      const message = `Orders for the day have closed. Please place your order before ${closeHour}00 Hours`;
-      return res.status(403).json({ message });
+      const message = `Orders for the day have closed. Please place your order before ${closeHour}:${closeMin} Hours`;
+      return res.status(403).json({
+        message
+      });
     }
     return next();
   }
   getAllOrders() {
     const options = {
       include: [{
-        model: this.Meal,
-        as: 'Meals',
+        association: 'Meals',
         required: false,
+        paranoid: false,
         attributes: ['id', 'title', 'description', 'price'],
         through: {
-          attributes: []
+          attributes: ['quantity']
         }
       }]
     };
@@ -31,28 +36,53 @@ export default class OrderController extends Controller {
       .findAll(options)
       .then((result) => {
         if (result.length > 0) {
-          return Controller.defaultResponse(result);
+          return OrderController.defaultResponse(result);
         }
-        return Controller.errorResponse('no records available', 404);
+        return OrderController.errorResponse('no records available', 404);
       })
-      .catch(error => Controller.errorResponse(error.message));
+      .catch(error => OrderController.errorResponse(error.message));
   }
   postOrder(req) {
     const {
       userId
     } = req.decoded;
+
     return this.Model.create({
       userId
     })
-      .then(order => order.setMeals(req.body.meals))
-      .then(savedOrder => Controller.defaultResponse(savedOrder, 201))
-      .catch(err => Controller.errorResponse(err));
+      .then(order => this.orderProcess(order, req, 201))
+      .catch(err => OrderController.errorResponse(err.message));
   }
   updateOrder(req) {
 
     return this.Model.findById(req.params.id)
-      .then(order => order.setMeals(req.body.meals))
-      .then(savedOrder => Controller.defaultResponse(savedOrder))
-      .catch(err => Controller.errorResponse(err));
+      .then(order => this.orderProcess(order, req))
+      .catch(err => OrderController.errorResponse(err.message));
+
+  }
+  async orderProcess(order, req, successCode = 200) {
+    let postedMenu = {};
+    try {
+      await req.body.meals.forEach((meal) => {
+        order.addMeal(meal.id, {
+          through: {
+            quantity: meal.quantity
+          }
+        });
+      });
+      const savedOrder = await order.save();
+      postedMenu = savedOrder.dataValues;
+      const checkOrder = await this.Model.findById(postedMenu.id);
+      const meals = await checkOrder.getMeals();
+      if (meals.length > 0) {
+        postedMenu.Meals = meals;
+        return OrderController.defaultResponse(postedMenu, successCode);
+      }
+      return OrderController.errorResponse('Order was not processed. Try again', 404);
+    } catch (error) {
+      OrderController.errorResponse(error.message);
+
+    }
+
   }
 }

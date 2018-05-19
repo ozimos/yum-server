@@ -7,8 +7,8 @@ import {
   deleteMeal,
   token,
   templateTest
-} from './helper';
-import app from '../../src/app';
+} from '../../../testHelpers/appHelper';
+import app from '../../../src/app';
 
 const mealsUrl = `${rootURL}/meals`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
@@ -49,10 +49,10 @@ context('meals integration test', () => {
       .set('authorization', `JWT ${token}`)
       .send(updatedMeal)
       .then((res) => {
-        expect(res.body.data[1][0].title).to.equal(updatedMeal.title);
-        expect(res.body.data[1][0].price).to.equal(updatedMeal.price);
+        expect(res.body.data.title).to.equal(updatedMeal.title);
+        expect(res.body.data.price).to.equal(updatedMeal.price);
       }));
-    templateTest('Modify Meal', 'put', mealIdUrl, updatedMeal, '0', 'array');
+    templateTest('Modify Meal', 'put', mealIdUrl, updatedMeal, 'price', 'object');
   });
 
   // Create A Meal

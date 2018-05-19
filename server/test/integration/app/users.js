@@ -4,8 +4,8 @@ import {
   request,
   defaultUser,
   rootURL
-} from './helper';
-import app from '../../src/app';
+} from '../../../testHelpers/appHelper';
+import app from '../../../src/app';
 
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;

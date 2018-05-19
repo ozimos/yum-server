@@ -1,8 +1,7 @@
 export default {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable(
-      'Meals',
-      {
+      'Meals', {
         id: {
           type: Sequelize.UUID,
           primaryKey: true,
@@ -14,6 +13,7 @@ export default {
             model: 'Users',
             key: 'id',
             as: 'userId',
+            onDelete: 'CASCADE'
           },
         },
         title: {
@@ -42,6 +42,10 @@ export default {
           allowNull: false,
           type: Sequelize.DATE,
           defaultValue: Sequelize.fn('NOW')
+        },
+        deletedAt: {
+          allowNull: true,
+          type: Sequelize.DATE,
         }
       },
       // migration files do not add unique constraints in the same way as model definitions
@@ -50,8 +54,8 @@ export default {
       // sometimes and fails inexplicably at others. uniqueKeys preferrable
       {
         uniqueKeys: {
-          title: {
-            fields: ['title']
+          userTitle: {
+            fields: ['title', 'userId']
           }
         }
       }
