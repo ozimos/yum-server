@@ -37,15 +37,5 @@ export default (sequelize, DataTypes) => {
   });
 
   User.beforeCreate(hashPassword);
-  // Relations
-  User.associate = (models) => {
-    User.hasMany(models.Meal, {
-      foreignKey: 'userId',
-    });
-    User.hasMany(models.Order, {
-      foreignKey: 'userId',
-    });
-  };
-
   return User;
 };
