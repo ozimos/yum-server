@@ -29,6 +29,13 @@ describe('for POST requests on /api/v1/auth/signup, validation', () => {
     const result = schema.signup.validate(modified);
     assert.notEqual(result.error, null, `Joi output: ${result.error}`);
   });
+  it('throws error for non matching passwords', () => {
+    const modified = { ...postUserData
+    };
+    modified.password = 'high';
+    const result = schema.signup.validate(modified);
+    assert.equal(`${result.error}`, 'ValidationError: child "password" fails because [passwords do not match]');
+  });
   it('converts email to lowercase', () => {
     const modified = { ...postUserData
     };

@@ -17,7 +17,7 @@ const signup = Joi.object({
     .email()
     .lowercase()
     .required(),
-  password: Joi.ref('confirmPassword').error(new Error('passwords supplied do not match')),
+  password: Joi.any().valid(Joi.ref('confirmPassword')).error(() => 'passwords do not match'),
   confirmPassword: defaultString
     .strip()
     .required(),
