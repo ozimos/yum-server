@@ -8,23 +8,7 @@ export default (sequelize, DataTypes) => {
         isInt: true,
         min: 1
       }
-    },
-    orderId: {
-      type: DataTypes.UUID,
-      references: {
-        model: 'Orders',
-        key: 'id',
-      }
-    },
-    mealId: {
-      type: DataTypes.UUID,
-      references: {
-        model: 'Meals',
-        key: 'id',
-      }
-    },
+    }
   });
-
-
   return MealOrders;
 };
