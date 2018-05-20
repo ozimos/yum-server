@@ -54,8 +54,15 @@ export default class OrderController extends Controller {
       .catch(err => OrderController.errorResponse(err.message));
   }
   updateOrder(req) {
-
     return this.Model.findById(req.params.id)
+      .then((order) => {
+        try {
+          order.setMeals([]);
+          return order.save();
+        } catch (err) {
+          throw err;
+        }
+      })
       .then(order => this.orderProcess(order, req))
       .catch(err => OrderController.errorResponse(err.message));
 
@@ -81,7 +88,6 @@ export default class OrderController extends Controller {
       return OrderController.errorResponse('Order was not processed. Try again', 404);
     } catch (error) {
       OrderController.errorResponse(error.message);
-
     }
 
   }

@@ -1,7 +1,11 @@
 const validationErrors = (err, req, res, next) => {
   if (err.error && err.error.isJoi) {
+    if (err.error.details[0].context.key === 'password') {
+      return res.status(400).json({
+        message: 'passwords do not match'
+      });
+    }
     res.status(400).json({
-      type: err.type,
       message: err.error
     });
   } else next(err);

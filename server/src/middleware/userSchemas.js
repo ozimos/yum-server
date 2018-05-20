@@ -1,19 +1,24 @@
 import Joi from 'joi';
 
+const defaultString = Joi.string().trim().min(1).max(256)
+  .truncate();
 const login = Joi.object({
-  email: Joi.string()
+  email: defaultString
     .email()
     .required(),
-  password: Joi.string().required()
+  password: defaultString.required()
 });
 const signup = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  email: Joi.string()
-    .email()
+  firstName: defaultString
     .required(),
-  password: Joi.ref('confirmPassword'),
-  confirmPassword: Joi.string()
+  lastName: defaultString
+    .required(),
+  email: defaultString
+    .email()
+    .lowercase()
+    .required(),
+  password: Joi.any().valid(Joi.ref('confirmPassword')).error(() => 'passwords do not match'),
+  confirmPassword: defaultString
     .strip()
     .required(),
   isCaterer: Joi.boolean()

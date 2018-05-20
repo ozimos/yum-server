@@ -6,6 +6,10 @@ info:
     vendor know what the customers want to eat
   version: "1"
   title: Book A Meal API
+host: virtserver.swaggerhub.com
+basePath: /ozimos7/Book_A_Meal-API/1
+schemes:
+- https
 paths:
   /api/v1/auth/signup:
     post:
@@ -60,14 +64,12 @@ paths:
       responses:
         200:
           description: Return all meals details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
     post:
       consumes:
       - application/json
@@ -92,9 +94,7 @@ paths:
         400:
           description: Invalid input
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
   /api/v1/meals/{mealId}:
     put:
       consumes:
@@ -118,14 +118,12 @@ paths:
       responses:
         200:
           description: Return meal details as updated on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
     delete:
       consumes:
       - application/json
@@ -140,14 +138,12 @@ paths:
       responses:
         200:
           description: Return meal details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
   /api/v1/orders/{orderId}:
     put:
       consumes:
@@ -171,28 +167,24 @@ paths:
       responses:
         200:
           description: Return order details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
   /api/v1/orders:
     get:
       parameters: []
       responses:
         200:
           description: Return all order details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
     post:
       consumes:
       - application/json
@@ -205,34 +197,29 @@ paths:
         schema:
           $ref: '#/definitions/Orders'
         x-examples:
-          application/json: "{\r\n\"meals\"
-            :[{\"id\": \"084a7e7c-ef72-45cd-8998-727e56af2759\",
-              \"quantity\": \"1\"}]\r\n}"
+          application/json: "{\r\n\"meals\" :[{\"id\": \"084a7e7c-ef72-45cd-8998-727e56af2759\"\
+            , \"quantity\": \"1\"}]\r\n}"
       responses:
         201:
           description: Return order details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
   /api/v1/menu:
     get:
       parameters: []
       responses:
         200:
           description: Return all order details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
     post:
       consumes:
       - application/json
@@ -251,25 +238,16 @@ paths:
       responses:
         201:
           description: Return order details as saved on database
-        404:
-          description: No records available
         400:
           description: Bad Request
+        404:
+          description: No records available
       security:
-      - bookameal_auth:
-        - write:records
-        - read:records
+      - jwt: []
 securityDefinitions:
-  bookameal_auth:
-    type: oauth2
-    authorizationUrl: https://book-a-meal-andela-31.herokuapp.com/api/v1/login
-    flow: implicit
-    scopes:
-      write:records: modify records in your account
-      read:records: read your records
-  api_key:
+  jwt:
     type: apiKey
-    name: api_key
+    name: authorization
     in: header
 definitions:
   Meals:
@@ -298,19 +276,13 @@ definitions:
       meals:
         type: array
         items:
-          type: object
-          properties:
-            id:
-              type: string
-              format: uuidv4
-            quantity:
-              type: string
+          $ref: '#/definitions/Orders_meals'
     example:
       meals:
       - id: 443b76e7-b152-4937-890e-492c842b45a8
-        quantity: '1'
+        quantity: "1"
       - id: 443b76e7-b152-4937-890e-492c842b45a8
-        quantity: '1'
+        quantity: "1"
   Menu:
     type: object
     properties:
@@ -360,3 +332,10 @@ definitions:
     example:
       password: password
       email: email
+  Orders_meals:
+    properties:
+      id:
+        type: string
+        format: uuidv4
+      quantity:
+        type: string

@@ -10,76 +10,43 @@ import {
 const decoded = {
   userId: defaultUser.id
 };
-const sampleBody = {
+const body = {
   title: 'Beef Barbecue',
   description: 'roasted ground beef',
   imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
   price: 2000,
 };
-describe.skip('Integration Controller Meal AddMeal', () => {
-  it('does not add duplicate meal title by same user', async () => {
-    const body = { ...sampleBody };
-    body.title = defaultMeal.title;
-    const req = { decoded, body };
-
-    const expected = {
-      message: 'Meal title is not available',
-      statusCode: 400
-    };
-    const response = await mealController.postRecord(req);
-    expect(response).to.eql(expected);
-  });
+describe('Integration Controller Meal AddMeal', () => {
   it('does not add meal without userId', async () => {
 
-    const decoded2 = { ...decoded
-    };
-    const body = { ...sampleBody
-    };
-    delete decoded2.userId;
-
-    const req = {
-      decoded: decoded2,
-      body
-    };
-
     const expected = {
-      message: 'Meal title is not available',
+      message: 'userId not supplied',
       statusCode: 400
     };
-    const response = await mealController.postRecord(req);
+    const response = await mealController.postRecord({ body });
     expect(response).to.eql(expected);
   });
   it('does add duplicate meal title by different user', async () => {
 
     const decoded2 = { ...decoded
     };
-    const body = { ...sampleBody
+    const newBody = { ...body
     };
+    newBody.title = defaultMeal.title;
     decoded2.userId = defaultUser2.id;
     const req = {
       decoded: decoded2,
-      body
-    };
-
-    const expected = {
-      message: 'Meal title is not available',
-      statusCode: 400
+      body: newBody
     };
     const response = await mealController.postRecord(req);
-    expect(response).to.eql(expected);
+    expect(response.data.title).to.equal(newBody.title);
+    expect(response.data.description).to.equal(newBody.description);
+    expect(response.data.price).to.equal(newBody.price);
   });
   it('does create new meal', async () => {
-
-    const req = {
-      decoded,
-      body: sampleBody
-    };
-
-    const expected = {
-      message: 'Meal title is not available',
-      statusCode: 400
-    };
-    const response = await mealController.postRecord(req);
-    expect(response).to.eql(expected);
+    const response = await mealController.postRecord({ decoded, body });
+    expect(response.data.title).to.equal(body.title);
+    expect(response.data.description).to.equal(body.description);
+    expect(response.data.price).to.equal(body.price);
   });
 });

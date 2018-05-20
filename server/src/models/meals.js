@@ -26,7 +26,7 @@ export default (sequelize, DataTypes) => {
     paranoid: true,
     indexes: [{
       unique: true,
-      fields: ['title', 'userId']
+      fields: ['title', 'userId', 'deletedAt']
     }]
   });
 
@@ -34,6 +34,7 @@ export default (sequelize, DataTypes) => {
   Meal.associate = (models) => {
     Meal.belongsTo(models.User, {
       foreignKey: 'userId',
+      unique: 'userTitle',
       onDelete: 'CASCADE'
     });
     Meal.belongsToMany(models.Menu, {

@@ -1,65 +1,57 @@
 export default {
-  up: (queryInterface, Sequelize) =>
-    queryInterface.createTable(
-      'Meals', {
-        id: {
-          type: Sequelize.UUID,
-          primaryKey: true,
-          defaultValue: Sequelize.UUIDV4
-        },
-        userId: {
-          type: Sequelize.UUID,
-          references: {
-            model: 'Users',
-            key: 'id',
-            as: 'userId',
-            onDelete: 'CASCADE'
-          },
-        },
-        title: {
-          type: Sequelize.STRING,
-          allowNull: false,
-          unique: 'title'
-        },
-        description: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        imageUrl: {
-          type: Sequelize.STRING,
-          allowNull: false,
-        },
-        price: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-        },
-        createdAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-          defaultValue: Sequelize.fn('NOW')
-        },
-        updatedAt: {
-          allowNull: false,
-          type: Sequelize.DATE,
-          defaultValue: Sequelize.fn('NOW')
-        },
-        deletedAt: {
-          allowNull: true,
-          type: Sequelize.DATE,
-        }
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('Meals', {
+      id: {
+        type: Sequelize.UUID,
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
       },
-      // migration files do not add unique constraints in the same way as model definitions
-      // as documented at https://github.com/sequelize/cli/issues/272
-      // using the queryInterface.addConstraints method in a separate migration file works
-      // sometimes and fails inexplicably at others. uniqueKeys preferrable
-      {
-        uniqueKeys: {
-          userTitle: {
-            fields: ['title', 'userId']
-          }
-        }
+      userId: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId',
+          onDelete: 'CASCADE'
+        },
+      },
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: 'title'
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      imageUrl: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE,
       }
-    ),
+    });
+    await queryInterface.addConstraint('Meals', ['title', 'userId', 'deletedAt'], {
+      type: 'unique',
+      name: 'userTitle'
+    });
+  },
 
   down: queryInterface => queryInterface.dropTable('Meals')
 };
