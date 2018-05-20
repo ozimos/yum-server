@@ -24,4 +24,12 @@ app.get('/', (req, res) => {
 });
 
 app.use(validationErrors);
+// Get port from environment and store in Express.
+const PORT = parseInt(process.env.PORT, 10) || 3000;
+app.set('port', PORT);
+
+app.listen(PORT, () => {
+/* eslint no-console: off */
+  console.log(`API is running on port ${PORT}`);
+});
 export default app;
