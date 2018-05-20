@@ -43,15 +43,15 @@ describe.skip('Modify Order:', () => {
         id: orderId
       };
       const req = {
-        decoded,
         params,
         body2
       };
       const response = await orderController.updateOrder(req);
-      expect(response.data.Meals[1].id).to.equal(body2.meals[1].id);
-      expect(response.data.Meals[1].MealOrders.quantity).to.equal(body2.meals[1].quantity);
+      expect(response.data[0].Meals[0].id).to.equal(body2.meals[0].id);
+      expect(response.data[0].Meals[0].MealOrders.quantity).to.equal(body2.meals[0].quantity);
+      expect(response.data[0].Meals.length).to.equal(body2.meals.length);
       // eslint-disable-next-line
-      expect(response.data.id).to.exist;
+      expect(response.data[0].id).to.exist;
       expect(response.statusCode).to.equal(200);
     });
   });
