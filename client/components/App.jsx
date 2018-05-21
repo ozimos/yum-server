@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { hot } from 'react-hot-loader';
+import { connect } from 'react-redux';
+import action from '../actions/action';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <h1>Hello World</h1>
-      </div>);
-  }
+function App(props) {
+// eslint-disable-next-line react/prop-types
+  props.action();
+  return (
+    <div>Hello</div>
+  );
+
 }
+export default connect(null, { action })(hot(module)(App));
