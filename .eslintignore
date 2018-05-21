@@ -6,3 +6,7 @@ server/lib/
 
 # My debug folder
 debug/
+
+# sass files
+*.scss
+/\.s?[ac]ss$/

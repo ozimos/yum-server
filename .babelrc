@@ -1,10 +1,11 @@
 {
-  "presets": ["env"],
+  "presets": ["env", "react"],
   "plugins": [
     ["transform-object-rest-spread", { "useBuiltIns": true }],
     ["transform-runtime", {
       "polyfill": false,
       "regenerator": true
-    }]
+    }],
+    "react-hot-loader/babel"
   ]
 }
