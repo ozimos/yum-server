@@ -7,4 +7,9 @@ import '../public/styles/app.css';
 import '../public/styles/appStyles.scss';
 
 
-ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
