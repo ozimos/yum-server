@@ -1,7 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import action from '../actions/action';
+import action from './redux/actions/action';
 
 function App(props) {
 // eslint-disable-next-line react/prop-types

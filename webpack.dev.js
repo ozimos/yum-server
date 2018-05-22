@@ -1,5 +1,4 @@
 /* eslint import/no-extraneous-dependencies: off */
-import path from 'path';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import common from './webpack.common.js';
@@ -18,7 +17,8 @@ export default merge(common, {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: false,
+    publicPath: 'http://localhost:9000/client/dist',
     compress: true,
     hot: true,
     port: 9000

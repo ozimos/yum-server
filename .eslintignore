@@ -8,5 +8,5 @@ server/lib/
 debug/
 
 # sass files
-*.scss
+client/src/*.scss
 /\.s?[ac]ss$/

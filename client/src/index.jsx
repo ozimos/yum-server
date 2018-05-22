@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './redux/store';
 import App from './components/App.jsx';
-import './styles/app.css';
-import './styles/appStyles.scss';
+import '../public/styles/app.css';
+import '../public/styles/appStyles.scss';
 
 
 ReactDOM.render(<Provider store={store}> <App /> </Provider>, document.getElementById('root'));

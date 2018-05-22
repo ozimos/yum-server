@@ -1,6 +1,9 @@
 # Babel build directories
 server/lib/
 
+# Webpack build directories
+client/dist/
+
 # VSCode Directory
 .vscode/
 
