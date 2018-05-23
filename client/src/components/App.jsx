@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import InputPreview from './presentational/InputPreview.jsx';
 import action from '../redux/actions/action';
 import setMessage from '../redux/actions/message';
-import '../styles/App.css';
+// import '../styles/App.css';
 
 function App(props) {
   // props.action();
