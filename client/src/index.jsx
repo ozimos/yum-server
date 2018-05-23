@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { RouterProvider } from 'react-router5';
+// import AppRoutes from './routes';
+import configureStore from './configureStore';
+import configureRouter from './configureRouter';
 import App from './components/App.jsx';
 import '../public/styles/app.css';
-import '../public/styles/appStyles.scss';
 
-
-ReactDOM.render(
+const router = configureRouter();
+const store = configureStore(router);
+const wrappedApp = (
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider >
+  </Provider>
 );
+router.start(() => {
+  ReactDOM.render(wrappedApp, document.getElementById('root'));
+});
