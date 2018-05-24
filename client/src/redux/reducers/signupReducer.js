@@ -1,4 +1,6 @@
-import { userTypes } from '../types';
+import {
+  userTypes
+} from '../types';
 
 export default(state = {}, action) => {
   switch (action.type) {
