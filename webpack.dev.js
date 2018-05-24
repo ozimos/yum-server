@@ -19,6 +19,7 @@ export default merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'client/dist'),
+    historyApiFallback: true,
     compress: true,
     hot: true,
     port: 9000
