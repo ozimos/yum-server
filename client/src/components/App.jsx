@@ -10,13 +10,12 @@ import setMessage from '../redux/actions/message';
 
 function App(props) {
   // props.action();
-  const { message } = props;
   const changeAction = (value) => {
     props.setMessage(value);
   };
   return (
     <div className="App">
-      <InputPreview value={message} onChange={changeAction} />
+      <InputPreview value={props.message} onChange={changeAction} />
       <h3> some large text for testing</h3>
       <Link to="/about">
         <button>Go To About</button>

@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../../public/styles/book_a_meal.css';
 
-function SignUp(props) {
+function SignUp() {
   return (
     <div className="container2">
       <header className="header">
@@ -29,8 +29,10 @@ function SignUp(props) {
             <input type="password" name="password" placeholder="Password" />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" />
             <div>
-              <input type="checkbox" name="isCaterer" id="isCaterer" value="true" />
-              <label htmlFor="isCaterer">Caterer</label>
+              <label htmlFor="isCaterer">
+                <input type="checkbox" name="isCaterer" id="isCaterer" value="true" />
+              Caterer
+              </label>
             </div>
 
             <a href="meal_list.html" className="btn">
@@ -47,7 +49,5 @@ function SignUp(props) {
   );
 }
 SignUp.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
-export default connect(state => state )(hot(module)(SignUp));
+export default connect(state => state)(hot(module)(SignUp));
