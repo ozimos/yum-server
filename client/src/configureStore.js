@@ -1,21 +1,17 @@
 import {
   applyMiddleware,
   createStore,
-  combineReducers,
   compose
 } from 'redux';
 import thunk from 'redux-thunk';
-import photoReducer from './redux/reducers/reducer';
-import messageReducer from './redux/reducers/message';
+import { createLogger } from 'redux-logger';
+import rootReducer from './redux/reducers';
 
+const loggerMiddleware = createLogger();
 const configureStore = (initialState = {}) => {
 
-  const reducer = combineReducers({
-    messageReducer,
-    photoReducer
-  });
-  const middleware = applyMiddleware(thunk);
-  const store = createStore(reducer, initialState, compose(
+  const middleware = applyMiddleware(thunk, loggerMiddleware);
+  const store = createStore(rootReducer, initialState, compose(
     middleware,
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
