@@ -3,6 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 
 export default {
   entry: {
@@ -10,7 +11,8 @@ export default {
   },
   output: {
     path: path.resolve(__dirname, 'client/dist'),
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
+    publicPath: '/'
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
   module: {
@@ -41,8 +43,10 @@ export default {
     new HtmlWebpackPlugin({
       template: './client/public/index.html',
       filename: 'index.html',
-      inject: true
+      inject: true,
+      alwaysWriteToDisk: true
     }),
+    new HtmlWebpackHarddiskPlugin(),
     new CopyWebpackPlugin([{
       from: 'client/public/images',
       to: 'images'
