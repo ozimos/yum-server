@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import InputPreview from './presentational/InputPreview.jsx';
 import action from '../redux/actions/action';

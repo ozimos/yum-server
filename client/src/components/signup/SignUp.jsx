@@ -1,53 +1,134 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-// import { Link } from 'react-router-dom';
+// import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { userActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
 
-function SignUp() {
-  return (
-    <div className="container2">
-      <header className="header">
-        <h1 className="heading">Book A Meal</h1>
-      </header>
-      <main>
-        <div className="welcome">
-          <h1 className="welcome-text">
-            Welcome!
-          </h1>
-          <h4>
-            Register by entering the information below
-          </h4>
-        </div>
-        <div className="form-box">
-          <form className="form" action="">
 
-            <input type="text" name="email" placeholder="Email" />
-            <input type="text" name="firstName" placeholder="First Name" />
-            <input type="text" name="lastName" placeholder="Last Name" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" />
-            <div>
-              <label htmlFor="isCaterer">
-                <input type="checkbox" name="isCaterer" id="isCaterer" value="true" />
-              Caterer
-              </label>
-            </div>
+class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
 
-            <a href="meal_list.html" className="btn">
-              Continue
-            </a>
-          </form>
-          <div className="stacked-text">
-            <a href="sign_in.html"><p>Already have an account? Click here to sign in</p></a>
+    this.state = {
+      user: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        isCaterer: false
+      },
+      submitted: false
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    const { name, value } = event.target;
+    const { user } = this.state;
+    this.setState({
+      user: {
+        ...user,
+        [name]: value
+      }
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.setState({ submitted: true });
+    const { user } = this.state;
+    const { dispatch } = this.props;
+    if (user.firstName && user.lastName && user.email && user.password) {
+      dispatch(userActions.signUp(user));
+    }
+  }
+  render() {
+    const { user, submitted } = this.state;
+    return (
+      <div className="container2">
+        <header className="header">
+          <h1 className="heading">Book A Meal</h1>
+        </header>
+        <main>
+          <div className="welcome">
+            <h1 className="welcome-text">
+              Welcome!
+            </h1>
+            <h4>
+              Register by entering the information below
+            </h4>
           </div>
-        </div>
-      </main>
+          <div className="form-box">
+            <form className="form" action="" onSubmit={this.handleSubmit}>
 
-    </div>
-  );
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={this.handleChange}
+                value={user.email}
+              />
+              <input
+                type="text"
+                name="firstName"
+                value={user.firstName}
+                placeholder="First Name"
+                onChange={this.handleChange}
+              />
+              <input
+                type="text"
+                name="lastName"
+                value={user.lastName}
+                placeholder="Last Name"
+                onChange={this.handleChange}
+              />
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                placeholder="Password"
+                onChange={this.handleChange}
+              />
+              <input
+                type="password"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                placeholder="Confirm Password"
+                onChange={this.handleChange}
+              />
+              <div>
+                <label htmlFor="isCaterer">
+                  <input
+                    type="checkbox"
+                    name="isCaterer"
+                    id="isCaterer"
+                    value={user.isCaterer}
+                    onChange={this.handleChange}
+                  />
+                  Caterer
+                </label>
+              </div>
+
+              <a href="meal_list.html" className="btn">
+                Continue
+              </a>
+            </form>
+            <div className="stacked-text">
+              <a href="sign_in.html"><p>Already have an account? Click here to sign in</p></a>
+            </div>
+          </div>
+        </main>
+
+      </div>
+    );
+  }
 }
 SignUp.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 };
 export default connect(state => state)(hot(module)(SignUp));
