@@ -7,7 +7,7 @@ import {
 } from '../../../../testHelpers/controllerHelper';
 // import db from '../../../../src/models';
 
-describe('Integration Controller Get Orders', () => {
+describe.skip('Integration Controller Get Orders', () => {
   // beforeEach('truncate orders db', async () => {
   //   await db.Order.truncate({
   //     cascade: true
@@ -44,9 +44,7 @@ describe('Integration Controller Get Orders', () => {
     expect(response.data[0].Meals[0].id).to.equal(body.meals[0].id);
     expect(response.data[0].Meals[0].MealOrders.quantity).to.equal(body.meals[0].quantity);
     expect(response.data[0].Meals.length).to.equal(body.meals.length);
-
-    // eslint-disable-next-line
-    expect(response.data[0].id).to.exist;
+    expect(response.data[0].id).to.be.a('string');
     expect(response.statusCode).to.equal(200);
   });
 });

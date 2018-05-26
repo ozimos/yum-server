@@ -16,6 +16,8 @@ export const defaultUser = seedUsers[0];
 export const defaultMeal = seedMeals[0];
 export const menuMeal = seedMeals[1];
 export const deleteMeal = seedMeals[2];
+export const extraMeal = seedMeals[3];
+
 export const payload = {
   isCaterer: defaultUser.isCaterer,
   userId: defaultUser.id

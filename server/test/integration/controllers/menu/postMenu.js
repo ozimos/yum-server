@@ -23,7 +23,7 @@ describe('Integration Controller Post Menu', () => {
     expect(response.data.Meals[0].id).to.exist;
     expect(response.statusCode).to.equal(201);
   });
-  it('postMenu returns error message if meal is not in db', async () => {
+  it.skip('postMenu returns error message if meal is not in db', async () => {
     const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';
 
     const req = {

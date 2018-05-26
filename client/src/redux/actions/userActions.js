@@ -1,25 +1,39 @@
-import { userTypes } from '../types';
-import { userService } from '../../services/userServices';
-import { alertActions } from './';
-import { history } from '../../history';
+import push from 'react-router-redux';
+import {
+  userTypes
+} from '../types';
+import userService from '../../services/userServices';
+import {
+  alertActions
+} from './';
 
+const request = (userData, actionType) => ({
+  type: actionType,
+  userData
+});
+const success = (userData, actionType) => ({
+  type: actionType,
+  userData
+});
+const failure = (error, actionType) => ({
+  type: actionType,
+  error
+});
 
 function login(username, password) {
-  function request(user) { return { type: userTypes.LOGIN_REQUEST, user }; }
-  function success(user) { return { type: userTypes.LOGIN_SUCCESS, user }; }
-  function failure(error) { return { type: userTypes.LOGIN_FAILURE, error }; }
-
   return (dispatch) => {
-    dispatch(request({ username }));
+    dispatch(request({
+      username
+    }, userTypes.LOGIN_REQUEST));
 
     userService.login(username, password)
       .then(
         (user) => {
-          dispatch(success(user));
-          history.push('/');
+          dispatch(success(user, userTypes.LOGIN_SUCCESS));
+          dispatch(push('/about'));
         },
         (error) => {
-          dispatch(failure(error));
+          dispatch(failure(error, userTypes.LOGIN_FAILURE));
           dispatch(alertActions.error(error));
         }
       );
@@ -30,25 +44,24 @@ function login(username, password) {
 
 function logout() {
   userService.logout();
-  return { type: userTypes.LOGOUT };
+  return {
+    type: userTypes.LOGOUT
+  };
 }
 
 function signUp(user) {
-  const request = userData => ({ type: userTypes.REGISTER_REQUEST, userData });
-  const success = userData => ({ type: userTypes.REGISTER_SUCCESS, userData });
-  const failure = error => ({ type: userTypes.REGISTER_FAILURE, error });
   return (dispatch) => {
-    dispatch(request(user));
+    dispatch(request(user, userTypes.REGISTER_REQUEST));
 
-    userService.signUp(user)
+    userService.signUp(user, '/api/v1/auth/signup')
       .then(
         (userResults) => {
-          dispatch(success(userResults));
-          history.push('/login');
+          dispatch(success(userResults, userTypes.REGISTER_SUCCESS));
+          push('/about');
           dispatch(alertActions.success('Registration successful'));
         },
         (error) => {
-          dispatch(failure(error));
+          dispatch(failure(error, userTypes.REGISTER_FAILURE));
           dispatch(alertActions.error(error));
         }
       );
@@ -58,16 +71,13 @@ function signUp(user) {
 }
 
 function getAll() {
-  function request() { return { type: userTypes.GETALL_REQUEST }; }
-  function success(users) { return { type: userTypes.GETALL_SUCCESS, users }; }
-  function failure(error) { return { type: userTypes.GETALL_FAILURE, error }; }
   return (dispatch) => {
-    dispatch(request());
+    dispatch(request(null, userTypes.GETALL_REQUEST));
 
     userService.getAll()
       .then(
-        users => dispatch(success(users)),
-        error => dispatch(failure(error))
+        users => dispatch(success(users, userTypes.GETALL_SUCCESS)),
+        error => dispatch(failure(error, userTypes.GETALL_FAILURE))
       );
   };
 
