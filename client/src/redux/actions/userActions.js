@@ -1,4 +1,4 @@
-import push from 'react-router-redux';
+import { push } from 'react-router-redux';
 import {
   userTypes
 } from '../types';
@@ -7,82 +7,71 @@ import {
   alertActions
 } from './';
 
-const request = (userData, actionType) => ({
+const request = (user, actionType) => ({
   type: actionType,
-  userData
+  user
 });
-const success = (userData, actionType) => ({
+const success = (user, actionType) => ({
   type: actionType,
-  userData
+  user
 });
 const failure = (error, actionType) => ({
   type: actionType,
   error
 });
 
-function login(username, password) {
-  return (dispatch) => {
-    dispatch(request({
-      username
-    }, userTypes.LOGIN_REQUEST));
+const login = (email, password) => (dispatch) => {
+  dispatch(request({
+    data: { email }
+  }, userTypes.LOGIN_REQUEST));
 
-    userService.login(username, password)
-      .then(
-        (user) => {
-          dispatch(success(user, userTypes.LOGIN_SUCCESS));
-          dispatch(push('/about'));
-        },
-        (error) => {
-          dispatch(failure(error, userTypes.LOGIN_FAILURE));
-          dispatch(alertActions.error(error));
-        }
-      );
-  };
+  userService.login(email, password, '/api/v1/auth/login')
+    .then(
+      (user) => {
+        dispatch(success(user, userTypes.LOGIN_SUCCESS));
+        dispatch(push('/about'));
+      },
+      (error) => {
+        dispatch(failure(error, userTypes.LOGIN_FAILURE));
+        dispatch(alertActions.error(error));
+      }
+    );
+};
 
-
-}
-
-function logout() {
+const logout = () => {
   userService.logout();
   return {
     type: userTypes.LOGOUT
   };
-}
+};
 
-function signUp(user) {
-  return (dispatch) => {
-    dispatch(request(user, userTypes.REGISTER_REQUEST));
+const signUp = user => (dispatch) => {
+  dispatch(request(user, userTypes.SIGNUP_REQUEST));
 
-    userService.signUp(user, '/api/v1/auth/signup')
-      .then(
-        (userResults) => {
-          dispatch(success(userResults, userTypes.REGISTER_SUCCESS));
-          push('/about');
-          dispatch(alertActions.success('Registration successful'));
-        },
-        (error) => {
-          dispatch(failure(error, userTypes.REGISTER_FAILURE));
-          dispatch(alertActions.error(error));
-        }
-      );
-  };
+  userService.signUp(user, '/api/v1/auth/signup')
+    .then(
+      (userResults) => {
+        dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
+        dispatch(success(userResults, userTypes.LOGIN_SUCCESS));
+        dispatch(push('/about'));
+        // dispatch(alertActions.success('Registration successful'));
+      },
+      (error) => {
+        dispatch(failure(error, userTypes.SIGNUP_FAILURE));
+        // dispatch(alertActions.error(error));
+      }
+    );
+};
 
+const getAll = () => (dispatch) => {
+  dispatch(request(null, userTypes.GETALL_REQUEST));
 
-}
-
-function getAll() {
-  return (dispatch) => {
-    dispatch(request(null, userTypes.GETALL_REQUEST));
-
-    userService.getAll()
-      .then(
-        users => dispatch(success(users, userTypes.GETALL_SUCCESS)),
-        error => dispatch(failure(error, userTypes.GETALL_FAILURE))
-      );
-  };
-
-
-}
+  userService.getAll()
+    .then(
+      users => dispatch(success(users, userTypes.GETALL_SUCCESS)),
+      error => dispatch(failure(error, userTypes.GETALL_FAILURE))
+    );
+};
 
 export default {
   login,

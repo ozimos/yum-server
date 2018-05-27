@@ -13,12 +13,16 @@ import {
 import rootReducer from './redux/reducers';
 import history from './history';
 
-
 const loggerMiddleware = createLogger();
+const middlewares = [routerMiddleware(history), thunk];
 
-const middleware = applyMiddleware(routerMiddleware(history), thunk, loggerMiddleware);
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(loggerMiddleware);
+}
+const appliedMiddleware = applyMiddleware(...middlewares);
 const store = createStore(rootReducer, compose(
-  middleware,
+  appliedMiddleware,
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
+
 export default store;

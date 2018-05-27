@@ -1,14 +1,14 @@
 import authHeader from '../authHeader';
 
-function handleResponse(response) {
+const handleResponse = (response) => {
   if (!response.ok) {
     return Promise.reject(response.message);
   }
 
   return response.json();
-}
+};
 
-function login(email, password, url) {
+const login = (email, password, url) => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -35,24 +35,24 @@ function login(email, password, url) {
 
       return user;
     });
-}
+};
 
-function logout() {
+const logout = () => {
   // remove user from local storage to log user out
   localStorage.removeItem('user');
-}
+};
 
-function getAll(url) {
+const getAll = (url) => {
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   };
 
   return fetch(url, requestOptions).then(handleResponse);
-}
+};
 
 
-function signUp(newUser, url) {
+const signUp = (newUser, url) => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -75,7 +75,7 @@ function signUp(newUser, url) {
 
       return user;
     });
-}
+};
 
 export default {
   login,

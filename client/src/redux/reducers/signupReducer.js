@@ -4,11 +4,11 @@ import {
 
 export default(state = {}, action) => {
   switch (action.type) {
-    case userTypes.REGISTER_REQUEST:
+    case userTypes.SIGNUP_REQUEST:
       return { registering: true };
-    case userTypes.REGISTER_SUCCESS:
+    case userTypes.SIGNUP_SUCCESS:
       return {};
-    case userTypes.REGISTER_FAILURE:
+    case userTypes.SIGNUP_FAILURE:
       return {};
     default:
       return state;
