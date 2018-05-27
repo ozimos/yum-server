@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
@@ -10,9 +10,10 @@ import { alertActions } from './redux/actions';
 import PrivateRoute from './components/container/PrivateRoute';
 import About from './components/presentational/About';
 import SignUp from './components/signup/SignUp';
+import Login from './components/login/Login';
 
 const mapStateToProps = (state) => {
-  const { alert } = state;
+  const { alert } = state.alertReducer;
   return {
     alert
   };
@@ -41,7 +42,8 @@ class AppRoutes extends React.Component {
         }
         <ConnectedRouter history={history}>
           <Switch>
-            <PrivateRoute exact path="/" component={SignUp} />
+            <PrivateRoute exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
             <Route path="/about" component={About} />
             <Route path="/app" component={App} />

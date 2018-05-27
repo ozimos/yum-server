@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-// import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
@@ -20,7 +20,7 @@ class SignUp extends React.Component {
         confirmPassword: '',
         isCaterer: false
       },
-      submitted: false
+      // submitted: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -40,7 +40,7 @@ class SignUp extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    this.setState({ submitted: true });
+    // this.setState({ submitted: true });
     const { user } = this.state;
     const { dispatch } = this.props;
     if (user.firstName && user.lastName && user.email && user.password) {
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
     }
   }
   render() {
-    const { user, submitted } = this.state;
+    const { user } = this.state;
     return (
       <div className="container2">
         <header className="header">
@@ -114,12 +114,12 @@ class SignUp extends React.Component {
                 </label>
               </div>
 
-              <a href="meal_list.html" className="btn">
+              <button className="btn" type="submit">
                 Continue
-              </a>
+              </button>
             </form>
             <div className="stacked-text">
-              <a href="sign_in.html"><p>Already have an account? Click here to sign in</p></a>
+              <Link to="/login"><p>Already have an account? Click here to sign in</p></Link>
             </div>
           </div>
         </main>
