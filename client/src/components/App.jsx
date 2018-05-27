@@ -8,7 +8,7 @@ import action from '../redux/actions/action';
 import setMessage from '../redux/actions/message';
 // import '../styles/App.css';
 
-function App(props) {
+export const App = (props) => {
   // props.action();
   const changeAction = (value) => {
     props.setMessage(value);
@@ -24,7 +24,7 @@ function App(props) {
 
   );
 
-}
+};
 App.propTypes = {
   // action: PropTypes.func.isRequired,
   setMessage: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ import { userActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
 
 
-class SignUp extends React.Component {
+export class SignUp extends React.Component {
   constructor(props) {
     super(props);
 

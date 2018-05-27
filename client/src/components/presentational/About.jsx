@@ -17,3 +17,4 @@ function About() {
 }
 
 export default connect(state => state)(hot(module)(About));
+export { About };

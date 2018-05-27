@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
 
-
-class Login extends React.Component {
+export class Login extends React.Component {
   constructor(props) {
     super(props);
 
@@ -60,6 +59,7 @@ class Login extends React.Component {
               <input
                 type="text"
                 name="email"
+                id="email"
                 placeholder="Email"
                 onChange={this.handleChange}
                 value={email}
@@ -67,6 +67,7 @@ class Login extends React.Component {
               <input
                 type="password"
                 name="password"
+                id="password"
                 value={password}
                 placeholder="Password"
                 onChange={this.handleChange}
