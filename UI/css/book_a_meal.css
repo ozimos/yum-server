@@ -110,19 +110,6 @@ a {
   margin: 0;
 }
 
-a>.svg-inline--fa {
-  font-size: 1.5rem;
-  margin: 0.6em;
-  font-weight: 0;
-  vertical-align: middle;
-}
-
-button>.svg-inline--fa {
-  font-size: 1rem;
-  margin: 0.6em;
-  font-weight: 0;
-  vertical-align: middle;
-}
 button.title-button.icon {
   font-size: 1.2rem;
   margin: 0.6em;
