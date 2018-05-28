@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'development') {
     res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
   });
 }
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, '../../client/dist/index.html')));
 }
 app.use(validationErrors);

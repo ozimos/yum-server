@@ -15,7 +15,7 @@
     "server:setup": "npm run build:server && sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
     "build": "npm-run-all build:client build:server",
     "heroku-postbuild": "npm-run-all server:setup build:client",
-    "pretest": "npm run refresh:test",
+    "pretest:server": "npm run refresh:test",
     "test:server": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --t 5000 --exit --recursive -r dotenv/config -r esm",
     "test:babel": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --exit --recursive -r dotenv/config -r babel-polyfill -r babel-register",
     "test:client": "jest --env=jsdom --coverage",
