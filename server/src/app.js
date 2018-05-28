@@ -1,4 +1,3 @@
-/* eslint import/no-extraneous-dependencies: off */
 import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
