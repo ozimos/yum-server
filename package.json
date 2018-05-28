@@ -2,19 +2,23 @@
   "name": "book-a-meal",
   "version": "1.0.0",
   "engines": {
-    "node": "10.1.0"
+    "node": "10.1.0",
+    "npm": "6.0.1"
   },
   "description": "Book-A-Meal is an application that allows customers to make food orders and helps the food",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server -r esm --config webpack.dev.js --open",
     "build:client": "webpack -r esm --config webpack.prod.js",
+    "build:clientp": "cross-env NODE_ENV=production npm run build:client",
     "start:dev": "cross-env NODE_ENV=development nodemon --watch server -r dotenv/config -r esm server/src/app.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon --watch server -r dotenv/config -r esm server/src/app.js",
     "start:babel": "nodemon --watch server -r dotenv/config --exec babel-node server/src/app.js",
     "build:server": "babel server/src -d server/lib",
-    "server:setup": "npm run build:server && sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
+    "server:setup": "sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
     "build": "npm-run-all build:client build:server",
-    "heroku-postbuild": "npm-run-all server:setup build:client",
+    "heroku-postbuild": "npm run server:setup && npm run build:client",
+    "herokup": "npm run build:clientp && cross-env DATABASE_URL=postgres://zzwwvxmv:r9blS4h6NG-jCJ8VdYY_gEFwljCXFtos@elmer.db.elephantsql.com:5432/zzwwvxmv sequelize db:migrate --env=production && npm run start:prod",
     "pretest:server": "npm run refresh:test",
     "test:server": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --t 5000 --exit --recursive -r dotenv/config -r esm",
     "test:babel": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --exit --recursive -r dotenv/config -r babel-polyfill -r babel-register",

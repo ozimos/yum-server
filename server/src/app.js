@@ -6,15 +6,16 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-
+import {
+  config
+} from 'dotenv';
 import swaggerDocument from './swagger.json';
 import routers from './routes';
 import validationErrors from './middleware/validationErrors';
-import config from '../../webpack.dev.js';
+import configWp from '../../webpack.dev.js';
 
+config();
 const app = express();
-const compiler = webpack(config);
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -22,8 +23,12 @@ app.use(bodyParser.urlencoded({
 }));
 
 if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(configWp);
+
   app.use(webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
+    publicPath: configWp.output.publicPath,
+    stats: { colors: true },
+    noInfo: true
   }));
   app.use(webpackHotMiddleware(compiler));
 }
@@ -35,14 +40,12 @@ app.use('/api/v1/orders', routers.orderRouter);
 app.use('/api/v1/auth', routers.authRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-if (process.env.NODE_ENV === 'development') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-  });
-}
-if (process.env.NODE_ENV !== 'development') {
-  app.use(express.static(path.join(__dirname, '../../client/dist/index.html')));
-}
+app.use(express.static(path.resolve(__dirname, '../../client/', 'dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+});
+
+
 app.use(validationErrors);
 // Get port from environment and store in Express.
 const PORT = parseInt(process.env.PORT, 10) || 3000;
