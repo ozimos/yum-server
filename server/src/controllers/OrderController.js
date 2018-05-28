@@ -35,7 +35,7 @@ export default class OrderController extends Controller {
     return this.Model
       .findAll(options)
       .then((result) => {
-        if (result.length > 0) {
+        if (result && result.length > 0) {
           return OrderController.defaultResponse(result);
         }
         return OrderController.errorResponse('no records available', 404);
@@ -68,7 +68,7 @@ export default class OrderController extends Controller {
 
   }
   async orderProcess(order, req, successCode = 200) {
-    let postedMenu = {};
+    let postedOrder = {};
     try {
       await req.body.meals.forEach((meal) => {
         order.addMeal(meal.id, {
@@ -78,12 +78,18 @@ export default class OrderController extends Controller {
         });
       });
       const savedOrder = await order.save();
-      postedMenu = savedOrder.dataValues;
-      const checkOrder = await this.Model.findById(postedMenu.id);
+      postedOrder = savedOrder.dataValues;
+      const checkOrder = await this.Model.findById(postedOrder.id);
+      // not using savedOrder because getMeals returned
+      // values from before save
       const meals = await checkOrder.getMeals();
       if (meals.length > 0) {
-        postedMenu.Meals = meals;
-        return OrderController.defaultResponse(postedMenu, successCode);
+        const mealList = meals.map(elem => elem.id);
+        const quantityList = meals.map(elem => elem.MealOrders.quantity);
+        postedOrder.Meals = meals;
+        postedOrder.mealList = mealList;
+        postedOrder.quantityList = quantityList;
+        return OrderController.defaultResponse(postedOrder, successCode);
       }
       return OrderController.errorResponse('Order was not processed. Try again', 404);
     } catch (error) {

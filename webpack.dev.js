@@ -18,7 +18,8 @@ export default merge(common, {
   },
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'client/dist'),
+    historyApiFallback: true,
     compress: true,
     hot: true,
     port: 9000
@@ -29,5 +30,6 @@ export default merge(common, {
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ],
 });

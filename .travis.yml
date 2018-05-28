@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "lts/*"
+  - "10.1.0"
 addons:
   postgresql: "10"
   apt:
@@ -23,10 +23,17 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-
+  - npm run build
 script:
-  - npm run migrate
-  - npm test
+  - npm run migrate:test
+  - npm run test:server
+  - mv ./coverage/lcov.info ./coverage/lcov.server.info
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.server.info --output ./coverage/codeclimate.server.json
+  - npm run test:client
+  - mv ./coverage/lcov.info ./coverage/lcov.client.info
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.client.info  --output ./coverage/codeclimate.client.json
+  - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
+  - ./cc-test-reporter upload-coverage
 after_success:
   - npm run coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

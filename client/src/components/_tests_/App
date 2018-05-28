@@ -1,0 +1,14 @@
+/* global React:false, shallow:false */
+import { MemoryRouter } from 'react-router-dom';
+import { App } from '../App';
+
+describe('Login Component', () => {
+  it('should render without throwing an error', () => {
+    expect(shallow(<MemoryRouter><App /></MemoryRouter>))
+      .exists(<div className="App" />).toBe(true);
+  });
+  it('renders correctly', () => {
+    const wrapper = shallow(<MemoryRouter><App /></MemoryRouter>);
+    expect(wrapper).toMatchSnapshot();
+  });
+});
