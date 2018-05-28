@@ -1,1 +1,1 @@
-web: node -r dotenv/config server/src/app.js
+web: node -r dotenv/config server/lib/app.js
