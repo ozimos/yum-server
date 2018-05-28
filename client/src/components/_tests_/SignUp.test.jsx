@@ -1,10 +1,22 @@
-/* global React:false */
-
-import { render } from 'react-testing-library';
-import 'dom-testing-library/extend-expect';
+/* global React:false, shallow:false */
+/* eslint react/jsx-indent: off */
+import { MemoryRouter } from 'react-router-dom';
 import { SignUp } from '../signup/SignUp';
+// describe what we are testing
+describe('SignUp Component', () => {
 
-test('SignUp component receives prop and then renders text', () => {
-  const { getTestId } = render(<SignUp text="The funniest" />);
-  expect(getTestId('joke-text')).toHaveTextContent('The funniest');
+  it('should render without throwing an error', () => {
+    expect(shallow(<MemoryRouter><SignUp /></MemoryRouter>)
+      .exists(<form className="form" />)).toBe(true);
+  });
+  it('renders correctly', () => {
+    const wrapper =
+    shallow(<MemoryRouter
+      initialEntries={[{ pathname: '/', key: 'testKey' }]}
+    >
+      <SignUp />
+            </MemoryRouter>);
+    expect(wrapper).toMatchSnapshot();
+  });
 });
+
