@@ -10,7 +10,7 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .canvas {
-  background: #fafafa url('../assets/pastries2.jpg');
+  background: #fafafa url('../images/pastries2.jpg');
   background-position: right;
   background-repeat: no-repeat;
   background-attachment: fixed;
