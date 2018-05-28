@@ -4,7 +4,7 @@ module.exports = {
   //   '!<rootDir>/client/src/**/index.js',
   //   '!<rootDir>/client/tests/**/*.(spec|test).{js,jsx}'
   // ],
-  // coverageDirectory: '<rootDir>/coverage',
+  coverageDirectory: '<rootDir>/coverage',
   coveragePathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/server/',

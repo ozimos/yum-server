@@ -28,16 +28,21 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler));
 }
 
+
 app.use('/api/v1/meals', routers.mealRouter);
 app.use('/api/v1/menu', routers.menuRouter);
 app.use('/api/v1/orders', routers.orderRouter);
 app.use('/api/v1/auth', routers.authRouter);
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-});
+if (process.env.NODE_ENV === 'development') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
+  });
+}
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../../client/dist/index.html')));
+}
 app.use(validationErrors);
 // Get port from environment and store in Express.
 const PORT = parseInt(process.env.PORT, 10) || 3000;
