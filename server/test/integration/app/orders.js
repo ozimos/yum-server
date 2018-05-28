@@ -80,8 +80,8 @@ context('orders integration test', () => {
       .send(updatedOrder)
       .then((res) => {
         expect(res).to.have.status(200);
-        expect(res.body.data.mealList).to.include.members([mealKey[0].id, mealKey[1].id]);
         expect(res.body.data.mealList).to.not.include(newOrder.meals[0].id);
+        expect(res.body.data.mealList).to.include.members([mealKey[0].id, mealKey[1].id]);
         expect(res.body.data.quantityList).to.include.members([
           mealKey[0].quantity, mealKey[1].quantity]);
       }));
