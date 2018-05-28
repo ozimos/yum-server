@@ -50,80 +50,82 @@ export class SignUp extends React.Component {
   render() {
     const { user } = this.state;
     return (
-      <div className="container2">
-        <header className="header">
-          <h1 className="heading">Book A Meal</h1>
-        </header>
-        <main>
-          <div className="welcome">
-            <h1 className="welcome-text">
-              Welcome!
-            </h1>
-            <h4>
-              Register by entering the information below
-            </h4>
-          </div>
-          <div className="form-box">
-            <form className="form" action="" onSubmit={this.handleSubmit}>
-
-              <input
-                type="text"
-                name="email"
-                placeholder="Email"
-                onChange={this.handleChange}
-                value={user.email}
-              />
-              <input
-                type="text"
-                name="firstName"
-                value={user.firstName}
-                placeholder="First Name"
-                onChange={this.handleChange}
-              />
-              <input
-                type="text"
-                name="lastName"
-                value={user.lastName}
-                placeholder="Last Name"
-                onChange={this.handleChange}
-              />
-              <input
-                type="password"
-                name="password"
-                value={user.password}
-                placeholder="Password"
-                onChange={this.handleChange}
-              />
-              <input
-                type="password"
-                name="confirmPassword"
-                value={user.confirmPassword}
-                placeholder="Confirm Password"
-                onChange={this.handleChange}
-              />
-              <div>
-                <label htmlFor="isCaterer">
-                  <input
-                    type="checkbox"
-                    name="isCaterer"
-                    id="isCaterer"
-                    value={user.isCaterer}
-                    onChange={this.handleChange}
-                  />
-                  Caterer
-                </label>
-              </div>
-
-              <button className="btn" type="submit">
-                Continue
-              </button>
-            </form>
-            <div className="stacked-text">
-              <Link to="/login"><p>Already have an account? Click here to sign in</p></Link>
+      <div className="canvas">
+        <div className="container2">
+          <header className="header">
+            <h1 className="heading">Book A Meal</h1>
+          </header>
+          <main>
+            <div className="welcome">
+              <h1 className="welcome-text">
+                Welcome!
+              </h1>
+              <h4>
+                Register by entering the information below
+              </h4>
             </div>
-          </div>
-        </main>
+            <div className="form-box">
+              <form className="form" action="" onSubmit={this.handleSubmit}>
 
+                <input
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                  value={user.email}
+                />
+                <input
+                  type="text"
+                  name="firstName"
+                  value={user.firstName}
+                  placeholder="First Name"
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  value={user.lastName}
+                  placeholder="Last Name"
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  value={user.password}
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={user.confirmPassword}
+                  placeholder="Confirm Password"
+                  onChange={this.handleChange}
+                />
+                <div>
+                  <label htmlFor="isCaterer">
+                    <input
+                      type="checkbox"
+                      name="isCaterer"
+                      id="isCaterer"
+                      value={user.isCaterer}
+                      onChange={this.handleChange}
+                    />
+                    Caterer
+                  </label>
+                </div>
+
+                <button className="btn" type="submit">
+                  Continue
+                </button>
+              </form>
+              <div className="stacked-text">
+                <Link to="/login"><p>Already have an account? Click here to sign in</p></Link>
+              </div>
+            </div>
+          </main>
+
+        </div>
       </div>
     );
   }

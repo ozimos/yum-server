@@ -39,7 +39,7 @@ export default {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin('./client/dist'),
     new HtmlWebpackPlugin({
       template: './client/public/index.html',
       filename: 'index.html',
