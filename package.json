@@ -8,10 +8,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server -r esm --config webpack.dev.js --open",
-    "build:client": "cross-env NODE_ENV=production webpack -r esm --config webpack.prod.js",
+    "build:client": "webpack -r esm --config webpack.prod.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --watch server -r dotenv/config -r esm server/src/app.js",
     "start:babel": "nodemon --watch server -r dotenv/config --exec babel-node server/src/app.js",
-    "build:server": "cross-env NODE_ENV=production babel server/src -d server/lib",
+    "build:server": "babel server/src -d server/lib",
     "server:setup": "npm run build:server && sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
     "build": "npm-run-all build:client build:server",
     "heroku-postbuild": "npm-run-all server:setup build:client",
