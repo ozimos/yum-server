@@ -4,10 +4,12 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
+import FormConnected from '../helpers/Form';
 import '../../../public/styles/book_a_meal.css';
+import '../../../public/styles/auth.scss';
 
 
-class SignUp extends React.Component {
+class SignUp2 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -65,8 +67,11 @@ class SignUp extends React.Component {
               </h4>
             </div>
             <div className="form-box">
-              <form className="form" action="" onSubmit={this.handleSubmit}>
-
+              <FormConnected
+                className="form"
+                onSubmit={this.handleSubmit}
+                onChange={this.handleChange}
+              >
                 <input
                   type="email"
                   name="email"
@@ -79,9 +84,9 @@ class SignUp extends React.Component {
                 <input
                   type="text"
                   name="firstName"
+                  required
                   value={user.firstName}
                   placeholder="First Name"
-                  required
                   onChange={this.handleChange}
                 />
                 <div className="invalid-feedback" />
@@ -89,28 +94,31 @@ class SignUp extends React.Component {
                   type="text"
                   name="lastName"
                   value={user.lastName}
-                  placeholder="Last Name"
                   required
+                  placeholder="Last Name"
                   onChange={this.handleChange}
                 />
                 <div className="invalid-feedback" />
                 <input
                   type="password"
                   name="password"
+                  required
                   value={user.password}
                   placeholder="Password"
-                  required
                   onChange={this.handleChange}
                   minLength={6}
                   pattern="(?=.*\d)(?=.*[a-z]).{6,}"
                 />
                 <div className="invalid-feedback" />
+                <small className="directions">
+                 Must be at least 6 characters long, contain letters and numbers
+                </small>
                 <input
                   type="password"
                   name="confirmPassword"
                   value={user.confirmPassword}
-                  placeholder="Confirm Password"
                   required
+                  placeholder="Confirm Password"
                   onChange={this.handleChange}
                   minLength={6}
                   pattern="(?=.*\d)(?=.*[a-z]).{6,}"
@@ -132,7 +140,7 @@ class SignUp extends React.Component {
                 <button className="btn" type="submit">
                   Continue
                 </button>
-              </form>
+              </FormConnected>
               <div className="stacked-text">
                 <Link to="/login"><p>Already have an account? Click here to sign in</p></Link>
               </div>
@@ -144,8 +152,8 @@ class SignUp extends React.Component {
     );
   }
 }
-SignUp.propTypes = {
+SignUp2.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
-export { SignUp };
-export default connect(state => state)(hot(module)(SignUp));
+export { SignUp2 };
+export default connect(state => state)(hot(module)(SignUp2));

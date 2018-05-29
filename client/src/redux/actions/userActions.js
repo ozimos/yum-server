@@ -29,7 +29,7 @@ const login = (email, password) => (dispatch) => {
     .then(
       (user) => {
         dispatch(success(user, userTypes.LOGIN_SUCCESS));
-        dispatch(push('/about'));
+        dispatch(push('/meals'));
       },
       (error) => {
         dispatch(failure(error, userTypes.LOGIN_FAILURE));
@@ -53,7 +53,7 @@ const signUp = user => (dispatch) => {
       (userResults) => {
         dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
         dispatch(success(userResults, userTypes.LOGIN_SUCCESS));
-        dispatch(push('/about'));
+        dispatch(push('/meals'));
         // dispatch(alertActions.success('Registration successful'));
       },
       (error) => {

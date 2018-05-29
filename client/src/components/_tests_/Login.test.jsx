@@ -3,7 +3,7 @@
 
 import { MemoryRouter } from 'react-router-dom';
 import { Login } from '../login/Login';
-// describe what we are testing
+
 describe('Login Component', () => {
 
   it('should render without throwing an error', () => {
