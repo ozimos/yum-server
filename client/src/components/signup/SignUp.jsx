@@ -1,55 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Formsy from 'formsy-react';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
+import MyInput from '../helpers/MyInput';
+import MyInputCheckBox from '../helpers/MyInputCheckBox';
 import '../../../public/styles/book_a_meal.css';
+import '../../../public/styles/auth.scss';
 
 
 class SignUp extends React.Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      user: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        isCaterer: false
-      },
-      // submitted: false
+      canSubmit: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+    this.enableButton = this.enableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.serverFeedback = this.serverFeedback.bind(this);
+    this.formEl = null;
   }
-  handleChange(event) {
-    const { name, value } = event.target;
-    const { user } = this.state;
-    this.setState({
-      user: {
-        ...user,
-        [name]: value
-      }
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-
-    // this.setState({ submitted: true });
-    const { user } = this.state;
-    const { dispatch } = this.props;
-    if (user.firstName && user.lastName && user.email && user.password
-       && user.password === user.confirmPassword) {
-      dispatch(userActions.signUp(user));
+  componentDidUpdate() {
+    const { signupError } = this.props;
+    if (Object.keys(signupError).length !== 0) {
+      this.serverFeedback(signupError);
     }
   }
+  handleSubmit(user) {
+    this.props.dispatch(userActions.logout(user));
+    this.props.dispatch(userActions.signUp(user));
+  }
+  disableButton() {
+    this.setState({ canSubmit: false });
+  }
+
+  enableButton() {
+    this.setState({ canSubmit: true });
+  }
+  serverFeedback(error) {
+    this.formEl.updateInputsWithError(error);
+  }
+
+
   render() {
-    const { user } = this.state;
     return (
       <div className="canvas">
         <div className="container2">
@@ -66,72 +64,91 @@ class SignUp extends React.Component {
               </h4>
             </div>
             <div className="form-box">
-              <form className="form" action="" onSubmit={this.handleSubmit}>
+              <Formsy
+                className="form"
+                onValidSubmit={this.handleSubmit}
+                onValid={this.enableButton}
+                onInvalid={this.disableButton}
+                ref={(form) => { this.formEl = form; }}
+              >
 
-                <input
-                  type="email"
+                <MyInput
+                  typeOfInput="email"
                   name="email"
                   required
                   placeholder="Email"
-                  onChange={this.handleChange}
-                  value={user.email}
+                  validations="isEmail"
+                  validationError="This is not a valid email"
                 />
                 <div className="invalid-feedback" />
-                <input
-                  type="text"
+                <MyInput
+                  typeOfInput="text"
                   name="firstName"
-                  value={user.firstName}
                   placeholder="First Name"
+                  validations="minLength:1"
+                  validationError="Please enter your first name"
                   required
-                  onChange={this.handleChange}
                 />
                 <div className="invalid-feedback" />
-                <input
-                  type="text"
+                <MyInput
+                  typeOfInput="text"
                   name="lastName"
-                  value={user.lastName}
                   placeholder="Last Name"
+                  validations="minLength:1"
+                  validationError="Please enter your last name"
                   required
-                  onChange={this.handleChange}
                 />
-                <div className="invalid-feedback" />
-                <input
-                  type="password"
+                <MyInput
+                  typeOfInput="password"
                   name="password"
-                  value={user.password}
                   placeholder="Password"
                   required
-                  onChange={this.handleChange}
-                  minLength={6}
-                  pattern="^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}|.{16,})$"
+                  validations={{
+                    hasUpperCase: (values, value) => /[A-Z]+|.{16,}/.test(value),
+                    hasLowerCase: (values, value) => /[a-z]+|.{16,}/.test(value),
+                    hasNumber: (values, value) => /\d+|.{16,}/.test(value),
+                    hasSpecialCharacter: (values, value) => /\W+|.{16,}/.test(value),
+                    minLength: 8
+                  }}
+                  validationErrors={{
+                    hasUpperCase: 'Must have uppercase letter or you can use a passphrase of minimum length 16 characters',
+                    hasLowerCase: 'Must have lowercase letter or you can use a passphrase of minimum length 16 characters',
+                    hasNumber: 'Must have a number or you can use a passphrase of minimum length 16 characters',
+                    hasSpecialCharacter: 'Must have a special character or you can use a passphrase of minimum length 16 characters',
+                    minLength: 'Must have at least 8 characters'
+                  }}
                 />
-                <div className="invalid-feedback" />
-                <input
-                  type="password"
+                <MyInput
+                  typeOfInput="password"
                   name="confirmPassword"
-                  value={user.confirmPassword}
                   placeholder="Confirm Password"
                   required
-                  onChange={this.handleChange}
+                  validations={{
+                    matchPassword: (values, value) => values.password === value
+                  }}
+                  validationErrors={{
+                    matchPassword: 'Passwords do not match',
+                  }}
+
                 />
-                <div className="invalid-feedback" />
                 <div>
                   <label htmlFor="isCaterer">
-                    <input
-                      type="checkbox"
+                    <MyInputCheckBox
                       name="isCaterer"
                       id="isCaterer"
-                      value={user.isCaterer}
-                      onChange={this.handleChange}
                     />
                     Caterer
                   </label>
                 </div>
 
-                <button className="btn" type="submit">
+                <button
+                  className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+                  type="submit"
+                  disabled={!this.state.canSubmit}
+                >
                   Continue
                 </button>
-              </form>
+              </Formsy>
               <div className="stacked-text">
                 <Link to="/login"><p>Already have an account? Click here to sign in</p></Link>
               </div>
@@ -143,8 +160,15 @@ class SignUp extends React.Component {
     );
   }
 }
+SignUp.defaultProps = {
+  signupError: {}
+};
 SignUp.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  signupError: PropTypes.objectOf(PropTypes.string),
 };
+const mapStateToProps = state => ({
+  signupError: state.signupReducer.signupError
+});
 export { SignUp };
-export default connect(state => state)(hot(module)(SignUp));
+export default connect(mapStateToProps)(hot(module)(SignUp));

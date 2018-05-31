@@ -4,16 +4,14 @@ const processResponse = response => new Promise((resolve, reject) => {
   const func = response.status < 400 ? resolve : reject;
   return response.json().then(data => func(data));
 });
-const login = (email, password, url) => {
+const login = (userData, url) => {
+
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      email,
-      password
-    })
+    body: JSON.stringify(userData)
   };
 
   return fetch(url, requestOptions)

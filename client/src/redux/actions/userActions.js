@@ -5,9 +5,6 @@ import {
   userTypes
 } from '../types';
 import userService from '../../services/userServices';
-import {
-  alertActions
-} from './';
 
 const request = (user, actionType) => ({
   type: actionType,
@@ -22,22 +19,21 @@ const failure = (error, actionType) => ({
   error
 });
 
-const login = (email, password) => (dispatch) => {
+const login = userData => (dispatch) => {
   dispatch(request({
     data: {
-      email
+      email: userData.email
     }
   }, userTypes.LOGIN_REQUEST));
 
-  userService.login(email, password, '/api/v1/auth/login')
+  userService.login(userData, '/api/v1/auth/login')
     .then(
       (user) => {
         dispatch(success(user, userTypes.LOGIN_SUCCESS));
         dispatch(push('/meals'));
       },
       (error) => {
-        dispatch(failure(error, userTypes.LOGIN_FAILURE));
-        dispatch(alertActions.error(error));
+        dispatch(failure(error.message, userTypes.LOGIN_FAILURE));
       }
     );
 };
@@ -58,11 +54,9 @@ const signUp = user => (dispatch) => {
         dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
         dispatch(success(userResults, userTypes.LOGIN_SUCCESS));
         dispatch(push('/meals'));
-        // dispatch(alertActions.success('Registration successful'));
       },
       (error) => {
         dispatch(failure(error.message, userTypes.SIGNUP_FAILURE));
-        // dispatch(alertActions.error(error));
       }
     );
 };

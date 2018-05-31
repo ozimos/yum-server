@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 // import { Link } from 'react-router-dom';
@@ -64,10 +65,10 @@ export class MealManager extends React.Component {
                 Meal Booking
 
               </a>
-              <a href="sign_in.html">
+              <Link to="/login">
                 Log Out
 
-              </a>
+              </Link>
             </div>
           </nav>
         </header>

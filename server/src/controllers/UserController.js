@@ -24,7 +24,7 @@ class UserController extends Controller {
         }
       }).then((response) => {
         if (!response) {
-          return UserController.errorResponse('Account does not exist! Visit /api/v1/users/signup and register.', 404);
+          return UserController.errorResponse({ email: 'Account does not exist! Visit /api/v1/auth/signup to signup.' }, 404);
         }
         // check if password is correct
         const isCorrectPassword = bcrypt.compareSync(req.body.password, response.password);
@@ -32,7 +32,7 @@ class UserController extends Controller {
         if (isCorrectPassword) {
           return UserController.sendResponseWithToken(response);
         }
-        return UserController.errorResponse('Incorrect password', 404);
+        return UserController.errorResponse({ password: 'Incorrect password' }, 404);
       }).catch(error => UserController.errorResponse(error.message));
   }
 

@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Formsy from 'formsy-react';
+import MyInput from '../helpers/MyInput';
 import { userActions } from '../../redux/actions';
+import '../../../public/styles/auth.scss';
 import '../../../public/styles/book_a_meal.css';
 
-export class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,31 +17,38 @@ export class Login extends React.Component {
     this.props.dispatch(userActions.logout());
 
     this.state = {
-      email: '',
-      password: '',
-      // submitted: false
+      canSubmit: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.disableButton = this.disableButton.bind(this);
+    this.enableButton = this.enableButton.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.serverFeedback = this.serverFeedback.bind(this);
+    this.formEl = null;
   }
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-
-    // this.setState({ submitted: true });
-    const { email, password } = this.state;
-    const { dispatch } = this.props;
-    if (email && password) {
-      dispatch(userActions.login(email, password));
+  componentDidUpdate() {
+    const { loginError } = this.props;
+    if (Object.keys(loginError).length !== 0) {
+      this.serverFeedback(loginError);
     }
   }
+
+  handleSubmit(user) {
+    this.props.dispatch(userActions.logout(user));
+    this.props.dispatch(userActions.login(user));
+  }
+  disableButton() {
+    this.setState({ canSubmit: false });
+  }
+
+  enableButton() {
+    this.setState({ canSubmit: true });
+  }
+  serverFeedback(error) {
+    this.formEl.updateInputsWithError(error);
+  }
+
   render() {
-    const { email, password } = this.state;
     return (
       <div className="canvas">
         <div className="container2">
@@ -55,33 +65,53 @@ export class Login extends React.Component {
               </h4>
             </div>
             <div className="form-box">
-              <form className="form" action="" onSubmit={this.handleSubmit}>
-
-                <input
-                  type="text"
+              <Formsy
+                className="form"
+                onValidSubmit={this.handleSubmit}
+                onValid={this.enableButton}
+                onInvalid={this.disableButton}
+                ref={(form) => { this.formEl = form; }}
+              >
+                <MyInput
+                  typeOfInput="text"
                   name="email"
-                  id="email"
                   placeholder="Email"
-                  onChange={this.handleChange}
-                  value={email}
+                  validations="isEmail"
+                  validationError="This is not a valid email"
                 />
-                <input
-                  type="password"
+                <MyInput
+                  typeOfInput="password"
                   name="password"
-                  id="password"
-                  value={password}
                   placeholder="Password"
-                  onChange={this.handleChange}
+                  required
+                  validations={{
+                    hasUpperCase: (values, value) => /[A-Z]+|.{16,}/.test(value),
+                    hasLowerCase: (values, value) => /[a-z]+|.{16,}/.test(value),
+                    hasNumber: (values, value) => /\d+|.{16,}/.test(value),
+                    hasSpecialCharacter: (values, value) => /\W+|.{16,}/.test(value),
+                    minLength: 8
+                  }}
+                  validationErrors={{
+                    hasUpperCase: 'Must have uppercase letter or you can use a passphrase of minimum length 16 characters',
+                    hasLowerCase: 'Must have lowercase letter or you can use a passphrase of minimum length 16 characters',
+                    hasNumber: 'Must have a number or you can use a passphrase of minimum length 16 characters',
+                    hasSpecialCharacter: 'Must have a special character or you can use a passphrase of minimum length 16 characters',
+                    minLength: 'Must have at least 8 characters'
+                  }}
                 />
-                <button className="btn" type="submit">
+                <button
+                  className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+                  type="submit"
+                  disabled={!this.state.canSubmit}
+                >
                   Continue
                 </button>
-              </form>
+              </Formsy>
               <div className="stacked-text">
                 <Link to="/signup">
                   <p>
-                  Don&#39;t have an account?
-                   Click here to create one
+                    Don&#39;t have an account?
+                     Click here to create one
                   </p>
                 </Link>
               </div>
@@ -93,7 +123,15 @@ export class Login extends React.Component {
     );
   }
 }
+Login.defaultProps = {
+  loginError: {}
+};
 Login.propTypes = {
+  loginError: PropTypes.objectOf(PropTypes.string),
   dispatch: PropTypes.func.isRequired,
 };
-export default connect(state => state)(hot(module)(Login));
+const mapStateToProps = state => ({
+  loginError: state.loginReducer.loginError
+});
+export { Login };
+export default connect(mapStateToProps)(hot(module)(Login));
