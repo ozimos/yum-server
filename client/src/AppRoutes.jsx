@@ -10,6 +10,8 @@ import PrivateRoute from './components/container/PrivateRoute';
 import ConnectedMealManager from './components/mealManager/MealManager';
 import ConnectedSignUp from './components/signup/SignUp';
 import ConnectedSignUp2 from './components/signup/SignUp2';
+import ConnectedSignUp3 from './components/signup/SignUp3';
+import ConnectedSignUp4 from './components/signup/SignUp4';
 import ConnectedLogin from './components/login/Login';
 
 const mapStateToProps = (state) => {
@@ -46,6 +48,8 @@ class AppRoutes extends React.Component {
             <Route exact path="/login" component={ConnectedLogin} />
             <Route exact path="/signup" component={ConnectedSignUp} />
             <Route exact path="/signup2" component={ConnectedSignUp2} />
+            <Route exact path="/signup3" component={ConnectedSignUp3} />
+            <Route exact path="/signup4" component={ConnectedSignUp4} />
             <Route path="/meals" component={ConnectedMealManager} />
           </Switch>
         </ConnectedRouter>

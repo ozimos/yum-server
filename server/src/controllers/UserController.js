@@ -57,7 +57,7 @@ class UserController extends Controller {
       defaults: rest
     }).then(([response, created]) => {
       if (!created) {
-        return UserController.errorResponse('Email is not available');
+        return UserController.errorResponse({ email: 'Email is not available' });
       }
       return UserController
         .sendResponseWithToken(response, 'Signup Successful, ', 201);

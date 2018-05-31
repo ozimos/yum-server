@@ -23,7 +23,7 @@ describe('Integration Controller User SignUp', () => {
     };
 
     const expected = {
-      message: 'Email is not available',
+      message: { email: 'Email is not available' },
       statusCode: 400
     };
     const response = await userController.signUp(req);

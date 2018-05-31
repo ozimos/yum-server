@@ -60,13 +60,13 @@ describe('User Controllers', () => {
 
   describe('signUp(req)', () => {
     it('should return an error message if email already in database', () => {
-      const expectedResponse = 'Email is not available';
+      const expectedResponse = { email: 'Email is not available' };
       const dummyUser = {
         email: req.body.email,
       };
       td.when(User.findOrCreate(td.matchers.anything())).thenResolve([dummyUser, false]);
       return userController.signUp(req)
-        .then(response => expect(response.message).to.equal(expectedResponse));
+        .then(response => expect(response.message).to.eql(expectedResponse));
     });
 
     it('should return an error message if error occurs when accessing database', () => {

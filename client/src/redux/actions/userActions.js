@@ -1,4 +1,6 @@
-import { push } from 'react-router-redux';
+import {
+  push
+} from 'react-router-redux';
 import {
   userTypes
 } from '../types';
@@ -22,7 +24,9 @@ const failure = (error, actionType) => ({
 
 const login = (email, password) => (dispatch) => {
   dispatch(request({
-    data: { email }
+    data: {
+      email
+    }
   }, userTypes.LOGIN_REQUEST));
 
   userService.login(email, password, '/api/v1/auth/login')
@@ -57,7 +61,7 @@ const signUp = user => (dispatch) => {
         // dispatch(alertActions.success('Registration successful'));
       },
       (error) => {
-        dispatch(failure(error, userTypes.SIGNUP_FAILURE));
+        dispatch(failure(error.message, userTypes.SIGNUP_FAILURE));
         // dispatch(alertActions.error(error));
       }
     );

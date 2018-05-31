@@ -1,8 +1,4 @@
-small.directions{
-  font-size: 0.8rem;
-  text-align: left
-}
-
-.invalid-feedback{
- color: red
+.btn-disabled{
+  border-color: red;
+  border-width: 2px
 }

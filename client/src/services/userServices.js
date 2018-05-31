@@ -1,13 +1,9 @@
 import authHeader from '../authHeader';
 
-const handleResponse = (response) => {
-  if (!response.ok) {
-    return Promise.reject(response.message);
-  }
-
-  return response.json();
-};
-
+const processResponse = response => new Promise((resolve, reject) => {
+  const func = response.status < 400 ? resolve : reject;
+  return response.json().then(data => func(data));
+});
 const login = (email, password, url) => {
   const requestOptions = {
     method: 'POST',
@@ -21,13 +17,7 @@ const login = (email, password, url) => {
   };
 
   return fetch(url, requestOptions)
-    .then((response) => {
-      if (!response.ok) {
-        return Promise.reject(response.message);
-      }
-
-      return response.json();
-    })
+    .then(processResponse)
     .then((user) => {
       if (user && user.token) {
         localStorage.setItem('user', JSON.stringify(user));
@@ -48,7 +38,7 @@ const getAll = (url) => {
     headers: authHeader()
   };
 
-  return fetch(url, requestOptions).then(handleResponse);
+  return fetch(url, requestOptions).then(processResponse);
 };
 
 
@@ -61,13 +51,7 @@ const signUp = (newUser, url) => {
     body: JSON.stringify(newUser)
   };
 
-  return fetch(url, requestOptions).then((response) => {
-    if (!response.ok) {
-      return Promise.reject(response.message);
-    }
-
-    return response.json();
-  })
+  return fetch(url, requestOptions).then(processResponse)
     .then((user) => {
       if (user && user.token) {
         localStorage.setItem('user', JSON.stringify(user));

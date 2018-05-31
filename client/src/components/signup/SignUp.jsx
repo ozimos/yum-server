@@ -43,7 +43,8 @@ class SignUp extends React.Component {
     // this.setState({ submitted: true });
     const { user } = this.state;
     const { dispatch } = this.props;
-    if (user.firstName && user.lastName && user.email && user.password) {
+    if (user.firstName && user.lastName && user.email && user.password
+       && user.password === user.confirmPassword) {
       dispatch(userActions.signUp(user));
     }
   }
@@ -102,7 +103,7 @@ class SignUp extends React.Component {
                   required
                   onChange={this.handleChange}
                   minLength={6}
-                  pattern="(?=.*\d)(?=.*[a-z]).{6,}"
+                  pattern="^((?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}|.{16,})$"
                 />
                 <div className="invalid-feedback" />
                 <input
@@ -112,8 +113,6 @@ class SignUp extends React.Component {
                   placeholder="Confirm Password"
                   required
                   onChange={this.handleChange}
-                  minLength={6}
-                  pattern="(?=.*\d)(?=.*[a-z]).{6,}"
                 />
                 <div className="invalid-feedback" />
                 <div>
