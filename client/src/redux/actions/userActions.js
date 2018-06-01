@@ -4,7 +4,7 @@ import {
 import {
   userTypes
 } from '../types';
-import userService from '../../services/userServices';
+import userServices from '../../services/userServices';
 
 const request = (user, actionType) => ({
   type: actionType,
@@ -26,7 +26,7 @@ const login = userData => (dispatch) => {
     }
   }, userTypes.LOGIN_REQUEST));
 
-  userService.login(userData, '/api/v1/auth/login')
+  userServices.login(userData, '/api/v1/auth/login')
     .then(
       (user) => {
         dispatch(success(user, userTypes.LOGIN_SUCCESS));
@@ -39,7 +39,7 @@ const login = userData => (dispatch) => {
 };
 
 const logout = () => {
-  userService.logout();
+  userServices.logout();
   return {
     type: userTypes.LOGOUT
   };
@@ -48,7 +48,7 @@ const logout = () => {
 const signUp = user => (dispatch) => {
   dispatch(request(user, userTypes.SIGNUP_REQUEST));
 
-  userService.signUp(user, '/api/v1/auth/signup')
+  userServices.signUp(user, '/api/v1/auth/signup')
     .then(
       (userResults) => {
         dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
@@ -64,7 +64,7 @@ const signUp = user => (dispatch) => {
 const getAll = () => (dispatch) => {
   dispatch(request(null, userTypes.GETALL_REQUEST));
 
-  userService.getAll()
+  userServices.getAll()
     .then(
       users => dispatch(success(users, userTypes.GETALL_SUCCESS)),
       error => dispatch(failure(error, userTypes.GETALL_FAILURE))

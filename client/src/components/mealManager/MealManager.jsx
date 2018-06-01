@@ -5,8 +5,8 @@ import { hot } from 'react-hot-loader';
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { mealActions } from '../../redux/actions';
+import MealCardContainer from '../mealCard/MealCardContainer';
 import '../../../public/styles/book_a_meal.css';
-import foodImage from '../../../public/images/Food.jpg';
 
 export class MealManager extends React.Component {
   constructor(props) {
@@ -46,7 +46,6 @@ export class MealManager extends React.Component {
     }
   }
   render() {
-    // const { meal } = this.state;
     return (
       <div className="container">
         <header className="header">
@@ -87,92 +86,7 @@ export class MealManager extends React.Component {
               </button>
             </div>
           </div>
-          <div className="gallery">
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-            <div className="card">
-              <img src={foodImage} alt="Meal" className="fluid-img" />
-              <div className="title-element flexbox wrap">
-                <h4 className="shrink modal-trigger">
-                  Some random meal
-                </h4>
-                <div className="flexbox">
-                  <button className="title-button icon">
-                    &#10006;
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </div>
+          <MealCardContainer />
         </main>
       </div>
     );
