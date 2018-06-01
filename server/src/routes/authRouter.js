@@ -2,6 +2,7 @@ import express from 'express';
 import Validator from 'express-joi-validation';
 
 import UserController from '../controllers/UserController';
+import Authenticate from '../middleware/Authenticate';
 import schemas from '../middleware/userSchemas';
 import db from '../models';
 
@@ -15,7 +16,8 @@ authRouter.post(
 );
 
 authRouter.post('/login', validator.body(schemas.login), UserController.select(userController, 'login'));
-authRouter.get('/', UserController.select(userController, 'getAllRecords'));
+authRouter.get('/all', Authenticate.isUser, Authenticate.isAdmin, UserController.select(userController, 'getAllRecords'));
+authRouter.get('/check', Authenticate.isUser, UserController.checkUser);
 
 // Return authRouter
 export default authRouter;

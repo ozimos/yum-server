@@ -1,75 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { mealActions } from '../../redux/actions';
+import { push } from 'react-router-redux';
 import MealCardContainer from '../mealCard/MealCardContainer';
+import Nav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
 
 export class MealManager extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      meal: {
-        title: '',
-        description: '',
-        imageUrl: '',
-        price: '',
-      }
-      // submitted: false
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-
-  handleChange(event) {
-    const { name, value } = event.target;
-    const { meal } = this.state;
-    this.setState({
-      meal: {
-        ...meal,
-        [name]: value
-      }
-    });
-  }
-  handleSubmit(event) {
-    event.preventDefault();
-
-    // this.setState({ submitted: true });
-    const { meal } = this.state;
-    const { dispatch } = this.props;
-    if (meal.title && meal.description && meal.imageUrl && meal.price) {
-      dispatch(mealActions.create(meal));
+  componentDidMount() {
+    if (!this.props.authenticated) {
+      this.props.dispatch(push('/login'));
     }
   }
+
   render() {
     return (
       <div className="container">
         <header className="header">
-          <nav className="flexbox">
-            <h2 className="shrink heading">Book A Meal</h2>
-            <div className="flexbox nowrap">
-              <a href="menu_editor.html">
-                Menu
-
-              </a>
-              <a href="order_report.html">
-                Orders
-
-              </a>
-              <a href="meal_booking.html">
-                Meal Booking
-
-              </a>
-              <Link to="/login">
-                Log Out
-
-              </Link>
-            </div>
-          </nav>
+          <Nav />
         </header>
         <main>
           <div>
@@ -92,7 +41,14 @@ export class MealManager extends React.Component {
     );
   }
 }
+MealManager.defaultProps = {
+  authenticated: false,
+};
 MealManager.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool,
 };
-export default connect(state => state)(hot(module)(MealManager));
+const mapStateToProps = state =>
+  ({ authenticated: state.loginReducer.authenticated });
+
+export default connect(mapStateToProps)(hot(module)(MealManager));

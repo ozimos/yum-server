@@ -6,20 +6,20 @@ import {
 import td from 'testdouble';
 import UserController from '../../../src/controllers/UserController.js';
 
-let User, userController;
-const req = {
-  body: {
-    email: 'some email',
-    password: 'some password',
-  }
-};
-const input = {
-  where: {
-    email: req.body.email
-  },
-};
 
 describe('User Controllers', () => {
+  let User, userController;
+  const req = {
+    body: {
+      email: 'some email',
+      password: 'some password',
+    }
+  };
+  const input = {
+    where: {
+      email: req.body.email
+    },
+  };
   beforeEach('Stub User model', () => {
     User = td.object();
     userController = new UserController(User);
@@ -27,7 +27,9 @@ describe('User Controllers', () => {
   afterEach('Remove stubbing', () => td.reset());
   describe('login(req)', () => {
     it('should return an error message if no data in database', () => {
-      const expectedResponse = { email: 'Account does not exist! Visit /api/v1/auth/signup to signup.' };
+      const expectedResponse = {
+        email: 'Account does not exist! Visit /api/v1/auth/signup to signup.'
+      };
 
       td.when(User.findOne(input)).thenResolve(null);
       return userController.login(req)
@@ -37,7 +39,9 @@ describe('User Controllers', () => {
       const response = {
         password: 'some Hash'
       };
-      const expectedResponse = { password: 'Incorrect password' };
+      const expectedResponse = {
+        password: 'Incorrect password'
+      };
       const bcrypt = {
         compareSync: td.func()
       };
@@ -60,7 +64,9 @@ describe('User Controllers', () => {
 
   describe('signUp(req)', () => {
     it('should return an error message if email already in database', () => {
-      const expectedResponse = { email: 'Email is not available' };
+      const expectedResponse = {
+        email: 'Email is not available'
+      };
       const dummyUser = {
         email: req.body.email,
       };

@@ -24,7 +24,9 @@ class UserController extends Controller {
         }
       }).then((response) => {
         if (!response) {
-          return UserController.errorResponse({ email: 'Account does not exist! Visit /api/v1/auth/signup to signup.' }, 404);
+          return UserController.errorResponse({
+            email: 'Account does not exist! Visit /api/v1/auth/signup to signup.'
+          }, 404);
         }
         // check if password is correct
         const isCorrectPassword = bcrypt.compareSync(req.body.password, response.password);
@@ -32,7 +34,9 @@ class UserController extends Controller {
         if (isCorrectPassword) {
           return UserController.sendResponseWithToken(response);
         }
-        return UserController.errorResponse({ password: 'Incorrect password' }, 404);
+        return UserController.errorResponse({
+          password: 'Incorrect password'
+        }, 404);
       }).catch(error => UserController.errorResponse(error.message));
   }
 
@@ -57,12 +61,25 @@ class UserController extends Controller {
       defaults: rest
     }).then(([response, created]) => {
       if (!created) {
-        return UserController.errorResponse({ email: 'Email is not available' });
+        return UserController.errorResponse({
+          email: 'Email is not available'
+        });
       }
       return UserController
         .sendResponseWithToken(response, 'Signup Successful, ', 201);
     })
       .catch(error => UserController.errorResponse(error.message));
+  }
+
+  static checkUser(req, res) {
+    const {
+      isCaterer
+    } = req.decoded;
+    res.status(200).json({
+      data: {
+        isCaterer
+      }
+    });
   }
 
 
@@ -75,13 +92,16 @@ class UserController extends Controller {
    * @memberof UserController
    */
   static sendResponseWithToken(user, extraMessage = '', code = 200) {
-    const data = { ...user.dataValues };
+    const data = user.dataValues ? { ...user.dataValues
+    } : user;
     let message = extraMessage;
     const payload = {
       isCaterer: data.isCaterer,
       userId: data.id
     };
-    delete data.password;
+    if (data.password) {
+      delete data.password;
+    }
     const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
       expiresIn: '2h'
     });

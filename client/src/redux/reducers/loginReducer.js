@@ -2,8 +2,8 @@ import {
   userTypes
 } from '../types';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user ? { loggedIn: true, user } : {};
+const user = JSON.parse(sessionStorage.getItem('user'));
+const initialState = user ? { authenticated: true, user } : {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
       };
     case userTypes.LOGIN_SUCCESS:
       return {
-        loggedIn: true,
+        authenticated: true,
         user: action.user
       };
     case userTypes.LOGIN_FAILURE:
