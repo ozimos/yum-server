@@ -110,7 +110,7 @@ a {
   margin: 0;
 }
 
-button.title-button.icon {
+title-button.icon {
   font-size: 1.2rem;
   margin: 0.6em;
   font-weight: 0;
@@ -125,7 +125,6 @@ button.title-button.icon {
   white-space: nowrap;
 }
 
-button,
 .btn {
   background-color: #2f80ed;
   border-radius: 10px;

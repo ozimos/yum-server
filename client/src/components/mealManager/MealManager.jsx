@@ -30,7 +30,7 @@ export class MealManager extends React.Component {
             </h3>
             <div className="flexbox nowrap">
               <p>Click on a meal title to edit the meal or</p>
-              <button className="title-button modal-trigger">
+              <button className="btn title-button modal-trigger">
                 <p>Add Meal</p>
               </button>
             </div>
