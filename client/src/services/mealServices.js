@@ -36,14 +36,26 @@ const updateMeal = (mealData, url) => {
       ...authHeader(),
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(mealData)
+    body: JSON.stringify(mealData),
   };
 
   return fetch(url, requestOptions).then(processResponse);
 };
 
+const deleteMeal = (url) => {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      ...authHeader(),
+      'Content-Type': 'application/json'
+    },
+  };
+
+  return fetch(url, requestOptions).then(processResponse);
+};
 export default {
   postMeal,
   updateMeal,
   getAllMeals,
+  deleteMeal
 };

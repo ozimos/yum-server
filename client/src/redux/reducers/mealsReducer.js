@@ -3,7 +3,7 @@ import {
 } from '../types';
 
 const initialState = {
-  loadState: null,
+  connecting: false,
   mealError: null,
   meals: []
 };
@@ -13,37 +13,37 @@ export default (state = initialState, action) => {
     case mealTypes.MEALS_REQUEST:
       return {
         ...state,
-        loadState: 'loading',
+        connecting: true,
         mealError: null
       };
     case mealTypes.ALL_MEALS_SUCCESS:
       return {
-        loadState: 'success',
         meals: action.meals,
-        mealError: null
       };
     case mealTypes.MEALS_FAILURE:
       return {
         ...state,
-        loadState: 'failure',
+        connecting: false,
         mealError: action.error
       };
     case mealTypes.CREATE_MEAL_SUCCESS:
       return {
-        loadState: 'success',
-        meals: [...state.meals, action.meals],
-        mealError: null
+        meals: [...state.meals, action.meal],
       };
     case mealTypes.UPDATE_MEAL_SUCCESS:
       return {
-        loadState: 'success',
-        mealError: null,
         meals: state.meals.map((meal) => {
-          if (meal.id === action.meals.id) {
+          if (meal.id === action.meal.id) {
             return action.meals;
           }
           return meal;
         })
+      };
+    case mealTypes.DELETE_MEAL_SUCCESS:
+      return {
+        ...state,
+        connecting: false,
+        deleted: action.deleted
       };
     default:
       return state;
