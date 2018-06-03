@@ -123,13 +123,8 @@ class SignUp extends React.Component {
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   required
-                  validations={{
-                    matchPassword: (values, value) => values.password === value
-                  }}
-                  validationErrors={{
-                    matchPassword: 'Passwords do not match',
-                  }}
-
+                  validations="equalsField:password"
+                  validationError="Passwords do not match"
                 />
                 <div>
                   <label htmlFor="isCaterer">
