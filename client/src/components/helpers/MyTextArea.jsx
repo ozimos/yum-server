@@ -20,7 +20,7 @@ class MyTextArea extends React.Component {
       <React.Fragment>
         <textarea
           onChange={this.changeValue}
-          value={this.props.getValue() || ''}
+          value={this.props.getValue() || this.props.initialValue}
           placeholder={this.props.placeholder}
         />
         <div

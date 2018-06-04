@@ -31,7 +31,7 @@ const getAllMeals = (url) => {
 
 const updateMeal = (mealData, url) => {
   const requestOptions = {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       ...authHeader(),
       'Content-Type': 'application/json'

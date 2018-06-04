@@ -29,6 +29,7 @@ class MealCard extends React.Component {
     this.serverFeedback = this.serverFeedback.bind(this);
     this.formEl = null;
   }
+  // fileInput = React.createRef();
   handleOpenModal() {
     this.setState({ showModal: true });
   }
@@ -39,7 +40,7 @@ class MealCard extends React.Component {
     this.props.dispatch(mealActions.delete(this.props.id));
   }
   handleSubmit(meal) {
-    this.props.dispatch(mealActions.updateMeal(meal));
+    this.props.dispatch(mealActions.updateMeal(meal, this.props.id));
   }
   disableButton() {
     this.setState({ canSubmit: false });
@@ -52,7 +53,9 @@ class MealCard extends React.Component {
     this.formEl.updateInputsWithError(error);
   }
   render() {
-    const { title, imageUrl } = this.props;
+    const { title, imageUrl, price, description } = this.props;
+    const cloudName = 'tovieyeozim';
+    const unsignedUploadPreset = 'u9zfzeap';
     return (
       <React.Fragment>
         <div className="card">
@@ -72,6 +75,8 @@ class MealCard extends React.Component {
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="Input Modal"
+          onRequestClose={this.handleCloseModal}
+          shouldCloseOnOverlayClick
         >
           <div className="title flexbox">
             <h3 className="shrink">
@@ -94,39 +99,44 @@ class MealCard extends React.Component {
               <MyInput
                 typeOfInput="text"
                 name="title"
-                placeholder="Meal Title"
+                placeholder={title || 'Meal Title'}
                 validations="minLength:1"
                 validationError="Please enter the meal title"
-                required
               />
               <MyInput
-                typeOfInput="text"
+                typeOfInput="number"
                 name="price"
-                placeholder="Price"
-                validations="minLength:1"
+                placeholder={price || 'Price'}
+                validations={{
+                  minLength: 1,
+                  isOnlyInt: (values, value) => /^[1-9]\d*$/.test(value)
+                }}
                 validationError="Please enter the meal price"
-                required
+                validationErrors={{ isOnlyInt: 'price must be integer' }}
               />
               <MyTextArea
                 name="description"
-                placeholder="Description"
+                placeholder={description || 'Description'}
               />
-              <p>Select a meal image</p>
+              {/* <button
+              onClick={this.fileInput.current.click()}
+               className="btn">Select a meal image</button> */}
               <MyInput
+                // myRef={this.fileInput}
+                // style={{ display: 'none' }}
                 typeOfInput="file"
                 name="imageUrl"
                 validations="minLength:5"
                 validationError="Please select an image"
-                required
               />
             </Formsy>
           </div>
           <div id="meal_image">
-            <img src="http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864569/salmon-1312372_640.jpg" alt="meal" className="fluid-img" />
+            <img src={imageUrl} alt="meal" className="fluid-img" />
           </div>
           <button
             className={this.state.canSubmit ? 'btn title-button' : 'btn btn-disabled title-button'}
-            form={this.formEl}
+            onClick={() => this.formEl.submit()}
             type="submit"
             disabled={!this.state.canSubmit}
           >
@@ -139,6 +149,8 @@ class MealCard extends React.Component {
 }
 MealCard.propTypes = {
   title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,

@@ -47,7 +47,7 @@ const createMeal = meal => (dispatch) => {
 const updateMeal = (meal, mealId) => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.updateMeal(meal, `/api/v1/meals${mealId}`)
+  mealServices.updateMeal(meal, `/api/v1/meals/${mealId}`)
     .then(
       updatedMeal =>
         dispatch({

@@ -19,6 +19,8 @@ class MyInput extends React.Component {
     return (
       <React.Fragment>
         <input
+          // style={this.props.style}
+          // ref={this.props.myRef}
           onChange={this.changeValue}
           type={this.props.typeOfInput}
           value={this.props.getValue() || ''}
@@ -36,11 +38,14 @@ class MyInput extends React.Component {
   }
 }
 MyInput.defaultProps = {
-  placeholder: ''
+  placeholder: '',
 };
 MyInput.propTypes = {
   typeOfInput: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
+  placeholder: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   ...propTypes
 };
 export default withFormsy(MyInput);

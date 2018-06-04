@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
 import MyInput from '../helpers/MyInput';
-import MyInputCheckBox from '../helpers/MyInputCheckBox';
+import MyCheckBox from '../helpers/MyCheckBox';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 
@@ -128,7 +128,7 @@ class SignUp extends React.Component {
                 />
                 <div>
                   <label htmlFor="isCaterer">
-                    <MyInputCheckBox
+                    <MyCheckBox
                       name="isCaterer"
                       id="isCaterer"
                     />
