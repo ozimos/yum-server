@@ -13,11 +13,11 @@ class MealCardContainer extends React.Component {
   componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
   }
-  componentDidUpdate() {
-    if (this.props.deleted !== '') {
-      this.props.dispatch(mealActions.getAllMeals());
-    }
-  }
+  // componentDidUpdate() {
+  //   if (this.props.deleted !== '') {
+  //     this.props.dispatch(mealActions.getAllMeals());
+  //   }
+  // }
 
 
   render() {
@@ -26,7 +26,6 @@ class MealCardContainer extends React.Component {
         {this.props.meals.map(meal => (<MealCard
           key={meal.id}
           {...meal}
-          deleteMeal={this.deleteMeal}
         />))
         }
       </div>

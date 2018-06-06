@@ -4,6 +4,7 @@ import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import MealCardContainer from '../mealCard/MealCardContainer';
+import Greeting from '../greeting/Greeting';
 import Nav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
 
@@ -15,15 +16,14 @@ export class MealManager extends React.Component {
   }
 
   render() {
+    const { isCaterer, firstName } = this.props.user;
     return (
       <div className="container">
         <header className="header">
           <Nav />
         </header>
         <main>
-          <div>
-            <h3>Welcome Caterer Sanni</h3>
-          </div>
+          <Greeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title flexbox">
             <h3 className="shrink">
               Your Meals
@@ -47,8 +47,13 @@ MealManager.defaultProps = {
 MealManager.propTypes = {
   dispatch: PropTypes.func.isRequired,
   authenticated: PropTypes.bool,
+  user: PropTypes.shape({
+    isCaterer: PropTypes.bool,
+    firstName: PropTypes.string
+  }).isRequired,
 };
 const mapStateToProps = state =>
-  ({ authenticated: state.loginReducer.authenticated });
+  ({ authenticated: state.loginReducer.authenticated,
+    user: state.loginReducer.user.data });
 
 export default connect(mapStateToProps)(hot(module)(MealManager));

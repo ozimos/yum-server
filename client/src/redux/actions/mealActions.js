@@ -61,13 +61,16 @@ const updateMeal = (meal, mealId) => (dispatch) => {
 const deleteMeal = mealId => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.deleteMeal(`/api/v1/meals${mealId}`)
+  mealServices.deleteMeal(`/api/v1/meals/${mealId}`)
     .then(
-      deletedMeal =>
-        dispatch({
-          type: mealTypes.DELETE_MEAL_SUCCESS,
-          deleted: deletedMeal.data
-        }),
+      (deletedMeal) => {
+        if (deletedMeal.data) {
+          return dispatch({
+            type: mealTypes.DELETE_MEAL_SUCCESS,
+            id: mealId
+          });
+        }
+      },
       error => dispatch(failure(error.message, mealTypes.MEALS_FAILURE))
     );
 };

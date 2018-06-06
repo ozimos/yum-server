@@ -34,16 +34,15 @@ export default (state = initialState, action) => {
       return {
         meals: state.meals.map((meal) => {
           if (meal.id === action.meal.id) {
-            return action.meals;
+            return action.meal;
           }
           return meal;
         })
       };
     case mealTypes.DELETE_MEAL_SUCCESS:
       return {
-        ...state,
+        meals: state.meals.filter(meal => meal.id !== action.id),
         connecting: false,
-        deleted: action.deleted
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';
 import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
+import MyUrlInput from '../helpers/MyUrlInput';
 import MyTextArea from '../helpers/MyTextArea';
 import { mealActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
@@ -29,6 +30,7 @@ class MealCard extends React.Component {
         // eslint-disable-next-line
         console.log(result);
         this.state.displayImage = result[0].secure_url;
+        // this.urlInput.value = this.state.displayImage;
       }
     );
   }
@@ -116,20 +118,15 @@ disableButton = () =>
                 placeholder={description || 'Description'}
               />
 
-              <MyInput
-                myRef={(fileInput) => { this.fileInput = fileInput; }}
-                style={{ display: 'none' }}
-                typeOfInput="file"
+              <MyUrlInput
+                // myRef={(urlInput) => { this.urlInput = urlInput; }}
+                // style={{ display: 'none' }}
+                typeOfInput="url"
                 name="imageUrl"
+                initialValue={this.state.displayImage}
                 validations="minLength:5"
                 validationError="Please select an image"
               />
-              <button
-                type="button"
-                onClick={() => this.fileInput.click()}
-                className="btn title-button"
-              >Select a meal image
-              </button>
             </Formsy>
           </div>
           <div id="meal_image">

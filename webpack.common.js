@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+import HtmlWebpackExternalsPlugin from 'html-webpack-externals-plugin';
 
 export default {
   entry: {
@@ -45,6 +46,20 @@ export default {
       filename: 'index.html',
       inject: true,
       alwaysWriteToDisk: true
+    }),
+    new HtmlWebpackExternalsPlugin({
+      externals: [
+        {
+          module: 'jquery',
+          entry: 'https://unpkg.com/jquery@3.2.1/dist/jquery.min.js',
+          global: 'jQuery',
+        },
+        {
+          module: 'cloudinary',
+          entry: 'https://widget.cloudinary.com/global/all.js',
+          global: 'cloudinary',
+        }
+      ],
     }),
     new HtmlWebpackHarddiskPlugin(),
     new CopyWebpackPlugin([{

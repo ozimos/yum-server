@@ -157,7 +157,7 @@ class Controller {
         },
       })
       .then((result) => {
-        if (result > 0) { return Controller.defaultResponse(`${result} record(s) deleted`); }
+        if (result) { return Controller.defaultResponse(result); }
         return Controller.errorResponse('no records available', 404);
       })
       .catch(error => Controller.errorResponse(error.message));

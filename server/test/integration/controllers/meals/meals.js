@@ -52,7 +52,7 @@ describe('Integration Controller Meal All, Single, Delete', () => {
         }
       };
       const response = await mealController.deleteRecord(req);
-      expect(response.data).to.equal('1 record(s) deleted');
+      expect(response.data).to.equal(1);
       expect(response.statusCode).to.equal(200);
     });
     it('returns error message if meal not in db', async () => {
