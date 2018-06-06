@@ -1,3 +1,4 @@
+/* global cloudinary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
@@ -17,45 +18,42 @@ class MealCard extends React.Component {
     super(props);
     this.state = {
       canSubmit: false,
-      showModal: false
+      showModal: false,
+      displayImage: this.props.imageUrl
     };
-
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.deleteMeal = this.deleteMeal.bind(this);
-    this.disableButton = this.disableButton.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.serverFeedback = this.serverFeedback.bind(this);
-    this.formEl = null;
   }
-  // fileInput = React.createRef();
-  handleOpenModal() {
+  uploadWidget = () => {
+    cloudinary.openUploadWidget(
+      { cloud_name: 'tovieyeozim', upload_preset: 'u9zfzeap', tags: [this.props.id] },
+      (error, result) => {
+        // eslint-disable-next-line
+        console.log(result);
+        this.state.displayImage = result[0].secure_url;
+      }
+    );
+  }
+  handleOpenModal = () =>
     this.setState({ showModal: true });
-  }
-  handleCloseModal() {
+  handleCloseModal = () =>
     this.setState({ showModal: false });
-  }
-  deleteMeal() {
-    this.props.dispatch(mealActions.delete(this.props.id));
-  }
-  handleSubmit(meal) {
-    this.props.dispatch(mealActions.updateMeal(meal, this.props.id));
-  }
-  disableButton() {
-    this.setState({ canSubmit: false });
-  }
+  deleteMeal = () =>
+    this.props.dispatch(mealActions.deleteMeal(this.props.id));
 
-  enableButton() {
+  handleSubmit = async (meal) => {
+    await this.props.dispatch(mealActions.updateMeal(meal, this.props.id));
+    this.handleCloseModal();
+  }
+disableButton = () =>
+  this.setState({ canSubmit: false });
+
+  enableButton = () =>
     this.setState({ canSubmit: true });
-  }
-  serverFeedback(error) {
+  serverFeedback = error =>
     this.formEl.updateInputsWithError(error);
-  }
   render() {
     const { title, imageUrl, price, description } = this.props;
-    const cloudName = 'tovieyeozim';
-    const unsignedUploadPreset = 'u9zfzeap';
+    // const cloudName = 'tovieyeozim';
+    // const unsignedUploadPreset = 'u9zfzeap';
     return (
       <React.Fragment>
         <div className="card">
@@ -108,31 +106,34 @@ class MealCard extends React.Component {
                 name="price"
                 placeholder={price || 'Price'}
                 validations={{
-                  minLength: 1,
-                  isOnlyInt: (values, value) => /^[1-9]\d*$/.test(value)
+                  isOnlyInt: (values, value = '') => /^(\s?|[1-9]\d*)$/.test(value)
                 }}
-                validationError="Please enter the meal price"
+                validationError="Please enter a price"
                 validationErrors={{ isOnlyInt: 'price must be integer' }}
               />
               <MyTextArea
                 name="description"
                 placeholder={description || 'Description'}
               />
-              {/* <button
-              onClick={this.fileInput.current.click()}
-               className="btn">Select a meal image</button> */}
+
               <MyInput
-                // myRef={this.fileInput}
-                // style={{ display: 'none' }}
+                myRef={(fileInput) => { this.fileInput = fileInput; }}
+                style={{ display: 'none' }}
                 typeOfInput="file"
                 name="imageUrl"
                 validations="minLength:5"
                 validationError="Please select an image"
               />
+              <button
+                type="button"
+                onClick={() => this.fileInput.click()}
+                className="btn title-button"
+              >Select a meal image
+              </button>
             </Formsy>
           </div>
           <div id="meal_image">
-            <img src={imageUrl} alt="meal" className="fluid-img" />
+            <img src={this.state.displayImage} alt="meal" className="fluid-img" />
           </div>
           <button
             className={this.state.canSubmit ? 'btn title-button' : 'btn btn-disabled title-button'}
@@ -141,6 +142,9 @@ class MealCard extends React.Component {
             disabled={!this.state.canSubmit}
           >
             <p>Continue</p>
+          </button>
+          <button onClick={this.uploadWidget} className="btn title-button">
+          Upload Photo
           </button>
         </ReactModal>
       </React.Fragment>
