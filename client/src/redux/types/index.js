@@ -1,4 +1,4 @@
-import alertTypes from './alertTypes';
+import mealTypes from './mealTypes';
 import userTypes from './userTypes';
 
-export { alertTypes, userTypes };
+export { mealTypes, userTypes };

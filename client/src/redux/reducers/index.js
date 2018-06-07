@@ -4,14 +4,14 @@ import { routerReducer } from 'react-router-redux';
 import loginReducer from './loginReducer';
 import signupReducer from './signupReducer';
 import userReducer from './userReducer';
-import alertReducer from './alertReducer';
+import mealsReducer from './mealsReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
   loginReducer,
   signupReducer,
   userReducer,
-  alertReducer
+  mealsReducer
 });
 
 export default rootReducer;

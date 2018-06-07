@@ -17,7 +17,7 @@ describe('Integration Controller User Login', () => {
     body.email = 'tomvie@gmail.com';
     const req = { body };
     const expected = {
-      message: 'Account does not exist! Visit /api/v1/users/signup and register.',
+      message: { email: 'Account does not exist! Visit /api/v1/auth/signup to signup.' },
       statusCode: 404
     };
     const response = await userController.login(req);
@@ -29,7 +29,7 @@ describe('Integration Controller User Login', () => {
     const req = { body };
 
     const expected = {
-      message: 'Incorrect password',
+      message: { password: 'Incorrect password' },
       statusCode: 404
     };
     const response = await userController.login(req);

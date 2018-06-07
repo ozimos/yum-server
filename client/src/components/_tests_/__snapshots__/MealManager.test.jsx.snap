@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SignUp Component renders correctly 1`] = `
+exports[`MealManager Component renders correctly 1`] = `
 <Router
   history={
     Object {
@@ -33,8 +33,8 @@ exports[`SignUp Component renders correctly 1`] = `
     }
   }
 >
-  <SignUp
-    signupError={Object {}}
+  <MealManager
+    authenticated={false}
   />
 </Router>
 `;

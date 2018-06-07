@@ -21,7 +21,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Beef with Rice',
   description: 'plain rice with ground beef',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864706/pasta-1181189_640.jpg',
   price: 2000,
 },
 {
@@ -29,7 +29,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Spaghetti and Sauce',
   description: 'plain rice with ground beef',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864569/salmon-1312372_640.jpg',
   price: 1500,
 },
 {
@@ -37,7 +37,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Amala and Ewedu',
   description: 'traditional',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864569/salmon-518032_640.jpg',
   price: 1800,
 },
 {
@@ -45,7 +45,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Starch and Owho',
   description: 'affordable',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864568/schnitzel-3279045_1280.jpg',
   price: 1800,
 },
 {
@@ -53,7 +53,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Pancake and Syrup',
   description: 'affordable',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864464/pumpkin-soup-2972858_640.jpg',
   price: 1800,
 },
 {
@@ -61,7 +61,7 @@ export const seedMeals = [{
   userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
   title: 'Starch and Owho',
   description: 'affordable',
-  imageUrl: 'https://cdn.pixabay.com/photo/2017/11/23/13/50/pumpkin-soup-2972858_960_720.jpg',
+  imageUrl: 'http://res.cloudinary.com/tovieyeozim/image/upload/c_scale,w_300/v1527864442/pizza-329523_640.jpg',
   price: 1800,
 }
 ];

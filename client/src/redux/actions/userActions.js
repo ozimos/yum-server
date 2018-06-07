@@ -1,11 +1,10 @@
-import { push } from 'react-router-redux';
+import {
+  push
+} from 'react-router-redux';
 import {
   userTypes
 } from '../types';
-import userService from '../../services/userServices';
-import {
-  alertActions
-} from './';
+import userServices from '../../services/userServices';
 
 const request = (user, actionType) => ({
   type: actionType,
@@ -20,26 +19,27 @@ const failure = (error, actionType) => ({
   error
 });
 
-const login = (email, password) => (dispatch) => {
+const login = userData => (dispatch) => {
   dispatch(request({
-    data: { email }
+    data: {
+      email: userData.email
+    }
   }, userTypes.LOGIN_REQUEST));
 
-  userService.login(email, password, '/api/v1/auth/login')
+  userServices.login(userData, '/api/v1/auth/login')
     .then(
       (user) => {
         dispatch(success(user, userTypes.LOGIN_SUCCESS));
-        dispatch(push('/about'));
+        dispatch(push('/meals'));
       },
       (error) => {
-        dispatch(failure(error, userTypes.LOGIN_FAILURE));
-        dispatch(alertActions.error(error));
+        dispatch(failure(error.message, userTypes.LOGIN_FAILURE));
       }
     );
 };
 
 const logout = () => {
-  userService.logout();
+  userServices.logout();
   return {
     type: userTypes.LOGOUT
   };
@@ -48,17 +48,15 @@ const logout = () => {
 const signUp = user => (dispatch) => {
   dispatch(request(user, userTypes.SIGNUP_REQUEST));
 
-  userService.signUp(user, '/api/v1/auth/signup')
+  userServices.signUp(user, '/api/v1/auth/signup')
     .then(
       (userResults) => {
         dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
         dispatch(success(userResults, userTypes.LOGIN_SUCCESS));
-        dispatch(push('/about'));
-        // dispatch(alertActions.success('Registration successful'));
+        dispatch(push('/meals'));
       },
       (error) => {
-        dispatch(failure(error, userTypes.SIGNUP_FAILURE));
-        // dispatch(alertActions.error(error));
+        dispatch(failure(error.message, userTypes.SIGNUP_FAILURE));
       }
     );
 };
@@ -66,12 +64,13 @@ const signUp = user => (dispatch) => {
 const getAll = () => (dispatch) => {
   dispatch(request(null, userTypes.GETALL_REQUEST));
 
-  userService.getAll()
+  userServices.getAll()
     .then(
       users => dispatch(success(users, userTypes.GETALL_SUCCESS)),
       error => dispatch(failure(error, userTypes.GETALL_FAILURE))
     );
 };
+
 
 export default {
   login,

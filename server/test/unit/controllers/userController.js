@@ -6,20 +6,20 @@ import {
 import td from 'testdouble';
 import UserController from '../../../src/controllers/UserController.js';
 
-let User, userController;
-const req = {
-  body: {
-    email: 'some email',
-    password: 'some password',
-  }
-};
-const input = {
-  where: {
-    email: req.body.email
-  },
-};
 
 describe('User Controllers', () => {
+  let User, userController;
+  const req = {
+    body: {
+      email: 'some email',
+      password: 'some password',
+    }
+  };
+  const input = {
+    where: {
+      email: req.body.email
+    },
+  };
   beforeEach('Stub User model', () => {
     User = td.object();
     userController = new UserController(User);
@@ -27,17 +27,21 @@ describe('User Controllers', () => {
   afterEach('Remove stubbing', () => td.reset());
   describe('login(req)', () => {
     it('should return an error message if no data in database', () => {
-      const expectedResponse = 'Account does not exist! Visit /api/v1/users/signup and register.';
+      const expectedResponse = {
+        email: 'Account does not exist! Visit /api/v1/auth/signup to signup.'
+      };
 
       td.when(User.findOne(input)).thenResolve(null);
       return userController.login(req)
-        .then(response => expect(response.message).to.equal(expectedResponse));
+        .then(response => expect(response.message).to.eql(expectedResponse));
     });
     it('should return an error message if password is incorrect', () => {
       const response = {
         password: 'some Hash'
       };
-      const expectedResponse = 'Incorrect password';
+      const expectedResponse = {
+        password: 'Incorrect password'
+      };
       const bcrypt = {
         compareSync: td.func()
       };
@@ -45,7 +49,7 @@ describe('User Controllers', () => {
       td.when(User.findOne(input)).thenResolve(response);
       td.when(bcrypt.compareSync(req.body.password, response.password)).thenResolve(false);
       return userController.login(req)
-        .then(response2 => expect(response2.message).to.equal(expectedResponse));
+        .then(response2 => expect(response2.message).to.eql(expectedResponse));
     });
     it('should return an error message if error occurs when accessing database', () => {
       const error = {
@@ -60,13 +64,15 @@ describe('User Controllers', () => {
 
   describe('signUp(req)', () => {
     it('should return an error message if email already in database', () => {
-      const expectedResponse = 'Email is not available';
+      const expectedResponse = {
+        email: 'Email is not available'
+      };
       const dummyUser = {
         email: req.body.email,
       };
       td.when(User.findOrCreate(td.matchers.anything())).thenResolve([dummyUser, false]);
       return userController.signUp(req)
-        .then(response => expect(response.message).to.equal(expectedResponse));
+        .then(response => expect(response.message).to.eql(expectedResponse));
     });
 
     it('should return an error message if error occurs when accessing database', () => {

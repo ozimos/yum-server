@@ -184,7 +184,7 @@ describe('Controllers', () => {
       })).thenResolve(result);
       return controller.deleteRecord(req)
         .then(response =>
-          expect(response.data).to.equal(`${result} record(s) deleted`));
+          expect(response.data).to.equal(result));
     });
     it('should return an error message if error occurs when accessing database', () => {
       const error = {

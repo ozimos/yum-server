@@ -1,22 +1,16 @@
 /* global React:false, shallow:false */
 /* eslint react/jsx-indent: off */
 import { MemoryRouter } from 'react-router-dom';
-import { SignUp } from '../signup/SignUp';
+import { MealManager } from '../mealManager/MealManager';
 
-describe('SignUp Component', () => {
-
-  it('should render without throwing an error', () => {
-    expect(shallow(<MemoryRouter><SignUp /></MemoryRouter>)
-      .exists(<form className="form" />)).toBe(true);
-  });
+describe('MealManager Component', () => {
   it('renders correctly', () => {
     const wrapper =
     shallow(<MemoryRouter
       initialEntries={[{ pathname: '/', key: 'testKey' }]}
     >
-      <SignUp />
+      <MealManager />
             </MemoryRouter>);
     expect(wrapper).toMatchSnapshot();
   });
 });
-

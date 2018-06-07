@@ -22,8 +22,14 @@ export const payload = {
   isCaterer: defaultUser.isCaterer,
   userId: defaultUser.id
 };
-
+const payloadNonAdmin = {
+  isCaterer: seedUsers[1].isCaterer,
+  userId: seedUsers[1].id
+};
 export const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
+  expiresIn: '1h'
+});
+export const tokenUser = jwt.sign(payloadNonAdmin, process.env.TOKEN_PASSWORD, {
   expiresIn: '1h'
 });
 // endpoint urls
