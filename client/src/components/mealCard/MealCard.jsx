@@ -13,7 +13,7 @@ import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
 
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement(document.getElementById('root'));
 class MealCard extends React.Component {
   constructor(props) {
     super(props);

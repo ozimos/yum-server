@@ -33,6 +33,8 @@ exports[`SignUp Component renders correctly 1`] = `
     }
   }
 >
-  <SignUp />
+  <SignUp
+    signupError={Object {}}
+  />
 </Router>
 `;
