@@ -65,7 +65,7 @@ export class MealManager extends React.Component {
   render() {
     const { isCaterer, firstName } = this.props.user;
     return (
-      <div className="container">
+      <div className="contain">
         <header className="header">
           <Nav />
         </header>

@@ -10,7 +10,6 @@ import {
   AccordionItemTitle,
   AccordionItemBody,
 } from 'react-accessible-accordion';
-import 'react-accessible-accordion/dist/fancy-example.css';
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard2 from '../mealCard/MealCard2';
 import MealCardContainer from '../mealCard/MealCardContainer';
@@ -21,6 +20,7 @@ import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
 import '../../../public/styles/search-input.css';
+import '../../../public/styles/accordion.css';
 
 ReactModal.setAppElement(document.getElementById('root'));
 export class Menu extends React.Component {
@@ -60,34 +60,30 @@ export class Menu extends React.Component {
       .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
     return (
-      <div className="container">
+      <div className="contain">
         <header className="header">
           <Nav />
         </header>
         <main>
           <Greeting isCaterer={isCaterer} firstName={firstName} />
-          <Accordion>
-            <AccordionItem>
+          <Accordion accordion={false}>
+            <AccordionItem expanded>
               <AccordionItemTitle>
                 <div className="title-element flexbox">
                   <h3>
           Your Meals
                   </h3>
-                  <div className="form-box flex">
-                    <SearchInput className="search-input" onChange={this.searchUpdated} />
-                  </div>
+                  <div className="accordion__arrow u-position-relative" role="presentation" />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
-                <div className="flexbox wrap">
-                  <div className="flexbox" >
-                    <MealCardContainer
-                      meals={filteredMeals}
-                      MealCard={MealCard2}
-                      addToMenu={this.addToMenu}
-                    />
-                  </div>
-                </div>
+                <SearchInput className="search-input" onChange={this.searchUpdated} />
+                <MealCardContainer
+                  meals={filteredMeals}
+                  MealCard={MealCard2}
+                  addToMenu={this.addToMenu}
+                  addClass="scroll"
+                />
               </AccordionItemBody>
             </AccordionItem>
             <AccordionItem>
@@ -96,21 +92,24 @@ export class Menu extends React.Component {
                   <h3>
           Today&#39;s Menu
                   </h3>
-                  <div className="flexbox">
-                    <button className="btn title-button" onClick={this.postMenu}>
-                      <p>Post Menu</p>
-                    </button>
-                    <button className="title-button btn" onClick={() => this.setState({ menu: [] })}>
-                      <p>Clear Menu</p>
-                    </button>
-                  </div>
+                  <div className="accordion__arrow u-position-relative" role="presentation" />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
+                <div className="title-element flexbox">
+                  <button className="btn title-button" onClick={this.postMenu}>
+                    <p>Post Menu</p>
+                  </button>
+                  <button className="title-button btn" onClick={() => this.setState({ menu: [] })}>
+                    <p>Clear Menu</p>
+                  </button>
+                </div>
+
                 <MealCardContainer
                   meals={this.state.menu}
                   MealCard={MealCard2}
                   removeFromMenu={this.removeFromMenu}
+                  addClass="scroll"
                 />
               </AccordionItemBody>
             </AccordionItem>

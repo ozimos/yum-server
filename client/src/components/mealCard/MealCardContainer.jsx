@@ -7,7 +7,7 @@ import '../../../public/styles/book_a_meal.css';
 
 const MealCardContainer = ({ MealCard, meals, ...props }) =>
   (
-    <div className="gallery">
+    <div className={props.addClass ? `${props.addClass} gallery` : 'gallery'}>
       {meals.map(meal => (<MealCard
         key={meal.id}
         {...meal}
@@ -16,10 +16,13 @@ const MealCardContainer = ({ MealCard, meals, ...props }) =>
         }
     </div>
   );
-
+MealCardContainer.defaultProps = {
+  addClass: PropTypes.string
+};
 MealCardContainer.propTypes = {
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,
   MealCard: PropTypes.func.isRequired,
+  addClass: PropTypes.string,
 };
 
 export default hot(module)(MealCardContainer);

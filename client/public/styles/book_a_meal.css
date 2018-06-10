@@ -21,7 +21,7 @@ body {
   color: maroon
 }
 
-.container {
+.contain {
   box-sizing: border-box;
   height: 100vh;
   margin: 0;
@@ -130,7 +130,7 @@ title-button.icon {
   border-radius: 10px;
   padding: 0.5em 0;
   min-width: 20px;
-  color: #aaa;
+  color: white;
   font-weight: bold;
   border-width: 0;
   cursor: pointer;
@@ -139,6 +139,7 @@ title-button.icon {
 
 .title-element {
   border-radius: 10px;
+  margin-top: 10px;
   line-height: 2;
 }
 
@@ -285,8 +286,12 @@ h3.modal-trigger,p.modal-trigger  {
   grid-template-columns: 1fr;
   grid-gap: 10px;
   justify-items: center;
-}
 
+}
+.scroll {
+  max-height: 50vh;
+  overflow-y: scroll
+}
 @media screen and (min-width: 736px) {
   html,
   body {
@@ -306,7 +311,7 @@ h3.modal-trigger,p.modal-trigger  {
   .shrink {
     min-width: unset;
   }
-  .container {
+  .contain {
     margin: 0;
     padding: 0 20px;
   }
