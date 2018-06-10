@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import '../../../public/styles/book_a_meal.css';
@@ -9,10 +9,12 @@ const Nav = () =>
     <nav className="flexbox">
       <h2 className="shrink heading">Book A Meal</h2>
       <div className="flexbox nowrap">
-        <a href="menu_editor.html">
+        <NavLink activeClassName="active" to="/menu">
           Menu
-
-        </a>
+        </NavLink>
+        <NavLink activeClassName="active" to="/meals">
+          Meals
+        </NavLink>
         <a href="order_report.html">
           Orders
 
@@ -23,7 +25,6 @@ const Nav = () =>
         </a>
         <Link to="/login">
           Log Out
-
         </Link>
       </div>
     </nav>);

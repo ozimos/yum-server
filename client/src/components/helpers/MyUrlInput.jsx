@@ -23,7 +23,7 @@ class MyInput extends React.Component {
           ref={this.props.myRef}
           onChange={this.changeValue}
           type={this.props.typeOfInput}
-          value={this.props.initialValue || ''}
+          value={this.props.getValue() || ''}
           placeholder={this.props.placeholder}
         />
         <div
