@@ -51,13 +51,26 @@ export default {
       externals: [
         {
           module: 'jquery',
-          entry: 'https://unpkg.com/jquery@3.2.1/dist/jquery.min.js',
+          entry: 'https://unpkg.com/jquery@3.3.1/dist/jquery.min.js',
           global: 'jQuery',
         },
         {
           module: 'cloudinary',
           entry: 'https://widget.cloudinary.com/global/all.js',
           global: 'cloudinary',
+        },
+        {
+          module: 'popper',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',
+          global: 'popper',
+        },
+        {
+          module: 'bootstrap',
+          entry: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
+        },
+        {
+          module: 'bootstrap',
+          entry: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js',
         }
       ],
     }),

@@ -8,6 +8,7 @@ import PrivateRoute from './components/container/PrivateRoute';
 import ConnectedMealManager from './components/mealManager/MealManager';
 import ConnectedSignUp from './components/signup/SignUp';
 import ConnectedLogin from './components/login/Login';
+import ConnectedMenu from './components/menu/Menu';
 
 const AppRoutes = () => (
   <ConnectedRouter history={history}>
@@ -16,6 +17,7 @@ const AppRoutes = () => (
       <Route exact path="/login" component={ConnectedLogin} />
       <Route exact path="/signup" component={ConnectedSignUp} />
       <Route path="/meals" component={ConnectedMealManager} />
+      <Route path="/menu" component={ConnectedMenu} />
     </Switch>
   </ConnectedRouter>
 );

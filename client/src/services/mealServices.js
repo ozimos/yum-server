@@ -4,7 +4,7 @@ const processResponse = response => new Promise((resolve, reject) => {
   const func = response.status < 400 ? resolve : reject;
   return response.json().then(data => func(data));
 });
-const postMeal = (mealData, url) => {
+const createMeal = (mealData, url) => {
 
   const requestOptions = {
     method: 'POST',
@@ -54,7 +54,7 @@ const deleteMeal = (url) => {
   return fetch(url, requestOptions).then(processResponse);
 };
 export default {
-  postMeal,
+  createMeal,
   updateMeal,
   getAllMeals,
   deleteMeal

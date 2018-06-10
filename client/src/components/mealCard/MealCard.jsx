@@ -29,8 +29,8 @@ class MealCard extends React.Component {
       (error, result) => {
         // eslint-disable-next-line
         console.log(result);
-        this.state.displayImage = result[0].secure_url;
-        // this.urlInput.value = this.state.displayImage;
+        this.setState({ displayImage: result[0].secure_url });
+        this.urlInput.value = this.state.displayImage;
       }
     );
   }
@@ -45,8 +45,8 @@ class MealCard extends React.Component {
     await this.props.dispatch(mealActions.updateMeal(meal, this.props.id));
     this.handleCloseModal();
   }
-disableButton = () =>
-  this.setState({ canSubmit: false });
+  disableButton = () =>
+    this.setState({ canSubmit: false });
 
   enableButton = () =>
     this.setState({ canSubmit: true });
@@ -54,8 +54,7 @@ disableButton = () =>
     this.formEl.updateInputsWithError(error);
   render() {
     const { title, imageUrl, price, description } = this.props;
-    // const cloudName = 'tovieyeozim';
-    // const unsignedUploadPreset = 'u9zfzeap';
+
     return (
       <React.Fragment>
         <div className="card">
@@ -119,15 +118,20 @@ disableButton = () =>
               />
 
               <MyUrlInput
-                // myRef={(urlInput) => { this.urlInput = urlInput; }}
+                myRef={(urlInput) => { this.urlInput = urlInput; }}
                 // style={{ display: 'none' }}
                 typeOfInput="url"
                 name="imageUrl"
-                initialValue={this.state.displayImage}
+                // initialValue={this.state.displayImage}
                 validations="minLength:5"
                 validationError="Please select an image"
               />
             </Formsy>
+          </div>
+          <div>
+            <button onClick={this.uploadWidget} className="btn title-button">
+          Upload Photo
+            </button>
           </div>
           <div id="meal_image">
             <img src={this.state.displayImage} alt="meal" className="fluid-img" />
@@ -139,9 +143,6 @@ disableButton = () =>
             disabled={!this.state.canSubmit}
           >
             <p>Continue</p>
-          </button>
-          <button onClick={this.uploadWidget} className="btn title-button">
-          Upload Photo
           </button>
         </ReactModal>
       </React.Fragment>
