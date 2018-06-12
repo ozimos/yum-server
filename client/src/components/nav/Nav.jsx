@@ -17,12 +17,10 @@ const Nav = () =>
         </NavLink>
         <a href="order_report.html">
           Orders
-
         </a>
-        <a href="meal_booking.html">
+        <NavLink activeClassName="active" to="/orders">
           Meal Booking
-
-        </a>
+        </NavLink>
         <Link to="/login">
           Log Out
         </Link>

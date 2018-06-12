@@ -6,6 +6,7 @@ import signupReducer from './signupReducer';
 import userReducer from './userReducer';
 import mealsReducer from './mealsReducer';
 import menuReducer from './menuReducer';
+import orderReducer from './orderReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   signupReducer,
   userReducer,
   mealsReducer,
-  menuReducer
+  menuReducer,
+  orderReducer
 });
 
 export default rootReducer;

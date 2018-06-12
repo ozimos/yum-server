@@ -14,4 +14,4 @@ global.mount = mount;
 global.toJson = toJson;
 global.rrcMock = new ReactRouterEnzymeContext();
 
-window.sessionStorage = sessionStorageMock;
+window.localStorage = sessionStorageMock;

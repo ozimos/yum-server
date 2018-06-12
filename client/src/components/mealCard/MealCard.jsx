@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';
 import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
-import MyUrlInput from '../helpers/MyUrlInput';
 import MyTextArea from '../helpers/MyTextArea';
 import { mealActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
@@ -27,10 +26,9 @@ class MealCard extends React.Component {
     cloudinary.openUploadWidget(
       { cloud_name: 'tovieyeozim', upload_preset: 'u9zfzeap', tags: [this.props.id] },
       (error, result) => {
-        // eslint-disable-next-line
-        console.log(result);
         this.setState({ displayImage: result[0].secure_url });
-        this.urlInput.value = this.state.displayImage;
+        // this.urlInput.value = this.state.displayImage;
+        this.urlInput.props.setValue(result[0].secure_url);
       }
     );
   }
@@ -82,7 +80,7 @@ class MealCard extends React.Component {
               Meal Editor
             </h3>
             <div className="flexbox">
-              <button className="btn title-button close" onClick={this.handleCloseModal}>
+              <button className="btn title-button" onClick={this.handleCloseModal}>
                 &#10006;
               </button>
             </div>
@@ -117,8 +115,9 @@ class MealCard extends React.Component {
                 placeholder={description || 'Description'}
               />
 
-              <MyUrlInput
-                myRef={(urlInput) => { this.urlInput = urlInput; }}
+              <MyInput
+                ref={(urlInput) => { this.urlInputMain = urlInput; }}
+                innerRef={(c) => { this.urlInput = c; }}
                 // style={{ display: 'none' }}
                 typeOfInput="url"
                 name="imageUrl"
