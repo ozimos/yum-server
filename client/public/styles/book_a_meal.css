@@ -20,7 +20,14 @@ body {
 .heading {
   color: maroon
 }
+input[type=number] {
+  height: 30px;
+}
 
+input[type=number]:hover::-webkit-inner-spin-button, input[type=number]:focus::-webkit-inner-spin-button {  
+  width: 14px;
+  height: 30px;
+}
 .contain {
   box-sizing: border-box;
   height: 100vh;
@@ -110,7 +117,7 @@ a {
   margin: 0;
 }
 
-title-button.icon {
+.title-button.icon {
   font-size: 1.2rem;
   margin: 0.6em;
   font-weight: 0;
@@ -286,11 +293,11 @@ h3.modal-trigger,p.modal-trigger  {
   grid-template-columns: 1fr;
   grid-gap: 10px;
   justify-items: center;
-
-}
-.scroll {
-  max-height: 50vh;
+  max-height: 80vh;
   overflow-y: scroll
+}
+.gallery.scroll {
+  max-height: 50vh;
 }
 @media screen and (min-width: 736px) {
   html,

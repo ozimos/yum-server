@@ -3,7 +3,6 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import {
   Accordion,
   AccordionItem,
@@ -32,9 +31,6 @@ export class Menu extends React.Component {
     };
   }
   componentDidMount() {
-    if (!this.props.authenticated) {
-      this.props.dispatch(push('/login'));
-    }
     this.props.dispatch(mealActions.getAllMeals());
   }
 
@@ -120,12 +116,8 @@ export class Menu extends React.Component {
     );
   }
 }
-Menu.defaultProps = {
-  authenticated: false,
-};
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool,
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,

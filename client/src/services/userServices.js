@@ -18,7 +18,7 @@ const login = (userData, url) => {
     .then(processResponse)
     .then((user) => {
       if (user && user.token) {
-        sessionStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user));
       }
 
       return user;
@@ -27,7 +27,7 @@ const login = (userData, url) => {
 
 const logout = () => {
   // remove user from local storage to log user out
-  sessionStorage.removeItem('user');
+  localStorage.removeItem('user');
 };
 
 const getAll = (url) => {
@@ -52,7 +52,7 @@ const signUp = (newUser, url) => {
   return fetch(url, requestOptions).then(processResponse)
     .then((user) => {
       if (user && user.token) {
-        sessionStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user));
       }
 
       return user;

@@ -17,7 +17,7 @@ const MealCardContainer = ({ MealCard, meals, ...props }) =>
     </div>
   );
 MealCardContainer.defaultProps = {
-  addClass: PropTypes.string
+  addClass: ''
 };
 MealCardContainer.propTypes = {
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,

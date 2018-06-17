@@ -4,16 +4,19 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+import SearchInput, { createFilter } from 'react-search-input';
 import { push } from 'react-router-redux';
 import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
-import MyUrlInput from '../helpers/MyUrlInput';
 import MealCard from '../mealCard/MealCard';
 import MyTextArea from '../helpers/MyTextArea';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import Greeting from '../greeting/Greeting';
 import { mealActions } from '../../redux/actions';
 import Nav from '../nav/Nav';
+import '../../../public/styles/search-input.css';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
@@ -25,7 +28,8 @@ export class MealManager extends React.Component {
     this.state = {
       canSubmit: false,
       showModal: false,
-      displayImage: ''
+      displayImage: '',
+      searchTerm: '',
     };
   }
   componentDidMount() {
@@ -33,6 +37,22 @@ export class MealManager extends React.Component {
       this.props.dispatch(push('/login'));
     }
     this.props.dispatch(mealActions.getAllMeals());
+  }
+  handleDrop = (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('tags', 'meals');
+    formData.append('upload_preset', 'u9zfzeap');
+    formData.append('api_key', '411447556157938');
+    formData.append('timestamp', (Date.now() / 1000) || 0);
+
+    return axios.post('https://api.cloudinary.com/v1_1/tovieyeozim/image/upload', formData, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    }).then((response) => {
+      const { data } = response;
+      const fileURL = data.secure_url;
+      this.urlInput.props.setValue(fileURL);
+    });
   }
   handleOpenModal = () =>
     this.setState({ showModal: true });
@@ -48,21 +68,23 @@ export class MealManager extends React.Component {
     this.setState({ canSubmit: true });
   serverFeedback = error =>
     this.formEl.updateInputsWithError(error);
+    searchUpdated = (term) => {
+      this.setState({ searchTerm: term });
+    }
   uploadWidget = () => {
     cloudinary.openUploadWidget(
       { cloud_name: 'tovieyeozim', upload_preset: 'u9zfzeap' },
       (error, result) => {
-        // eslint-disable-next-line
-        console.log(result);
         this.setState({ displayImage: result[0].secure_url });
-        this.urlInput.value = this.state.displayImage;
-        const event = new Event('change', { bubbles: true });
-        this.urlInput.dispatchEvent(event);
+        this.urlInput.props.setValue(result[0].secure_url);
       }
     );
   }
 
   render() {
+    const KEYS_TO_FILTERS = ['id', 'title', 'description', 'price'];
+    const filteredMeals = this.props.meals
+      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
     return (
       <div className="contain">
@@ -82,7 +104,12 @@ export class MealManager extends React.Component {
               </button>
             </div>
           </div>
-          <MealCardContainer meals={this.props.meals} MealCard={MealCard} />
+          <SearchInput className="search-input" onChange={this.searchUpdated} />
+
+          <MealCardContainer
+            meals={filteredMeals}
+            MealCard={MealCard}
+          />
         </main>
         <ReactModal
           isOpen={this.state.showModal}
@@ -95,7 +122,7 @@ export class MealManager extends React.Component {
               Meal Editor
             </h3>
             <div className="flexbox">
-              <button className="btn title-button close" onClick={this.handleCloseModal}>
+              <button className="btn title-button" onClick={this.handleCloseModal}>
                 &#10006;
               </button>
             </div>
@@ -133,9 +160,10 @@ export class MealManager extends React.Component {
                 placeholder="Description"
               />
 
-              <MyUrlInput
-                myRef={(urlInput) => { this.urlInput = urlInput; }}
-                // style={{ display: 'none' }}
+              <MyInput
+                ref={(urlInput) => { this.urlInputMain = urlInput; }}
+                innerRef={(c) => { this.urlInput = c; }}
+                style={{ display: 'none' }}
                 required
                 typeOfInput="url"
                 name="imageUrl"
@@ -145,11 +173,19 @@ export class MealManager extends React.Component {
               />
             </Formsy>
           </div>
-          <div>
+          <Dropzone
+            onDrop={this.handleDrop}
+            multiple
+            accept="image/*"
+            style={{ width: '20px' }}
+          >
+            <p>Drop your files or click here to upload</p>
+          </Dropzone>
+          {/* <div>
             <button onClick={this.uploadWidget} className="btn title-button">
           Upload Photo
             </button>
-          </div>
+          </div> */}
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>
