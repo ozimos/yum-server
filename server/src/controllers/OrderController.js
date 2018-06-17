@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import format from 'date-fns/format';
+import isToday from 'date-fns/is_today';
+import differenceInHours from 'date-fns/difference_in_hours';
 import Controller from './Controller';
 
 export default class OrderController extends Controller {
@@ -21,6 +23,11 @@ export default class OrderController extends Controller {
       });
     }
     return next();
+  }
+  static canEdit(date) {
+    const hasEditHours = (parseInt(process.env.ORDER_EDIT_HOURS, 10) || 4)
+     - differenceInHours(new Date(), date) > 0;
+    return (isToday(date) && hasEditHours);
   }
   getAllOrders() {
     const options = {
@@ -112,7 +119,11 @@ export default class OrderController extends Controller {
   updateOrder(req) {
     let orderRef;
     return this.Model.findById(req.params.id)
-      .then((order) => { orderRef = order; return order.setMeals([]); })
+      .then((order) => {
+        orderRef = order;
+        if (OrderController.canEdit(order.createdAt)) { return order.setMeals([]); }
+        return Promise.reject(new Error('Order edit period has expired'));
+      })
       .then(() => orderRef.reload())
       .then(reloadedOrder => OrderController.orderProcess(reloadedOrder, req))
       .catch(err => OrderController.errorResponse(err.message));

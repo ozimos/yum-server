@@ -8,7 +8,7 @@ const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) =>
     <React.Fragment>
       <tr>
         <td>
-          <button className="btn title-button icon" onClick={() => removeFromCart(id)}>
+          <button className="btn btn-cart" onClick={() => removeFromCart(id)}>
                 &#10006;
           </button>
         </td>

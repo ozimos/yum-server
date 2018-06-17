@@ -64,7 +64,6 @@ class CartContainer extends React.Component {
    }
  }
 
-
  render() {
    const { MealRow, order, ...rest } = this.props;
    const reducer = (total, meal) => total + (meal.price * (this.state.orderQuantity[meal.id] || 1));
@@ -73,6 +72,7 @@ class CartContainer extends React.Component {
    const total = calcTotal();
    return (
      <div className={rest.addClass ? `${rest.addClass}` : ''}>
+       <h3>Order Cart</h3>
        <div className="table-responsive">
          <table className="table">
            <thead>
@@ -100,12 +100,12 @@ class CartContainer extends React.Component {
                <div className="col-2"> Total </div>
                <div className="col-2"> {total}</div>
                <div className="col2">
-                 <button className="btn" onClick={rest.clearCart}>
+                 <button className="btn btn-cart" onClick={rest.clearCart}>
                    <p>Clear Cart</p>
                  </button>
                </div>
                <div className="col2">
-                 <button className="btn" onClick={this.placeOrder}>
+                 <button className="btn btn-cart" onClick={this.placeOrder}>
                    {this.props.orderId ? <p>Modify Order</p> : <p>Place New Order</p>}
                  </button>
                </div>
