@@ -1,3 +1,5 @@
+import Sequelize from 'sequelize';
+import format from 'date-fns/format';
 import Controller from './Controller';
 
 export default class OrderController extends Controller {
@@ -42,6 +44,60 @@ export default class OrderController extends Controller {
       })
       .catch(error => OrderController.errorResponse(error.message));
   }
+  getUserOrdersByDate(req) {
+    const { userId } = req.decoded;
+    const currentDate = format(new Date(), 'YYYY-MM-DD');
+    const { date } = req.params || currentDate;
+    const { Op } = Sequelize;
+
+    const options = {
+      where: { userId,
+        createdAt: { [Op.gt]: date } },
+      include: [{
+        association: 'Meals',
+        required: false,
+        paranoid: false,
+        attributes: ['id', 'title', 'description', 'price'],
+        through: {
+          attributes: ['quantity']
+        }
+      }]
+    };
+    return this.Model
+      .findAll(options)
+      .then((result) => {
+        if (result && result.length > 0) {
+          return OrderController.defaultResponse(result);
+        }
+        return OrderController.errorResponse('no records available', 404);
+      })
+      .catch(error => OrderController.errorResponse(error.message));
+  }
+  getUserOrders(req) {
+    const { userId } = req.decoded;
+
+    const options = {
+      where: { userId },
+      include: [{
+        association: 'Meals',
+        required: false,
+        paranoid: false,
+        attributes: ['id', 'title', 'description', 'price'],
+        through: {
+          attributes: ['quantity']
+        }
+      }]
+    };
+    return this.Model
+      .findAll(options)
+      .then((result) => {
+        if (result && result.length > 0) {
+          return OrderController.defaultResponse(result);
+        }
+        return OrderController.errorResponse('no records available', 404);
+      })
+      .catch(error => OrderController.errorResponse(error.message));
+  }
   postOrder(req) {
     const {
       userId
@@ -50,39 +106,29 @@ export default class OrderController extends Controller {
     return this.Model.create({
       userId
     })
-      .then(order => this.orderProcess(order, req, 201))
+      .then(order => OrderController.orderProcess(order, req, 201))
       .catch(err => OrderController.errorResponse(err.message));
   }
   updateOrder(req) {
+    let orderRef;
     return this.Model.findById(req.params.id)
-      .then((order) => {
-        try {
-          order.setMeals([]);
-          return order.save();
-        } catch (err) {
-          throw err;
-        }
-      })
-      .then(order => this.orderProcess(order, req))
+      .then((order) => { orderRef = order; return order.setMeals([]); })
+      .then(() => orderRef.reload())
+      .then(reloadedOrder => OrderController.orderProcess(reloadedOrder, req))
       .catch(err => OrderController.errorResponse(err.message));
-
   }
-  async orderProcess(order, req, successCode = 200) {
-    let postedOrder = {};
+  static async orderProcess(order, req, successCode = 200) {
     try {
-      await req.body.meals.forEach((meal) => {
+      const promise = req.body.meals.map(meal =>
         order.addMeal(meal.id, {
           through: {
             quantity: meal.quantity
           }
-        });
-      });
-      const savedOrder = await order.save();
-      postedOrder = savedOrder.dataValues;
-      const checkOrder = await this.Model.findById(postedOrder.id);
-      // not using savedOrder because getMeals returned
-      // values from before save
-      const meals = await checkOrder.getMeals();
+        }));
+      await Promise.all(promise);
+      const reloadedOrder = await order.reload();
+      const postedOrder = reloadedOrder.dataValues;
+      const meals = await reloadedOrder.getMeals({ paranoid: false });
       if (meals.length > 0) {
         const mealList = meals.map(elem => elem.id);
         const quantityList = meals.map(elem => elem.MealOrders.quantity);
@@ -95,6 +141,5 @@ export default class OrderController extends Controller {
     } catch (error) {
       OrderController.errorResponse(error.message);
     }
-
   }
 }

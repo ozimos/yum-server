@@ -25,7 +25,7 @@ export default class MenuController extends Controller {
       .catch(err => MenuController.errorResponse(err.message));
   }
   postMenu(req) {
-    let postedMenu = {};
+    let postedMenu, menuRef;
     return this.Model.findOrBuild({
       where: {
         title: 'Today'
@@ -33,18 +33,21 @@ export default class MenuController extends Controller {
     })
       .then(([menu]) => {
         try {
-          menu.description = req.body.description;
-          menu.setMeals(req.body.meals);
+          if (req.body.description) { menu.description = req.body.description; }
           return menu.save();
         } catch (err) {
           throw err;
         }
       })
-      .then((savedMenu) => {
-        postedMenu = savedMenu.dataValues;
-        return this.Model.findById('Today');
+      .then((menu) => {
+        menuRef = menu;
+        return menu.setMeals(req.body.meals);
       })
-      .then(menu => menu.getMeals())
+      .then(() => menuRef.reload())
+      .then((reloadedMenu) => {
+        postedMenu = reloadedMenu.dataValues;
+        return reloadedMenu.getMeals();
+      })
       .then((meals) => {
         if (meals.length > 0) {
           const menuDate = new Date(postedMenu.updatedAt);
