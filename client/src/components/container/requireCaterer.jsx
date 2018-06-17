@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import { hot } from 'react-hot-loader';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
@@ -36,7 +37,7 @@ const requireCaterer = (MyComponent) => {
     MyComponent
   });
 
-  return connect(mapStateToProps)(AuthenticatedComponent);
+  return connect(mapStateToProps)(hot(module)(AuthenticatedComponent));
 };
 
 export default requireCaterer;

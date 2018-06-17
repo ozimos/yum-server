@@ -47,7 +47,7 @@ export default class OrderController extends Controller {
   getUserOrdersByDate(req) {
     const { userId } = req.decoded;
     const currentDate = format(new Date(), 'YYYY-MM-DD');
-    const { date } = req.params || currentDate;
+    const date = req.params.date || currentDate;
     const { Op } = Sequelize;
 
     const options = {

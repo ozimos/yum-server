@@ -3,6 +3,7 @@ import {
 } from '../types';
 import orderServices from '../../services/orderServices';
 
+const baseUrl = '/api/v1/orders';
 const request = actionType => ({
   type: actionType,
 });
@@ -14,7 +15,7 @@ const failure = (error, actionType) => ({
 const getAllOrders = () => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.getAllOrders('/api/v1/orders')
+  orderServices.getAllOrders(baseUrl)
     .then(
       order =>
         dispatch({
@@ -27,11 +28,40 @@ const getAllOrders = () => (dispatch) => {
     );
 };
 
+const getUserOrdersByDate = date => (dispatch) => {
+  const url = date ? `${baseUrl}/date/${date}` : `${baseUrl}/date/`;
+  dispatch(request(orderTypes.ORDER_REQUEST));
+  orderServices.get(url)
+    .then(
+      order =>
+        dispatch({
+          type: orderTypes.GET_ORDER_ALL_SUCCESS,
+          orders: order.data
+        }),
+      error =>
+        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+
+    );
+};
+const getUserOrders = () => (dispatch) => {
+  dispatch(request(orderTypes.ORDER_REQUEST));
+  orderServices.get(`${baseUrl}/user`)
+    .then(
+      order =>
+        dispatch({
+          type: orderTypes.GET_ORDER_ALL_SUCCESS,
+          orders: order.data
+        }),
+      error =>
+        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+
+    );
+};
 
 const postOrder = order => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.postOrder(order, '/api/v1/orders')
+  orderServices.postOrder(order, baseUrl)
     .then(
       postedOrder =>
         dispatch({
@@ -47,7 +77,7 @@ const postOrder = order => (dispatch) => {
 const updateOrder = (order, orderId) => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.updateOrder(order, `/api/v1/orders/${orderId}`)
+  orderServices.updateOrder(order, `${baseUrl}/${orderId}`)
     .then(
       updatedOrder =>
         dispatch({
@@ -62,6 +92,8 @@ const updateOrder = (order, orderId) => (dispatch) => {
 
 export default {
   getAllOrders,
+  getUserOrdersByDate,
+  getUserOrders,
   postOrder,
   updateOrder
 };

@@ -27,6 +27,14 @@ const getAllOrders = (url) => {
 
   return fetch(url, requestOptions).then(processResponse);
 };
+const get = (url) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
+
+  return fetch(url, requestOptions).then(processResponse);
+};
 const updateOrder = (orderData, url) => {
   const requestOptions = {
     method: 'PUT',
@@ -42,6 +50,7 @@ const updateOrder = (orderData, url) => {
 
 export default {
   getAllOrders,
+  get,
   postOrder,
   updateOrder
 };

@@ -27,7 +27,6 @@ class MealCard extends React.Component {
       { cloud_name: 'tovieyeozim', upload_preset: 'u9zfzeap', tags: [this.props.id] },
       (error, result) => {
         this.setState({ displayImage: result[0].secure_url });
-        // this.urlInput.value = this.state.displayImage;
         this.urlInput.props.setValue(result[0].secure_url);
       }
     );
@@ -118,7 +117,7 @@ class MealCard extends React.Component {
               <MyInput
                 ref={(urlInput) => { this.urlInputMain = urlInput; }}
                 innerRef={(c) => { this.urlInput = c; }}
-                // style={{ display: 'none' }}
+                style={{ display: 'none' }}
                 typeOfInput="url"
                 name="imageUrl"
                 // initialValue={this.state.displayImage}

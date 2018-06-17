@@ -20,7 +20,14 @@ body {
 .heading {
   color: maroon
 }
+input[type=number] {
+  height: 30px;
+}
 
+input[type=number]:hover::-webkit-inner-spin-button, input[type=number]:focus::-webkit-inner-spin-button {  
+  width: 14px;
+  height: 30px;
+}
 .contain {
   box-sizing: border-box;
   height: 100vh;

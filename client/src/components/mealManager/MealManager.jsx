@@ -4,6 +4,8 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
 import SearchInput, { createFilter } from 'react-search-input';
 import { push } from 'react-router-redux';
 import Formsy from 'formsy-react';
@@ -35,6 +37,22 @@ export class MealManager extends React.Component {
       this.props.dispatch(push('/login'));
     }
     this.props.dispatch(mealActions.getAllMeals());
+  }
+  handleDrop = (files) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    formData.append('tags', 'meals');
+    formData.append('upload_preset', 'u9zfzeap');
+    formData.append('api_key', '411447556157938');
+    formData.append('timestamp', (Date.now() / 1000) || 0);
+
+    return axios.post('https://api.cloudinary.com/v1_1/tovieyeozim/image/upload', formData, {
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    }).then((response) => {
+      const { data } = response;
+      const fileURL = data.secure_url;
+      this.urlInput.props.setValue(fileURL);
+    });
   }
   handleOpenModal = () =>
     this.setState({ showModal: true });
@@ -155,11 +173,19 @@ export class MealManager extends React.Component {
               />
             </Formsy>
           </div>
-          <div>
+          <Dropzone
+            onDrop={this.handleDrop}
+            multiple
+            accept="image/*"
+            style={{ width: '20px' }}
+          >
+            <p>Drop your files or click here to upload</p>
+          </Dropzone>
+          {/* <div>
             <button onClick={this.uploadWidget} className="btn title-button">
           Upload Photo
             </button>
-          </div>
+          </div> */}
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>

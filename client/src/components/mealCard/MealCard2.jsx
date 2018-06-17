@@ -60,7 +60,7 @@ class MealCard2 extends React.Component {
               Meal Details
             </h3>
             <div className="flexbox">
-              <button className="btn title-button close" onClick={this.handleCloseModal}>
+              <button className="btn title-button" onClick={this.handleCloseModal}>
                 &#10006;
               </button>
             </div>
