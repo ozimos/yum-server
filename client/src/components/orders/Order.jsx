@@ -17,7 +17,7 @@ import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
-import Nav from '../nav/Nav';
+import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/search-input.css';
@@ -76,7 +76,7 @@ export class Order extends React.Component {
     return (
       <div className="contain">
         <header className="header">
-          <Nav />
+          <ConnectedNav />
         </header>
         <Greeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
@@ -140,7 +140,9 @@ export class Order extends React.Component {
               clearCart={this.clearOrder}
             /> :
             <div>
-              Select a meal by clicking on a meal checkmark button
+              <h3>Order Cart</h3>
+              <p>Add a meal by clicking on a meal checkmark button</p>
+
             </div>
                 }
           </aside>

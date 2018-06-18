@@ -29,7 +29,7 @@ const getAllOrders = () => (dispatch) => {
 };
 
 const getUserOrdersByDate = date => (dispatch) => {
-  const url = date ? `${baseUrl}/date/${date}` : `${baseUrl}/date/`;
+  const url = date ? `${baseUrl}/user/${date}` : `${baseUrl}/user/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
   orderServices.get(url)
     .then(
@@ -43,9 +43,10 @@ const getUserOrdersByDate = date => (dispatch) => {
 
     );
 };
-const getUserOrders = () => (dispatch) => {
+const getOrdersByDate = date => (dispatch) => {
+  const url = date ? `${baseUrl}/all/${date}` : `${baseUrl}/all/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
-  orderServices.get(`${baseUrl}/user`)
+  orderServices.get(url)
     .then(
       order =>
         dispatch({
@@ -93,7 +94,7 @@ const updateOrder = (order, orderId) => (dispatch) => {
 export default {
   getAllOrders,
   getUserOrdersByDate,
-  getUserOrders,
+  getOrdersByDate,
   postOrder,
   updateOrder
 };

@@ -30,7 +30,9 @@ const login = userData => (dispatch) => {
     .then(
       (user) => {
         dispatch(success(user, userTypes.LOGIN_SUCCESS));
-        dispatch(push('/meals'));
+        if (user.data.isCaterer) {
+          dispatch(push('/meals'));
+        } else { dispatch(push('/orders')); }
       },
       (error) => {
         dispatch(failure(error.message, userTypes.LOGIN_FAILURE));

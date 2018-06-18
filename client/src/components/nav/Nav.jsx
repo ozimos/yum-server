@@ -1,24 +1,28 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../../public/styles/book_a_meal.css';
 
-const Nav = () =>
+const Nav = ({ user }) =>
   (
     <nav className="flexbox">
       <h2 className="shrink heading">Book A Meal</h2>
       <div className="flexbox nowrap">
-        <NavLink activeClassName="active" to="/menu">
+        {user.isCaterer &&
+        <NavLink activeClassName="active" className="nav-item" to="/menu">
           Menu
-        </NavLink>
-        <NavLink activeClassName="active" to="/meals">
+        </NavLink>}
+        {user.isCaterer &&
+        <NavLink activeClassName="active" className="nav-item" to="/meals">
           Meals
-        </NavLink>
-        <a href="order_report.html">
-          Orders
-        </a>
-        <NavLink activeClassName="active" to="/orders">
+        </NavLink >}
+        {user.isCaterer &&
+        <NavLink activeClassName="active" className="nav-item" to="/dashboard">
+        DashBoard
+        </NavLink >}
+        <NavLink activeClassName="active" className="nav-item" to="/orders">
           Meal Booking
         </NavLink>
         <Link to="/login">
@@ -26,5 +30,14 @@ const Nav = () =>
         </Link>
       </div>
     </nav>);
-
-export default connect(state => state)(hot(module)(Nav));
+Nav.propTypes = {
+  user: PropTypes.shape({
+    isCaterer: PropTypes.bool,
+  }).isRequired,
+};
+const mapStateToProps = state => ({
+  user: state.loginReducer.user.data,
+  authenticated: state.loginReducer.authenticated,
+});
+export { Nav };
+export default connect(mapStateToProps)(hot(module)(Nav));

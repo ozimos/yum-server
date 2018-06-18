@@ -80,11 +80,12 @@ export default class OrderController extends Controller {
       })
       .catch(error => OrderController.errorResponse(error.message));
   }
-  getUserOrders(req) {
-    const { userId } = req.decoded;
-
+  getOrdersByDate(req) {
+    const currentDate = format(new Date(), 'YYYY-MM-DD');
+    const date = req.params.date || currentDate;
+    const { Op } = Sequelize;
     const options = {
-      where: { userId },
+      where: { createdAt: { [Op.gt]: date } },
       include: [{
         association: 'Meals',
         required: false,
