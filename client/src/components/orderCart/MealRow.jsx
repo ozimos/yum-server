@@ -38,4 +38,5 @@ MealRow.propTypes = {
   removeFromCart: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
 };
+export { MealRow };
 export default hot(module)(MealRow);

@@ -5,14 +5,14 @@ import {
   defaultUser,
   orderController
 } from '../../../../testHelpers/controllerHelper';
-// import db from '../../../../src/models';
+import db from '../../../../src/models';
 
-describe.skip('Integration Controller Get Orders', () => {
-  // beforeEach('truncate orders db', async () => {
-  //   await db.Order.truncate({
-  //     cascade: true
-  //   });
-  // });
+describe('Integration Controller Get Orders', () => {
+  beforeEach('truncate orders db', async () => {
+    await db.Order.truncate({
+      cascade: true
+    });
+  });
 
   it('getAllOrders returns error message if no orders in db', async () => {
     const response = await orderController.getAllRecords();
@@ -41,7 +41,7 @@ describe.skip('Integration Controller Get Orders', () => {
       body
     });
     const response = await orderController.getAllOrders();
-    expect(response.data[0].Meals[0].id).to.equal(body.meals[0].id);
+    expect(response.data[0].Meals[0].id).to.be.oneOf([body.meals[0].id, body.meals[1].id]);
     expect(response.data[0].Meals[0].MealOrders.quantity).to.equal(body.meals[0].quantity);
     expect(response.data[0].Meals.length).to.equal(body.meals.length);
     expect(response.data[0].id).to.be.a('string');

@@ -15,7 +15,7 @@ const body = {
     quantity: 1
   }]
 };
-describe.skip('Integration Controller Orders Post,', () => {
+describe('Integration Controller Orders Post,', () => {
 
   it('postOrder posts the order', async () => {
 

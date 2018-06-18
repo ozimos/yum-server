@@ -1,4 +1,8 @@
 /* eslint-disable no-console */
+/* eslint import/no-extraneous-dependencies: off */
+import format from 'date-fns/format';
+import addDays from 'date-fns/add_days';
+import MockDate from 'mockdate';
 import {
   expect,
   request,
@@ -13,6 +17,8 @@ import app from '../../../src/app';
 const ordersUrl = `${rootURL}/orders`;
 
 context('orders integration test', () => {
+  const nextDay2 = addDays(new Date(), 2);
+  const currentDate = format(new Date(), 'YYYY-MM-DD');
 
   const newOrder = {
     meals: [{
@@ -24,6 +30,24 @@ context('orders integration test', () => {
   // Get All Orders
   describe('GET /orders', () => {
     it('should return error message if no orders', () => request(app).get(ordersUrl)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('no records available');
+      }));
+  });
+  // Get All Orders for current user by date
+  describe('GET /orders/user/:date', () => {
+    it('should return error message if no orders', () => request(app).get(`${ordersUrl}/user/`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('no records available');
+      }));
+  });
+  // Get All Orders for all users by date
+  describe('GET /orders/all/:date', () => {
+    it('should return error message if no orders', () => request(app).get(`${ordersUrl}/all/`)
       .set('authorization', `JWT ${token}`)
       .then((res) => {
         expect(res).to.have.status(404);
@@ -51,7 +75,62 @@ context('orders integration test', () => {
         expect(res.body.data[0].Meals).to.be.an('array');
       }));
   });
-
+  // Get All Orders for current user by date
+  describe('GET /orders/user/:date', () => {
+    it('should return all orders', () => request(app).get(`${ordersUrl}/user/`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.data[0].id).to.be.a('string');
+        expect(res.body.data[0].Meals).to.be.an('array');
+      }));
+  });
+  // Get All Orders for all users by date
+  describe('GET /orders/all/:date', () => {
+    it('should return all orders', () => request(app).get(`${ordersUrl}/all/`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.data[0].id).to.be.a('string');
+        expect(res.body.data[0].Meals).to.be.an('array');
+      }));
+  });
+  // Get All Orders for current user by date
+  describe('GET /orders/user/:date', () => {
+    MockDate.set(nextDay2);
+    it.skip('should return error message no orders for today', () => request(app).get(`${ordersUrl}/user/`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('no records available');
+      }));
+    it('should return all orders from the specified date', () => request(app).get(`${ordersUrl}/user/${currentDate}`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.data[0].id).to.be.a('string');
+        expect(res.body.data[0].Meals).to.be.an('array');
+      }));
+    MockDate.reset();
+  });
+  // Get All Orders for all users by date
+  describe('GET /orders/all/:date', () => {
+    MockDate.set(nextDay2);
+    it.skip('should return error message if no orders for today', () => request(app).get(`${ordersUrl}/all/`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(404);
+        expect(res.body.message).to.equal('no records available');
+      }));
+    it('should return all orders from the specified date', () => request(app).get(`${ordersUrl}/all/${currentDate}`)
+      .set('authorization', `JWT ${token}`)
+      .then((res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.data[0].id).to.be.a('string');
+        expect(res.body.data[0].Meals).to.be.an('array');
+      }));
+    MockDate.reset();
+  });
   // Update An Order
   describe('PUT /orders/:id', () => {
 

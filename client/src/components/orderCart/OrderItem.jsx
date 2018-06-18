@@ -27,5 +27,6 @@ OrderItem.propTypes = {
   Meals: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrder: PropTypes.func.isRequired
 };
+export { OrderItem };
 export default hot(module)(OrderItem);
 

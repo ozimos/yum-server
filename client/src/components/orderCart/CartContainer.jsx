@@ -135,5 +135,6 @@ const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
   connecting: state.orderReducer.connecting,
 });
+export { CartContainer };
 export default connect(mapStateToProps)(hot(module)(CartContainer));
 

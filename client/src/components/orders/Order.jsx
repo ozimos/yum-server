@@ -10,12 +10,12 @@ import {
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard3 from '../mealCard/MealCard3';
-import MealRow from '../orderCart/MealRow';
-import CartContainer from '../orderCart/CartContainer';
-import OrderItem from '../orderCart/OrderItem';
+import HotMealRow from '../orderCart/MealRow';
+import ConnectedCartContainer from '../orderCart/CartContainer';
+import HotOrderItem from '../orderCart/OrderItem';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
-import Greeting from '../greeting/Greeting';
+import HotGreeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
@@ -23,7 +23,7 @@ import '../../../public/styles/auth.scss';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
 
-export class Order extends React.Component {
+class Order extends React.Component {
 
   constructor(props) {
     super(props);
@@ -78,7 +78,7 @@ export class Order extends React.Component {
         <header className="header">
           <ConnectedNav />
         </header>
-        <Greeting isCaterer={isCaterer} firstName={firstName} />
+        <HotGreeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
           <main className="col-12 col-md-8">
             <Accordion accordion={false}>
@@ -120,7 +120,7 @@ export class Order extends React.Component {
                 <AccordionItemBody>
                   { isTodayOrder ? <OrderContainer
                     orders={this.props.orders}
-                    OrderItem={OrderItem}
+                    OrderItem={HotOrderItem}
                     addOrder={this.addOrder}
                   /> :
                   <div>
@@ -132,10 +132,10 @@ export class Order extends React.Component {
             </Accordion>
           </main>
           <aside className="col-12 col-md-4" >
-            {isMealSelected ? <CartContainer
+            {isMealSelected ? <ConnectedCartContainer
               order={this.state.currentOrder}
               orderId={this.state.currentOrderId}
-              MealRow={MealRow}
+              MealRow={HotMealRow}
               removeFromCart={this.removeFromOrder}
               clearCart={this.clearOrder}
             /> :
@@ -174,5 +174,5 @@ const mapStateToProps = state => ({
   user: state.loginReducer.user.data
 });
 
-
+export { Order };
 export default connect(mapStateToProps)(hot(module)(Order));

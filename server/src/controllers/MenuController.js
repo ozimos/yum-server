@@ -12,7 +12,7 @@ export default class MenuController extends Controller {
       }]
     })
       .then((response) => {
-        if (response) {
+        if (response && response.Meals[0]) {
           const today = new Date().setHours(0, 0, 0);
           const menuByDateUpdatedArray = response.Meals
             .sort((a, b) => new Date(b.MealMenus.updatedAt) - new Date(a.MealMenus.updatedAt));

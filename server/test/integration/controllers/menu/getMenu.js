@@ -56,7 +56,7 @@ describe('Integration Controller Menu', () => {
       expect(response.message).to.equal('menu for the day has not been set');
       expect(response.statusCode).to.equal(404);
     });
-    it.skip('getMenu returns error message after invalid meal is set', async () => {
+    it('getMenu returns error message after invalid meal is set', async () => {
       const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';
 
       const body = {

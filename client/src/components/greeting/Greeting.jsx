@@ -14,4 +14,5 @@ Greeting.propTypes = {
   isCaterer: PropTypes.bool.isRequired,
   firstName: PropTypes.string.isRequired
 };
+export { Greeting };
 export default hot(module)(Greeting);
