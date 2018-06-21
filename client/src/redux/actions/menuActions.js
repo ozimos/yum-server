@@ -1,7 +1,7 @@
 import {
   menuTypes
 } from '../types';
-import menuServices from '../../services/menuServices';
+import requestServices from '../../services/requestServices';
 
 const request = actionType => ({
   type: actionType,
@@ -14,15 +14,15 @@ const failure = (error, actionType) => ({
 const getMenu = () => (dispatch) => {
   dispatch(request(menuTypes.MENU_REQUEST));
 
-  menuServices.getMenu('/api/v1/menu')
+  requestServices.noSend('/api/v1/menu')
     .then(
-      menu =>
+      response =>
         dispatch({
           type: menuTypes.GET_MENU_SUCCESS,
-          menu: menu.data
+          menu: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, menuTypes.MENU_FAILURE))
+        dispatch(failure(error.response.data.message, menuTypes.MENU_FAILURE))
 
     );
 };
@@ -31,15 +31,15 @@ const getMenu = () => (dispatch) => {
 const postMenu = menu => (dispatch) => {
   dispatch(request(menuTypes.MENU_REQUEST));
 
-  menuServices.postMenu(menu, '/api/v1/menu')
+  requestServices.send('/api/v1/menu', 'post', menu)
     .then(
-      postedMenu =>
+      response =>
         dispatch({
           type: menuTypes.POST_MENU_SUCCESS,
-          menu: postedMenu.data
+          menu: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, menuTypes.MENU_FAILURE))
+        dispatch(failure(error.response.data.message, menuTypes.MENU_FAILURE))
 
     );
 };

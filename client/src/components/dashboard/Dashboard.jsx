@@ -10,7 +10,7 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
-import Greeting from '../greeting/Greeting';
+import HotGreeting from '../greeting/Greeting';
 import { dashboardActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import uniqueUsers from '../../utils/uniqueUsers';
@@ -52,7 +52,7 @@ class Dashboard extends React.Component {
             <ConnectedNav />
           </header>
           <main>
-            <Greeting isCaterer={isCaterer} firstName={firstName} />
+            <HotGreeting isCaterer={isCaterer} firstName={firstName} />
 
             <div className="summary">
               <h3>Summary</h3>
@@ -102,7 +102,6 @@ class Dashboard extends React.Component {
                           </tr>
                         ))
                       }
-
                       </tbody>
                     </table>
                   </div>

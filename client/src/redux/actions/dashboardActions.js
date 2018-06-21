@@ -1,7 +1,7 @@
 import {
   dashboardTypes
 } from '../types';
-import orderServices from '../../services/orderServices';
+import requestServices from '../../services/requestServices';
 
 const baseUrl = '/api/v1/orders';
 const request = actionType => ({
@@ -15,15 +15,15 @@ const failure = (error, actionType) => ({
 const getOrdersByDate = date => (dispatch) => {
   const url = date ? `${baseUrl}/all/${date}` : `${baseUrl}/all/`;
   dispatch(request(dashboardTypes.ORDER_DASHBOARD_REQUEST));
-  orderServices.get(url)
+  requestServices.noSend(url)
     .then(
-      order =>
+      response =>
         dispatch({
           type: dashboardTypes.GET_ORDER_DASHBOARD_SUCCESS,
-          orders: order.data
+          orders: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, dashboardTypes.ORDER_DASHBOARD_FAILURE))
+        dispatch(failure(error.response.data.message, dashboardTypes.ORDER_DASHBOARD_FAILURE))
 
     );
 };

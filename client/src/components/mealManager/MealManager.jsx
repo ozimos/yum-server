@@ -13,9 +13,9 @@ import MyInput from '../helpers/MyInput';
 import MealCard from '../mealCard/MealCard';
 import MyTextArea from '../helpers/MyTextArea';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import Greeting from '../greeting/Greeting';
+import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions } from '../../redux/actions';
-import Nav from '../nav/Nav';
+import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
@@ -89,10 +89,10 @@ export class MealManager extends React.Component {
     return (
       <div className="contain">
         <header className="header">
-          <Nav />
+          <ConnectedNav />
         </header>
         <main>
-          <Greeting isCaterer={isCaterer} firstName={firstName} />
+          <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title flexbox">
             <h3 className="shrink">
               Your Meals
