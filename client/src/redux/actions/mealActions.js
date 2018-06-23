@@ -14,7 +14,7 @@ const failure = (error, actionType) => ({
 const getAllMeals = () => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  requestServices.noSend('/api/v1/meals')
+  return requestServices.noSend('/api/v1/meals')
     .then(
       response =>
         dispatch({
@@ -23,7 +23,6 @@ const getAllMeals = () => (dispatch) => {
         }),
       error =>
         dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
-
     );
 };
 
@@ -31,7 +30,7 @@ const getAllMeals = () => (dispatch) => {
 const createMeal = meal => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  requestServices.send('/api/v1/meals', 'post', meal)
+  return requestServices.send('/api/v1/meals', 'post', meal)
     .then(
       response =>
         dispatch({
@@ -47,7 +46,7 @@ const createMeal = meal => (dispatch) => {
 const updateMeal = (meal, mealId) => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  requestServices.send(`/api/v1/meals/${mealId}`, 'put', meal)
+  return requestServices.send(`/api/v1/meals/${mealId}`, 'put', meal)
     .then(
       response =>
         dispatch({
@@ -61,7 +60,7 @@ const updateMeal = (meal, mealId) => (dispatch) => {
 const deleteMeal = mealId => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  requestServices.noSend(`/api/v1/meals/${mealId}`)
+  return requestServices.noSend(`/api/v1/meals/${mealId}`, 'delete')
     .then(
       (response) => {
         if (response.data.data) {

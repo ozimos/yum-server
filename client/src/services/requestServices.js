@@ -15,9 +15,10 @@ const send = (url, method, menuData) => {
   return axios(requestOptions);
 };
 
-const noSend = (url) => {
+const noSend = (url, requestMethod) => {
   const requestOptions = {
     url,
+    method: requestMethod || 'get',
     headers: {
       Accept: 'application/json',
       ...authHeader()

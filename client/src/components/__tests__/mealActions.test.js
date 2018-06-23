@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import mealActions from '../../redux/actions/mealActions';
 import mealTypes from '../../redux/types/mealTypes';
-import mealResponse from '../mocks/mealDataMock';
+import { allMeals, meal } from '../mocks/mealDataMock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -12,31 +12,142 @@ const store = mockStore({
   mealError: null,
   meals: []
 });
-describe('async actions', () => {
+describe('meal async actions', () => {
   beforeEach(() => {
-    // import and pass your custom axios instance to this method
     moxios.install();
+    store.clearActions();
   });
 
   afterEach(() => {
-    // import and pass your custom axios instance to this method
     moxios.uninstall();
   });
 
-  it('dispatches MEALS_REQUEST and ALL_MEALS_SUCCESS on successful fetching of caterer meals', () => {
+  it('dispatches MEALS_REQUEST and ALL_MEALS_SUCCESS on successfully fetching meals', () => {
 
-    moxios.stubRequest('api/v1/meals', {
+    moxios.stubRequest('/api/v1/meals', {
       status: 200,
-      response: mealResponse
+      response: allMeals
     });
     const expectedActions = [
       { type: mealTypes.MEALS_REQUEST },
-      { type: mealTypes.ALL_MEALS_SUCCESS, meals: mealResponse.data },
+      { type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data },
     ];
     return store.dispatch(mealActions.getAllMeals())
       .then(() => {
         const dispatchedActions = store.getActions();
-        //   const actionTypes = dispatchedActions.map(action => action.type);
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing fetching meals', () => {
+
+    moxios.stubRequest('/api/v1/meals', {
+      status: 400,
+      response: { message: 'problem' }
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.MEALS_FAILURE, error: 'problem' },
+    ];
+    return store.dispatch(mealActions.getAllMeals())
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and CREATE_MEAL_SUCCESS on successfully creating a meal', () => {
+
+    moxios.stubRequest('/api/v1/meals', {
+      status: 200,
+      response: meal
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.CREATE_MEAL_SUCCESS, meal: meal.data },
+    ];
+    return store.dispatch(mealActions.createMeal({}))
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing creating a meal', () => {
+
+    moxios.stubRequest('/api/v1/meals', {
+      status: 400,
+      response: { message: 'problem' }
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.MEALS_FAILURE, error: 'problem' },
+    ];
+    return store.dispatch(mealActions.createMeal({}))
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and UPDATE_MEAL_SUCCESS on successfully updating a meal', () => {
+    const mealId = 'abc';
+    moxios.stubRequest(`/api/v1/meals/${mealId}`, {
+      status: 200,
+      response: meal
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.UPDATE_MEAL_SUCCESS, meal: meal.data },
+    ];
+    return store.dispatch(mealActions.updateMeal({}, mealId))
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing updating a meal', () => {
+    const mealId = 'abc';
+
+    moxios.stubRequest(`/api/v1/meals/${mealId}`, {
+      status: 400,
+      response: { message: 'problem' }
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.MEALS_FAILURE, error: 'problem' },
+    ];
+    return store.dispatch(mealActions.updateMeal({}, mealId))
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and DELETE_MEAL_SUCCESS on successfully deleting a meal', () => {
+    const mealId = 'abc';
+    moxios.stubRequest(`/api/v1/meals/${mealId}`, {
+      status: 200,
+      response: meal
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.DELETE_MEAL_SUCCESS, id: mealId },
+    ];
+    return store.dispatch(mealActions.deleteMeal(mealId))
+      .then(() => {
+        const dispatchedActions = store.getActions();
+        expect(dispatchedActions).toEqual(expectedActions);
+      });
+  });
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing deleting a meal', () => {
+    const mealId = 'abc';
+    moxios.stubRequest(`/api/v1/meals/${mealId}`, {
+      status: 400,
+      response: { message: 'problem' }
+    });
+    const expectedActions = [
+      { type: mealTypes.MEALS_REQUEST },
+      { type: mealTypes.MEALS_FAILURE, error: 'problem' },
+    ];
+    return store.dispatch(mealActions.deleteMeal(mealId))
+      .then(() => {
+        const dispatchedActions = store.getActions();
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });

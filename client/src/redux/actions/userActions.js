@@ -26,7 +26,7 @@ const login = userData => (dispatch) => {
     }
   }, userTypes.LOGIN_REQUEST));
 
-  requestServices.send('/api/v1/auth/login', 'post', userData)
+  return requestServices.send('/api/v1/auth/login', 'post', userData)
     .then(
       (response) => {
         const user = response.data;
@@ -54,7 +54,7 @@ const logout = () => {
 const signUp = user => (dispatch) => {
   dispatch(request(user, userTypes.SIGNUP_REQUEST));
 
-  requestServices.send('/api/v1/auth/signup', 'post', user)
+  return requestServices.send('/api/v1/auth/signup', 'post', user)
     .then(
       (response) => {
         const userResults = response.data;
@@ -76,7 +76,7 @@ const signUp = user => (dispatch) => {
 const getAll = () => (dispatch) => {
   dispatch(request(null, userTypes.GETALL_REQUEST));
 
-  requestServices.noSend('/api/v1/auth/all')
+  return requestServices.noSend('/api/v1/auth/all')
     .then(
       response => dispatch(success(response.data.data, userTypes.GETALL_SUCCESS)),
       error => dispatch(failure(error.response.data.message, userTypes.GETALL_FAILURE))

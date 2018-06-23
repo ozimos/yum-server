@@ -15,7 +15,7 @@ const failure = (error, actionType) => ({
 const getAllOrders = () => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  requestServices.noSend(baseUrl)
+  return requestServices.noSend(baseUrl)
     .then(
       response =>
         dispatch({
@@ -31,7 +31,7 @@ const getAllOrders = () => (dispatch) => {
 const getUserOrdersByDate = date => (dispatch) => {
   const url = date ? `${baseUrl}/user/${date}` : `${baseUrl}/user/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
-  requestServices.noSend(url)
+  return requestServices.noSend(url)
     .then(
       response =>
         dispatch({
@@ -46,7 +46,7 @@ const getUserOrdersByDate = date => (dispatch) => {
 const getOrdersByDate = date => (dispatch) => {
   const url = date ? `${baseUrl}/all/${date}` : `${baseUrl}/all/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
-  requestServices.noSend(url)
+  return requestServices.noSend(url)
     .then(
       response =>
         dispatch({
@@ -62,7 +62,7 @@ const getOrdersByDate = date => (dispatch) => {
 const postOrder = order => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  requestServices.send(baseUrl, 'post', order)
+  return requestServices.send(baseUrl, 'post', order)
     .then(
       response =>
         dispatch({
@@ -78,7 +78,7 @@ const postOrder = order => (dispatch) => {
 const updateOrder = (order, orderId) => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  requestServices.send(`${baseUrl}/${orderId}`, 'put', order)
+  return requestServices.send(`${baseUrl}/${orderId}`, 'put', order)
     .then(
       response =>
         dispatch({

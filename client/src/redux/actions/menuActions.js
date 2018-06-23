@@ -14,7 +14,7 @@ const failure = (error, actionType) => ({
 const getMenu = () => (dispatch) => {
   dispatch(request(menuTypes.MENU_REQUEST));
 
-  requestServices.noSend('/api/v1/menu')
+  return requestServices.noSend('/api/v1/menu')
     .then(
       response =>
         dispatch({
@@ -31,7 +31,7 @@ const getMenu = () => (dispatch) => {
 const postMenu = menu => (dispatch) => {
   dispatch(request(menuTypes.MENU_REQUEST));
 
-  requestServices.send('/api/v1/menu', 'post', menu)
+  return requestServices.send('/api/v1/menu', 'post', menu)
     .then(
       response =>
         dispatch({
