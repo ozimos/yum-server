@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { hot } from 'react-hot-loader';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../../public/styles/book_a_meal.css';
@@ -40,4 +39,4 @@ const mapStateToProps = state => ({
   authenticated: state.loginReducer.authenticated,
 });
 export { Nav };
-export default connect(mapStateToProps)(hot(module)(Nav));
+export default connect(mapStateToProps)(Nav);

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
@@ -46,5 +45,5 @@ MealCard3.propTypes = {
   addToOrder: PropTypes.func,
   removeFromOrder: PropTypes.func,
 };
-export default hot(module)(MealCard3);
+export default MealCard3;
 

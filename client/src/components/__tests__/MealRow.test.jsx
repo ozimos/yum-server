@@ -2,7 +2,7 @@
 /* eslint react/jsx-indent: off */
 
 import { MemoryRouter } from 'react-router-dom';
-import { MealRow } from '../orderCart/MealRow';
+import MealRow from '../orderCart/MealRow';
 
 describe('Login Component', () => {
   it('renders correctly', () => {

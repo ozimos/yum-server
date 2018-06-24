@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import { orderActions } from '../../redux/actions';
 
 
@@ -136,5 +135,5 @@ const mapStateToProps = state => ({
   connecting: state.orderReducer.connecting,
 });
 export { CartContainer };
-export default connect(mapStateToProps)(hot(module)(CartContainer));
+export default connect(mapStateToProps)(CartContainer);
 

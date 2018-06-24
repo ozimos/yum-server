@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
 import MyTextArea from '../helpers/MyTextArea';
@@ -155,5 +154,5 @@ MealCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-export default connect(state => state)(hot(module)(MealCard));
+export default connect(state => state)(MealCard);
 

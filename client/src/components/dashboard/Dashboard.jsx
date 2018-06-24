@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import {
@@ -130,4 +129,4 @@ const mapStateToProps = state => ({
   authenticated: state.loginReducer.authenticated,
 });
 export { Dashboard };
-export default connect(mapStateToProps)(hot(module)(Dashboard));
+export default connect(mapStateToProps)(Dashboard);

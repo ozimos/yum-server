@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import {
   Accordion,
@@ -134,4 +133,4 @@ const mapStateToProps = state => ({
 });
 
 export { Menu };
-export default connect(mapStateToProps)(hot(module)(Menu));
+export default connect(mapStateToProps)(Menu);

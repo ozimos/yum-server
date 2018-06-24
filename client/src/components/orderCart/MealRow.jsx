@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) => {
   const subTotal = price * (quantity || 1);
@@ -38,5 +37,4 @@ MealRow.propTypes = {
   removeFromCart: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
 };
-export { MealRow };
-export default hot(module)(MealRow);
+export default MealRow;

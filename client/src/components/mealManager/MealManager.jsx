@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
@@ -177,15 +176,10 @@ export class MealManager extends React.Component {
             onDrop={this.handleDrop}
             multiple
             accept="image/*"
-            style={{ width: '20px' }}
+            style={{ width: '300px' }}
           >
             <p>Drop your files or click here to upload</p>
           </Dropzone>
-          {/* <div>
-            <button onClick={this.uploadWidget} className="btn title-button">
-          Upload Photo
-            </button>
-          </div> */}
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>
@@ -221,4 +215,4 @@ const mapStateToProps = state =>
     connecting: state.mealsReducer.connecting,
     meals: state.mealsReducer.meals, });
 
-export default connect(mapStateToProps)(hot(module)(MealManager));
+export default connect(mapStateToProps)(MealManager);

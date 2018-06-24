@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
@@ -134,4 +133,4 @@ const mapStateToProps = state => ({
   loginError: state.loginReducer.loginError
 });
 export { Login };
-export default connect(mapStateToProps)(hot(module)(Login));
+export default connect(mapStateToProps)(Login);

@@ -2,7 +2,7 @@
 /* eslint react/jsx-indent: off */
 
 import { MemoryRouter } from 'react-router-dom';
-import { Greeting } from '../greeting/Greeting';
+import Greeting from '../greeting/Greeting';
 
 describe('Login Component', () => {
   it('renders correctly', () => {

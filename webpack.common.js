@@ -8,7 +8,7 @@ import HtmlWebpackExternalsPlugin from 'html-webpack-externals-plugin';
 
 export default {
   entry: {
-    index: './client/src/index.jsx'
+    index: ['./client/src/index.jsx']
   },
   output: {
     path: path.resolve(__dirname, 'client/dist'),

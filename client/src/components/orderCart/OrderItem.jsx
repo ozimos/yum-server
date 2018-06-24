@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const OrderItem = ({ id, Meals, addOrder }) => {
   const details = Meals.map(meal => (
@@ -27,6 +26,5 @@ OrderItem.propTypes = {
   Meals: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrder: PropTypes.func.isRequired
 };
-export { OrderItem };
-export default hot(module)(OrderItem);
+export default OrderItem;
 

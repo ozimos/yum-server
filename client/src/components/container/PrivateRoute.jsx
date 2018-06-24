@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import validateToken from '../../services/validateToken';
 
 const user = localStorage.getItem('user');
@@ -24,4 +23,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
 };
-export default connect(state => state)(hot(module)(PrivateRoute));
+export default connect(state => state)(PrivateRoute);

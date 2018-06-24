@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import { mealActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
@@ -90,5 +89,5 @@ MealCard2.propTypes = {
   addToMenu: PropTypes.func,
   removeFromMenu: PropTypes.func,
 };
-export default connect(state => state)(hot(module)(MealCard2));
+export default connect(state => state)(MealCard2);
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 
 class MealsModal extends React.Component {
@@ -35,4 +34,4 @@ class MealsModal extends React.Component {
     );
   }
 }
-export default connect(state => state)(hot(module)(MealsModal));
+export default connect(state => state)(MealsModal);

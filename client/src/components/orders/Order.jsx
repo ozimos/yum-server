@@ -10,12 +10,12 @@ import {
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard3 from '../mealCard/MealCard3';
-import HotMealRow from '../orderCart/MealRow';
+import MealRow from '../orderCart/MealRow';
 import ConnectedCartContainer from '../orderCart/CartContainer';
-import HotOrderItem from '../orderCart/OrderItem';
+import OrderItem from '../orderCart/OrderItem';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
-import HotGreeting from '../greeting/Greeting';
+import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
@@ -78,7 +78,7 @@ class Order extends React.Component {
         <header className="header">
           <ConnectedNav />
         </header>
-        <HotGreeting isCaterer={isCaterer} firstName={firstName} />
+        <Greeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
           <main className="col-12 col-md-8">
             <Accordion accordion={false}>
@@ -120,7 +120,7 @@ class Order extends React.Component {
                 <AccordionItemBody>
                   { isTodayOrder ? <OrderContainer
                     orders={this.props.orders}
-                    OrderItem={HotOrderItem}
+                    OrderItem={OrderItem}
                     addOrder={this.addOrder}
                   /> :
                   <div>
@@ -135,7 +135,7 @@ class Order extends React.Component {
             {isMealSelected ? <ConnectedCartContainer
               order={this.state.currentOrder}
               orderId={this.state.currentOrderId}
-              MealRow={HotMealRow}
+              MealRow={MealRow}
               removeFromCart={this.removeFromOrder}
               clearCart={this.clearOrder}
             /> :

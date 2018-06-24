@@ -2,7 +2,7 @@
 /* eslint react/jsx-indent: off */
 
 import { MemoryRouter } from 'react-router-dom';
-import { OrderItem } from '../orderCart/OrderItem';
+import OrderItem from '../orderCart/OrderItem';
 
 describe('Login Component', () => {
 
