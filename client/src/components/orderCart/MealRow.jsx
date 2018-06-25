@@ -33,7 +33,7 @@ MealRow.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  quantity: PropTypes.oneOfType(PropTypes.string, PropTypes.number).isRequired,
+  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   removeFromCart: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
 };

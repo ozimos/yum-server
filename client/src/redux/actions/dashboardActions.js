@@ -15,7 +15,7 @@ const failure = (error, actionType) => ({
 const getOrdersByDate = date => (dispatch) => {
   const url = date ? `${baseUrl}/all/${date}` : `${baseUrl}/all/`;
   dispatch(request(dashboardTypes.ORDER_DASHBOARD_REQUEST));
-  requestServices.noSend(url)
+  return requestServices.noSend(url)
     .then(
       response =>
         dispatch({

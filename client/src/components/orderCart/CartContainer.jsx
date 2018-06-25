@@ -119,13 +119,14 @@ class CartContainer extends React.Component {
 
 CartContainer.defaultProps = {
   addClass: '',
-  orderError: ''
+  orderError: '',
+  orderId: ''
 };
 CartContainer.propTypes = {
   order: PropTypes.arrayOf(PropTypes.object).isRequired,
   MealRow: PropTypes.func.isRequired,
   addClass: PropTypes.string,
-  orderId: PropTypes.string.isRequired,
+  orderId: PropTypes.string,
   orderError: PropTypes.string,
   clearCart: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,

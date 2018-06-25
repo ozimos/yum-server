@@ -28,7 +28,7 @@ AuthenticatedComponent.propTypes = {
   user: PropTypes.shape({ data: PropTypes.object, token: PropTypes.string })
 };
 
-const requireCaterer = (MyComponent) => {
+const requireUser = (MyComponent) => {
   const mapStateToProps = state => ({
     authenticated: state.loginReducer.authenticated,
     user: state.loginReducer.user,
@@ -38,4 +38,4 @@ const requireCaterer = (MyComponent) => {
   return connect(mapStateToProps)(AuthenticatedComponent);
 };
 
-export default requireCaterer;
+export default requireUser;

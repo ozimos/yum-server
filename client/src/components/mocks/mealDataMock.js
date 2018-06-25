@@ -1,9 +1,12 @@
 export const allMeals = {
-  data: ['meal1', 'meal2']
+  data: [{ id: 'abc', price: 1200 }, { id: 'def', price: 2000 }]
 };
 
 export const meal = {
   data: { id: 'mealId',
     price: 200,
-    description: 'nice' }
+    description: 'nice',
+    imageUrl: 'nice',
+    title: 'nice'
+  }
 };

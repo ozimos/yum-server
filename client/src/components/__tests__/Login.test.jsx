@@ -1,19 +1,20 @@
-/* global React:false, shallow:false */
-/* eslint react/jsx-indent: off */
+/* global React:false, shallow:false toJson:false */
 
-import { MemoryRouter } from 'react-router-dom';
 import { Login } from '../login/Login';
 
 describe('Login Component', () => {
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MemoryRouter><Login /></MemoryRouter>)
+    expect(shallow(<Login
+      dispatch={jest.fn()}
+    />)
       .exists(<form className="form" />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}><Login />
-                            </MemoryRouter>);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<Login
+      dispatch={jest.fn()}
+    />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
 

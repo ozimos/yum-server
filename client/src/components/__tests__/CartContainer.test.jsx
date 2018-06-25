@@ -1,19 +1,29 @@
-/* global React:false, shallow:false */
-/* eslint react/jsx-indent: off */
+/* global React:false, shallow:false toJson:false */
 
-import { MemoryRouter } from 'react-router-dom';
 import { CartContainer } from '../orderCart/CartContainer';
+import { allOrders } from '../mocks/orderDataMock';
 
-describe('Login Component', () => {
+describe('CartContainer Component', () => {
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MemoryRouter><CartContainer /></MemoryRouter>)
+    expect(shallow(<CartContainer
+      order={allOrders.data}
+      MealRow={jest.fn()}
+      clearCart={jest.fn()}
+      dispatch={jest.fn()}
+      orderId=""
+    />)
       .exists(<table className="table" />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}><CartContainer />
-                            </MemoryRouter>);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<CartContainer
+      order={allOrders.data}
+      MealRow={jest.fn()}
+      clearCart={jest.fn()}
+      dispatch={jest.fn()}
+      orderId=""
+    />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
 

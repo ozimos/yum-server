@@ -1,3 +1,5 @@
+import { allMeals } from './mealDataMock';
+
 export default {
-  data: { Meals: ['meal1', 'meal2'] }
+  data: { Meals: allMeals.data }
 };

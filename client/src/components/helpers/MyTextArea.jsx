@@ -41,4 +41,5 @@ MyTextArea.propTypes = {
   placeholder: PropTypes.string,
   ...propTypes
 };
+export { MyTextArea };
 export default withFormsy(MyTextArea);

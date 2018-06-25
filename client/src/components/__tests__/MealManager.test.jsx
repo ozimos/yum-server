@@ -1,16 +1,16 @@
-/* global React:false, shallow:false */
-/* eslint react/jsx-indent: off */
-import { MemoryRouter } from 'react-router-dom';
+/* global React:false, shallow:false toJson:false */
 import { MealManager } from '../mealManager/MealManager';
+import { allMeals } from '../mocks/mealDataMock';
 
 describe('MealManager Component', () => {
+  const user = { isCaterer: true, firstName: 'user' };
   it('renders correctly', () => {
     const wrapper =
-    shallow(<MemoryRouter
-      initialEntries={[{ pathname: '/', key: 'testKey' }]}
-    >
-      <MealManager />
-            </MemoryRouter>);
-    expect(wrapper).toMatchSnapshot();
+    shallow(<MealManager
+      dispatch={jest.fn()}
+      user={user}
+      meals={allMeals.data}
+    />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

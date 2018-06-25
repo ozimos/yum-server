@@ -48,4 +48,5 @@ MyInput.propTypes = {
   ]),
   ...propTypes
 };
+export { MyInput };
 export default withFormsy(MyInput);

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MealCard3 Component renders correctly 1`] = `
+<React.Fragment>
+  <div
+    className="card"
+  >
+    <img
+      alt="Meal"
+      className="fluid-img"
+      src="nice"
+    />
+    <div
+      className="title-element flexbox wrap"
+    >
+      <div
+        className="shrink"
+      >
+        nice
+      </div>
+      <div
+        className="flexbox"
+      >
+        <button
+          className="btn title-button icon"
+          onClick={[Function]}
+        >
+          ✔
+        </button>
+        <button
+          className="btn title-button icon"
+          onClick={[Function]}
+        >
+          ✖
+        </button>
+      </div>
+    </div>
+  </div>
+</React.Fragment>
+`;

@@ -1,67 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MealManager Component renders correctly 1`] = `
-<div
-  className="contain"
->
-  <header
-    className="header"
+exports[`MealCard Component renders correctly 1`] = `
+<React.Fragment>
+  <div
+    className="card"
   >
-    <Connect(Nav) />
-  </header>
-  <main>
-    <Greeting
-      firstName="user"
-      isCaterer={true}
+    <img
+      alt="Meal"
+      className="fluid-img"
+      src="nice"
     />
     <div
-      className="title flexbox"
+      className="title-element flexbox wrap"
     >
-      <h3
-        className="shrink"
+      <button
+        className="modal-open shrink modal-trigger"
+        onClick={[Function]}
       >
-        Your Meals
-      </h3>
+        nice
+      </button>
       <div
-        className="flexbox nowrap"
+        className="flexbox"
       >
-        <p>
-          Click on a meal title to edit the meal or
-        </p>
         <button
-          className="btn title-button"
+          className="btn title-button icon"
           onClick={[Function]}
         >
-          <p>
-            Add Meal
-          </p>
+          ✖
         </button>
       </div>
     </div>
-    <Search
-      caseSensitive={false}
-      className="search-input"
-      fuzzy={false}
-      onChange={[Function]}
-      throttle={200}
-    />
-    <MealCardContainer
-      MealCard={[Function]}
-      addClass=""
-      meals={
-        Array [
-          Object {
-            "id": "abc",
-            "price": 1200,
-          },
-          Object {
-            "id": "def",
-            "price": 2000,
-          },
-        ]
-      }
-    />
-  </main>
+  </div>
   <Modal
     ariaHideApp={true}
     bodyOpenClassName="ReactModal__Body--open"
@@ -131,8 +100,8 @@ exports[`MealManager Component renders correctly 1`] = `
         <Formsy(MyInput)
           innerRef={[Function]}
           name="title"
-          placeholder="Meal Title"
-          required={true}
+          placeholder="nice"
+          required={false}
           typeOfInput="text"
           validationError="Please enter the meal title"
           validationErrors={Object {}}
@@ -141,8 +110,8 @@ exports[`MealManager Component renders correctly 1`] = `
         <Formsy(MyInput)
           innerRef={[Function]}
           name="price"
-          placeholder="Price"
-          required={true}
+          placeholder={200}
+          required={false}
           typeOfInput="number"
           validationError="Please enter a price"
           validationErrors={
@@ -159,8 +128,8 @@ exports[`MealManager Component renders correctly 1`] = `
         <Formsy(MyTextArea)
           innerRef={[Function]}
           name="description"
-          placeholder="Description"
-          required={true}
+          placeholder="nice"
+          required={false}
           validationError=""
           validationErrors={Object {}}
           validations={null}
@@ -168,7 +137,7 @@ exports[`MealManager Component renders correctly 1`] = `
         <Formsy(MyInput)
           innerRef={[Function]}
           name="imageUrl"
-          required={true}
+          required={false}
           style={
             Object {
               "display": "none",
@@ -181,29 +150,23 @@ exports[`MealManager Component renders correctly 1`] = `
         />
       </Formsy>
     </div>
-    <t
-      accept="image/*"
-      disableClick={false}
-      disablePreview={false}
-      disabled={false}
-      maxSize={Infinity}
-      minSize={0}
-      multiple={true}
-      onDrop={[Function]}
-      preventDropOnDocument={true}
-      style={
-        Object {
-          "width": "300px",
-        }
-      }
-    >
-      <p>
-        Drop your files or click here to upload
-      </p>
-    </t>
+    <div>
+      <button
+        className="btn title-button"
+        onClick={[Function]}
+      >
+        Upload Photo
+      </button>
+    </div>
     <div
       id="meal_image"
-    />
+    >
+      <img
+        alt="meal"
+        className="fluid-img"
+        src="nice"
+      />
+    </div>
     <button
       className="btn btn-disabled title-button"
       disabled={true}
@@ -215,5 +178,5 @@ exports[`MealManager Component renders correctly 1`] = `
       </p>
     </button>
   </Modal>
-</div>
+</React.Fragment>
 `;

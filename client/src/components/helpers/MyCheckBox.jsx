@@ -29,4 +29,5 @@ class MyCheckBox extends React.Component {
 MyCheckBox.propTypes = {
   ...propTypes
 };
+export { MyCheckBox };
 export default withFormsy(MyCheckBox);

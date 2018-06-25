@@ -89,5 +89,6 @@ MealCard2.propTypes = {
   addToMenu: PropTypes.func,
   removeFromMenu: PropTypes.func,
 };
+export { MealCard2 };
 export default connect(state => state)(MealCard2);
 

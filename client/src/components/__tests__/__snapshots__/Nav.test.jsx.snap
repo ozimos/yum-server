@@ -1,38 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Component renders correctly 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "canGo": [Function],
-      "createHref": [Function],
-      "entries": Array [
-        Object {
-          "hash": "",
-          "key": "testKey",
-          "pathname": "/",
-          "search": "",
-        },
-      ],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "index": 0,
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "testKey",
-        "pathname": "/",
-        "search": "",
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+exports[`Nav Component renders correctly 1`] = `
+<nav
+  className="flexbox"
 >
-  <Nav />
-</Router>
+  <h2
+    className="shrink heading"
+  >
+    Book A Meal
+  </h2>
+  <div
+    className="flexbox nowrap"
+  >
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-item"
+      to="/menu"
+    >
+      Menu
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-item"
+      to="/meals"
+    >
+      Meals
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-item"
+      to="/dashboard"
+    >
+      DashBoard
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-item"
+      to="/orders"
+    >
+      Meal Booking
+    </NavLink>
+    <Link
+      replace={false}
+      to="/login"
+    >
+      Log Out
+    </Link>
+  </div>
+</nav>
 `;

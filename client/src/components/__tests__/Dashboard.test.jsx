@@ -1,19 +1,26 @@
-/* global React:false, shallow:false */
-/* eslint react/jsx-indent: off */
+/* global React:false, shallow:false toJson:false */
 
-import { MemoryRouter } from 'react-router-dom';
 import { Dashboard } from '../dashboard/Dashboard';
+import { allOrders } from '../mocks/orderDataMock';
 
-describe('Login Component', () => {
+describe('Dashboard Component', () => {
+  const user = { isCaterer: true, firstName: 'user' };
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MemoryRouter><Dashboard /></MemoryRouter>)
+    expect(shallow(<Dashboard
+      dispatch={jest.fn()}
+      user={user}
+      orders={allOrders.data}
+    />)
       .exists(<table className="table" />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}><Dashboard />
-                            </MemoryRouter>);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<Dashboard
+      dispatch={jest.fn()}
+      user={user}
+      orders={allOrders.data}
+    />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
 

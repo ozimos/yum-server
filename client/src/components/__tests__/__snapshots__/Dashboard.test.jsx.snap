@@ -1,38 +1,179 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Component renders correctly 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "canGo": [Function],
-      "createHref": [Function],
-      "entries": Array [
-        Object {
-          "hash": "",
-          "key": "testKey",
-          "pathname": "/",
-          "search": "",
-        },
-      ],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "index": 0,
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "testKey",
-        "pathname": "/",
-        "search": "",
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+exports[`Dashboard Component renders correctly 1`] = `
+<div
+  className="canvas"
 >
-  <Dashboard />
-</Router>
+  <div
+    className="container3"
+  >
+    <header
+      className="header extra"
+    >
+      <Connect(Nav) />
+    </header>
+    <main>
+      <Greeting
+        firstName="user"
+        isCaterer={true}
+      />
+      <div
+        className="summary"
+      >
+        <h3>
+          Summary
+        </h3>
+        <div
+          className="flexbox"
+        >
+          <h4>
+            Orders
+            <span
+              className="bg-blue"
+            >
+              2
+            </span>
+          </h4>
+          <h4>
+            Customers
+            <span
+              className="bg-blue"
+            >
+              1
+            </span>
+          </h4>
+          <h4>
+            Total Sales
+            <span
+              className="bg-blue"
+            >
+              ₦ 
+              12800
+            </span>
+          </h4>
+        </div>
+      </div>
+      <AccordionWrapper
+        accordion={false}
+        className="accordion"
+        onChange={[Function]}
+      >
+        <AccordionItemWrapper
+          accordionStore={
+            AccordionContainer {
+              "_listeners": Array [],
+              "state": Object {
+                "accordion": true,
+                "items": Array [],
+                "onChange": [Function],
+              },
+            }
+          }
+          className="accordion__item"
+          disabled={false}
+          expanded={true}
+          hideBodyClassName=""
+        >
+          <AccordionItemTitleWrapper
+            className="accordion__title"
+            hideBodyClassName=""
+          >
+            <div
+              className="title flexbox"
+            >
+              <h3>
+                Order List
+              </h3>
+              <p
+                className="shrink"
+              >
+                Click Order Id To View Details
+              </p>
+              <div
+                className="flexbox"
+              />
+            </div>
+          </AccordionItemTitleWrapper>
+          <AccordionItemBodyWrapper
+            className="accordion__body"
+            hideBodyClassName="accordion__body--hidden"
+          >
+            <Search
+              caseSensitive={false}
+              className="search-input"
+              fuzzy={false}
+              onChange={[Function]}
+              throttle={200}
+            />
+            <div
+              className="table-responsive"
+            >
+              <table
+                className="table"
+              >
+                <thead>
+                  <tr>
+                    <th>
+                      Id
+                    </th>
+                    <th>
+                      Total Amount(₦)
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    key="order1"
+                  >
+                    <td>
+                      <p
+                        className="modal-trigger"
+                      >
+                        order1
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        6400
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        Pending
+                      </p>
+                    </td>
+                  </tr>
+                  <tr
+                    key="order2"
+                  >
+                    <td>
+                      <p
+                        className="modal-trigger"
+                      >
+                        order2
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        6400
+                      </p>
+                    </td>
+                    <td>
+                      <p>
+                        Pending
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </AccordionItemBodyWrapper>
+        </AccordionItemWrapper>
+      </AccordionWrapper>
+    </main>
+  </div>
+</div>
 `;

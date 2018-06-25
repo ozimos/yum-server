@@ -1,38 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Component renders correctly 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "canGo": [Function],
-      "createHref": [Function],
-      "entries": Array [
-        Object {
-          "hash": "",
-          "key": "testKey",
-          "pathname": "/",
-          "search": "",
-        },
-      ],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "index": 0,
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "testKey",
-        "pathname": "/",
-        "search": "",
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+exports[`Menu Component renders correctly 1`] = `
+<div
+  className="contain"
 >
-  <Menu />
-</Router>
+  <header
+    className="header"
+  >
+    <Connect(Nav) />
+  </header>
+  <main>
+    <Greeting
+      firstName="user"
+      isCaterer={true}
+    />
+    <AccordionWrapper
+      accordion={false}
+      className="accordion"
+      onChange={[Function]}
+    >
+      <AccordionItemWrapper
+        accordionStore={
+          AccordionContainer {
+            "_listeners": Array [],
+            "state": Object {
+              "accordion": true,
+              "items": Array [],
+              "onChange": [Function],
+            },
+          }
+        }
+        className="accordion__item"
+        disabled={false}
+        expanded={true}
+        hideBodyClassName=""
+      >
+        <AccordionItemTitleWrapper
+          className="accordion__title"
+          hideBodyClassName=""
+        >
+          <div
+            className="title-element flexbox"
+          >
+            <h3>
+              Your Meals
+            </h3>
+            <div
+              className="accordion__arrow u-position-relative"
+              role="presentation"
+            />
+          </div>
+        </AccordionItemTitleWrapper>
+        <AccordionItemBodyWrapper
+          className="accordion__body"
+          hideBodyClassName="accordion__body--hidden"
+        >
+          <Search
+            caseSensitive={false}
+            className="search-input"
+            fuzzy={false}
+            onChange={[Function]}
+            throttle={200}
+          />
+          <MealCardContainer
+            MealCard={[Function]}
+            addClass="scroll"
+            addToMenu={[Function]}
+            meals={
+              Array [
+                Object {
+                  "id": "abc",
+                  "price": 1200,
+                },
+                Object {
+                  "id": "def",
+                  "price": 2000,
+                },
+              ]
+            }
+          />
+        </AccordionItemBodyWrapper>
+      </AccordionItemWrapper>
+      <AccordionItemWrapper
+        accordionStore={
+          AccordionContainer {
+            "_listeners": Array [],
+            "state": Object {
+              "accordion": true,
+              "items": Array [],
+              "onChange": [Function],
+            },
+          }
+        }
+        className="accordion__item"
+        disabled={false}
+        expanded={false}
+        hideBodyClassName=""
+      >
+        <AccordionItemTitleWrapper
+          className="accordion__title"
+          hideBodyClassName=""
+        >
+          <div
+            className="title-element flexbox wrap"
+          >
+            <h3>
+              Today's Menu
+            </h3>
+            <div
+              className="accordion__arrow u-position-relative"
+              role="presentation"
+            />
+          </div>
+        </AccordionItemTitleWrapper>
+        <AccordionItemBodyWrapper
+          className="accordion__body"
+          hideBodyClassName="accordion__body--hidden"
+        >
+          <div
+            className="title-element flexbox"
+          >
+            <button
+              className="btn title-button"
+              onClick={[Function]}
+            >
+              <p>
+                Post Menu
+              </p>
+            </button>
+            <button
+              className="title-button btn"
+              onClick={[Function]}
+            >
+              <p>
+                Clear Menu
+              </p>
+            </button>
+          </div>
+          <MealCardContainer
+            MealCard={[Function]}
+            addClass="scroll"
+            meals={Array []}
+            removeFromMenu={[Function]}
+          />
+        </AccordionItemBodyWrapper>
+      </AccordionItemWrapper>
+    </AccordionWrapper>
+  </main>
+</div>
 `;

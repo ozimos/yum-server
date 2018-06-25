@@ -1,38 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Component renders correctly 1`] = `
-<Router
-  history={
+exports[`OrderItem Component renders correctly 1`] = `
+<div
+  className="row"
+  style={
     Object {
-      "action": "POP",
-      "block": [Function],
-      "canGo": [Function],
-      "createHref": [Function],
-      "entries": Array [
-        Object {
-          "hash": "",
-          "key": "testKey",
-          "pathname": "/",
-          "search": "",
-        },
-      ],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "index": 0,
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "testKey",
-        "pathname": "/",
-        "search": "",
-      },
-      "push": [Function],
-      "replace": [Function],
+      "borderBottom": "1px solid",
     }
   }
 >
-  <OrderItem />
-</Router>
+  <div
+    className="col-4"
+  >
+    orderId
+  </div>
+  <div
+    className="col-7"
+  >
+    <div
+      className="row"
+      key="abc"
+    >
+      <div
+        className="col-8"
+      />
+      <div
+        className="col-3"
+      >
+        1200
+      </div>
+      <div
+        className="col-1"
+      >
+        2
+      </div>
+    </div>
+    <div
+      className="row"
+      key="def"
+    >
+      <div
+        className="col-8"
+      />
+      <div
+        className="col-3"
+      >
+        2000
+      </div>
+      <div
+        className="col-1"
+      >
+        2
+      </div>
+    </div>
+  </div>
+  <div
+    className="col-1"
+  >
+    <button
+      className="btn btn-primary"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+  </div>
+</div>
 `;

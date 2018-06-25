@@ -1,41 +1,210 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Component renders correctly 1`] = `
-<Router
-  history={
-    Object {
-      "action": "POP",
-      "block": [Function],
-      "canGo": [Function],
-      "createHref": [Function],
-      "entries": Array [
-        Object {
-          "hash": "",
-          "key": "testKey",
-          "pathname": "/",
-          "search": "",
-        },
-      ],
-      "go": [Function],
-      "goBack": [Function],
-      "goForward": [Function],
-      "index": 0,
-      "length": 1,
-      "listen": [Function],
-      "location": Object {
-        "hash": "",
-        "key": "testKey",
-        "pathname": "/",
-        "search": "",
-      },
-      "push": [Function],
-      "replace": [Function],
-    }
-  }
+exports[`Order Component renders correctly 1`] = `
+<div
+  className="contain"
 >
-  <Order
-    menu={Array []}
-    orders={Array []}
+  <header
+    className="header"
+  >
+    <Connect(Nav) />
+  </header>
+  <Greeting
+    firstName="user"
+    isCaterer={true}
   />
-</Router>
+  <div
+    className="row"
+  >
+    <main
+      className="col-12 col-md-8"
+    >
+      <AccordionWrapper
+        accordion={false}
+        className="accordion"
+        onChange={[Function]}
+      >
+        <AccordionItemWrapper
+          accordionStore={
+            AccordionContainer {
+              "_listeners": Array [],
+              "state": Object {
+                "accordion": true,
+                "items": Array [],
+                "onChange": [Function],
+              },
+            }
+          }
+          className="accordion__item"
+          disabled={false}
+          expanded={true}
+          hideBodyClassName=""
+        >
+          <AccordionItemTitleWrapper
+            className="accordion__title"
+            hideBodyClassName=""
+          >
+            <div
+              className="title-element flexbox"
+            >
+              <h3>
+                Today's Menu
+              </h3>
+              <div
+                className="accordion__arrow u-position-relative"
+                role="presentation"
+              />
+            </div>
+          </AccordionItemTitleWrapper>
+          <AccordionItemBodyWrapper
+            className="accordion__body"
+            hideBodyClassName="accordion__body--hidden"
+          >
+            <Search
+              caseSensitive={false}
+              className="search-input"
+              fuzzy={false}
+              onChange={[Function]}
+              throttle={200}
+            />
+            <MealCardContainer
+              MealCard={[Function]}
+              addClass="scroll"
+              addToOrder={[Function]}
+              meals={
+                Array [
+                  Object {
+                    "id": "abc",
+                    "price": 1200,
+                  },
+                  Object {
+                    "id": "def",
+                    "price": 2000,
+                  },
+                ]
+              }
+            />
+          </AccordionItemBodyWrapper>
+        </AccordionItemWrapper>
+        <AccordionItemWrapper
+          accordionStore={
+            AccordionContainer {
+              "_listeners": Array [],
+              "state": Object {
+                "accordion": true,
+                "items": Array [],
+                "onChange": [Function],
+              },
+            }
+          }
+          className="accordion__item"
+          disabled={false}
+          expanded={false}
+          hideBodyClassName=""
+        >
+          <AccordionItemTitleWrapper
+            className="accordion__title"
+            hideBodyClassName=""
+          >
+            <div
+              className="title-element flexbox wrap"
+            >
+              <h3>
+                Your Orders for Today
+              </h3>
+              <p>
+                Orders can only be edited up to 4 hours after booking
+              </p>
+              <div
+                className="accordion__arrow u-position-relative"
+                role="presentation"
+              />
+            </div>
+          </AccordionItemTitleWrapper>
+          <AccordionItemBodyWrapper
+            className="accordion__body"
+            hideBodyClassName="accordion__body--hidden"
+          >
+            <OrderContainer
+              OrderItem={[Function]}
+              addOrder={[Function]}
+              orders={
+                Array [
+                  Object {
+                    "Meals": Array [
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "abc",
+                        "price": 1200,
+                      },
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "def",
+                        "price": 2000,
+                      },
+                    ],
+                    "id": "order1",
+                    "mealList": Array [
+                      "abc",
+                      "def",
+                    ],
+                    "quantityList": Array [
+                      2,
+                      2,
+                    ],
+                    "userId": "userId",
+                  },
+                  Object {
+                    "Meals": Array [
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "abc",
+                        "price": 1200,
+                      },
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "def",
+                        "price": 2000,
+                      },
+                    ],
+                    "id": "order2",
+                    "mealList": Array [
+                      "abc",
+                      "def",
+                    ],
+                    "quantityList": Array [
+                      2,
+                      2,
+                    ],
+                    "userId": "userId",
+                  },
+                ]
+              }
+            />
+          </AccordionItemBodyWrapper>
+        </AccordionItemWrapper>
+      </AccordionWrapper>
+    </main>
+    <aside
+      className="col-12 col-md-4"
+    >
+      <div>
+        <h3>
+          Order Cart
+        </h3>
+        <p>
+          Add a meal by clicking on a meal checkmark button
+        </p>
+      </div>
+    </aside>
+  </div>
+</div>
 `;

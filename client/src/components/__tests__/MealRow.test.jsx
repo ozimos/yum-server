@@ -1,14 +1,18 @@
-/* global React:false, shallow:false */
-/* eslint react/jsx-indent: off */
+/* global React:false, shallow:false toJson:false */
 
-import { MemoryRouter } from 'react-router-dom';
 import MealRow from '../orderCart/MealRow';
 
-describe('Login Component', () => {
+describe('MealRow Component', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(<MemoryRouter initialEntries={[{ pathname: '/', key: 'testKey' }]}><MealRow />
-                            </MemoryRouter>);
-    expect(wrapper).toMatchSnapshot();
+    const wrapper = shallow(<MealRow
+      id="abc"
+      title="abc"
+      price={4}
+      quantity={4}
+      removeFromCart={jest.fn()}
+      setQuantity={jest.fn()}
+    />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
 
