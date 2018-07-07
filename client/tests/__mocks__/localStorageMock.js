@@ -1,13 +1,14 @@
-let localStorage = {};
+let store = {};
 
 export default {
-  setItem(key, value) {
-    return Object.assign(localStorage, { [key]: value });
-  },
+  setItem: (key, value) => { store[key] = value.toString(); },
   getItem(key) {
-    return localStorage[key];
+    return store[key] || null;
+  },
+  removeItem: (key) => {
+    delete store[key];
   },
   clear() {
-    localStorage = {};
+    store = {};
   }
 };

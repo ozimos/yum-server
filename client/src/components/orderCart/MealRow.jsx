@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) => {
   const subTotal = price * (quantity || 1);
@@ -34,8 +33,8 @@ MealRow.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  quantity: PropTypes.oneOfType(PropTypes.string, PropTypes.number).isRequired,
+  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   removeFromCart: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
 };
-export default hot(module)(MealRow);
+export default MealRow;

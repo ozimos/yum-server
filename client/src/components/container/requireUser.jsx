@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -29,14 +28,14 @@ AuthenticatedComponent.propTypes = {
   user: PropTypes.shape({ data: PropTypes.object, token: PropTypes.string })
 };
 
-const requireCaterer = (MyComponent) => {
+const requireUser = (MyComponent) => {
   const mapStateToProps = state => ({
     authenticated: state.loginReducer.authenticated,
     user: state.loginReducer.user,
     MyComponent
   });
 
-  return connect(mapStateToProps)(hot(module)(AuthenticatedComponent));
+  return connect(mapStateToProps)(AuthenticatedComponent);
 };
 
-export default requireCaterer;
+export default requireUser;

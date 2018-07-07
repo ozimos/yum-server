@@ -5,6 +5,9 @@ import merge from 'webpack-merge';
 import common from './webpack.common.js';
 
 export default merge(common, {
+  entry: {
+    index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true']
+  },
   mode: 'development',
   module: {
     rules: [{
@@ -16,7 +19,7 @@ export default merge(common, {
     },
     ]
   },
-  devtool: 'inline-source-map',
+  devtool: 'eval',
   devServer: {
     contentBase: path.join(__dirname, 'client/dist'),
     historyApiFallback: true,

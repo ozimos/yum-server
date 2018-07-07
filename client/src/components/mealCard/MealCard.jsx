@@ -3,10 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import Formsy from 'formsy-react';
-import MyInput from '../helpers/MyInput';
-import MyTextArea from '../helpers/MyTextArea';
+import MyFormsyInput from '../helpers/MyInput';
+import MyFormsyTextArea from '../helpers/MyTextArea';
 import { mealActions } from '../../redux/actions';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
@@ -92,14 +91,14 @@ class MealCard extends React.Component {
               onInvalid={this.disableButton}
               ref={(form) => { this.formEl = form; }}
             >
-              <MyInput
+              <MyFormsyInput
                 typeOfInput="text"
                 name="title"
                 placeholder={title || 'Meal Title'}
                 validations="minLength:1"
                 validationError="Please enter the meal title"
               />
-              <MyInput
+              <MyFormsyInput
                 typeOfInput="number"
                 name="price"
                 placeholder={price || 'Price'}
@@ -109,12 +108,12 @@ class MealCard extends React.Component {
                 validationError="Please enter a price"
                 validationErrors={{ isOnlyInt: 'price must be integer' }}
               />
-              <MyTextArea
+              <MyFormsyTextArea
                 name="description"
                 placeholder={description || 'Description'}
               />
 
-              <MyInput
+              <MyFormsyInput
                 ref={(urlInput) => { this.urlInputMain = urlInput; }}
                 innerRef={(c) => { this.urlInput = c; }}
                 style={{ display: 'none' }}
@@ -155,5 +154,6 @@ MealCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-export default connect(state => state)(hot(module)(MealCard));
+export { MealCard };
+export default connect(state => state)(MealCard);
 

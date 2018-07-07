@@ -1,7 +1,7 @@
 import {
   orderTypes
 } from '../types';
-import orderServices from '../../services/orderServices';
+import requestServices from '../../services/requestServices';
 
 const baseUrl = '/api/v1/orders';
 const request = actionType => ({
@@ -15,45 +15,46 @@ const failure = (error, actionType) => ({
 const getAllOrders = () => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.getAllOrders(baseUrl)
+  return requestServices.noSend(baseUrl)
     .then(
-      order =>
+      response =>
         dispatch({
           type: orderTypes.GET_ORDER_ALL_SUCCESS,
-          orders: order.data
+          orders: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
 
     );
 };
 
 const getUserOrdersByDate = date => (dispatch) => {
-  const url = date ? `${baseUrl}/date/${date}` : `${baseUrl}/date/`;
+  const url = date ? `${baseUrl}/user/${date}` : `${baseUrl}/user/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
-  orderServices.get(url)
+  return requestServices.noSend(url)
     .then(
-      order =>
+      response =>
         dispatch({
           type: orderTypes.GET_ORDER_ALL_SUCCESS,
-          orders: order.data
+          orders: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
 
     );
 };
-const getUserOrders = () => (dispatch) => {
+const getOrdersByDate = date => (dispatch) => {
+  const url = date ? `${baseUrl}/all/${date}` : `${baseUrl}/all/`;
   dispatch(request(orderTypes.ORDER_REQUEST));
-  orderServices.get(`${baseUrl}/user`)
+  return requestServices.noSend(url)
     .then(
-      order =>
+      response =>
         dispatch({
           type: orderTypes.GET_ORDER_ALL_SUCCESS,
-          orders: order.data
+          orders: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
 
     );
 };
@@ -61,15 +62,15 @@ const getUserOrders = () => (dispatch) => {
 const postOrder = order => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.postOrder(order, baseUrl)
+  return requestServices.send(baseUrl, 'post', order)
     .then(
-      postedOrder =>
+      response =>
         dispatch({
           type: orderTypes.POST_ORDER_SUCCESS,
-          order: postedOrder.data
+          order: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
 
     );
 };
@@ -77,15 +78,15 @@ const postOrder = order => (dispatch) => {
 const updateOrder = (order, orderId) => (dispatch) => {
   dispatch(request(orderTypes.ORDER_REQUEST));
 
-  orderServices.updateOrder(order, `${baseUrl}/${orderId}`)
+  return requestServices.send(`${baseUrl}/${orderId}`, 'put', order)
     .then(
-      updatedOrder =>
+      response =>
         dispatch({
           type: orderTypes.UPDATE_ORDER_SUCCESS,
-          order: updatedOrder.data
+          order: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
 
     );
 };
@@ -93,7 +94,7 @@ const updateOrder = (order, orderId) => (dispatch) => {
 export default {
   getAllOrders,
   getUserOrdersByDate,
-  getUserOrders,
+  getOrdersByDate,
   postOrder,
   updateOrder
 };

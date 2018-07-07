@@ -7,14 +7,16 @@ export default class MenuController extends Controller {
         association: 'Meals',
         required: false,
         through: {
-          attributes: []
+          attributes: ['updatedAt']
         }
       }]
     })
       .then((response) => {
-        if (response) {
+        if (response && response.Meals[0]) {
           const today = new Date().setHours(0, 0, 0);
-          const menuDate = new Date(response.updatedAt);
+          const menuByDateUpdatedArray = response.Meals
+            .sort((a, b) => new Date(b.MealMenus.updatedAt) - new Date(a.MealMenus.updatedAt));
+          const menuDate = new Date(menuByDateUpdatedArray[0].MealMenus.updatedAt);
           const isTodayMenu = (menuDate - today) > 0;
           if ((response.Meals.length > 0) && isTodayMenu) {
             return MenuController.defaultResponse(response);

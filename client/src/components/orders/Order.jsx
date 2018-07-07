@@ -11,19 +11,19 @@ import {
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard3 from '../mealCard/MealCard3';
 import MealRow from '../orderCart/MealRow';
-import CartContainer from '../orderCart/CartContainer';
+import ConnectedCartContainer from '../orderCart/CartContainer';
 import OrderItem from '../orderCart/OrderItem';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
-import Nav from '../nav/Nav';
+import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
 
-export class Order extends React.Component {
+class Order extends React.Component {
 
   constructor(props) {
     super(props);
@@ -76,7 +76,7 @@ export class Order extends React.Component {
     return (
       <div className="contain">
         <header className="header">
-          <Nav />
+          <ConnectedNav />
         </header>
         <Greeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
@@ -132,7 +132,7 @@ export class Order extends React.Component {
             </Accordion>
           </main>
           <aside className="col-12 col-md-4" >
-            {isMealSelected ? <CartContainer
+            {isMealSelected ? <ConnectedCartContainer
               order={this.state.currentOrder}
               orderId={this.state.currentOrderId}
               MealRow={MealRow}
@@ -140,7 +140,9 @@ export class Order extends React.Component {
               clearCart={this.clearOrder}
             /> :
             <div>
-              Select a meal by clicking on a meal checkmark button
+              <h3>Order Cart</h3>
+              <p>Add a meal by clicking on a meal checkmark button</p>
+
             </div>
                 }
           </aside>
@@ -172,5 +174,5 @@ const mapStateToProps = state => ({
   user: state.loginReducer.user.data
 });
 
-
+export { Order };
 export default connect(mapStateToProps)(hot(module)(Order));

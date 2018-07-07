@@ -1,7 +1,7 @@
 import {
   mealTypes
 } from '../types';
-import mealServices from '../../services/mealServices';
+import requestServices from '../../services/requestServices';
 
 const request = actionType => ({
   type: actionType,
@@ -14,16 +14,15 @@ const failure = (error, actionType) => ({
 const getAllMeals = () => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.getAllMeals('/api/v1/meals')
+  return requestServices.noSend('/api/v1/meals')
     .then(
-      meals =>
+      response =>
         dispatch({
           type: mealTypes.ALL_MEALS_SUCCESS,
-          meals: meals.data
+          meals: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, mealTypes.MEALS_FAILURE))
-
+        dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
     );
 };
 
@@ -31,15 +30,15 @@ const getAllMeals = () => (dispatch) => {
 const createMeal = meal => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.createMeal(meal, '/api/v1/meals')
+  return requestServices.send('/api/v1/meals', 'post', meal)
     .then(
-      createdMeal =>
+      response =>
         dispatch({
           type: mealTypes.CREATE_MEAL_SUCCESS,
-          meal: createdMeal.data
+          meal: response.data.data
         }),
       error =>
-        dispatch(failure(error.message, mealTypes.MEALS_FAILURE))
+        dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
 
     );
 };
@@ -47,31 +46,31 @@ const createMeal = meal => (dispatch) => {
 const updateMeal = (meal, mealId) => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.updateMeal(meal, `/api/v1/meals/${mealId}`)
+  return requestServices.send(`/api/v1/meals/${mealId}`, 'put', meal)
     .then(
-      updatedMeal =>
+      response =>
         dispatch({
           type: mealTypes.UPDATE_MEAL_SUCCESS,
-          meal: updatedMeal.data
+          meal: response.data.data
         }),
-      error => dispatch(failure(error.message, mealTypes.MEALS_FAILURE))
+      error => dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
     );
 };
 
 const deleteMeal = mealId => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
 
-  mealServices.deleteMeal(`/api/v1/meals/${mealId}`)
+  return requestServices.noSend(`/api/v1/meals/${mealId}`, 'delete')
     .then(
-      (deletedMeal) => {
-        if (deletedMeal.data) {
+      (response) => {
+        if (response.data.data) {
           return dispatch({
             type: mealTypes.DELETE_MEAL_SUCCESS,
             id: mealId
           });
         }
       },
-      error => dispatch(failure(error.message, mealTypes.MEALS_FAILURE))
+      error => dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
     );
 };
 

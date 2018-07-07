@@ -12,9 +12,11 @@ import ConnectedSignUp from './components/signup/SignUp';
 import ConnectedLogin from './components/login/Login';
 import ConnectedMenu from './components/menu/Menu';
 import ConnectedOrder from './components/orders/Order';
+import ConnectedDashboard from './components/dashboard/Dashboard';
 
 const MealManagerWithAuthorization = requireCaterer(ConnectedMealManager);
 const MenuWithAuthorization = requireCaterer(ConnectedMenu);
+const DashboardWithAuthorization = requireCaterer(ConnectedDashboard);
 const OrderWithAuthorization = requireUser(ConnectedOrder);
 const AppRoutes = () => (
   <ConnectedRouter history={history}>
@@ -25,6 +27,7 @@ const AppRoutes = () => (
       <Route path="/meals" component={MealManagerWithAuthorization} />
       <Route path="/menu" component={MenuWithAuthorization} />
       <Route path="/orders" component={OrderWithAuthorization} />
+      <Route path="/dashboard" component={DashboardWithAuthorization} />
     </Switch>
   </ConnectedRouter>
 );

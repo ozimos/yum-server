@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderItem Component renders correctly 1`] = `
+<div
+  className="row"
+  style={
+    Object {
+      "borderBottom": "1px solid",
+    }
+  }
+>
+  <div
+    className="col-4"
+  >
+    orderId
+  </div>
+  <div
+    className="col-7"
+  >
+    <div
+      className="row"
+      key="abc"
+    >
+      <div
+        className="col-8"
+      />
+      <div
+        className="col-3"
+      >
+        1200
+      </div>
+      <div
+        className="col-1"
+      >
+        2
+      </div>
+    </div>
+    <div
+      className="row"
+      key="def"
+    >
+      <div
+        className="col-8"
+      />
+      <div
+        className="col-3"
+      >
+        2000
+      </div>
+      <div
+        className="col-1"
+      >
+        2
+      </div>
+    </div>
+  </div>
+  <div
+    className="col-1"
+  >
+    <button
+      className="btn btn-primary"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+  </div>
+</div>
+`;

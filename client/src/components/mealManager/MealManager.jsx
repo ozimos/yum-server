@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
@@ -13,9 +12,9 @@ import MyInput from '../helpers/MyInput';
 import MealCard from '../mealCard/MealCard';
 import MyTextArea from '../helpers/MyTextArea';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import Greeting from '../greeting/Greeting';
+import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions } from '../../redux/actions';
-import Nav from '../nav/Nav';
+import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
@@ -89,10 +88,10 @@ export class MealManager extends React.Component {
     return (
       <div className="contain">
         <header className="header">
-          <Nav />
+          <ConnectedNav />
         </header>
         <main>
-          <Greeting isCaterer={isCaterer} firstName={firstName} />
+          <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title flexbox">
             <h3 className="shrink">
               Your Meals
@@ -177,15 +176,10 @@ export class MealManager extends React.Component {
             onDrop={this.handleDrop}
             multiple
             accept="image/*"
-            style={{ width: '20px' }}
+            style={{ width: '300px' }}
           >
             <p>Drop your files or click here to upload</p>
           </Dropzone>
-          {/* <div>
-            <button onClick={this.uploadWidget} className="btn title-button">
-          Upload Photo
-            </button>
-          </div> */}
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>
@@ -221,4 +215,4 @@ const mapStateToProps = state =>
     connecting: state.mealsReducer.connecting,
     meals: state.mealsReducer.meals, });
 
-export default connect(mapStateToProps)(hot(module)(MealManager));
+export default connect(mapStateToProps)(MealManager);

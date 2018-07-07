@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MealManager Component renders correctly 1`] = `
+<div
+  className="contain"
+>
+  <header
+    className="header"
+  >
+    <Connect(Nav) />
+  </header>
+  <main>
+    <Greeting
+      firstName="user"
+      isCaterer={true}
+    />
+    <div
+      className="title flexbox"
+    >
+      <h3
+        className="shrink"
+      >
+        Your Meals
+      </h3>
+      <div
+        className="flexbox nowrap"
+      >
+        <p>
+          Click on a meal title to edit the meal or
+        </p>
+        <button
+          className="btn title-button"
+          onClick={[Function]}
+        >
+          <p>
+            Add Meal
+          </p>
+        </button>
+      </div>
+    </div>
+    <Search
+      caseSensitive={false}
+      className="search-input"
+      fuzzy={false}
+      onChange={[Function]}
+      throttle={200}
+    />
+    <MealCardContainer
+      MealCard={[Function]}
+      addClass=""
+      meals={
+        Array [
+          Object {
+            "id": "abc",
+            "price": 1200,
+          },
+          Object {
+            "id": "def",
+            "price": 2000,
+          },
+        ]
+      }
+    />
+  </main>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    closeTimeoutMS={0}
+    contentLabel="Input Modal"
+    isOpen={false}
+    onRequestClose={[Function]}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <div
+      className="title flexbox"
+    >
+      <h3
+        className="shrink"
+      >
+        Meal Editor
+      </h3>
+      <div
+        className="flexbox"
+      >
+        <button
+          className="btn title-button"
+          onClick={[Function]}
+        >
+          ✖
+        </button>
+      </div>
+    </div>
+    <div
+      className="form-box"
+    >
+      <Formsy
+        className="form"
+        disabled={false}
+        getErrorMessage={[Function]}
+        getErrorMessages={[Function]}
+        getValue={[Function]}
+        hasValue={[Function]}
+        isFormDisabled={[Function]}
+        isFormSubmitted={[Function]}
+        isPristine={[Function]}
+        isRequired={[Function]}
+        isValid={[Function]}
+        isValidValue={[Function]}
+        mapping={null}
+        onChange={[Function]}
+        onError={[Function]}
+        onInvalid={[Function]}
+        onInvalidSubmit={[Function]}
+        onReset={[Function]}
+        onSubmit={[Function]}
+        onValid={[Function]}
+        onValidSubmit={[Function]}
+        preventExternalInvalidation={false}
+        resetValue={[Function]}
+        setValidations={[Function]}
+        setValue={[Function]}
+        showError={[Function]}
+        showRequired={[Function]}
+        validationErrors={null}
+      >
+        <Formsy(MyInput)
+          innerRef={[Function]}
+          name="title"
+          placeholder="Meal Title"
+          required={true}
+          typeOfInput="text"
+          validationError="Please enter the meal title"
+          validationErrors={Object {}}
+          validations="minLength:1"
+        />
+        <Formsy(MyInput)
+          innerRef={[Function]}
+          name="price"
+          placeholder="Price"
+          required={true}
+          typeOfInput="number"
+          validationError="Please enter a price"
+          validationErrors={
+            Object {
+              "isOnlyInt": "price must be integer",
+            }
+          }
+          validations={
+            Object {
+              "isOnlyInt": [Function],
+            }
+          }
+        />
+        <Formsy(MyTextArea)
+          innerRef={[Function]}
+          name="description"
+          placeholder="Description"
+          required={true}
+          validationError=""
+          validationErrors={Object {}}
+          validations={null}
+        />
+        <Formsy(MyInput)
+          innerRef={[Function]}
+          name="imageUrl"
+          required={true}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          typeOfInput="url"
+          validationError="Please select an image"
+          validationErrors={Object {}}
+          validations="minLength:5"
+        />
+      </Formsy>
+    </div>
+    <t
+      accept="image/*"
+      disableClick={false}
+      disablePreview={false}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={true}
+      onDrop={[Function]}
+      preventDropOnDocument={true}
+      style={
+        Object {
+          "width": "300px",
+        }
+      }
+    >
+      <p>
+        Drop your files or click here to upload
+      </p>
+    </t>
+    <div
+      id="meal_image"
+    />
+    <button
+      className="btn btn-disabled title-button"
+      disabled={true}
+      onClick={[Function]}
+      type="submit"
+    >
+      <p>
+        Continue
+      </p>
+    </button>
+  </Modal>
+</div>
+`;

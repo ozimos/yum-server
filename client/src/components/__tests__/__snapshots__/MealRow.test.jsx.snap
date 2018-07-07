@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MealRow Component renders correctly 1`] = `
+<React.Fragment>
+  <tr>
+    <td>
+      <button
+        className="btn btn-cart"
+        onClick={[Function]}
+      >
+        ✖
+      </button>
+    </td>
+    <td>
+      abc
+    </td>
+    <td>
+      4
+    </td>
+    <td>
+      <input
+        className="formControl"
+        onChange={[Function]}
+        placeholder="1"
+        style={
+          Object {
+            "width": "40px",
+          }
+        }
+        type="number"
+        value={4}
+      />
+    </td>
+    <td>
+      16
+    </td>
+  </tr>
+</React.Fragment>
+`;

@@ -25,12 +25,12 @@ orderRouter
   .put(Authenticate.isUser, validator.body(orderSchema), OrderController.orderClose, OrderController.select(orderController, 'updateOrder'));
 
 orderRouter
-  .route('/date/:date?')
+  .route('/user/:date?')
   .get(Authenticate.isUser, Authenticate.isAdmin, validator.body(orderSchema), OrderController.select(orderController, 'getUserOrdersByDate'));
 
 orderRouter
-  .route('/user')
-  .get(Authenticate.isUser, validator.body(orderSchema), OrderController.select(orderController, 'getUserOrders'));
+  .route('/all/:date?')
+  .get(Authenticate.isUser, validator.body(orderSchema), OrderController.select(orderController, 'getOrdersByDate'));
 
 // Return orderRouter
 export default orderRouter;

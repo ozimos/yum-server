@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { hot } from 'react-hot-loader';
 import { orderActions } from '../../redux/actions';
 
 
@@ -120,13 +119,14 @@ class CartContainer extends React.Component {
 
 CartContainer.defaultProps = {
   addClass: '',
-  orderError: ''
+  orderError: '',
+  orderId: ''
 };
 CartContainer.propTypes = {
   order: PropTypes.arrayOf(PropTypes.object).isRequired,
   MealRow: PropTypes.func.isRequired,
   addClass: PropTypes.string,
-  orderId: PropTypes.string.isRequired,
+  orderId: PropTypes.string,
   orderError: PropTypes.string,
   clearCart: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
@@ -135,5 +135,6 @@ const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
   connecting: state.orderReducer.connecting,
 });
-export default connect(mapStateToProps)(hot(module)(CartContainer));
+export { CartContainer };
+export default connect(mapStateToProps)(CartContainer);
 

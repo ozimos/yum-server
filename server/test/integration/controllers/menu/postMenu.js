@@ -23,7 +23,7 @@ describe('Integration Controller Post Menu', () => {
     expect(response.data.Meals[0].id).to.exist;
     expect(response.statusCode).to.equal(201);
   });
-  it.skip('postMenu returns error message if meal is not in db', async () => {
+  it('postMenu returns error message if meal is not in db', async () => {
     const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';
 
     const req = {
@@ -33,8 +33,8 @@ describe('Integration Controller Post Menu', () => {
       }
     };
     const response = await menuController.postMenu(req);
-    expect(response.message).to.equal('Menu was not posted. Try again');
-    expect(response.statusCode).to.equal(404);
+    expect(response.message).to.be.a('string');
+    expect(response.statusCode).to.equal(400);
   });
   it('postMenu sets the environment variables', async () => {
     const hour = new Date().getHours();

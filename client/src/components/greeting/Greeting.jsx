@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const Greeting = props =>
   (
@@ -14,4 +13,4 @@ Greeting.propTypes = {
   isCaterer: PropTypes.bool.isRequired,
   firstName: PropTypes.string.isRequired
 };
-export default hot(module)(Greeting);
+export default Greeting;

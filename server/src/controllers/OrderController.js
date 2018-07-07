@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
+import addDays from 'date-fns/add_days';
 import differenceInHours from 'date-fns/difference_in_hours';
 import Controller from './Controller';
 
@@ -55,11 +56,12 @@ export default class OrderController extends Controller {
     const { userId } = req.decoded;
     const currentDate = format(new Date(), 'YYYY-MM-DD');
     const date = req.params.date || currentDate;
+    const nextDate = addDays(date, 1);
     const { Op } = Sequelize;
 
     const options = {
       where: { userId,
-        createdAt: { [Op.gt]: date } },
+        createdAt: { [Op.gt]: date, [Op.lt]: nextDate } },
       include: [{
         association: 'Meals',
         required: false,
@@ -80,11 +82,13 @@ export default class OrderController extends Controller {
       })
       .catch(error => OrderController.errorResponse(error.message));
   }
-  getUserOrders(req) {
-    const { userId } = req.decoded;
-
+  getOrdersByDate(req) {
+    const currentDate = format(new Date(), 'YYYY-MM-DD');
+    const date = req.params.date || currentDate;
+    const nextDate = addDays(date, 1);
+    const { Op } = Sequelize;
     const options = {
-      where: { userId },
+      where: { createdAt: { [Op.gt]: date, [Op.lt]: nextDate } },
       include: [{
         association: 'Meals',
         required: false,
@@ -150,7 +154,7 @@ export default class OrderController extends Controller {
       }
       return OrderController.errorResponse('Order was not processed. Try again', 404);
     } catch (error) {
-      OrderController.errorResponse(error.message);
+      return OrderController.errorResponse(error.message);
     }
   }
 }

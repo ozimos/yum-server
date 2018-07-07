@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyTextArea Component renders correctly 1`] = `
+<React.Fragment>
+  <textarea
+    onChange={[Function]}
+    placeholder=""
+  />
+  <div
+    style={
+      Object {
+        "color": "red",
+        "fontSize": "1rem",
+      }
+    }
+  />
+</React.Fragment>
+`;

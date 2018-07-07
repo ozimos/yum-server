@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp Component renders correctly 1`] = `
+<div
+  className="canvas"
+>
+  <div
+    className="container2"
+  >
+    <header
+      className="header"
+    >
+      <h1
+        className="heading"
+      >
+        Book A Meal
+      </h1>
+    </header>
+    <main>
+      <div
+        className="welcome"
+      >
+        <h1
+          className="welcome-text"
+        >
+          Welcome!
+        </h1>
+        <h4>
+          Register by entering the information below
+        </h4>
+      </div>
+      <div
+        className="form-box"
+      >
+        <Formsy
+          className="form"
+          disabled={false}
+          getErrorMessage={[Function]}
+          getErrorMessages={[Function]}
+          getValue={[Function]}
+          hasValue={[Function]}
+          isFormDisabled={[Function]}
+          isFormSubmitted={[Function]}
+          isPristine={[Function]}
+          isRequired={[Function]}
+          isValid={[Function]}
+          isValidValue={[Function]}
+          mapping={null}
+          onChange={[Function]}
+          onError={[Function]}
+          onInvalid={[Function]}
+          onInvalidSubmit={[Function]}
+          onReset={[Function]}
+          onSubmit={[Function]}
+          onValid={[Function]}
+          onValidSubmit={[Function]}
+          preventExternalInvalidation={false}
+          resetValue={[Function]}
+          setValidations={[Function]}
+          setValue={[Function]}
+          showError={[Function]}
+          showRequired={[Function]}
+          validationErrors={null}
+        >
+          <Formsy(MyInput)
+            innerRef={[Function]}
+            name="email"
+            placeholder="Email"
+            required={true}
+            typeOfInput="email"
+            validationError="This is not a valid email"
+            validationErrors={Object {}}
+            validations="isEmail"
+          />
+          <div
+            className="invalid-feedback"
+          />
+          <Formsy(MyInput)
+            innerRef={[Function]}
+            name="firstName"
+            placeholder="First Name"
+            required={true}
+            typeOfInput="text"
+            validationError="Please enter your first name"
+            validationErrors={Object {}}
+            validations="minLength:1"
+          />
+          <div
+            className="invalid-feedback"
+          />
+          <Formsy(MyInput)
+            innerRef={[Function]}
+            name="lastName"
+            placeholder="Last Name"
+            required={true}
+            typeOfInput="text"
+            validationError="Please enter your last name"
+            validationErrors={Object {}}
+            validations="minLength:1"
+          />
+          <Formsy(MyInput)
+            innerRef={[Function]}
+            name="password"
+            placeholder="Password"
+            required={true}
+            typeOfInput="password"
+            validationError=""
+            validationErrors={
+              Object {
+                "hasLowerCase": "Must have lowercase letter or you can use a passphrase of minimum length 16 characters",
+                "hasNumber": "Must have a number or you can use a passphrase of minimum length 16 characters",
+                "hasSpecialCharacter": "Must have a special character or you can use a passphrase of minimum length 16 characters",
+                "hasUpperCase": "Must have uppercase letter or you can use a passphrase of minimum length 16 characters",
+                "minLength": "Must have at least 8 characters",
+              }
+            }
+            validations={
+              Object {
+                "hasLowerCase": [Function],
+                "hasNumber": [Function],
+                "hasSpecialCharacter": [Function],
+                "hasUpperCase": [Function],
+                "minLength": 8,
+              }
+            }
+          />
+          <Formsy(MyInput)
+            innerRef={[Function]}
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            required={true}
+            typeOfInput="password"
+            validationError="Passwords do not match"
+            validationErrors={Object {}}
+            validations="equalsField:password"
+          />
+          <div>
+            <label
+              htmlFor="isCaterer"
+            >
+              <Formsy(MyCheckBox)
+                id="isCaterer"
+                innerRef={[Function]}
+                name="isCaterer"
+                required={false}
+                validationError=""
+                validationErrors={Object {}}
+                validations={null}
+              />
+              Caterer
+            </label>
+          </div>
+          <button
+            className="btn btn-disabled"
+            disabled={true}
+            type="submit"
+          >
+            Continue
+          </button>
+        </Formsy>
+        <div
+          className="stacked-text"
+        >
+          <Link
+            replace={false}
+            to="/login"
+          >
+            <p>
+              Already have an account? Click here to sign in
+            </p>
+          </Link>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;

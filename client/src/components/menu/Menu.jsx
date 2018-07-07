@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import {
   Accordion,
@@ -12,9 +11,9 @@ import {
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard2 from '../mealCard/MealCard2';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import Greeting from '../greeting/Greeting';
+import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions, menuActions } from '../../redux/actions';
-import Nav from '../nav/Nav';
+import ConnectedNav from '../nav/Nav';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
@@ -22,7 +21,7 @@ import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
 
 ReactModal.setAppElement(document.getElementById('root'));
-export class Menu extends React.Component {
+class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,10 +57,10 @@ export class Menu extends React.Component {
     return (
       <div className="contain">
         <header className="header">
-          <Nav />
+          <ConnectedNav />
         </header>
         <main>
-          <Greeting isCaterer={isCaterer} firstName={firstName} />
+          <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <Accordion accordion={false}>
             <AccordionItem expanded>
               <AccordionItemTitle>
@@ -133,5 +132,5 @@ const mapStateToProps = state => ({
   user: state.loginReducer.user.data
 });
 
-
-export default connect(mapStateToProps)(hot(module)(Menu));
+export { Menu };
+export default connect(mapStateToProps)(Menu);

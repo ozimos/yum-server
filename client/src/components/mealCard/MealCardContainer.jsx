@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 import '../../../public/styles/book_a_meal.css';
 
@@ -25,5 +24,5 @@ MealCardContainer.propTypes = {
   addClass: PropTypes.string,
 };
 
-export default hot(module)(MealCardContainer);
+export default MealCardContainer;
 
