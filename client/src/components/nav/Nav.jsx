@@ -8,22 +8,22 @@ const Nav = ({ user }) =>
   (
     <nav className="flexbox">
       <h2 className="shrink heading">Book A Meal</h2>
-      <div className="flexbox nowrap">
-        {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item" to="/menu">
-          Menu
-        </NavLink>}
+      <div className="flexbox">
         {user.isCaterer &&
         <NavLink activeClassName="active" className="nav-item" to="/meals">
           Meals
         </NavLink >}
         {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item" to="/dashboard">
-        DashBoard
-        </NavLink >}
+        <NavLink activeClassName="active" className="nav-item" to="/menu">
+          Menu
+        </NavLink>}
         <NavLink activeClassName="active" className="nav-item" to="/orders">
           Meal Booking
         </NavLink>
+        {user.isCaterer &&
+        <NavLink activeClassName="active" className="nav-item" to="/dashboard">
+        DashBoard
+        </NavLink >}
         <Link to="/login">
           Log Out
         </Link>

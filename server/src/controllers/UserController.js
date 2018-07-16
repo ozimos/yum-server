@@ -25,7 +25,7 @@ class UserController extends Controller {
       }).then((response) => {
         if (!response) {
           return UserController.errorResponse({
-            email: 'Account does not exist! Visit /api/v1/auth/signup to signup.'
+            email: 'Incorrect email or password'
           }, 404);
         }
         // check if password is correct
@@ -35,7 +35,7 @@ class UserController extends Controller {
           return UserController.sendResponseWithToken(response);
         }
         return UserController.errorResponse({
-          password: 'Incorrect password'
+          password: 'Incorrect email or password'
         }, 404);
       }).catch(error => UserController.errorResponse(error.message));
   }

@@ -9,7 +9,7 @@
     display: block;
     position: absolute;
     width: 15px;
-    z-index: 3;
+    z-index: 0;
     height: 15px;
     font-size: 20px;
     top: 11px;
@@ -20,6 +20,7 @@
   
   .search-input > input {
     width: 100%;
+    background-color: white;
     font-size: 18px;
     border: none;
     line-height: 22px;

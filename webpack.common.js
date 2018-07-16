@@ -55,22 +55,8 @@ export default {
           global: 'jQuery',
         },
         {
-          module: 'cloudinary',
-          entry: 'https://widget.cloudinary.com/global/all.js',
-          global: 'cloudinary',
-        },
-        {
-          module: 'popper',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js',
-          global: 'popper',
-        },
-        {
-          module: 'bootstrap',
-          entry: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
-        },
-        {
-          module: 'bootstrap',
-          entry: 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js',
+          module: 'materialize',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js',
         }
       ],
     }),

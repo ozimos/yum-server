@@ -9,7 +9,7 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
-import HotGreeting from '../greeting/Greeting';
+import Greeting from '../greeting/Greeting';
 import { dashboardActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import uniqueUsers from '../../utils/uniqueUsers';
@@ -36,11 +36,14 @@ class Dashboard extends React.Component {
   render() {
     const KEYS_TO_FILTERS = ['id', 'userId', 'updatedAt'];
     const isTodayOrder = this.props.orders.length !== 0;
+    console.log(isTodayOrder);
     let filteredOrders;
     if (isTodayOrder) {
       filteredOrders = this.props.orders
         .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     }
+    filteredOrders = this.props.orders
+      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
 
     return (
@@ -51,7 +54,7 @@ class Dashboard extends React.Component {
             <ConnectedNav />
           </header>
           <main>
-            <HotGreeting isCaterer={isCaterer} firstName={firstName} />
+            <Greeting isCaterer={isCaterer} firstName={firstName} />
 
             <div className="summary">
               <h3>Summary</h3>
@@ -93,7 +96,7 @@ class Dashboard extends React.Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredOrders.map(order => (
+                        {filteredOrders && filteredOrders.map(order => (
                           <tr key={order.id}>
                             <td><p className="modal-trigger">{order.id}</p></td>
                             <td><p>{subTotal(order.Meals)}</p></td>

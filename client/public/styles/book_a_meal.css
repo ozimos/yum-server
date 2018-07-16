@@ -16,7 +16,9 @@ body {
   background-attachment: fixed;
   background-size: 50% 100%;
 }
-
+.nav-item.active{
+  font-weight: bold
+}
 .heading {
   color: maroon
 }
@@ -88,6 +90,13 @@ a {
   margin-right: 10px;
   margin-left: 10px;
 }
+.flexbox2 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 
 .flexbox>* {
   margin-right: 10px;
@@ -133,17 +142,28 @@ a {
 }
 
 .btn {
-  background-color: #2f80ed;
-  border-radius: 10px;
-  padding: 0.5em 0;
+  background-color: #2f80ed !important;
+  border-radius: 5px;
   min-width: 20px;
   color: white;
+  height: unset;
+  line-height: unset;
   font-weight: bold;
   border-width: 0;
   cursor: pointer;
   text-align: center;
 }
-
+.btn:hover{
+  background-color: #2fa0ed;
+}
+.btn:visited, button:visited{
+  background-color: #2f80ed !important
+}
+.dropzone{
+  padding-left: 10px;
+  text-align: left;
+  width: 300px
+}
 .title-element {
   border-radius: 10px;
   margin-top: 10px;
@@ -229,7 +249,7 @@ a {
   width: 100%;
 }
 #meal_image {
-  width: 60%;
+  width: 40%;
   margin: 10px auto;
 }
 
@@ -280,12 +300,19 @@ h3.modal-trigger,p.modal-trigger  {
 /* Modal Content/Box */
 
 .modal-content {
-  width: 70%;
-  margin: 20px auto;
-  background-color: white;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  bottom: 40px;
+  width: 50%;
+  height: 70%;
+  border: 1px solid rgb(204, 204, 204);
+  margin: auto;
+  background: rgb(255, 255, 255);
   border-radius: 10px;
-  padding: 10px 0;
-  border: 1px solid #888;
+  outline: none;
+  padding: 10px 20px;
 }
 
 .gallery {

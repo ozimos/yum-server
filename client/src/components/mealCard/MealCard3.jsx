@@ -45,6 +45,5 @@ MealCard3.propTypes = {
   addToOrder: PropTypes.func,
   removeFromOrder: PropTypes.func,
 };
-export { MealCard3 };
 export default MealCard3;
 
