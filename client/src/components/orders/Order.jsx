@@ -111,10 +111,13 @@ class Order extends React.Component {
                     <h3>
           Your Orders for Today
                     </h3>
-                    <p>
-                      {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
-                    </p>
-                    <div className="accordion__arrow u-position-relative" role="presentation" />
+                    <div className="flexbox">
+                      <p className="shrink mr-auto">
+                        {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
+                      </p>
+                      <div className="mx-auto" />
+                      <div className="accordion__arrow u-position-relative" role="presentation" />
+                    </div>
                   </div>
                 </AccordionItemTitle>
                 <AccordionItemBody>

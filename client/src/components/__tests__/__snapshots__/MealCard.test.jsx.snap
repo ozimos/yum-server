@@ -34,6 +34,7 @@ exports[`MealCard Component renders correctly 1`] = `
   <Modal
     ariaHideApp={true}
     bodyOpenClassName="ReactModal__Body--open"
+    className="modal-content"
     closeTimeoutMS={0}
     contentLabel="Input Modal"
     isOpen={false}
@@ -150,14 +151,24 @@ exports[`MealCard Component renders correctly 1`] = `
         />
       </Formsy>
     </div>
-    <div>
+    <t
+      accept="image/*"
+      className="dropzone"
+      disableClick={false}
+      disablePreview={false}
+      disabled={false}
+      maxSize={Infinity}
+      minSize={0}
+      multiple={true}
+      onDrop={[Function]}
+      preventDropOnDocument={true}
+    >
       <button
-        className="btn title-button"
-        onClick={[Function]}
+        className="btn"
       >
-        Upload Photo
+         Select an Image
       </button>
-    </div>
+    </t>
     <div
       id="meal_image"
     >

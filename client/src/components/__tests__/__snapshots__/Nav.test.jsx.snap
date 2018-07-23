@@ -10,16 +10,8 @@ exports[`Nav Component renders correctly 1`] = `
     Book A Meal
   </h2>
   <div
-    className="flexbox nowrap"
+    className="flexbox"
   >
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      className="nav-item"
-      to="/menu"
-    >
-      Menu
-    </NavLink>
     <NavLink
       activeClassName="active"
       aria-current="page"
@@ -32,9 +24,9 @@ exports[`Nav Component renders correctly 1`] = `
       activeClassName="active"
       aria-current="page"
       className="nav-item"
-      to="/dashboard"
+      to="/menu"
     >
-      DashBoard
+      Menu
     </NavLink>
     <NavLink
       activeClassName="active"
@@ -43,6 +35,14 @@ exports[`Nav Component renders correctly 1`] = `
       to="/orders"
     >
       Meal Booking
+    </NavLink>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      className="nav-item"
+      to="/dashboard"
+    >
+      DashBoard
     </NavLink>
     <Link
       replace={false}

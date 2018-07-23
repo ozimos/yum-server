@@ -112,13 +112,22 @@ exports[`Order Component renders correctly 1`] = `
               <h3>
                 Your Orders for Today
               </h3>
-              <p>
-                Orders can only be edited up to 4 hours after booking
-              </p>
               <div
-                className="accordion__arrow u-position-relative"
-                role="presentation"
-              />
+                className="flexbox"
+              >
+                <p
+                  className="shrink mr-auto"
+                >
+                  Orders can only be edited up to 4 hours after booking
+                </p>
+                <div
+                  className="mx-auto"
+                />
+                <div
+                  className="accordion__arrow u-position-relative"
+                  role="presentation"
+                />
+              </div>
             </div>
           </AccordionItemTitleWrapper>
           <AccordionItemBodyWrapper
@@ -147,6 +156,11 @@ exports[`Order Component renders correctly 1`] = `
                         "price": 2000,
                       },
                     ],
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
                     "id": "order1",
                     "mealList": Array [
                       "abc",
@@ -175,6 +189,11 @@ exports[`Order Component renders correctly 1`] = `
                         "price": 2000,
                       },
                     ],
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
                     "id": "order2",
                     "mealList": Array [
                       "abc",

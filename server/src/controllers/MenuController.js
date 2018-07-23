@@ -16,9 +16,9 @@ export default class MenuController extends Controller {
           const today = new Date().setHours(0, 0, 0);
           const menuByDateUpdatedArray = response.Meals
             .sort((a, b) => new Date(b.MealMenus.updatedAt) - new Date(a.MealMenus.updatedAt));
-          const menuDate = new Date(menuByDateUpdatedArray[0].MealMenus.updatedAt);
+          const menuDate = menuByDateUpdatedArray[0].MealMenus.updatedAt;
           const isTodayMenu = (menuDate - today) > 0;
-          if ((response.Meals.length > 0) && isTodayMenu) {
+          if (isTodayMenu) {
             return MenuController.defaultResponse(response);
           }
         }
@@ -52,7 +52,9 @@ export default class MenuController extends Controller {
       })
       .then((meals) => {
         if (meals.length > 0) {
-          const menuDate = new Date(postedMenu.updatedAt);
+          const menuByDateUpdatedArray = meals
+            .sort((a, b) => new Date(b.MealMenus.updatedAt) - new Date(a.MealMenus.updatedAt));
+          const menuDate = menuByDateUpdatedArray[0].MealMenus.updatedAt;
           process.env.ORDER_START_HOUR = menuDate.getHours();
           process.env.ORDER_START_MINS = menuDate.getMinutes();
           postedMenu.Meals = meals;

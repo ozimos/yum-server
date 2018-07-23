@@ -40,6 +40,10 @@ export default class OrderController extends Controller {
         through: {
           attributes: ['quantity']
         }
+      },
+      {
+        association: 'User',
+        attributes: ['firstName', 'lastName', 'email']
       }]
     };
     return this.Model
@@ -70,6 +74,10 @@ export default class OrderController extends Controller {
         through: {
           attributes: ['quantity']
         }
+      },
+      {
+        association: 'User',
+        attributes: ['firstName', 'lastName', 'email']
       }]
     };
     return this.Model
@@ -97,6 +105,10 @@ export default class OrderController extends Controller {
         through: {
           attributes: ['quantity']
         }
+      },
+      {
+        association: 'User',
+        attributes: ['firstName', 'lastName', 'email']
       }]
     };
     return this.Model

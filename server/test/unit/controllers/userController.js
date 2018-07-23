@@ -28,7 +28,7 @@ describe('User Controllers', () => {
   describe('login(req)', () => {
     it('should return an error message if no data in database', () => {
       const expectedResponse = {
-        email: 'Account does not exist! Visit /api/v1/auth/signup to signup.'
+        email: 'Incorrect email or password'
       };
 
       td.when(User.findOne(input)).thenResolve(null);
@@ -40,7 +40,7 @@ describe('User Controllers', () => {
         password: 'some Hash'
       };
       const expectedResponse = {
-        password: 'Incorrect password'
+        password: 'Incorrect email or password'
       };
       const bcrypt = {
         compareSync: td.func()

@@ -1,12 +1,14 @@
-/* global cloudinary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
+import Dropzone from 'react-dropzone';
+
 import MyFormsyInput from '../helpers/MyInput';
 import MyFormsyTextArea from '../helpers/MyTextArea';
 import { mealActions } from '../../redux/actions';
+import imageUpload from '../../services/imageUpload';
 import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 import '../../../public/styles/modalOpenButton.scss';
@@ -18,17 +20,19 @@ class MealCard extends React.Component {
     this.state = {
       canSubmit: false,
       showModal: false,
-      displayImage: this.props.imageUrl
+      displayImage: this.props.imageUrl,
+      // uploading: false,
+      // uploadPercent: 0
     };
   }
-  uploadWidget = () => {
-    cloudinary.openUploadWidget(
-      { cloud_name: 'tovieyeozim', upload_preset: 'u9zfzeap', tags: [this.props.id] },
-      (error, result) => {
-        this.setState({ displayImage: result[0].secure_url });
-        this.urlInput.props.setValue(result[0].secure_url);
-      }
-    );
+  handleDrop = (files) => {
+    // this.setState({ uploading: true });
+    imageUpload(files).then((response) => {
+      const { data } = response;
+      const fileURL = data.secure_url;
+      this.urlInput.props.setValue(fileURL);
+      // this.setState({ uploading: false });
+    });
   }
   handleOpenModal = () =>
     this.setState({ showModal: true });
@@ -70,6 +74,7 @@ class MealCard extends React.Component {
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="Input Modal"
+          className="modal-content"
           onRequestClose={this.handleCloseModal}
           shouldCloseOnOverlayClick
         >
@@ -125,11 +130,14 @@ class MealCard extends React.Component {
               />
             </Formsy>
           </div>
-          <div>
-            <button onClick={this.uploadWidget} className="btn title-button">
-          Upload Photo
-            </button>
-          </div>
+          <Dropzone
+            onDrop={this.handleDrop}
+            multiple
+            accept="image/*"
+            className="dropzone"
+          >
+            <button className="btn"> Select an Image</button>
+          </Dropzone>
           <div id="meal_image">
             <img src={this.state.displayImage} alt="meal" className="fluid-img" />
           </div>
