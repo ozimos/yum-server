@@ -4,6 +4,10 @@ export const userData = {
   token: 'abc'
 };
 export const userInput = {
-  data: { email: 'asdf' },
-
+  data: { email: 'asdf' }
+};
+export const userIncludes = {
+  email: 'asdf',
+  firstName: 'first',
+  lastName: 'last'
 };

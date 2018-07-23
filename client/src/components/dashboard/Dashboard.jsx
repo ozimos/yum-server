@@ -14,7 +14,8 @@ import { dashboardActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import uniqueUsers from '../../utils/uniqueUsers';
 import cashTotal, { subTotal } from '../../utils/cashTotal';
-import '../../../public/styles/book_a_meal.css';
+import orderDetails from '../../utils/orderDetails';
+import '../../../public/styles/book_a_meal3.scss';
 import '../../../public/styles/dashboard.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
@@ -36,7 +37,6 @@ class Dashboard extends React.Component {
   render() {
     const KEYS_TO_FILTERS = ['id', 'userId', 'updatedAt'];
     const isTodayOrder = this.props.orders.length !== 0;
-    console.log(isTodayOrder);
     let filteredOrders;
     if (isTodayOrder) {
       filteredOrders = this.props.orders
@@ -45,9 +45,8 @@ class Dashboard extends React.Component {
     filteredOrders = this.props.orders
       .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
-
     return (
-      <div className="canvas">
+      <div id="dashboard" className="canvas">
         <div className="container3">
 
           <header className="header extra">
@@ -56,51 +55,60 @@ class Dashboard extends React.Component {
           <main>
             <Greeting isCaterer={isCaterer} firstName={firstName} />
 
-            <div className="summary">
-              <h3>Summary</h3>
-              <div className="flexbox">
-                <h4>Orders
-                  <span className="bg-blue">{this.props.orders.length}</span>
-                </h4>
-                <h4>Customers
-                  <span className="bg-blue">{uniqueUsers(this.props.orders)}</span>
-                </h4>
-                <h4>Total Sales
-                  <span className="bg-blue">&#8358; {cashTotal(this.props.orders)}</span>
-                </h4>
+            <div className="flexbox">
+              <div className="card order_summary">
+                <div className="flexbox">
+                  <span className="order_span summary_value flow-text">{this.props.orders.length}</span>
+                  <span className="order_span shrink"><img alt="cutlery" className="responsive-img" src="./images/food.png" /></span>
+                </div>
+                <h5 className="flow-text" >Orders</h5>
+              </div >
+              <div className="card order_summary">
+                <div className="flexbox">
+                  <span className="order_span summary_value flow-text">{uniqueUsers(this.props.orders)}</span>
+                  <span className="order_span shrink"><img alt="head profile" className="responsive-img" src="./images/profile.png" /></span>
+                </div>
+                <h5 className="flow-text">Customers</h5>
+              </div >
+              <div className="card order_summary">
+                <div className="flexbox">
+                  <span className="order_span summary_value flow-text">&#8358;{cashTotal(this.props.orders)}</span>
+                  <span className="order_span shrink"><img alt="upward stock chart" className="responsive-img" src="./images/chart.png" /></span>
+                </div>
+                <h5 className="flow-text">Total Sales</h5>
               </div>
-
+            </div>
+            <div className="order_detail flexbox">
+              <h5>
+                Order List
+              </h5>
+              <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
             </div>
             <Accordion accordion={false}>
               <AccordionItem expanded>
-                <AccordionItemTitle>
-                  <div className="title flexbox">
-                    <h3>
-                Order List
-                    </h3>
-                    <p className="shrink">
-                Click Order Id To View Details
-                    </p>
-                    <div className="flexbox" />
-                  </div>
-                </AccordionItemTitle>
+                <AccordionItemTitle />
                 <AccordionItemBody>
-                  <SearchInput className="search-input" onChange={this.searchUpdated} />
-                  <div className="table-responsive">
-                    <table className="table">
+                  <div>
+                    <table className="striped responsive-table">
                       <thead>
                         <tr>
-                          <th>Id</th>
-                          <th>Total Amount(&#x20a6;)</th>
-                          <th>Status</th>
+                          <th>S/N</th>
+                          <th>Customer</th>
+                          <th>Order</th>
+                          <th>Meals</th>
+                          <th>Quantities</th>
+                          <th>Total(&#8358;)</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredOrders && filteredOrders.map(order => (
+                        {filteredOrders && filteredOrders.map((order, index) => (
                           <tr key={order.id}>
-                            <td><p className="modal-trigger">{order.id}</p></td>
-                            <td><p>{subTotal(order.Meals)}</p></td>
-                            <td><p>Pending</p></td>
+                            <td>{index + 1}</td>
+                            <td>{`${order.User.firstName} ${order.User.lastName}`}</td>
+                            <td>{order.id}</td>
+                            <td>{orderDetails.mealTitleList(order)}</td>
+                            <td>{orderDetails.mealQuantityList(order)}</td>
+                            <td>{subTotal(order.Meals)}</td>
                           </tr>
                         ))
                       }

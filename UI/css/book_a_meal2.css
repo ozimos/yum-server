@@ -58,11 +58,26 @@ body {
   right: 0;
   z-index: -1;
 }
-
+.order_summary{
+max-width: 30%;
+min-height: 200px
+}
+.order_span{
+  padding: 0 20px
+}
+.order_span.summary_value{
+  font-size: 2.5em
+}
 a {
   text-decoration: none;
   padding: 0.5em;
   color: #2f80ed;
+}
+nav.flexbox{
+  background-color: #fafafa
+}
+nav.flexbox a{
+  color: #2f80ed;  
 }
 nav a.active{
   font-weight: bold;

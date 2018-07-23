@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import { Row, ProgressBar } from 'react-materialize';
+// import { Row, ProgressBar } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
@@ -29,8 +29,8 @@ export class MealManager extends React.Component {
       showModal: false,
       displayImage: '',
       searchTerm: '',
-      uploading: false,
-      uploadPercent: 0
+      // uploading: false,
+      // uploadPercent: 0
     };
   }
   componentDidMount() {
@@ -40,12 +40,14 @@ export class MealManager extends React.Component {
     this.props.dispatch(mealActions.getAllMeals());
   }
   handleDrop = (files) => {
-    this.setState({ uploading: true });
+    // this.setState({ uploading: true });
     imageUpload(files).then((response) => {
       const { data } = response;
       const fileURL = data.secure_url;
       this.urlInput.props.setValue(fileURL);
-      this.setState({ uploading: false, displayImage: fileURL });
+      this.setState({
+        // uploading: false,
+        displayImage: fileURL });
     });
   }
   handleOpenModal = () =>
@@ -166,7 +168,8 @@ export class MealManager extends React.Component {
           >
             <p>Drop your files or click here to upload</p>
           </Dropzone>
-          {/* {this.state.uploading && <ProgressBar progress={this.state.uploadPercent} label={`${this.state.uploadPercent}%`} />} */}
+          {/* {this.state.uploading && <ProgressBar progress={this.state.uploadPercent}
+        label={`${this.state.uploadPercent}%`} />} */}
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>

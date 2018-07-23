@@ -3,6 +3,7 @@
 exports[`Dashboard Component renders correctly 1`] = `
 <div
   className="canvas"
+  id="dashboard"
 >
   <div
     className="container3"
@@ -18,40 +19,104 @@ exports[`Dashboard Component renders correctly 1`] = `
         isCaterer={true}
       />
       <div
-        className="summary"
+        className="flexbox"
       >
-        <h3>
-          Summary
-        </h3>
         <div
-          className="flexbox"
+          className="card order_summary"
         >
-          <h4>
-            Orders
+          <div
+            className="flexbox"
+          >
             <span
-              className="bg-blue"
+              className="order_span summary_value flow-text"
             >
               2
             </span>
-          </h4>
-          <h4>
-            Customers
             <span
-              className="bg-blue"
+              className="order_span shrink"
+            >
+              <img
+                alt="cutlery"
+                className="responsive-img"
+                src="./images/food.png"
+              />
+            </span>
+          </div>
+          <h5
+            className="flow-text"
+          >
+            Orders
+          </h5>
+        </div>
+        <div
+          className="card order_summary"
+        >
+          <div
+            className="flexbox"
+          >
+            <span
+              className="order_span summary_value flow-text"
             >
               1
             </span>
-          </h4>
-          <h4>
-            Total Sales
             <span
-              className="bg-blue"
+              className="order_span shrink"
             >
-              ₦ 
+              <img
+                alt="head profile"
+                className="responsive-img"
+                src="./images/profile.png"
+              />
+            </span>
+          </div>
+          <h5
+            className="flow-text"
+          >
+            Customers
+          </h5>
+        </div>
+        <div
+          className="card order_summary"
+        >
+          <div
+            className="flexbox"
+          >
+            <span
+              className="order_span summary_value flow-text"
+            >
+              ₦
               12800
             </span>
-          </h4>
+            <span
+              className="order_span shrink"
+            >
+              <img
+                alt="upward stock chart"
+                className="responsive-img"
+                src="./images/chart.png"
+              />
+            </span>
+          </div>
+          <h5
+            className="flow-text"
+          >
+            Total Sales
+          </h5>
         </div>
+      </div>
+      <div
+        className="order_detail flexbox"
+      >
+        <h5>
+          Order List
+        </h5>
+        <Search
+          caseSensitive={false}
+          className="search-input input-field"
+          fuzzy={false}
+          onChange={[Function]}
+          throttle={200}
+        />
       </div>
       <AccordionWrapper
         accordion={false}
@@ -77,50 +142,34 @@ exports[`Dashboard Component renders correctly 1`] = `
           <AccordionItemTitleWrapper
             className="accordion__title"
             hideBodyClassName=""
-          >
-            <div
-              className="title flexbox"
-            >
-              <h3>
-                Order List
-              </h3>
-              <p
-                className="shrink"
-              >
-                Click Order Id To View Details
-              </p>
-              <div
-                className="flexbox"
-              />
-            </div>
-          </AccordionItemTitleWrapper>
+          />
           <AccordionItemBodyWrapper
             className="accordion__body"
             hideBodyClassName="accordion__body--hidden"
           >
-            <Search
-              caseSensitive={false}
-              className="search-input"
-              fuzzy={false}
-              onChange={[Function]}
-              throttle={200}
-            />
-            <div
-              className="table-responsive"
-            >
+            <div>
               <table
-                className="table"
+                className="striped responsive-table"
               >
                 <thead>
                   <tr>
                     <th>
-                      Id
+                      S/N
                     </th>
                     <th>
-                      Total Amount(₦)
+                      Customer
                     </th>
                     <th>
-                      Status
+                      Order
+                    </th>
+                    <th>
+                      Meals
+                    </th>
+                    <th>
+                      Quantities
+                    </th>
+                    <th>
+                      Total(₦)
                     </th>
                   </tr>
                 </thead>
@@ -129,42 +178,44 @@ exports[`Dashboard Component renders correctly 1`] = `
                     key="order1"
                   >
                     <td>
-                      <p
-                        className="modal-trigger"
-                      >
-                        order1
-                      </p>
+                      1
                     </td>
                     <td>
-                      <p>
-                        6400
-                      </p>
+                      first last
                     </td>
                     <td>
-                      <p>
-                        Pending
-                      </p>
+                      order1
+                    </td>
+                    <td>
+                      , 
+                    </td>
+                    <td>
+                      2, 2
+                    </td>
+                    <td>
+                      6400
                     </td>
                   </tr>
                   <tr
                     key="order2"
                   >
                     <td>
-                      <p
-                        className="modal-trigger"
-                      >
-                        order2
-                      </p>
+                      2
                     </td>
                     <td>
-                      <p>
-                        6400
-                      </p>
+                      first last
                     </td>
                     <td>
-                      <p>
-                        Pending
-                      </p>
+                      order2
+                    </td>
+                    <td>
+                      , 
+                    </td>
+                    <td>
+                      2, 2
+                    </td>
+                    <td>
+                      6400
                     </td>
                   </tr>
                 </tbody>

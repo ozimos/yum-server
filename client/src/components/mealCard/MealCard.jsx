@@ -21,17 +21,17 @@ class MealCard extends React.Component {
       canSubmit: false,
       showModal: false,
       displayImage: this.props.imageUrl,
-      uploading: false,
-      uploadPercent: 0
+      // uploading: false,
+      // uploadPercent: 0
     };
   }
   handleDrop = (files) => {
-    this.setState({ uploading: true });
+    // this.setState({ uploading: true });
     imageUpload(files).then((response) => {
       const { data } = response;
       const fileURL = data.secure_url;
       this.urlInput.props.setValue(fileURL);
-      this.setState({ uploading: false });
+      // this.setState({ uploading: false });
     });
   }
   handleOpenModal = () =>

@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { MealCard3 } from '../mealCard/MealCard3';
+import MealCard3 from '../mealCard/MealCard3';
 import { meal } from '../mocks/mealDataMock';
 
 describe('MealCard3 Component', () => {

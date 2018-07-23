@@ -52,6 +52,13 @@ exports[`CartContainer Component renders correctly 1`] = `
               },
             ]
           }
+          User={
+            Object {
+              "email": "asdf",
+              "firstName": "first",
+              "lastName": "last",
+            }
+          }
           addClass=""
           clearCart={[MockFunction]}
           dispatch={[MockFunction]}
@@ -93,6 +100,13 @@ exports[`CartContainer Component renders correctly 1`] = `
                 "price": 2000,
               },
             ]
+          }
+          User={
+            Object {
+              "email": "asdf",
+              "firstName": "first",
+              "lastName": "last",
+            }
           }
           addClass=""
           clearCart={[MockFunction]}

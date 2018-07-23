@@ -10,27 +10,25 @@ exports[`OrderItem Component renders correctly 1`] = `
   }
 >
   <div
-    className="col-4"
-  >
-    orderId
-  </div>
+    className="col-1 text-left"
+  />
   <div
-    className="col-7"
+    className="col-9 text-left"
   >
     <div
       className="row"
       key="abc"
     >
       <div
-        className="col-8"
+        className="col-7 text-left"
       />
       <div
-        className="col-3"
+        className="col-3 text-left"
       >
         1200
       </div>
       <div
-        className="col-1"
+        className="col-2 text-left"
       >
         2
       </div>
@@ -40,22 +38,22 @@ exports[`OrderItem Component renders correctly 1`] = `
       key="def"
     >
       <div
-        className="col-8"
+        className="col-7 text-left"
       />
       <div
-        className="col-3"
+        className="col-3 text-left"
       >
         2000
       </div>
       <div
-        className="col-1"
+        className="col-2 text-left"
       >
         2
       </div>
     </div>
   </div>
   <div
-    className="col-1"
+    className="col-1 text-right"
   >
     <button
       className="btn btn-primary"
