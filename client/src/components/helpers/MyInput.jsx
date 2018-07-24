@@ -2,7 +2,7 @@ import { withFormsy, propTypes } from 'formsy-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class MyInput extends React.Component {
+class Input extends React.Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -37,10 +37,10 @@ class MyInput extends React.Component {
     );
   }
 }
-MyInput.defaultProps = {
+Input.defaultProps = {
   placeholder: '',
 };
-MyInput.propTypes = {
+Input.propTypes = {
   typeOfInput: PropTypes.string.isRequired,
   placeholder: PropTypes.oneOfType([
     PropTypes.string,
@@ -48,5 +48,5 @@ MyInput.propTypes = {
   ]),
   ...propTypes
 };
-export { MyInput };
-export default withFormsy(MyInput);
+export { Input };
+export default withFormsy(Input);

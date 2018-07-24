@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { userActions } from '../../redux/actions';
 import MyInput from '../helpers/MyInput';
 import MyCheckBox from '../helpers/MyCheckBox';
-import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/auth.scss';
 
 

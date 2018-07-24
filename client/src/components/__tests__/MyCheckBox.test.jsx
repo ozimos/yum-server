@@ -1,15 +1,15 @@
 /* global React:false, shallow:false toJson:false */
 
-import { MyCheckBox } from '../helpers/MyCheckBox';
+import { CheckBox } from '../helpers/MyCheckBox';
 
 describe('MyCheckBox Component', () => {
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MyCheckBox getValue={jest.fn()} name="name" />)
+    expect(shallow(<CheckBox getValue={jest.fn()} name="name" />)
       .exists(<input type="checkbox" />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MyCheckBox
+    const wrapper = shallow(<CheckBox
       getValue={jest.fn()}
       name="name"
     />);

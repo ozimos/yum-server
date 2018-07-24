@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import '../../../public/styles/book_a_meal.css';
+import '../../../public/styles/nav.scss';
 
 const Nav = ({ user }) =>
   (

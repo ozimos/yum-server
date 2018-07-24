@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
+import ReactModal from 'react-modal';
+
 import {
   Accordion,
   AccordionItem,
@@ -11,18 +13,18 @@ import {
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard3 from '../mealCard/MealCard3';
 import MealRow from '../orderCart/MealRow';
-import ConnectedCartContainer from '../orderCart/CartContainer';
+import CartContainer from '../orderCart/CartContainer';
 import OrderItem from '../orderCart/OrderItem';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
+import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
 
+ReactModal.setAppElement(document.getElementById('root'));
 class Order extends React.Component {
 
   constructor(props) {
@@ -30,13 +32,18 @@ class Order extends React.Component {
     this.state = {
       searchTerm: '',
       currentOrder: [],
-      currentOrderId: ''
+      currentOrderId: '',
+      showModal: false,
     };
   }
   componentDidMount() {
     this.props.dispatch(menuActions.getMenu());
     this.props.dispatch(orderActions.getUserOrdersByDate());
   }
+  handleOpenModal = () =>
+    this.setState({ showModal: true });
+  handleCloseModal = () =>
+    this.setState({ showModal: false });
   addToOrder = (meal) => {
     const inOrder = this.state.currentOrder.some(elem => elem.id === meal.id);
     if (!inOrder) {
@@ -80,7 +87,7 @@ class Order extends React.Component {
         </header>
         <Greeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
-          <main className="col-12 col-md-8">
+          <main className="col s12">
             <Accordion accordion={false}>
               <AccordionItem expanded>
                 <AccordionItemTitle>
@@ -92,7 +99,12 @@ class Order extends React.Component {
                   </div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                  <SearchInput className="search-input" onChange={this.searchUpdated} />
+                  <div className="flexbox">
+                    <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
+                    <button className="btn title-button" onClick={this.handleOpenModal}>
+                      <p>Complete Order</p>
+                    </button>
+                  </div>
                   {isMenuSet ? <MealCardContainer
                     meals={filteredMeals}
                     MealCard={MealCard3}
@@ -111,16 +123,13 @@ class Order extends React.Component {
                     <h3>
           Your Orders for Today
                     </h3>
-                    <div className="flexbox">
-                      <p className="shrink mr-auto">
-                        {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
-                      </p>
-                      <div className="mx-auto" />
-                      <div className="accordion__arrow u-position-relative" role="presentation" />
-                    </div>
+                    <div className="accordion__arrow u-position-relative" role="presentation" />
                   </div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
+                  <p className="shrink mr-auto">
+                    {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
+                  </p>
                   { isTodayOrder ? <OrderContainer
                     orders={this.props.orders}
                     OrderItem={OrderItem}
@@ -134,21 +143,29 @@ class Order extends React.Component {
               </AccordionItem>
             </Accordion>
           </main>
-          <aside className="col-12 col-md-4" >
-            {isMealSelected ? <ConnectedCartContainer
-              order={this.state.currentOrder}
-              orderId={this.state.currentOrderId}
-              MealRow={MealRow}
-              removeFromCart={this.removeFromOrder}
-              clearCart={this.clearOrder}
-            /> :
-            <div>
-              <h3>Order Cart</h3>
-              <p>Add a meal by clicking on a meal checkmark button</p>
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="Input Modal"
+            className="modal-content"
+            onRequestClose={this.handleCloseModal}
+            shouldCloseOnOverlayClick
+          >
+            <aside className="col s12" >
+              {isMealSelected ? <CartContainer
+                order={this.state.currentOrder}
+                orderId={this.state.currentOrderId}
+                MealRow={MealRow}
+                removeFromCart={this.removeFromOrder}
+                clearCart={this.clearOrder}
+              /> :
+              <div>
+                <h3>Order Cart</h3>
+                <p>Add a meal by clicking on a meal checkmark button</p>
 
-            </div>
+              </div>
                 }
-          </aside>
+            </aside>
+          </ReactModal>
         </div>
 
       </div>

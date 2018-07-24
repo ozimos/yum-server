@@ -1,0 +1,10 @@
+nav.flexbox{
+    background-color: #fafafa;
+    a{
+        color: #2f80ed; 
+        line-height: normal;                    
+        &.active{
+            font-weight: bold;
+          } 
+      }
+  }

@@ -6,7 +6,6 @@ import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
 import { userActions } from '../../redux/actions';
 import '../../../public/styles/auth.scss';
-import '../../../public/styles/book_a_meal.css';
 
 class Login extends React.Component {
   constructor(props) {

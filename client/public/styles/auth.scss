@@ -1,5 +1,91 @@
-.btn-disabled {
-  border-color: red;
-  border-width: 2px;
+.canvas{
+    background: #fafafa url('../images/pastries2.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 50% 100%;      
+    
+
+    .container2 {
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 105vh;
+      margin: 0;
+      margin-top: -20px;
+      margin-bottom: -20px;
+      padding-left: 10%;
+      padding-right: 20%;
+      background-color: #fafafa;
+      background-attachment: scroll;
+      background-size: 200vw 200vh;
+
+      .welcome {
+        box-sizing: border-box;
+        min-height: 6em;
+        margin-top: 2em;
+        margin-bottom: 3em;
+      }
+      
+      .welcome-text {
+        padding: 0 50px;
+        font-weight: 900;
+      }
+    }
+    
+    
+    .title-element {
+      border-radius: 10px;
+      line-height: 2;
+      &>.flexbox {
+          max-width: 80%;
+          &>*:first-child {
+              justify-items: flex-start;
+              margin-right: 20px;
+            }
+        }
+        &>* {
+          margin: 0;
+          font-weight: lighter;
+        }
+    }
+    
+    
+    
+    .summary {
+      margin: 40px 0;
+      text-align: left;
+      * {
+          margin-left: 20px;
+          padding: 0;
+        }
+    }
+  
+    @media screen and (min-width: 736px) {
+     
+      .container2 {
+        max-width: 50% !important;
+        padding-left: 2%;
+        padding-right: 4%;
+        margin-left: 0;
+      }
+     
+    }
+    
+    @media screen and (min-width: 600px) {
+     
+      .canvas{
+    background-size: 20% 100%; 
+    .container2 {
+      max-width: 70%;
+    }               
+      }
+     
+    }
+    
+    @media screen and (min-width: 450px) and (max-width: 600px) {
+      .order_span.shrink{
+          visibility: hidden;
+        }
+    }
 }
 

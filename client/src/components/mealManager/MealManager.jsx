@@ -16,8 +16,7 @@ import { mealActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import imageUpload from '../../services/imageUpload';
 import '../../../public/styles/search-input.css';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
+import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/modalOpenButton.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));

@@ -9,9 +9,6 @@ import MyFormsyInput from '../helpers/MyInput';
 import MyFormsyTextArea from '../helpers/MyTextArea';
 import { mealActions } from '../../redux/actions';
 import imageUpload from '../../services/imageUpload';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
-import '../../../public/styles/modalOpenButton.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
 class MealCard extends React.Component {

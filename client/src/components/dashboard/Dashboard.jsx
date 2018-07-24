@@ -15,7 +15,6 @@ import ConnectedNav from '../nav/Nav';
 import uniqueUsers from '../../utils/uniqueUsers';
 import cashTotal, { subTotal } from '../../utils/cashTotal';
 import orderDetails from '../../utils/orderDetails';
-import '../../../public/styles/book_a_meal3.scss';
 import '../../../public/styles/dashboard.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));

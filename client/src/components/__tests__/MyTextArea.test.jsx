@@ -1,11 +1,11 @@
 /* global React:false, shallow:false toJson:false */
 
-import { MyTextArea } from '../helpers/MyTextArea';
+import { TextArea } from '../helpers/MyTextArea';
 
 describe('MyTextArea Component', () => {
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MyTextArea
+    expect(shallow(<TextArea
       getValue={jest.fn()}
       getErrorMessage={jest.fn()}
       name="name"
@@ -18,7 +18,7 @@ describe('MyTextArea Component', () => {
       />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MyTextArea
+    const wrapper = shallow(<TextArea
       getValue={jest.fn()}
       getErrorMessage={jest.fn()}
       name="name"

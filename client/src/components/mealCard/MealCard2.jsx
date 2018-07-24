@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import { connect } from 'react-redux';
 import { mealActions } from '../../redux/actions';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
-import '../../../public/styles/modalOpenButton.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
 class MealCard2 extends React.Component {

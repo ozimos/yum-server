@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
-import '../../../public/styles/modalOpenButton.scss';
+import '../../../public/styles/mealcard3.scss';
 
 const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
   const meal = { id, title, imageUrl, price, description };
   return (
     <React.Fragment>
-      <div className="card">
+      <div className="card card-booking pillar">
         <img src={imageUrl} alt="Meal" className="fluid-img" />
-        <div className="title-element flexbox wrap">
-          <div className="shrink">
+        <div className="pillar grow">
+          <div className="title-element text_left">
             {title}
           </div>
-          <div className="flexbox">
-
+          <div className="flexbox grow">
+            <div className="text_left pad">
+          &#8358;{price}
+            </div>
             {props.addToOrder &&
-              <button className="btn title-button icon" onClick={() => props.addToOrder(meal)}>
+            <button className="btn title-button icon" onClick={() => props.addToOrder(meal)}>
                 &#10004;
-              </button>}
+            </button>}
             {props.removeFromOrder &&
-              <button className="btn title-button icon" onClick={() => props.removeFromOrder(id)}>
+            <button className="btn title-button icon" onClick={() => props.removeFromOrder(id)}>
                 &#10006;
-              </button>}
+            </button>}
           </div>
-
         </div>
       </div>
     </React.Fragment>

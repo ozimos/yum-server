@@ -2,7 +2,7 @@ import { withFormsy, propTypes } from 'formsy-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class MyTextArea extends React.Component {
+class TextArea extends React.Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -34,12 +34,12 @@ class MyTextArea extends React.Component {
     );
   }
 }
-MyTextArea.defaultProps = {
+TextArea.defaultProps = {
   placeholder: ''
 };
-MyTextArea.propTypes = {
+TextArea.propTypes = {
   placeholder: PropTypes.string,
   ...propTypes
 };
-export { MyTextArea };
-export default withFormsy(MyTextArea);
+export { TextArea };
+export default withFormsy(TextArea);

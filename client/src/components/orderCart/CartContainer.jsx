@@ -8,7 +8,7 @@ import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/cart_layout.scss';
 
 
-class CartContainer extends React.Component {
+class PlainCartContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,7 +72,7 @@ class CartContainer extends React.Component {
    return (
      <div className={rest.addClass ? `${rest.addClass}` : ''}>
        <h3>Order Cart</h3>
-       <div className="table-responsive">
+       <div className="responsive-table">
          <table className="table">
            <thead>
              <tr>
@@ -95,15 +95,15 @@ class CartContainer extends React.Component {
            </tbody>
            <caption>
              <div className="row">
-               <div className="col-3 mr-auto">&#9776; Your Order</div>
-               <div className="col-2"> Total </div>
-               <div className="col-2"> {total}</div>
-               <div className="col2">
+               <div className="col s3 mr-auto">&#9776; Your Order</div>
+               <div className="col s2"> Total </div>
+               <div className="col s2"> {total}</div>
+               <div className="col s2">
                  <button className="btn btn-cart" onClick={rest.clearCart}>
                    <p>Clear Cart</p>
                  </button>
                </div>
-               <div className="col2">
+               <div className="col s2">
                  <button className="btn btn-cart" onClick={this.placeOrder}>
                    {this.props.orderId ? <p>Modify Order</p> : <p>Place New Order</p>}
                  </button>
@@ -117,12 +117,12 @@ class CartContainer extends React.Component {
  }
 }
 
-CartContainer.defaultProps = {
+PlainCartContainer.defaultProps = {
   addClass: '',
   orderError: '',
   orderId: ''
 };
-CartContainer.propTypes = {
+PlainCartContainer.propTypes = {
   order: PropTypes.arrayOf(PropTypes.object).isRequired,
   MealRow: PropTypes.func.isRequired,
   addClass: PropTypes.string,
@@ -135,6 +135,6 @@ const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
   connecting: state.orderReducer.connecting,
 });
-export { CartContainer };
-export default connect(mapStateToProps)(CartContainer);
+export { PlainCartContainer };
+export default connect(mapStateToProps)(PlainCartContainer);
 
