@@ -130,7 +130,7 @@ class SignUp extends React.Component {
                       name="isCaterer"
                       id="isCaterer"
                     />
-                    Caterer
+                    <span>Caterer</span>
                   </label>
                 </div>
 

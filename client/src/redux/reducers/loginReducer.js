@@ -3,15 +3,15 @@ import {
 } from '../types';
 import validateToken from '../../services/validateToken';
 
-const user = localStorage.getItem('user');
+const user = JSON.parse(localStorage.getItem('user'));
+
 let result = {};
-if (user && user.constructor === Object && Object.keys(user).length !== 0) {
+if (user) {
   result = validateToken(user);
 }
 
 if (!result.valid) { localStorage.removeItem('user'); }
 const initialState = result.valid ? { authenticated: true, user } : {};
-// const initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {

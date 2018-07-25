@@ -42,9 +42,9 @@ exports[`Menu Component renders correctly 1`] = `
           <div
             className="title-element flexbox"
           >
-            <h3>
+            <h4>
               Your Meals
-            </h3>
+            </h4>
             <div
               className="accordion__arrow u-position-relative"
               role="presentation"
@@ -57,7 +57,7 @@ exports[`Menu Component renders correctly 1`] = `
         >
           <Search
             caseSensitive={false}
-            className="search-input"
+            className="search-input input-field"
             fuzzy={false}
             onChange={[Function]}
             throttle={200}

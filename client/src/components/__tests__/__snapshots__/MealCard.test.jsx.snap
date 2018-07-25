@@ -14,21 +14,17 @@ exports[`MealCard Component renders correctly 1`] = `
       className="title-element flexbox wrap"
     >
       <button
-        className="modal-open shrink modal-trigger"
+        className="modal-open modal-trigger"
         onClick={[Function]}
       >
         nice
       </button>
-      <div
-        className="flexbox"
+      <button
+        className="btn title-button icon"
+        onClick={[Function]}
       >
-        <button
-          className="btn title-button icon"
-          onClick={[Function]}
-        >
-          ✖
-        </button>
-      </div>
+        ✖
+      </button>
     </div>
   </div>
   <Modal
@@ -49,108 +45,100 @@ exports[`MealCard Component renders correctly 1`] = `
     <div
       className="title flexbox"
     >
-      <h3
+      <h4
         className="shrink"
       >
         Meal Editor
-      </h3>
-      <div
-        className="flexbox"
+      </h4>
+      <button
+        className="btn title-button"
+        onClick={[Function]}
       >
-        <button
-          className="btn title-button"
-          onClick={[Function]}
-        >
-          ✖
-        </button>
-      </div>
+        ✖
+      </button>
     </div>
-    <div
-      className="form-box"
+    <Formsy
+      className="form3"
+      disabled={false}
+      getErrorMessage={[Function]}
+      getErrorMessages={[Function]}
+      getValue={[Function]}
+      hasValue={[Function]}
+      isFormDisabled={[Function]}
+      isFormSubmitted={[Function]}
+      isPristine={[Function]}
+      isRequired={[Function]}
+      isValid={[Function]}
+      isValidValue={[Function]}
+      mapping={null}
+      onChange={[Function]}
+      onError={[Function]}
+      onInvalid={[Function]}
+      onInvalidSubmit={[Function]}
+      onReset={[Function]}
+      onSubmit={[Function]}
+      onValid={[Function]}
+      onValidSubmit={[Function]}
+      preventExternalInvalidation={false}
+      resetValue={[Function]}
+      setValidations={[Function]}
+      setValue={[Function]}
+      showError={[Function]}
+      showRequired={[Function]}
+      validationErrors={null}
     >
-      <Formsy
-        className="form"
-        disabled={false}
-        getErrorMessage={[Function]}
-        getErrorMessages={[Function]}
-        getValue={[Function]}
-        hasValue={[Function]}
-        isFormDisabled={[Function]}
-        isFormSubmitted={[Function]}
-        isPristine={[Function]}
-        isRequired={[Function]}
-        isValid={[Function]}
-        isValidValue={[Function]}
-        mapping={null}
-        onChange={[Function]}
-        onError={[Function]}
-        onInvalid={[Function]}
-        onInvalidSubmit={[Function]}
-        onReset={[Function]}
-        onSubmit={[Function]}
-        onValid={[Function]}
-        onValidSubmit={[Function]}
-        preventExternalInvalidation={false}
-        resetValue={[Function]}
-        setValidations={[Function]}
-        setValue={[Function]}
-        showError={[Function]}
-        showRequired={[Function]}
-        validationErrors={null}
-      >
-        <Formsy(MyInput)
-          innerRef={[Function]}
-          name="title"
-          placeholder="nice"
-          required={false}
-          typeOfInput="text"
-          validationError="Please enter the meal title"
-          validationErrors={Object {}}
-          validations="minLength:1"
-        />
-        <Formsy(MyInput)
-          innerRef={[Function]}
-          name="price"
-          placeholder={200}
-          required={false}
-          typeOfInput="number"
-          validationError="Please enter a price"
-          validationErrors={
-            Object {
-              "isOnlyInt": "price must be integer",
-            }
+      <Formsy(Input)
+        innerRef={[Function]}
+        name="title"
+        placeholder="nice"
+        required={false}
+        typeOfInput="text"
+        validationError="Please enter the meal title"
+        validationErrors={Object {}}
+        validations="minLength:1"
+      />
+      <Formsy(Input)
+        innerRef={[Function]}
+        name="price"
+        placeholder={200}
+        required={false}
+        typeOfInput="number"
+        validationError="Please enter a price"
+        validationErrors={
+          Object {
+            "isOnlyInt": "price must be integer",
           }
-          validations={
-            Object {
-              "isOnlyInt": [Function],
-            }
+        }
+        validations={
+          Object {
+            "isOnlyInt": [Function],
           }
-        />
-        <Formsy(MyTextArea)
-          innerRef={[Function]}
-          name="description"
-          placeholder="nice"
-          required={false}
-          validationError=""
-          validationErrors={Object {}}
-          validations={null}
-        />
-        <Formsy(MyInput)
-          innerRef={[Function]}
-          name="imageUrl"
-          required={false}
-          style={
-            Object {
-              "display": "none",
-            }
+        }
+      />
+      <Formsy(TextArea)
+        innerRef={[Function]}
+        name="description"
+        placeholder="nice"
+        required={false}
+        validationError=""
+        validationErrors={Object {}}
+        validations={null}
+      />
+      <Formsy(Input)
+        innerRef={[Function]}
+        name="imageUrl"
+        required={false}
+        style={
+          Object {
+            "display": "none",
           }
-          typeOfInput="url"
-          validationError="Please select an image"
-          validationErrors={Object {}}
-          validations="minLength:5"
-        />
-      </Formsy>
-    </div>
+        }
+        typeOfInput="url"
+        validationError="Please select an image"
+        validationErrors={Object {}}
+        validations="minLength:5"
+      />
+    </Formsy>
     <t
       accept="image/*"
       className="dropzone"
@@ -179,14 +167,12 @@ exports[`MealCard Component renders correctly 1`] = `
       />
     </div>
     <button
-      className="btn btn-disabled title-button"
+      className="btn btn-disabled"
       disabled={true}
       onClick={[Function]}
       type="submit"
     >
-      <p>
-        Continue
-      </p>
+      Continue
     </button>
   </Modal>
 </React.Fragment>

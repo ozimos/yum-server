@@ -9,6 +9,9 @@ body {
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.heading {
+  color: maroon;
+}
 .absolute {
     position: absolute;
     top: 0;
@@ -91,6 +94,7 @@ a {
     margin: 0.6em;
     font-weight: 0;
     vertical-align: middle;
+    align-self: flex-start;
   }
   
   .shrink {
@@ -105,17 +109,24 @@ a {
     margin-left: 10px;
     margin-right: 10px;
   }
-  button,
+  
   .btn {
-    background-color: #2f80ed;
-    border-radius: 10px;
-    padding: 0.5em 0;
+    background-color: #2f80ed !important;
+    border-radius: 5px;
     min-width: 20px;
     color: white;
+    height: unset;
+    line-height: unset;
     font-weight: bold;
     border-width: 0;
     cursor: pointer;
     text-align: center;
+  }
+  .btn:hover{
+    background-color: #2fa0ed;
+  }
+  .btn:visited, button:visited{
+    background-color: #2f80ed !important
   }
   .btn-disabled {
     border-color: red;
@@ -155,26 +166,28 @@ a {
     margin: 0;
     color: lightblue;
   }
-  .form{
+  .form3{
     &>* {
   display: block;
   width: 100%;
-  font-size: 20px;
   border-width: 0 0 1px 0;
-  border-color: #000;
+  border-color: #aaa;
   margin-top: 20px;
 }
-&>input,
-&>p {
+input,
+p {
   text-align: left;
-  background-color: #fafafa
+  height: 1rem
 }
-&>label {
-  font-size: 16px;
-  text-align: left;
-  margin: 0;
+input, textarea{
+  &:focus{
+  border-color: #2f80ed;
+  outline: none    
+  }
 }
-
+textarea{
+  height: 2rem  
+}
 &>div {
   text-align: left;
   padding-right: auto;
@@ -192,20 +205,36 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: #fafafa60;
-    /* Modal Content/Box */
+    
+  }
+  /* Modal Content/Box */
   
   .modal-content {
-    width: 70%;
-    margin: 20px auto;
-    background-color: white;
+    position: absolute;
+    overflow: auto;    
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    height: max-content;
+    max-height: 70%;
+    border: 1px solid rgb(204, 204, 204);
+    margin: auto;
+    background: rgb(255, 255, 255);
     border-radius: 10px;
-    padding: 10px 0;
-    border: 1px solid #888;
+    outline: none;
+    padding: 10px 20px;
+    .title{
+      margin-bottom: 20px
+    }
+    input[type=number], input[type=text],textarea{
+      &:focus{
+      border-color: #2f80ed;
+      outline: none    
+      }
+    }
   }
-  }
-  
   .gallery {
     display: grid;
     grid-template-columns: 1fr;
@@ -221,6 +250,7 @@ a {
     }
     .modal-content {
       padding: 10px 20px;
+      width: 50%;      
     }
     .form-box {
       margin: 40px 10px;
@@ -243,6 +273,9 @@ a {
     }
     .canvas{
   background-size: 20% 100%;                
+    }
+    .modal-content {
+      width: 60%;      
     }
     .order_span.shrink{
       visibility: visible !important;

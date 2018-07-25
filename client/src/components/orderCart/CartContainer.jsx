@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { orderActions } from '../../redux/actions';
 
-
-import '../../../public/styles/book_a_meal.css';
 import '../../../public/styles/cart_layout.scss';
 
 

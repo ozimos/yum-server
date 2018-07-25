@@ -9,7 +9,7 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
-import ConnectedMealCard2 from '../mealCard/MealCard2';
+import MealCard2 from '../mealCard/MealCard2';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions, menuActions } from '../../redux/actions';
@@ -64,17 +64,17 @@ class Menu extends React.Component {
             <AccordionItem expanded>
               <AccordionItemTitle>
                 <div className="title-element flexbox">
-                  <h3>
-          Your Meals
-                  </h3>
+                  <h4>
+                  Your Meals
+                  </h4>
                   <div className="accordion__arrow u-position-relative" role="presentation" />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
-                <SearchInput className="search-input" onChange={this.searchUpdated} />
+                <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
                 <MealCardContainer
                   meals={filteredMeals}
-                  MealCard={ConnectedMealCard2}
+                  MealCard={MealCard2}
                   addToMenu={this.addToMenu}
                   addClass="scroll"
                 />
@@ -101,7 +101,7 @@ class Menu extends React.Component {
 
                 <MealCardContainer
                   meals={this.state.menu}
-                  MealCard={ConnectedMealCard2}
+                  MealCard={MealCard2}
                   removeFromMenu={this.removeFromMenu}
                   addClass="scroll"
                 />

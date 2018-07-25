@@ -8,11 +8,11 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
     <React.Fragment>
       <div className="card card-booking pillar">
         <img src={imageUrl} alt="Meal" className="fluid-img" />
-        <div className="pillar grow">
+        <div className="pillar">
           <div className="title-element text_left">
             {title}
           </div>
-          <div className="flexbox grow">
+          <div className="flexbox">
             <div className="text_left pad">
           &#8358;{price}
             </div>

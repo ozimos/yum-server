@@ -4,10 +4,19 @@
   height: 100vh;
   margin: 0;
   background-color: #fafafa;    
-      .heading {
-        color: maroon
-      }
-      
+  input[type=number] {
+    height: 30px;
+  }
+  .heading {
+    margin-left: 20px
+  }
+  input[type=number]:hover::-webkit-inner-spin-button, input[type=number]:focus::-webkit-inner-spin-button {  
+    width: 14px;
+    height: 30px;
+  }
+  .info-spacer{
+    margin-right: 20px
+  }
       .title-element {
         border-radius: 10px;
         line-height: 2;
@@ -38,28 +47,21 @@
          outline: none
        }
      }
-      
-      
-      #meal_image {
-        width: 60%;
-        margin: 10px auto;
-      }
-      
-      
-      
+     
       .modal-trigger {
         cursor: pointer;
         &:focus{
           background-color: transparent;      
           }
       }
+      button.modal-trigger.modal-open{
+        width: 60%
+      }
       
-      .shrink.modal-trigger,
+      button.modal-trigger,
       h3.modal-trigger,p.modal-trigger  {
         color: #2f80ed;
       }
-      
-  
 
       @media screen and (min-width: 736px) {
         .contain {
@@ -68,4 +70,13 @@
         }
       }
       
+}
+#meal_image {
+  width: 60%;
+  margin: 10px auto;
+}
+.dropzone{
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px
 }

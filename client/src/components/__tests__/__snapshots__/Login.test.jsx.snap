@@ -62,7 +62,7 @@ exports[`Login Component renders correctly 1`] = `
           showRequired={[Function]}
           validationErrors={null}
         >
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="email"
             placeholder="Email"
@@ -72,7 +72,7 @@ exports[`Login Component renders correctly 1`] = `
             validationErrors={Object {}}
             validations="isEmail"
           />
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="password"
             placeholder="Password"

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { mealActions } from '../../redux/actions';
 
 ReactModal.setAppElement(document.getElementById('root'));
-class MealCard2 extends React.Component {
+class PlainMealCard2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,25 +29,23 @@ class MealCard2 extends React.Component {
         <div className="card">
           <img src={imageUrl} alt="Meal" className="fluid-img" />
           <div className="title-element flexbox wrap">
-            <button className="modal-open shrink modal-trigger" onClick={this.handleOpenModal}>
+            <button className="modal-open modal-trigger" onClick={this.handleOpenModal}>
               {title}
             </button>
-            <div className="flexbox">
-              {this.props.addToMenu &&
+            {this.props.addToMenu &&
               <button className="btn title-button icon" onClick={() => this.props.addToMenu(meal)}>
                 &#10004;
               </button>}
-              {this.props.removeFromMenu &&
+            {this.props.removeFromMenu &&
               <button className="btn title-button icon" onClick={() => this.props.removeFromMenu(id)}>
                 &#10006;
               </button>}
-            </div>
-
           </div>
         </div>
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="Input Modal"
+          className="modal-content"
           onRequestClose={this.handleCloseModal}
           shouldCloseOnOverlayClick
         >
@@ -72,11 +70,11 @@ class MealCard2 extends React.Component {
     );
   }
 }
-MealCard2.defaultProps = {
+PlainMealCard2.defaultProps = {
   addToMenu: null,
   removeFromMenu: null,
 };
-MealCard2.propTypes = {
+PlainMealCard2.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -86,6 +84,6 @@ MealCard2.propTypes = {
   addToMenu: PropTypes.func,
   removeFromMenu: PropTypes.func,
 };
-export { MealCard2 };
-export default connect(state => state)(MealCard2);
+export { PlainMealCard2 };
+export default connect(state => state)(PlainMealCard2);
 

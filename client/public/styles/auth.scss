@@ -32,7 +32,40 @@
       }
     }
     
-    
+    .form{
+      &>* {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    border-width: 0 0 1px 0;
+    border-color: #000;
+    margin-top: 20px;
+  }
+  &>input,
+  &>p {
+    text-align: left;
+    background-color: #fafafa
+  }
+  input{
+    outline: none
+  }
+  label {
+    font-size: unset;
+    text-align: left;
+    margin: 0;
+  }
+  input[type=checkbox]{
+    margin-right: 20px;
+    position: relative;
+    opacity: unset;
+    left: unset;
+    bottom: 2px;
+  }
+  &>div {
+    text-align: left;
+    padding-right: auto;
+  }
+  }
     .title-element {
       border-radius: 10px;
       line-height: 2;
@@ -63,7 +96,7 @@
     @media screen and (min-width: 736px) {
      
       .container2 {
-        max-width: 50% !important;
+        max-width: 70% !important;
         padding-left: 2%;
         padding-right: 4%;
         margin-left: 0;
