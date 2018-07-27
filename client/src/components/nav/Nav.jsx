@@ -6,29 +6,32 @@ import '../../../public/styles/nav.scss';
 
 const Nav = ({ user }) =>
   (
-    <nav className="flexbox">
-      <h3 className="shrink heading">Book A Meal</h3>
-      <div className="flexbox">
-        {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item long_string" to="/dashboard">
+    <div className="navbar-fixed">
+      <nav className="flexbox">
+        <h3 className="shrink heading">Book A Meal</h3>
+        <div className="flexbox">
+          {user.isCaterer &&
+          <NavLink activeClassName="active" className="nav-item long_string" to="/dashboard">
         DashBoard
-        </NavLink >}
-        {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item" to="/meals">
+          </NavLink >}
+          {user.isCaterer &&
+          <NavLink activeClassName="active" className="nav-item" to="/meals">
           Meals
-        </NavLink >}
-        {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item" to="/menu">
+          </NavLink >}
+          {user.isCaterer &&
+          <NavLink activeClassName="active" className="nav-item" to="/menu">
           Menu
-        </NavLink>}
-        <NavLink activeClassName="active" className="nav-item" to="/orders">
+          </NavLink>}
+          <NavLink activeClassName="active" className="nav-item" to="/orders">
           Meal Booking
-        </NavLink>
-        <Link to="/login">
+          </NavLink>
+          <Link to="/login">
           Log Out
-        </Link>
-      </div>
-    </nav>);
+          </Link>
+        </div>
+      </nav>
+    </div>
+  );
 Nav.propTypes = {
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
