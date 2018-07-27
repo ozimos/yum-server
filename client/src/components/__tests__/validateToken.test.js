@@ -6,8 +6,7 @@ import validateToken from '../../services/validateToken';
 
 config();
 
-const tokenString = jwt.sign({ isCaterer: true }, process.env.TOKEN_PASSWORD, { expiresIn: '1h' });
-const token = `Bearer ${tokenString}`;
+const token = jwt.sign({ isCaterer: true }, process.env.TOKEN_PASSWORD, { expiresIn: '1h' });
 const nextDay2 = addDays(new Date(), 2);
 
 describe('validate token', () => {

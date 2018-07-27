@@ -3,6 +3,7 @@
 exports[`MyTextArea Component renders correctly 1`] = `
 <React.Fragment>
   <textarea
+    maxLength="100"
     onChange={[Function]}
     placeholder=""
   />

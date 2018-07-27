@@ -16,9 +16,6 @@ body {
   background-attachment: fixed;
   background-size: 50% 100%;
 }
-.nav-item.active{
-  font-weight: bold
-}
 .heading {
   color: maroon
 }
@@ -49,17 +46,7 @@ input[type=number]:hover::-webkit-inner-spin-button, input[type=number]:focus::-
   background-attachment: scroll;
   background-size: 200vw 200vh;
 }
-.container3 {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 105vh;
-  margin: 0;
-  margin-top: -20px;
-  margin-bottom: -20px;
-  background-color: #fafafa;
-  background-attachment: scroll;
-  background-size: 200vw 200vh;
-}
+
 
 .absolute {
   position: absolute;
@@ -364,9 +351,7 @@ h3.modal-trigger,p.modal-trigger  {
   .container2 {
     max-width: 70%;
   }
-  .container3 {
-    max-width: 70%;
-  }
+ 
 }
 
 @media screen and (min-width: 450px) and (max-width: 600px) {

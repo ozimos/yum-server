@@ -8,14 +8,15 @@ import {
   AccordionItemTitle,
   AccordionItemBody,
 } from 'react-accessible-accordion';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SearchInput, { createFilter } from 'react-search-input';
 import MealCard2 from '../mealCard/MealCard2';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions, menuActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
+import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/modalOpenButton.scss';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
@@ -28,24 +29,33 @@ class Menu extends React.Component {
       searchTerm: '',
       menu: []
     };
+    this.addToMenu = this.addToMenu.bind(this);
+    this.postMenu = this.postMenu.bind(this);
   }
   componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
   }
 
-  addToMenu = (meal) => {
+  addToMenu(meal) {
     const inMenu = this.state.menu.some(elem => elem.id === meal.id);
-    if (!inMenu) { this.setState(prevState => ({ menu: [...prevState.menu, meal] })); }
+    if (!inMenu) {
+      this.setState(prevState => ({ menu: [...prevState.menu, meal] }));
+      toast.success('Meal has been added to menu', { className: 'toaster' });
+    } else {
+      toast.error('Meal is already in menu', { className: 'toaster' });
+    }
   }
+
   removeFromMenu = id =>
     this.setState(prevState =>
       ({ menu: prevState.menu.filter(elem => elem.id !== id) }));
   searchUpdated = (term) => {
     this.setState({ searchTerm: term });
   }
-  postMenu = () => {
+  postMenu() {
     const mealIdArray = this.state.menu.map(meal => meal.id);
     this.props.dispatch(menuActions.postMenu({ meals: mealIdArray }));
+    toast.success('Menu for the day has been posted', { className: 'toaster' });
   }
 
   render() {
@@ -54,25 +64,29 @@ class Menu extends React.Component {
     const filteredMeals = this.props.meals
       .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
+    const isMenuSet = this.state.menu.length !== 0;
+
     return (
       <div className="contain">
         <header className="header">
           <ConnectedNav />
         </header>
         <main>
+          <ToastContainer autoClose={2000} />
+
           <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <Accordion accordion={false}>
             <AccordionItem expanded>
               <AccordionItemTitle>
                 <div className="title-element flexbox">
-                  <h3>
-          Your Meals
-                  </h3>
+                  <h5>
+                  Your Meals
+                  </h5>
                   <div className="accordion__arrow u-position-relative" role="presentation" />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
-                <SearchInput className="search-input" onChange={this.searchUpdated} />
+                <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
                 <MealCardContainer
                   meals={filteredMeals}
                   MealCard={MealCard2}
@@ -84,9 +98,9 @@ class Menu extends React.Component {
             <AccordionItem>
               <AccordionItemTitle>
                 <div className="title-element flexbox wrap">
-                  <h3>
+                  <h5>
           Today&#39;s Menu
-                  </h3>
+                  </h5>
                   <div className="accordion__arrow u-position-relative" role="presentation" />
                 </div>
               </AccordionItemTitle>
@@ -100,12 +114,19 @@ class Menu extends React.Component {
                   </button>
                 </div>
 
-                <MealCardContainer
-                  meals={this.state.menu}
-                  MealCard={MealCard2}
-                  removeFromMenu={this.removeFromMenu}
-                  addClass="scroll"
-                />
+                {
+                  isMenuSet ?
+                    <MealCardContainer
+                      meals={this.state.menu}
+                      MealCard={MealCard2}
+                      removeFromMenu={this.removeFromMenu}
+                      addClass="scroll"
+                    /> :
+                    <div className="menu-message">
+                  You have not added meals to the menu.
+                   Select a meal from the meal section above to add meal to menu.
+                    </div>
+                 }
               </AccordionItemBody>
             </AccordionItem>
 

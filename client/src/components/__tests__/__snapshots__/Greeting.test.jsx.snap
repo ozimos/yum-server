@@ -2,11 +2,11 @@
 
 exports[`Login Component renders correctly 1`] = `
 <div>
-  <h3>
+  <h4>
     Welcome 
     Caterer
      
     alias
-  </h3>
+  </h4>
 </div>
 `;

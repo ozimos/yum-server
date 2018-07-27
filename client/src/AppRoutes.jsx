@@ -13,6 +13,8 @@ import ConnectedLogin from './components/login/Login';
 import ConnectedMenu from './components/menu/Menu';
 import ConnectedOrder from './components/orders/Order';
 import ConnectedDashboard from './components/dashboard/Dashboard';
+import '../public/styles/common.scss';
+
 
 const MealManagerWithAuthorization = requireCaterer(ConnectedMealManager);
 const MenuWithAuthorization = requireCaterer(ConnectedMenu);

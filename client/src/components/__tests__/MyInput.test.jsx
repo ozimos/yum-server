@@ -1,11 +1,11 @@
 /* global React:false, shallow:false toJson:false */
 
-import { MyInput } from '../helpers/MyInput';
+import { Input } from '../helpers/MyInput';
 
 describe('MyInput Component', () => {
 
   it('should render without throwing an error', () => {
-    expect(shallow(<MyInput
+    expect(shallow(<Input
       getValue={jest.fn()}
       getErrorMessage={jest.fn()}
       name="name"
@@ -18,7 +18,7 @@ describe('MyInput Component', () => {
       />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<MyInput
+    const wrapper = shallow(<Input
       getValue={jest.fn()}
       getErrorMessage={jest.fn()}
       name="name"

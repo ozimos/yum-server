@@ -6,7 +6,6 @@ import Formsy from 'formsy-react';
 import MyInput from '../helpers/MyInput';
 import { userActions } from '../../redux/actions';
 import '../../../public/styles/auth.scss';
-import '../../../public/styles/book_a_meal.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -52,16 +51,16 @@ class Login extends React.Component {
       <div className="canvas">
         <div className="container2">
           <header className="header">
-            <h1 className="heading">Book A Meal</h1>
+            <h2 className="heading">Book A Meal</h2>
           </header>
           <main>
             <div className="welcome">
-              <h1 className="welcome-text">
+              <h4 className="welcome-text">
                 Welcome!
-              </h1>
-              <h4>
-                Sign in by entering the information below
               </h4>
+              <h5>
+                Sign in by entering the information below
+              </h5>
             </div>
             <div className="form-box">
               <Formsy

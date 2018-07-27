@@ -1,7 +1,7 @@
 import { withFormsy, propTypes } from 'formsy-react';
 import React from 'react';
 
-class MyCheckBox extends React.Component {
+class CheckBox extends React.Component {
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -26,8 +26,8 @@ class MyCheckBox extends React.Component {
   }
 }
 
-MyCheckBox.propTypes = {
+CheckBox.propTypes = {
   ...propTypes
 };
-export { MyCheckBox };
-export default withFormsy(MyCheckBox);
+export { CheckBox };
+export default withFormsy(CheckBox);

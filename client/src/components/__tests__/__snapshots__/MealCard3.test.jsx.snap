@@ -3,7 +3,7 @@
 exports[`MealCard3 Component renders correctly 1`] = `
 <React.Fragment>
   <div
-    className="card"
+    className="card card-booking pillar"
   >
     <img
       alt="Meal"
@@ -11,21 +11,27 @@ exports[`MealCard3 Component renders correctly 1`] = `
       src="nice"
     />
     <div
-      className="title-element flexbox wrap"
+      className="pillar"
     >
       <div
-        className="shrink"
+        className="title-element text_left long_string"
       >
         nice
       </div>
       <div
         className="flexbox"
       >
+        <div
+          className="text_left pad"
+        >
+          ₦
+          200
+        </div>
         <button
-          className="btn title-button icon"
+          className="btn title-button"
           onClick={[Function]}
         >
-          ✔
+          Add to Cart
         </button>
         <button
           className="btn title-button icon"

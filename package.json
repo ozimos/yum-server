@@ -10,7 +10,6 @@
   "scripts": {
     "start": "webpack-dev-server -r esm --config webpack.dev.js --open",
     "build:client": "webpack -r esm --config webpack.prod.js",
-    "build:clientp": "cross-env NODE_ENV=production npm run build:client",
     "start:dev": "cross-env NODE_ENV=development nodemon --watch server -r dotenv/config -r esm server/src/app.js",
     "start:prod": "cross-env NODE_ENV=production nodemon --watch server -r dotenv/config -r esm server/src/app.js",
     "start:babel": "nodemon --watch server -r dotenv/config --exec babel-node server/src/app.js",
@@ -18,7 +17,7 @@
     "server:setup": "sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
     "build": "npm-run-all build:client build:server",
     "heroku-postbuild": "npm run server:setup && npm run build",
-    "herokup": "npm run build:clientp && cross-env DATABASE_URL=postgres://zzwwvxmv:r9blS4h6NG-jCJ8VdYY_gEFwljCXFtos@elmer.db.elephantsql.com:5432/zzwwvxmv sequelize db:migrate --env=production && npm run start:prod",
+    "herokup": "npm run build:client && cross-env DATABASE_URL=postgres://zzwwvxmv:r9blS4h6NG-jCJ8VdYY_gEFwljCXFtos@elmer.db.elephantsql.com:5432/zzwwvxmv sequelize db:migrate --env=production && npm run start:prod",
     "pretest:server": "npm run refresh:test",
     "test:server": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --t 5000 --exit --recursive -r dotenv/config -r esm",
     "test:babel": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --exit --recursive -r dotenv/config -r babel-polyfill -r babel-register",
@@ -58,7 +57,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
@@ -103,6 +101,7 @@
   "dependencies": {
     "ajv": "^6.5.0",
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "clean-webpack-plugin": "^0.1.19",

@@ -10,24 +10,24 @@ exports[`SignUp Component renders correctly 1`] = `
     <header
       className="header"
     >
-      <h1
+      <h2
         className="heading"
       >
         Book A Meal
-      </h1>
+      </h2>
     </header>
     <main>
       <div
         className="welcome"
       >
-        <h1
+        <h4
           className="welcome-text"
         >
           Welcome!
-        </h1>
-        <h4>
-          Register by entering the information below
         </h4>
+        <h5>
+          Register by entering the information below
+        </h5>
       </div>
       <div
         className="form-box"
@@ -62,7 +62,7 @@ exports[`SignUp Component renders correctly 1`] = `
           showRequired={[Function]}
           validationErrors={null}
         >
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="email"
             placeholder="Email"
@@ -75,7 +75,7 @@ exports[`SignUp Component renders correctly 1`] = `
           <div
             className="invalid-feedback"
           />
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="firstName"
             placeholder="First Name"
@@ -88,7 +88,7 @@ exports[`SignUp Component renders correctly 1`] = `
           <div
             className="invalid-feedback"
           />
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="lastName"
             placeholder="Last Name"
@@ -98,7 +98,7 @@ exports[`SignUp Component renders correctly 1`] = `
             validationErrors={Object {}}
             validations="minLength:1"
           />
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="password"
             placeholder="Password"
@@ -124,7 +124,7 @@ exports[`SignUp Component renders correctly 1`] = `
               }
             }
           />
-          <Formsy(MyInput)
+          <Formsy(Input)
             innerRef={[Function]}
             name="confirmPassword"
             placeholder="Confirm Password"
@@ -138,7 +138,7 @@ exports[`SignUp Component renders correctly 1`] = `
             <label
               htmlFor="isCaterer"
             >
-              <Formsy(MyCheckBox)
+              <Formsy(CheckBox)
                 id="isCaterer"
                 innerRef={[Function]}
                 name="isCaterer"
@@ -147,7 +147,9 @@ exports[`SignUp Component renders correctly 1`] = `
                 validationErrors={Object {}}
                 validations={null}
               />
-              Caterer
+              <span>
+                Caterer
+              </span>
             </label>
           </div>
           <button

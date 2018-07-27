@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-// import { Row, ProgressBar } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
@@ -8,16 +7,16 @@ import SearchInput, { createFilter } from 'react-search-input';
 import { push } from 'react-router-redux';
 import Formsy from 'formsy-react';
 import MyFormsyInput from '../helpers/MyInput';
-import ConnectedMealCard from '../mealCard/MealCard';
+import MealCard from '../mealCard/MealCard';
 import MyFormsyTextArea from '../helpers/MyTextArea';
+import ProgressLoader from '../helpers/ProgressLoader';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions } from '../../redux/actions';
 import ConnectedNav from '../nav/Nav';
 import imageUpload from '../../services/imageUpload';
 import '../../../public/styles/search-input.css';
-import '../../../public/styles/book_a_meal.css';
-import '../../../public/styles/auth.scss';
+import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/modalOpenButton.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
@@ -29,9 +28,11 @@ export class MealManager extends React.Component {
       showModal: false,
       displayImage: '',
       searchTerm: '',
-      // uploading: false,
-      // uploadPercent: 0
+      uploading: false,
+      uploadPercent: 0
     };
+    this.handleDrop = this.handleDrop.bind(this);
+    this.setUploadPercent = this.setUploadPercent.bind(this);
   }
   componentDidMount() {
     if (!this.props.authenticated) {
@@ -39,15 +40,17 @@ export class MealManager extends React.Component {
     }
     this.props.dispatch(mealActions.getAllMeals());
   }
-  handleDrop = (files) => {
-    // this.setState({ uploading: true });
-    imageUpload(files).then((response) => {
+  setUploadPercent(percentProgress) {
+    this.setState({ uploadPercent: percentProgress });
+  }
+  handleDrop(files) {
+    this.setState({ uploading: true });
+    imageUpload(files, this.setUploadPercent).then((response) => {
       const { data } = response;
       const fileURL = data.secure_url;
       this.urlInput.props.setValue(fileURL);
-      this.setState({
-        // uploading: false,
-        displayImage: fileURL });
+      this.setState({ displayImage: fileURL, uploading: false, uploadPercent: 0 });
+
     });
   }
   handleOpenModal = () =>
@@ -81,21 +84,21 @@ export class MealManager extends React.Component {
         <main>
           <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title flexbox">
-            <h3 className="shrink">
+            <h5 className="shrink">
               Your Meals
-            </h3>
-            <div className="flexbox nowrap">
-              <p>Click on a meal title to edit the meal or</p>
+            </h5>
+            <div className="flexbox">
+              <p className="info-spacer">Click on a meal title to edit the meal or</p>
               <button className="btn title-button" onClick={this.handleOpenModal}>
                 <p>Add Meal</p>
               </button>
             </div>
           </div>
-          <SearchInput className="search-input" onChange={this.searchUpdated} />
+          <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
 
           <MealCardContainer
             meals={filteredMeals}
-            MealCard={ConnectedMealCard}
+            MealCard={MealCard}
           />
         </main>
         <ReactModal
@@ -106,75 +109,75 @@ export class MealManager extends React.Component {
           shouldCloseOnOverlayClick
         >
           <div className="title flexbox">
-            <h3 className="shrink">
+            <h4 className="shrink">
               Meal Editor
-            </h3>
+            </h4>
             <div className="flexbox">
               <button className="btn title-button" onClick={this.handleCloseModal}>
                 &#10006;
               </button>
             </div>
           </div>
-          <div className="form-box">
-            <Formsy
-              className="form"
-              onValidSubmit={this.handleSubmit}
-              onValid={this.enableButton}
-              onInvalid={this.disableButton}
-              ref={(form) => { this.formEl = form; }}
-            >
-              <MyFormsyInput
-                typeOfInput="text"
-                name="title"
-                required
-                placeholder="Meal Title"
-                validations="minLength:1"
-                validationError="Please enter the meal title"
-              />
-              <MyFormsyInput
-                typeOfInput="number"
-                name="price"
-                required
-                placeholder="Price"
-                validations={{
+          <Formsy
+            className="form3"
+            onValidSubmit={this.handleSubmit}
+            onValid={this.enableButton}
+            onInvalid={this.disableButton}
+            ref={(form) => { this.formEl = form; }}
+          >
+            <MyFormsyInput
+              typeOfInput="text"
+              name="title"
+              required
+              placeholder="Meal Title"
+              validations="minLength:1"
+              validationError="Please enter the meal title"
+            />
+            <MyFormsyInput
+              typeOfInput="number"
+              name="price"
+              required
+              placeholder="Price"
+              validations={{
                   isOnlyInt: (values, value = '') => /^(\s?|[1-9]\d*)$/.test(value)
                 }}
-                validationError="Please enter a price"
-                validationErrors={{ isOnlyInt: 'price must be integer' }}
-              />
-              <MyFormsyTextArea
-                name="description"
-                required
-                placeholder="Description"
-              />
+              validationError="Please enter a price"
+              validationErrors={{ isOnlyInt: 'price must be integer' }}
+            />
+            <MyFormsyTextArea
+              name="description"
+              required
+              placeholder="Description"
+            />
 
-              <MyFormsyInput
-                ref={(urlInput) => { this.urlInputMain = urlInput; }}
-                innerRef={(c) => { this.urlInput = c; }}
-                style={{ display: 'none' }}
-                required
-                typeOfInput="url"
-                name="imageUrl"
-                validations="minLength:5"
-                validationError="Please select an image"
-              />
-            </Formsy>
-          </div>
+            <MyFormsyInput
+              ref={(urlInput) => { this.urlInputMain = urlInput; }}
+              innerRef={(c) => { this.urlInput = c; }}
+              style={{ display: 'none' }}
+              required
+              typeOfInput="url"
+              name="imageUrl"
+              validations="minLength:5"
+              validationError="Please select an image"
+            />
+          </Formsy>
           <Dropzone
             onDrop={this.handleDrop}
             multiple
             accept="image/*"
             className="dropzone"
           >
-            <p>Drop your files or click here to upload</p>
+            {!this.state.uploading &&
+            <button className="btn"> Select an Image</button>}
           </Dropzone>
-          {/* {this.state.uploading && <ProgressBar progress={this.state.uploadPercent}
-        label={`${this.state.uploadPercent}%`} />} */}
+          {this.state.uploading &&
+          <ProgressLoader upload={this.state.uploadPercent} />
+                  }
           <div id="meal_image">
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>
           <button
-            className={this.state.canSubmit ? 'btn title-button' : 'btn btn-disabled title-button'}
+            className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
             onClick={() => this.formEl.submit()}
             type="submit"
             disabled={!this.state.canSubmit}

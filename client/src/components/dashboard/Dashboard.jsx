@@ -15,7 +15,6 @@ import ConnectedNav from '../nav/Nav';
 import uniqueUsers from '../../utils/uniqueUsers';
 import cashTotal, { subTotal } from '../../utils/cashTotal';
 import orderDetails from '../../utils/orderDetails';
-import '../../../public/styles/book_a_meal3.scss';
 import '../../../public/styles/dashboard.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
@@ -28,11 +27,14 @@ class Dashboard extends React.Component {
     this.state = {
       searchTerm: '',
     };
+    this.searchUpdated = this.searchUpdated.bind(this);
   }
   componentDidMount() {
     this.props.dispatch(dashboardActions.getOrdersByDate());
   }
-
+  searchUpdated(term) {
+    this.setState({ searchTerm: term });
+  }
 
   render() {
     const KEYS_TO_FILTERS = ['id', 'userId', 'updatedAt'];
@@ -42,11 +44,9 @@ class Dashboard extends React.Component {
       filteredOrders = this.props.orders
         .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     }
-    filteredOrders = this.props.orders
-      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     const { isCaterer, firstName } = this.props.user;
     return (
-      <div id="dashboard" className="canvas">
+      <div id="dashboard" className="canvas2">
         <div className="container3">
 
           <header className="header extra">
@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
             </div>
             <div className="order_detail flexbox">
               <h5>
-                Order List
+                Today&#39;s Orders
               </h5>
               <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
             </div>
@@ -89,31 +89,34 @@ class Dashboard extends React.Component {
                 <AccordionItemTitle />
                 <AccordionItemBody>
                   <div>
-                    <table className="striped responsive-table">
-                      <thead>
-                        <tr>
-                          <th>S/N</th>
-                          <th>Customer</th>
-                          <th>Order</th>
-                          <th>Meals</th>
-                          <th>Quantities</th>
-                          <th>Total(&#8358;)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredOrders && filteredOrders.map((order, index) => (
-                          <tr key={order.id}>
-                            <td>{index + 1}</td>
-                            <td>{`${order.User.firstName} ${order.User.lastName}`}</td>
-                            <td>{order.id}</td>
-                            <td>{orderDetails.mealTitleList(order)}</td>
-                            <td>{orderDetails.mealQuantityList(order)}</td>
-                            <td>{subTotal(order.Meals)}</td>
+                    { isTodayOrder ?
+                      <table className="striped responsive-table">
+                        <thead>
+                          <tr>
+                            <th>S/N</th>
+                            <th>Customer</th>
+                            <th>Order</th>
+                            <th>Meals</th>
+                            <th>Quantities</th>
+                            <th>Total(&#8358;)</th>
                           </tr>
+                        </thead>
+                        <tbody>
+                          {filteredOrders && filteredOrders.map((order, index) => (
+                            <tr key={order.id}>
+                              <td>{index + 1}</td>
+                              <td>{`${order.User.firstName} ${order.User.lastName}`}</td>
+                              <td>{order.id}</td>
+                              <td>{orderDetails.mealTitleList(order)}</td>
+                              <td>{orderDetails.mealQuantityList(order)}</td>
+                              <td>{subTotal(order.Meals)}</td>
+                            </tr>
                         ))
                       }
-                      </tbody>
-                    </table>
+                        </tbody>
+                      </table> :
+                      <div>No orders have been placed today</div>
+                  }
                   </div>
                 </AccordionItemBody>
               </AccordionItem>

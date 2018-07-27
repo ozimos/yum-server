@@ -98,12 +98,6 @@ context('orders integration test', () => {
   // Get All Orders for current user by date
   describe('GET /orders/user/:date', () => {
     MockDate.set(nextDay2);
-    it.skip('should return error message no orders for today', () => request(app).get(`${ordersUrl}/user/`)
-      .set('authorization', `JWT ${token}`)
-      .then((res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('no records available');
-      }));
     it('should return all orders from the specified date', () => request(app).get(`${ordersUrl}/user/${currentDate}`)
       .set('authorization', `JWT ${token}`)
       .then((res) => {
@@ -116,12 +110,6 @@ context('orders integration test', () => {
   // Get All Orders for all users by date
   describe('GET /orders/all/:date', () => {
     MockDate.set(nextDay2);
-    it.skip('should return error message if no orders for today', () => request(app).get(`${ordersUrl}/all/`)
-      .set('authorization', `JWT ${token}`)
-      .then((res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.message).to.equal('no records available');
-      }));
     it('should return all orders from the specified date', () => request(app).get(`${ordersUrl}/all/${currentDate}`)
       .set('authorization', `JWT ${token}`)
       .then((res) => {

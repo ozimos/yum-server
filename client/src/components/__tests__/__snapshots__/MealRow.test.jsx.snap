@@ -2,15 +2,9 @@
 
 exports[`MealRow Component renders correctly 1`] = `
 <React.Fragment>
-  <tr>
-    <td>
-      <button
-        className="btn btn-cart"
-        onClick={[Function]}
-      >
-        ✖
-      </button>
-    </td>
+  <tr
+    className="slim"
+  >
     <td>
       abc
     </td>
@@ -19,20 +13,22 @@ exports[`MealRow Component renders correctly 1`] = `
     </td>
     <td>
       <input
-        className="formControl"
         onChange={[Function]}
         placeholder="1"
-        style={
-          Object {
-            "width": "40px",
-          }
-        }
         type="number"
         value={4}
       />
     </td>
     <td>
       16
+    </td>
+    <td>
+      <button
+        className="btn btn-cart"
+        onClick={[Function]}
+      >
+        ✖
+      </button>
     </td>
   </tr>
 </React.Fragment>
