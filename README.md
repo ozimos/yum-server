@@ -38,12 +38,13 @@ API Endpoints
 * Get All Orders  - GET /api/v1/orders
 * Select the meal option from the menu  - POST /api/v1/orders
 * Modify an order  - PUT /api/v1/orders/:orderId
+* View API Documentation  - GET /api/v1/docs
 
 ## Getting Started
 
 * [View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
 * [View the application server side hosted on Heroku](https://book-a-meal-andela-31.herokuapp.com/)
-
+* [View the application API Documentation](https://book-a-meal-andela-31.herokuapp.com/api/v1/docs)
 * [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
 * Requirements
 

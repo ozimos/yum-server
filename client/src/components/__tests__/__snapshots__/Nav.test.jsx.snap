@@ -1,55 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Nav Component renders correctly 1`] = `
-<nav
-  className="flexbox"
+<div
+  className="navbar-fixed"
 >
-  <h3
-    className="shrink heading"
-  >
-    Book A Meal
-  </h3>
-  <div
+  <nav
     className="flexbox"
   >
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      className="nav-item long_string"
-      to="/dashboard"
+    <h3
+      className="shrink heading"
     >
-      DashBoard
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      className="nav-item"
-      to="/meals"
+      Book A Meal
+    </h3>
+    <div
+      className="flexbox"
     >
-      Meals
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      className="nav-item"
-      to="/menu"
-    >
-      Menu
-    </NavLink>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      className="nav-item"
-      to="/orders"
-    >
-      Meal Booking
-    </NavLink>
-    <Link
-      replace={false}
-      to="/login"
-    >
-      Log Out
-    </Link>
-  </div>
-</nav>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-item long_string"
+        to="/dashboard"
+      >
+        DashBoard
+      </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-item"
+        to="/meals"
+      >
+        Meals
+      </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-item"
+        to="/menu"
+      >
+        Menu
+      </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        className="nav-item"
+        to="/orders"
+      >
+        Meal Booking
+      </NavLink>
+      <Link
+        replace={false}
+        to="/login"
+      >
+        Log Out
+      </Link>
+    </div>
+  </nav>
+</div>
 `;
