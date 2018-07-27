@@ -7,8 +7,12 @@ import '../../../public/styles/nav.scss';
 const Nav = ({ user }) =>
   (
     <nav className="flexbox">
-      <h2 className="shrink heading">Book A Meal</h2>
+      <h3 className="shrink heading">Book A Meal</h3>
       <div className="flexbox">
+        {user.isCaterer &&
+        <NavLink activeClassName="active" className="nav-item long_string" to="/dashboard">
+        DashBoard
+        </NavLink >}
         {user.isCaterer &&
         <NavLink activeClassName="active" className="nav-item" to="/meals">
           Meals
@@ -20,10 +24,6 @@ const Nav = ({ user }) =>
         <NavLink activeClassName="active" className="nav-item" to="/orders">
           Meal Booking
         </NavLink>
-        {user.isCaterer &&
-        <NavLink activeClassName="active" className="nav-item" to="/dashboard">
-        DashBoard
-        </NavLink >}
         <Link to="/login">
           Log Out
         </Link>

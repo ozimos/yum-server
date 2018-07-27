@@ -5,10 +5,11 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 import HtmlWebpackExternalsPlugin from 'html-webpack-externals-plugin';
+import 'babel-polyfill';
 
 export default {
   entry: {
-    index: ['./client/src/index.jsx']
+    index: ['babel-polyfill', './client/src/index.jsx']
   },
   output: {
     path: path.resolve(__dirname, 'client/dist'),

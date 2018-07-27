@@ -51,13 +51,12 @@ class PlainCartContainer extends React.Component {
    } else {
      await this.props.dispatch(orderActions.postOrder({ meals: actualOrder }));
    }
-   /* eslint no-alert: off */
    if (!this.props.orderError) {
-     alert('Order has been created');
+     this.props.notify('Order has been created');
      this.props.clearCart();
    }
    if (this.props.orderError) {
-     alert(this.props.orderError);
+     this.props.notify(this.props.orderError);
    }
  }
 
@@ -69,16 +68,21 @@ class PlainCartContainer extends React.Component {
    const total = calcTotal();
    return (
      <div className={rest.addClass ? `${rest.addClass}` : ''}>
-       <h3>Order Cart</h3>
+       <div className="flexbox cart">
+         <h5>Order Cart</h5>
+         <button className="btn title-button" onClick={rest.closeCart}>
+                &#10006;
+         </button>
+       </div>
        <div className="responsive-table">
          <table className="table">
            <thead>
              <tr>
-               <th>Remove Item</th>
                <th>Meal Title</th>
                <th>Price (&#x20a6;)</th>
                <th>Quantity</th>
                <th>Subtotal (&#x20a6;)</th>
+               <th />
              </tr>
            </thead>
            <tbody>
@@ -91,19 +95,20 @@ class PlainCartContainer extends React.Component {
              />))
         }
            </tbody>
-           <caption>
-             <div className="row">
-               <div className="col s3 mr-auto">&#9776; Your Order</div>
-               <div className="col s2"> Total </div>
-               <div className="col s2"> {total}</div>
-               <div className="col s2">
-                 <button className="btn btn-cart" onClick={rest.clearCart}>
-                   <p>Clear Cart</p>
-                 </button>
+           <caption className="flexbox-cart">
+             <div className="flexbox">
+               <div className="flexbox info">
+                 <p> Order Total </p>
+                 <p > &#x20a6;{total}</p>
                </div>
-               <div className="col s2">
+
+               <div className="flexbox info">
                  <button className="btn btn-cart" onClick={this.placeOrder}>
-                   {this.props.orderId ? <p>Modify Order</p> : <p>Place New Order</p>}
+                   {this.props.orderId ? 'Modify Order' : 'Place Order' }
+                 </button>
+
+                 <button className="btn btn-cart" onClick={rest.clearCart}>
+                   Clear Cart
                  </button>
                </div>
              </div>
@@ -127,6 +132,7 @@ PlainCartContainer.propTypes = {
   orderId: PropTypes.string,
   orderError: PropTypes.string,
   clearCart: PropTypes.func.isRequired,
+  notify: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({

@@ -14,7 +14,7 @@ exports[`MealCard3 Component renders correctly 1`] = `
       className="pillar"
     >
       <div
-        className="title-element text_left"
+        className="title-element text_left long_string"
       >
         nice
       </div>
@@ -28,10 +28,10 @@ exports[`MealCard3 Component renders correctly 1`] = `
           200
         </div>
         <button
-          className="btn title-button icon"
+          className="btn title-button"
           onClick={[Function]}
         >
-          ✔
+          Add to Cart
         </button>
         <button
           className="btn title-button icon"

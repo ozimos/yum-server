@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const Greeting = props =>
   (
     <div>
-      <h3>
+      <h4>
                 Welcome {props.isCaterer ? 'Caterer' : 'Customer'} {props.firstName}
-      </h3>
+      </h4>
     </div>
   );
 Greeting.propTypes = {

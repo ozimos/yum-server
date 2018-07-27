@@ -50,16 +50,16 @@ class SignUp extends React.Component {
       <div className="canvas">
         <div className="container2">
           <header className="header">
-            <h1 className="heading">Book A Meal</h1>
+            <h2 className="heading">Book A Meal</h2>
           </header>
           <main>
             <div className="welcome">
-              <h1 className="welcome-text">
+              <h4 className="welcome-text">
                 Welcome!
-              </h1>
-              <h4>
-                Register by entering the information below
               </h4>
+              <h5>
+                Register by entering the information below
+              </h5>
             </div>
             <div className="form-box">
               <Formsy

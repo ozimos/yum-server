@@ -2,7 +2,7 @@
 
 exports[`OrderItem Component renders correctly 1`] = `
 <div
-  className="row"
+  className="row order_item"
   style={
     Object {
       "borderBottom": "1px solid",
@@ -20,10 +20,10 @@ exports[`OrderItem Component renders correctly 1`] = `
       key="abc"
     >
       <div
-        className="col s7 text_left"
+        className="col s7 text_left long_string left_pad"
       />
       <div
-        className="col s3 text_left"
+        className="col s3 text_left left_pad"
       >
         1200
       </div>
@@ -38,10 +38,10 @@ exports[`OrderItem Component renders correctly 1`] = `
       key="def"
     >
       <div
-        className="col s7 text_left"
+        className="col s7 text_left long_string left_pad"
       />
       <div
-        className="col s3 text_left"
+        className="col s3 text_left left_pad"
       >
         2000
       </div>
@@ -56,7 +56,7 @@ exports[`OrderItem Component renders correctly 1`] = `
     className="col s1 text_right"
   >
     <button
-      className="btn"
+      className="btn title-button"
       onClick={[Function]}
     >
       Edit

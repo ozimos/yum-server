@@ -49,13 +49,13 @@ exports[`MealCard2 Component renders correctly 1`] = `
     shouldReturnFocusAfterClose={true}
   >
     <div
-      className="title flexbox"
+      className="flexbox"
     >
-      <h3
+      <h4
         className="shrink"
       >
         Meal Details
-      </h3>
+      </h4>
       <div
         className="flexbox"
       >
@@ -68,19 +68,17 @@ exports[`MealCard2 Component renders correctly 1`] = `
       </div>
     </div>
     <div
-      className="form-box"
+      className="menu-info"
     >
       <div>
         nice
       </div>
       <div>
+        nice
+      </div>
+      <div>
+        ₦
         200
-      </div>
-      <div>
-        nice
-      </div>
-      <div>
-        nice
       </div>
     </div>
   </Modal>

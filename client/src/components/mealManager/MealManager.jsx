@@ -84,9 +84,9 @@ export class MealManager extends React.Component {
         <main>
           <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title flexbox">
-            <h4 className="shrink">
+            <h5 className="shrink">
               Your Meals
-            </h4>
+            </h5>
             <div className="flexbox">
               <p className="info-spacer">Click on a meal title to edit the meal or</p>
               <button className="btn title-button" onClick={this.handleOpenModal}>

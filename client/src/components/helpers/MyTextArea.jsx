@@ -22,6 +22,7 @@ class TextArea extends React.Component {
           onChange={this.changeValue}
           value={this.props.getValue() || this.props.initialValue}
           placeholder={this.props.placeholder}
+          maxLength="100"
         />
         <div
           style={{

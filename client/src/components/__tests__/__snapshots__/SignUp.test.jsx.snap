@@ -10,24 +10,24 @@ exports[`SignUp Component renders correctly 1`] = `
     <header
       className="header"
     >
-      <h1
+      <h2
         className="heading"
       >
         Book A Meal
-      </h1>
+      </h2>
     </header>
     <main>
       <div
         className="welcome"
       >
-        <h1
+        <h4
           className="welcome-text"
         >
           Welcome!
-        </h1>
-        <h4>
-          Register by entering the information below
         </h4>
+        <h5>
+          Register by entering the information below
+        </h5>
       </div>
       <div
         className="form-box"

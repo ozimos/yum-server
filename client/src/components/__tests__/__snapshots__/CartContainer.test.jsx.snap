@@ -4,9 +4,18 @@ exports[`CartContainer Component renders correctly 1`] = `
 <div
   className=""
 >
-  <h3>
-    Order Cart
-  </h3>
+  <div
+    className="flexbox cart"
+  >
+    <h5>
+      Order Cart
+    </h5>
+    <button
+      className="btn title-button"
+    >
+      ✖
+    </button>
+  </div>
   <div
     className="responsive-table"
   >
@@ -15,9 +24,6 @@ exports[`CartContainer Component renders correctly 1`] = `
     >
       <thead>
         <tr>
-          <th>
-            Remove Item
-          </th>
           <th>
             Meal Title
           </th>
@@ -30,6 +36,7 @@ exports[`CartContainer Component renders correctly 1`] = `
           <th>
             Subtotal (₦)
           </th>
+          <th />
         </tr>
       </thead>
       <tbody>
@@ -132,48 +139,37 @@ exports[`CartContainer Component renders correctly 1`] = `
           userId="userId"
         />
       </tbody>
-      <caption>
+      <caption
+        className="flexbox-cart"
+      >
         <div
-          className="row"
+          className="flexbox"
         >
           <div
-            className="col s3 mr-auto"
+            className="flexbox info"
           >
-            ☰ Your Order
+            <p>
+               Order Total 
+            </p>
+            <p>
+               ₦
+              NaN
+            </p>
           </div>
           <div
-            className="col s2"
-          >
-             Total 
-          </div>
-          <div
-            className="col s2"
-          >
-             
-            NaN
-          </div>
-          <div
-            className="col s2"
-          >
-            <button
-              className="btn btn-cart"
-              onClick={[MockFunction]}
-            >
-              <p>
-                Clear Cart
-              </p>
-            </button>
-          </div>
-          <div
-            className="col s2"
+            className="flexbox info"
           >
             <button
               className="btn btn-cart"
               onClick={[Function]}
             >
-              <p>
-                Place New Order
-              </p>
+              Place Order
+            </button>
+            <button
+              className="btn btn-cart"
+              onClick={[MockFunction]}
+            >
+              Clear Cart
             </button>
           </div>
         </div>

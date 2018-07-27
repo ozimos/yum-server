@@ -17,59 +17,83 @@
   .info-spacer{
     margin-right: 20px
   }
-      .title-element {
-        border-radius: 10px;
-        line-height: 2;
-        &>.flexbox {
-            max-width: 80%;
-            &>*:first-child {
-                justify-items: flex-start;
-                margin-right: 20px;
-              }
-          }
-          &>* {
-            margin: 0;
-            font-weight: lighter;
+  .title-element {
+    border-radius: 10px;
+    line-height: 2;
+    &>.flexbox {
+        max-width: 80%;
+        &>*:first-child {
+            justify-items: flex-start;
+            margin-right: 20px;
           }
       }
+      &>* {
+        margin: 0;
+        font-weight: lighter;
+      }
+  }
       
-      .summary {
-        margin: 40px 0;
-        text-align: left;
-        * {
-            margin-left: 20px;
-            padding: 0;
-          }
+  .summary {
+    margin: 40px 0;
+    text-align: left;
+    * {
+        margin-left: 20px;
+        padding: 0;
       }
-      
-     .accordion__title{
-       &:focus{
-         outline: none
-       }
-     }
-     
-      .modal-trigger {
-        cursor: pointer;
-        &:focus{
-          background-color: transparent;      
-          }
+  }
+  
+  .accordion__title{
+    background-color: #CD9655;
+    border-radius: 5px;    
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #aaa;
+    &:focus{
+      outline: none
+    }
+  }
+  .menu-message{
+    margin-top: 10px;
+     text-align: left;
+      margin-left: 10px;
+      background-color: transparent
+  }
+  .gallery.scroll {
+    max-height: 50vh;
+    overflow: auto;
+    
+  }
+  span.badge{
+    color: white;
+    min-width: unset;
+    margin-left: 5px;
+  }
+  .modal-trigger {
+    cursor: pointer;
+    &:focus{
+      background-color: transparent;      
       }
-      button.modal-trigger.modal-open{
-        width: 60%
-      }
-      
-      button.modal-trigger,
-      h3.modal-trigger,p.modal-trigger  {
-        color: #2f80ed;
-      }
+  }
+  button.modal-trigger.modal-open{
+    width: 60%
+  }
+  
+  button.modal-trigger,
+  h3.modal-trigger,p.modal-trigger  {
+    color: #2f80ed;
+  }
 
-      @media screen and (min-width: 736px) {
-        .contain {
-          margin: 0;
-          padding: 0 20px;
-        }
-      }
+  @media screen and (min-width: 736px) {
+    .contain {
+      margin: 0;
+      padding: 0 20px;
+    }
+  }
       
+}
+.menu-info{
+  text-align: left;
+  padding-left: 10px
 }
 #meal_image {
   width: 60%;

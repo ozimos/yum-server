@@ -5,6 +5,9 @@
 .u-position-relative {
     position: relative;
 }
+.accordion__arrow.u-position-relative{
+    margin-left: 10px
+}
 .accordion__body {
     display: block;
 }

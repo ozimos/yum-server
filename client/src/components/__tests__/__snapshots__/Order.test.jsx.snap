@@ -19,6 +19,29 @@ exports[`Order Component renders correctly 1`] = `
     <main
       className="col s12"
     >
+      <ToastContainer
+        autoClose={2000}
+        bodyClassName={null}
+        className={null}
+        closeButton={
+          <CloseButton
+            ariaLabel="close"
+          />
+        }
+        closeOnClick={true}
+        draggable={true}
+        draggablePercent={80}
+        hideProgressBar={false}
+        newestOnTop={false}
+        pauseOnHover={true}
+        pauseOnVisibilityChange={true}
+        position="top-right"
+        progressClassName={null}
+        rtl={false}
+        style={null}
+        toastClassName={null}
+        transition={[Function]}
+      />
       <AccordionWrapper
         accordion={false}
         className="accordion"
@@ -47,9 +70,11 @@ exports[`Order Component renders correctly 1`] = `
             <div
               className="title-element flexbox"
             >
-              <h3>
+              <h4
+                className="long_string"
+              >
                 Today's Menu
-              </h3>
+              </h4>
               <div
                 className="accordion__arrow u-position-relative"
                 role="presentation"
@@ -72,10 +97,18 @@ exports[`Order Component renders correctly 1`] = `
               />
               <button
                 className="btn title-button"
+                disabled={true}
                 onClick={[Function]}
               >
-                <p>
-                  Complete Order
+                <p
+                  className="cart-notification"
+                >
+                  Cart
+                  <span
+                    className="badge"
+                  >
+                    0
+                  </span>
                 </p>
               </button>
             </div>
@@ -119,11 +152,13 @@ exports[`Order Component renders correctly 1`] = `
             hideBodyClassName=""
           >
             <div
-              className="title-element flexbox wrap"
+              className="title-element flexbox"
             >
-              <h3>
+              <h4
+                className="long_string"
+              >
                 Your Orders for Today
-              </h3>
+              </h4>
               <div
                 className="accordion__arrow u-position-relative"
                 role="presentation"
@@ -135,7 +170,7 @@ exports[`Order Component renders correctly 1`] = `
             hideBodyClassName="accordion__body--hidden"
           >
             <p
-              className="shrink mr-auto"
+              className="mr-auto"
             >
               Orders can only be edited up to 4 hours after booking
             </p>
@@ -240,7 +275,7 @@ exports[`Order Component renders correctly 1`] = `
             Order Cart
           </h3>
           <p>
-            Add a meal by clicking on a meal checkmark button
+            No orders here. Select a meal and click the Add to Cart button
           </p>
         </div>
       </aside>

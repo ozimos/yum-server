@@ -10,6 +10,29 @@ exports[`Menu Component renders correctly 1`] = `
     <Connect(Nav) />
   </header>
   <main>
+    <ToastContainer
+      autoClose={2000}
+      bodyClassName={null}
+      className={null}
+      closeButton={
+        <CloseButton
+          ariaLabel="close"
+        />
+      }
+      closeOnClick={true}
+      draggable={true}
+      draggablePercent={80}
+      hideProgressBar={false}
+      newestOnTop={false}
+      pauseOnHover={true}
+      pauseOnVisibilityChange={true}
+      position="top-right"
+      progressClassName={null}
+      rtl={false}
+      style={null}
+      toastClassName={null}
+      transition={[Function]}
+    />
     <Greeting
       firstName="user"
       isCaterer={true}
@@ -42,9 +65,9 @@ exports[`Menu Component renders correctly 1`] = `
           <div
             className="title-element flexbox"
           >
-            <h4>
+            <h5>
               Your Meals
-            </h4>
+            </h5>
             <div
               className="accordion__arrow u-position-relative"
               role="presentation"
@@ -104,9 +127,9 @@ exports[`Menu Component renders correctly 1`] = `
           <div
             className="title-element flexbox wrap"
           >
-            <h3>
+            <h5>
               Today's Menu
-            </h3>
+            </h5>
             <div
               className="accordion__arrow u-position-relative"
               role="presentation"
@@ -137,12 +160,11 @@ exports[`Menu Component renders correctly 1`] = `
               </p>
             </button>
           </div>
-          <MealCardContainer
-            MealCard={[Function]}
-            addClass="scroll"
-            meals={Array []}
-            removeFromMenu={[Function]}
-          />
+          <div
+            className="menu-message"
+          >
+            You have not added meals to the menu. Select a meal from the meal section above to add meal to menu.
+          </div>
         </AccordionItemBodyWrapper>
       </AccordionItemWrapper>
     </AccordionWrapper>

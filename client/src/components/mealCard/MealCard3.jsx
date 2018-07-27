@@ -9,7 +9,7 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
       <div className="card card-booking pillar">
         <img src={imageUrl} alt="Meal" className="fluid-img" />
         <div className="pillar">
-          <div className="title-element text_left">
+          <div className="title-element text_left long_string">
             {title}
           </div>
           <div className="flexbox">
@@ -17,8 +17,8 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
           &#8358;{price}
             </div>
             {props.addToOrder &&
-            <button className="btn title-button icon" onClick={() => props.addToOrder(meal)}>
-                &#10004;
+            <button className="btn title-button" onClick={() => props.addToOrder(meal)} >
+                Add to Cart
             </button>}
             {props.removeFromOrder &&
             <button className="btn title-button icon" onClick={() => props.removeFromOrder(id)}>

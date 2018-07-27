@@ -27,7 +27,6 @@
       }
       
       .welcome-text {
-        padding: 0 50px;
         font-weight: 900;
       }
     }
@@ -40,6 +39,10 @@
     border-width: 0 0 1px 0;
     border-color: #000;
     margin-top: 20px;
+  }
+  .btn{
+padding-top: 5px;
+padding-bottom: 5px;
   }
   &>input,
   &>p {
@@ -94,25 +97,28 @@
     }
   
     @media screen and (min-width: 736px) {
-     
-      .container2 {
-        max-width: 70% !important;
-        padding-left: 2%;
-        padding-right: 4%;
-        margin-left: 0;
-      }
-     
+      .canvas{
+        background-size: 40% 100% !important; 
+    }
+    .container2 {
+      width: 50%;
+      padding-left: 2%;
+      padding-right: 4%;
+      margin-left: 0;
+    }
     }
     
-    @media screen and (min-width: 600px) {
-     
+    @media screen and (min-width: 600px) and (max-width: 736px){
       .canvas{
-    background-size: 20% 100%; 
-    .container2 {
-      max-width: 70%;
-    }               
+    background-size: 40% 100%; 
+                
       }
-     
+      .container2 {
+        width: 70%;
+        padding-left: 10%;
+      padding-right: 10%;
+      margin-left: 0;
+      }   
     }
     
     @media screen and (min-width: 450px) and (max-width: 600px) {

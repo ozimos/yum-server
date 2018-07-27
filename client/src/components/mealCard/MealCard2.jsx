@@ -49,21 +49,20 @@ class PlainMealCard2 extends React.Component {
           onRequestClose={this.handleCloseModal}
           shouldCloseOnOverlayClick
         >
-          <div className="title flexbox">
-            <h3 className="shrink">
+          <div className="flexbox">
+            <h4 className="shrink">
               Meal Details
-            </h3>
+            </h4>
             <div className="flexbox">
               <button className="btn title-button" onClick={this.handleCloseModal}>
                 &#10006;
               </button>
             </div>
           </div>
-          <div className="form-box">
+          <div className="menu-info">
             <div>{title}</div>
-            <div>{price}</div>
             <div>{description}</div>
-            <div>{imageUrl}</div>
+            <div>&#x20a6;{price}</div>
           </div>
         </ReactModal>
       </React.Fragment>

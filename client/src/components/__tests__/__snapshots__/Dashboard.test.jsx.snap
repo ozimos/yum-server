@@ -2,7 +2,7 @@
 
 exports[`Dashboard Component renders correctly 1`] = `
 <div
-  className="canvas"
+  className="canvas2"
   id="dashboard"
 >
   <div
@@ -108,7 +108,7 @@ exports[`Dashboard Component renders correctly 1`] = `
         className="order_detail flexbox"
       >
         <h5>
-          Order List
+          Today's Orders
         </h5>
         <Search
           caseSensitive={false}

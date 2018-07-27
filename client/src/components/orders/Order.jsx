@@ -11,6 +11,8 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MealCard3 from '../mealCard/MealCard3';
 import MealRow from '../orderCart/MealRow';
 import CartContainer from '../orderCart/CartContainer';
@@ -35,30 +37,53 @@ class Order extends React.Component {
       currentOrderId: '',
       showModal: false,
     };
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.removeFromOrder = this.removeFromOrder.bind(this);
+    this.clearOrder = this.clearOrder.bind(this);
+    this.addOrder = this.addOrder.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
+    this.notify = this.notify.bind(this);
   }
   componentDidMount() {
     this.props.dispatch(menuActions.getMenu());
     this.props.dispatch(orderActions.getUserOrdersByDate());
   }
-  handleOpenModal = () =>
-    this.setState({ showModal: true });
-  handleCloseModal = () =>
-    this.setState({ showModal: false });
-  addToOrder = (meal) => {
+  handleOpenModal() {
+    return this.setState({ showModal: true });
+  }
+  handleCloseModal() { return this.setState({ showModal: false }); }
+  notify = message => toast(message, { className: 'toaster' });
+  addToOrder(meal) {
+    if (this.state.currentOrderId) {
+      return toast('New meals cannot be added to existing orders', { className: 'toaster' });
+    }
     const inOrder = this.state.currentOrder.some(elem => elem.id === meal.id);
     if (!inOrder) {
       this.setState(prevState =>
         ({ currentOrder: [...prevState.currentOrder, meal] }));
+      toast('Meal has been added to cart', { className: 'toaster' });
+    } else {
+      toast('Meal is already in cart', { className: 'toaster' });
     }
   }
-  addOrder = (id) => {
+  addOrder(id) {
     const order = this.props.orders.find(elem => elem.id === id);
     this.setState({ currentOrder: order.Meals, currentOrderId: id });
+    toast('Meal has been added to cart for editing', { className: 'toaster' });
   }
-  removeFromOrder = id =>
-    this.setState(prevState =>
-      ({ currentOrder: prevState.currentOrder.filter(elem => elem.id !== id) }));
-  clearOrder = () => this.setState({ currentOrder: [], currentOrderId: '' })
+  removeFromOrder(id) {
+    if (this.state.currentOrder.length <= 1) {
+      toast.error('There must be at least one meal in the cart. Use the clear cart button to clear cart', { className: 'toaster' });
+    } else {
+      this.setState(prevState =>
+        ({ currentOrder: prevState.currentOrder.filter(elem => elem.id !== id) }));
+    }
+  }
+  clearOrder() {
+    this.setState({ currentOrder: [], currentOrderId: '' });
+    this.handleCloseModal();
+  }
   searchUpdated = (term) => {
     this.setState({ searchTerm: term });
   }
@@ -88,21 +113,22 @@ class Order extends React.Component {
         <Greeting isCaterer={isCaterer} firstName={firstName} />
         <div className="row">
           <main className="col s12">
+            <ToastContainer autoClose={2000} />
             <Accordion accordion={false}>
               <AccordionItem expanded>
                 <AccordionItemTitle>
                   <div className="title-element flexbox">
-                    <h3>
+                    <h4 className="long_string">
                   Today&#39;s Menu
-                    </h3>
+                    </h4>
                     <div className="accordion__arrow u-position-relative" role="presentation" />
                   </div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                   <div className="flexbox">
                     <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
-                    <button className="btn title-button" onClick={this.handleOpenModal}>
-                      <p>Complete Order</p>
+                    <button className="btn title-button" onClick={this.handleOpenModal} disabled={!isMealSelected} >
+                      <p className="cart-notification">Cart<span className="badge">{this.state.currentOrder.length}</span></p>
                     </button>
                   </div>
                   {isMenuSet ? <MealCardContainer
@@ -119,15 +145,15 @@ class Order extends React.Component {
               </AccordionItem>
               <AccordionItem>
                 <AccordionItemTitle>
-                  <div className="title-element flexbox wrap">
-                    <h3>
-          Your Orders for Today
-                    </h3>
+                  <div className="title-element flexbox">
+                    <h4 className="long_string">
+                      Your Orders for Today
+                    </h4>
                     <div className="accordion__arrow u-position-relative" role="presentation" />
                   </div>
                 </AccordionItemTitle>
                 <AccordionItemBody>
-                  <p className="shrink mr-auto">
+                  <p className="mr-auto">
                     {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
                   </p>
                   { isTodayOrder ? <OrderContainer
@@ -157,10 +183,12 @@ class Order extends React.Component {
                 MealRow={MealRow}
                 removeFromCart={this.removeFromOrder}
                 clearCart={this.clearOrder}
+                closeCart={this.handleCloseModal}
+                notify={this.notify}
               /> :
               <div>
                 <h3>Order Cart</h3>
-                <p>Add a meal by clicking on a meal checkmark button</p>
+                <p>No orders here. Select a meal and click the Add to Cart button</p>
 
               </div>
                 }

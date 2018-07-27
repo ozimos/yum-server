@@ -17,11 +17,11 @@ exports[`MealManager Component renders correctly 1`] = `
     <div
       className="title flexbox"
     >
-      <h4
+      <h5
         className="shrink"
       >
         Your Meals
-      </h4>
+      </h5>
       <div
         className="flexbox"
       >
