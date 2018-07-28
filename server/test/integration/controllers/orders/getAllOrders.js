@@ -42,7 +42,9 @@ describe('Integration Controller Get Orders', () => {
     });
     const response = await orderController.getAllOrders();
     expect(response.data[0].Meals[0].id).to.be.oneOf([body.meals[0].id, body.meals[1].id]);
-    expect(response.data[0].Meals[0].MealOrders.quantity).to.equal(body.meals[0].quantity);
+    expect(response.data[0].Meals[0].MealOrders.quantity)
+      .to.be.oneOf([body.meals[0].quantity, body.meals[1].quantity]);
+    expect(response.data[0].Meals.length).to.equal(body.meals.length);
     expect(response.data[0].id).to.be.a('string');
     expect(response.statusCode).to.equal(200);
   });

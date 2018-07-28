@@ -100,7 +100,7 @@ exports[`MealCard Component renders correctly 1`] = `
       <Formsy(Input)
         innerRef={[Function]}
         name="price"
-        placeholder={200}
+        placeholder="₦200"
         required={false}
         typeOfInput="number"
         validationError="Please enter a price"
@@ -167,12 +167,14 @@ exports[`MealCard Component renders correctly 1`] = `
       />
     </div>
     <button
-      className="btn btn-disabled"
+      className="btn"
       disabled={true}
       onClick={[Function]}
       type="submit"
     >
-      Continue
+      <p>
+        Continue
+      </p>
     </button>
   </Modal>
 </React.Fragment>

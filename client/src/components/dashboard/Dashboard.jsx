@@ -68,7 +68,7 @@ class Dashboard extends React.Component {
                   <span className="order_span summary_value flow-text">{uniqueUsers(this.props.orders)}</span>
                   <span className="order_span shrink"><img alt="head profile" className="responsive-img" src="./images/profile.png" /></span>
                 </div>
-                <h5 className="flow-text">Customers</h5>
+                <h5 className="flow-text">Customer(s)</h5>
               </div >
               <div className="card order_summary">
                 <div className="flexbox">

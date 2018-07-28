@@ -49,7 +49,8 @@ exports[`MealManager Component renders correctly 1`] = `
     />
     <MealCardContainer
       MealCard={[Function]}
-      addClass=""
+      addClass="scroll2"
+      connecting={false}
       meals={
         Array [
           Object {
@@ -202,7 +203,7 @@ exports[`MealManager Component renders correctly 1`] = `
       id="meal_image"
     />
     <button
-      className="btn btn-disabled"
+      className="btn"
       disabled={true}
       onClick={[Function]}
       type="submit"

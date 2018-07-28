@@ -4,8 +4,8 @@ const imageUpload = (files, callback) => {
   const formData = new FormData();
   formData.append('file', files[0]);
   formData.append('tags', 'meals');
-  formData.append('upload_preset', 'u9zfzeap');
-  formData.append('api_key', '411447556157938');
+  formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
+  formData.append('api_key', process.env.CLOUDINARY_API_KEY);
   formData.append('timestamp', (Date.now() / 1000) || 0);
   const config = {
     onUploadProgress(ProgressEvent) {
@@ -17,7 +17,7 @@ const imageUpload = (files, callback) => {
       callback(percentCompleted);
     }
   };
-  return axios.post('https://api.cloudinary.com/v1_1/tovieyeozim/image/upload', formData, {
+  return axios.post(process.env.CLOUDINARY_URL, formData, {
     headers: { 'X-Requested-With': 'XMLHttpRequest' }, ...config
   });
 };

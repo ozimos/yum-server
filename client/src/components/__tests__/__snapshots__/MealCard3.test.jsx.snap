@@ -28,10 +28,14 @@ exports[`MealCard3 Component renders correctly 1`] = `
           200
         </div>
         <button
-          className="btn title-button"
+          className="btn title-button row_button"
           onClick={[Function]}
         >
-          Add to Cart
+          <div
+            className="long_string2"
+          >
+            Add to Cart
+          </div>
         </button>
         <button
           className="btn title-button icon"
