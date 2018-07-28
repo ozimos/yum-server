@@ -16,7 +16,7 @@
     "build:server": "babel server/src -d server/lib --copy-files",
     "server:setup": "sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
     "build": "npm-run-all build:client build:server",
-    "heroku-postbuild": "npm run server:setup && npm run build",
+    "heroku-postbuild": "npm run build",
     "herokup": "npm run build:client && cross-env DATABASE_URL=postgres://zzwwvxmv:r9blS4h6NG-jCJ8VdYY_gEFwljCXFtos@elmer.db.elephantsql.com:5432/zzwwvxmv sequelize db:migrate --env=production && npm run start:prod",
     "pretest:server": "npm run refresh:test",
     "test:server": "cross-env NODE_ENV=test TOKEN_PASSWORD=test nyc mocha server/test --t 5000 --exit --recursive -r dotenv/config -r esm",

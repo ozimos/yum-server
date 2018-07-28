@@ -103,7 +103,7 @@ class PlainMealCard extends React.Component {
             <MyFormsyInput
               typeOfInput="number"
               name="price"
-              placeholder={price || 'Price'}
+              placeholder={`\u20A6${price}` || 'Price'}
               validations={{
                   isOnlyInt: (values, value = '') => /^(\s?|[1-9]\d*)$/.test(value)
                 }}
@@ -121,7 +121,6 @@ class PlainMealCard extends React.Component {
               style={{ display: 'none' }}
               typeOfInput="url"
               name="imageUrl"
-                // initialValue={this.state.displayImage}
               validations="minLength:5"
               validationError="Please select an image"
             />
@@ -142,21 +141,25 @@ class PlainMealCard extends React.Component {
             <img src={this.state.displayImage} alt="meal" className="fluid-img" />
           </div>
           <button
-            className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+            className={(this.state.canSubmit || !this.props.connecting) ? 'btn' : 'btn btn-disabled'}
             onClick={() => this.formEl.submit()}
             type="submit"
-            disabled={!this.state.canSubmit}
+            disabled={!this.state.canSubmit || this.props.connecting}
           >
-            Continue
+            <p>Continue</p>
           </button>
         </ReactModal>
       </React.Fragment>
     );
   }
 }
+PlainMealCard.defaultProps = {
+  connecting: false,
+};
 PlainMealCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  connecting: PropTypes.bool,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,

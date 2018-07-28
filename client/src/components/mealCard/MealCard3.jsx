@@ -17,8 +17,8 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
           &#8358;{price}
             </div>
             {props.addToOrder &&
-            <button className="btn title-button" onClick={() => props.addToOrder(meal)} >
-                Add to Cart
+            <button className="btn title-button row_button" onClick={() => props.addToOrder(meal)} >
+              <div className="long_string2">Add to Cart</div>
             </button>}
             {props.removeFromOrder &&
             <button className="btn title-button icon" onClick={() => props.removeFromOrder(id)}>

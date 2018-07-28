@@ -3,6 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import webpack from 'webpack';
 import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
 import HtmlWebpackExternalsPlugin from 'html-webpack-externals-plugin';
 import 'babel-polyfill';
@@ -41,6 +42,14 @@ export default {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        CLOUDINARY_URL: JSON.stringify(process.env.CLOUDINARY_URL),
+        CLOUDINARY_UPLOAD_PRESET: JSON.stringify(process.env.CLOUDINARY_UPLOAD_PRESET),
+        CLOUDINARY_API_KEY: JSON.stringify(process.env.CLOUDINARY_API_KEY),
+      },
+    }),
     new CleanWebpackPlugin('./client/dist'),
     new HtmlWebpackPlugin({
       template: './client/public/index.html',

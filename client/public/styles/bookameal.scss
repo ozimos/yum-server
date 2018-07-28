@@ -60,7 +60,11 @@
   .gallery.scroll {
     max-height: 50vh;
     overflow: auto;
-    
+    max-height: 80vh;    
+  }
+  .gallery.scroll2 {
+    overflow: auto;
+    max-height: 60vh;        
   }
   span.badge{
     color: white;

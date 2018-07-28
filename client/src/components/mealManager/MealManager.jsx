@@ -56,9 +56,10 @@ export class MealManager extends React.Component {
   handleOpenModal = () =>
     this.setState({ showModal: true });
   handleCloseModal = () =>
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, displayImage: '' });
   handleSubmit = async (meal) => {
     await this.props.dispatch(mealActions.createMeal(meal));
+    this.setState({ displayImage: '' });
     this.handleCloseModal();
   }
   disableButton = () =>
@@ -99,6 +100,8 @@ export class MealManager extends React.Component {
           <MealCardContainer
             meals={filteredMeals}
             MealCard={MealCard}
+            addClass="scroll2"
+            connecting={this.props.connecting}
           />
         </main>
         <ReactModal
@@ -177,10 +180,10 @@ export class MealManager extends React.Component {
             {this.state.displayImage ? <img src={this.state.displayImage} alt="meal" className="fluid-img" /> : false}
           </div>
           <button
-            className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+            className={(this.state.canSubmit || !this.props.connecting) ? 'btn' : 'btn btn-disabled'}
             onClick={() => this.formEl.submit()}
             type="submit"
-            disabled={!this.state.canSubmit}
+            disabled={!this.state.canSubmit || this.props.connecting}
           >
             <p>Continue</p>
           </button>
@@ -191,10 +194,12 @@ export class MealManager extends React.Component {
 }
 MealManager.defaultProps = {
   authenticated: false,
+  connecting: false,
 };
 MealManager.propTypes = {
   dispatch: PropTypes.func.isRequired,
   authenticated: PropTypes.bool,
+  connecting: PropTypes.bool,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string
