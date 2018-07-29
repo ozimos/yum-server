@@ -52,7 +52,8 @@ class PlainCartContainer extends React.Component {
      await this.props.dispatch(orderActions.postOrder({ meals: actualOrder }));
    }
    if (!this.props.orderError) {
-     this.props.notify('Order has been created');
+     const message = this.props.orderId ? 'modified' : 'created';
+     this.props.notify(`Order has been ${message}`);
      this.props.clearCart();
    }
    if (this.props.orderError) {

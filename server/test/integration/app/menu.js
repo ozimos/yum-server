@@ -16,19 +16,9 @@ context('menu integration test', () => {
   // Post Menu
   describe('POST /menu', () => {
     const newMenu = {
-      description: 'Thursday Menu',
       meals: [menuMeal.id]
     };
-
-    it('should create a menu', () =>
-      request(app)
-        .post(menuUrl)
-        .set('authorization', `JWT ${token}`)
-        .send(newMenu)
-        .then((res) => {
-          expect(res.body.data.description).to.equal(newMenu.description);
-        }));
-    templateTest('Add Menu', 'post', menuUrl, newMenu, 'description', 'object', '201');
+    templateTest('Add Menu', 'post', menuUrl, newMenu, 'id', 'object', '201');
   });
   // Get  Menu
   describe('GET /menu', () => {

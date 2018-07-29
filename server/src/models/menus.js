@@ -1,22 +1,17 @@
 export default (sequelize, DataTypes) => {
   const Menu = sequelize.define('Menu', {
-
-    title: {
-      type: DataTypes.STRING,
-      defaultValue: 'Today',
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    description: {
-      type: DataTypes.STRING,
-      defaultValue: 'Default Menu',
-    }
   });
 
   // Relations
   Menu.associate = (models) => {
     Menu.belongsToMany(models.Meal, {
       through: 'MealMenus',
-      foreignKey: 'menuTitle',
+      foreignKey: 'menuId',
       as: 'Meals',
     });
   };

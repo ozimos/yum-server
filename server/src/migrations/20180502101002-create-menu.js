@@ -3,14 +3,10 @@ export default {
     queryInterface.createTable(
       'Menus',
       {
-        title: {
-          type: Sequelize.STRING,
+        id: {
+          type: Sequelize.UUID,
           primaryKey: true,
-          defaultValue: 'Today',
-        },
-        description: {
-          type: Sequelize.STRING,
-          defaultValue: 'Default Menu',
+          defaultValue: Sequelize.UUIDV4
         },
         createdAt: {
           allowNull: false,

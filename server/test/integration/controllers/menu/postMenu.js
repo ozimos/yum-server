@@ -9,7 +9,6 @@ describe('Integration Controller Post Menu', () => {
 
 
   const body = {
-    description: "Wednesday's Menu",
     meals: [defaultMeal3.id, defaultMeal4.id]
   };
 
@@ -18,9 +17,7 @@ describe('Integration Controller Post Menu', () => {
     const response = await menuController.postMenu({
       body
     });
-    expect(response.data.description).to.equal(body.description);
-    // eslint-disable-next-line
-    expect(response.data.Meals[0].id).to.exist;
+    expect(response.data.Meals[0].id).to.be.a('string');
     expect(response.statusCode).to.equal(201);
   });
   it('postMenu returns error message if meal is not in db', async () => {
@@ -28,7 +25,6 @@ describe('Integration Controller Post Menu', () => {
 
     const req = {
       body: {
-        description: "Wednesday's Menu",
         meals: [phantomMealId]
       }
     };
