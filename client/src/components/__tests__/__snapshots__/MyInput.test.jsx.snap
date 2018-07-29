@@ -3,6 +3,7 @@
 exports[`MyInput Component renders correctly 1`] = `
 <React.Fragment>
   <input
+    maxLength="100"
     onChange={[Function]}
     placeholder=""
     type="text"

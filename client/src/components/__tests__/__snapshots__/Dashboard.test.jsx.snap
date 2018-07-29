@@ -169,6 +169,9 @@ exports[`Dashboard Component renders correctly 1`] = `
                       Quantities
                     </th>
                     <th>
+                      Time
+                    </th>
+                    <th>
                       Total(₦)
                     </th>
                   </tr>
@@ -193,6 +196,9 @@ exports[`Dashboard Component renders correctly 1`] = `
                       2, 2
                     </td>
                     <td>
+                      Invalid Date
+                    </td>
+                    <td>
                       6400
                     </td>
                   </tr>
@@ -213,6 +219,9 @@ exports[`Dashboard Component renders correctly 1`] = `
                     </td>
                     <td>
                       2, 2
+                    </td>
+                    <td>
+                      Invalid Date
                     </td>
                     <td>
                       6400

@@ -115,7 +115,7 @@ a {
   }
   
   .btn {
-    background-color: #2f80ed !important;
+    background-color: #2f80ed;
     border-radius: 5px;
     min-width: 20px;
     color: white;
@@ -124,13 +124,11 @@ a {
     border-width: 0;
     cursor: pointer;
     text-align: center;
+    &:visited, &:hover, &:visited, &:focus{
+      background-color: #2f80ed !important
+    }
   }
-  .btn:hover{
-    background-color: #2fa0ed;
-  }
-  .btn:visited, button:visited{
-    background-color: #2f80ed !important
-  }
+  
   .btn-disabled {
     border-color: red;
     border-width: 2px;

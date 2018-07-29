@@ -164,10 +164,13 @@ class Menu extends React.Component {
     );
   }
 }
+Menu.defaultProps = {
+  menu: []
+};
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,
-  menu: PropTypes.arrayOf(PropTypes.object).isRequired,
+  menu: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string

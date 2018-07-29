@@ -2,19 +2,19 @@ import Sequelize from 'sequelize';
 import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
 import addDays from 'date-fns/add_days';
-import differenceInHours from 'date-fns/difference_in_hours';
+import differenceInMinutes from 'date-fns/difference_in_minutes';
 import Controller from './Controller';
 
 export default class OrderController extends Controller {
 
   static orderClose(req, res, next) {
     const hourInterval = parseInt(process.env.ORDER_INTERVAL_HOUR, 10) || 4;
-    const minuteInterval = parseInt(process.env.ORDER_INTERVAL_MIN, 10) || 30;
+    const minuteInterval = parseInt(process.env.ORDER_INTERVAL_MIN, 10) || 0;
     const computedCloseHour = parseInt(process.env.ORDER_START_HOUR, 10) + hourInterval;
     const computedCloseMin = parseInt(process.env.ORDER_START_MIN, 10) +
       minuteInterval;
     const closeHour = parseInt(process.env.ORDER_CLOSE_HOUR, 10) || computedCloseHour || 23;
-    const closeMin = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 0;
+    const closeMin = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 50;
     const closeDate = new Date().setHours(closeHour, closeMin, 0);
     const date = new Date();
     if ((date - closeDate) >= 0) {
@@ -26,9 +26,9 @@ export default class OrderController extends Controller {
     return next();
   }
   static canEdit(date) {
-    const hasEditHours = (parseInt(process.env.ORDER_EDIT_HOURS, 10) || 4)
-     - differenceInHours(new Date(), date) > 0;
-    return (isToday(date) && hasEditHours);
+    const hasEditMinutes = (parseInt(process.env.ORDER_EDIT_MINUTES, 10) || 15)
+     - differenceInMinutes(new Date(), date) > 0;
+    return (isToday(date) && hasEditMinutes);
   }
   getAllOrders() {
     const options = {

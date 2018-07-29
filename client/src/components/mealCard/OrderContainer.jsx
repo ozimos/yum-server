@@ -9,6 +9,7 @@ const OrderContainer = ({ OrderItem, orders, ...props }) =>
         <div className="col s5 text_left">Meal Title</div>
         <div className="col s2 text_left">Price (&#x20a6;)</div>
         <div className="col s2 text_left">Quantity</div>
+        <div className="col s2 text_left">Time</div>
       </div>
       {orders.map((order, index) => (<OrderItem
         key={order.id}

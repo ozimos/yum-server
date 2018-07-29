@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import isEqual from 'lodash.isequal';
 import { userActions } from '../../redux/actions';
 import MyInput from '../helpers/MyInput';
 import MyCheckBox from '../helpers/MyCheckBox';
@@ -15,7 +16,9 @@ class SignUp extends React.Component {
     super(props);
 
     this.state = {
-      canSubmit: false
+      canSubmit: false,
+      newError: false,
+      prevSignupError: {}
     };
     this.disableButton = this.disableButton.bind(this);
     this.enableButton = this.enableButton.bind(this);
@@ -23,10 +26,22 @@ class SignUp extends React.Component {
     this.serverFeedback = this.serverFeedback.bind(this);
     this.formEl = null;
   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.signupError && !isEqual(nextProps.signupError, prevState.prevSignupError)) {
+      return {
+        prevSignupError: nextProps.signupError,
+        newError: true
+      };
+    }
+    return null;
+  }
   componentDidUpdate() {
-    const { signupError } = this.props;
-    if (Object.keys(signupError).length !== 0) {
-      this.serverFeedback(signupError);
+    const { prevSignupError, newError } = this.state;
+
+    if (newError && Object.keys(prevSignupError).length !== 0) {
+      this.serverFeedback(prevSignupError);
+      // eslint-disable-next-line
+      this.setState({ newError: false });
     }
   }
   handleSubmit(user) {
@@ -153,12 +168,9 @@ class SignUp extends React.Component {
     );
   }
 }
-SignUp.defaultProps = {
-  signupError: {}
-};
+
 SignUp.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  signupError: PropTypes.objectOf(PropTypes.string),
 };
 const mapStateToProps = state => ({
   signupError: state.signupReducer.signupError

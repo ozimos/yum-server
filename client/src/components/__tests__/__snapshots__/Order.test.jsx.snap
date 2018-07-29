@@ -172,7 +172,7 @@ exports[`Order Component renders correctly 1`] = `
             <p
               className="mr-auto"
             >
-              Orders can only be edited up to 4 hours after booking
+              Orders can only be edited up to 15 minutes after order is placed
             </p>
             <OrderContainer
               OrderItem={[Function]}

@@ -17,6 +17,7 @@ class PlainMealCard extends React.Component {
     this.state = {
       canSubmit: false,
       showModal: false,
+      showModal2: false,
       displayImage: this.props.imageUrl,
       uploading: false,
       uploadPercent: 0
@@ -41,6 +42,10 @@ class PlainMealCard extends React.Component {
     this.setState({ showModal: true });
   handleCloseModal = () =>
     this.setState({ showModal: false });
+    handleOpenModal2 = () =>
+      this.setState({ showModal2: true });
+  handleCloseModal2 = () =>
+    this.setState({ showModal2: false });
   deleteMeal = () =>
     this.props.dispatch(mealActions.deleteMeal(this.props.id));
 
@@ -66,7 +71,7 @@ class PlainMealCard extends React.Component {
             <button className="modal-open modal-trigger" onClick={this.handleOpenModal}>
               {title}
             </button>
-            <button className="btn title-button icon" onClick={this.deleteMeal}>
+            <button className="btn title-button icon" onClick={this.handleOpenModal2}>
                 &#10006;
             </button>
           </div>
@@ -148,6 +153,33 @@ class PlainMealCard extends React.Component {
           >
             <p>Continue</p>
           </button>
+        </ReactModal>
+        <ReactModal
+          isOpen={this.state.showModal2}
+          contentLabel="Confirmation Modal"
+          className="modal-content"
+          onRequestClose={this.handleCloseModal}
+          shouldCloseOnOverlayClick={false}
+        >
+          <p>
+             This action will delete your meal. Do you want to continue
+          </p>
+          <div className="title flexbox">
+            <button
+              style={{ backgroundColor: 'red !important' }}
+              className="btn"
+              onClick={() => { this.deleteMeal(); this.handleCloseModal2(); }}
+            >
+              <p>Yes</p>
+            </button>
+            <button
+              className="btn"
+              onClick={this.handleCloseModal2}
+            >
+              <p>No</p>
+            </button>
+          </div>
+
         </ReactModal>
       </React.Fragment>
     );
