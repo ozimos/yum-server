@@ -154,7 +154,7 @@ class Order extends React.Component {
                 </AccordionItemTitle>
                 <AccordionItemBody>
                   <p className="mr-auto">
-                    {`Orders can only be edited up to ${process.env.ORDER_INTERVAL_HOUR || 4} hours after booking`}
+                    {`Orders can only be edited up to ${process.env.ORDER_EDIT_MINUTES || 15} minutes after order is placed`}
                   </p>
                   { isTodayOrder ? <OrderContainer
                     orders={this.props.orders}

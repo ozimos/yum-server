@@ -177,5 +177,49 @@ exports[`MealCard Component renders correctly 1`] = `
       </p>
     </button>
   </Modal>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="modal-content"
+    closeTimeoutMS={0}
+    contentLabel="Confirmation Modal"
+    isOpen={false}
+    onRequestClose={[Function]}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={false}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <p>
+      This action will delete your meal. Do you want to continue
+    </p>
+    <div
+      className="title flexbox"
+    >
+      <button
+        className="btn"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "red !important",
+          }
+        }
+      >
+        <p>
+          Yes
+        </p>
+      </button>
+      <button
+        className="btn"
+        onClick={[Function]}
+      >
+        <p>
+          No
+        </p>
+      </button>
+    </div>
+  </Modal>
 </React.Fragment>
 `;

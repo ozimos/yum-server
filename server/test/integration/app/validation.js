@@ -19,7 +19,7 @@ describe('validation errors are in json format', () => {
     .set('authorization', `JWT ${token}`).send(incorrectMeal)
     .then((res) => {
       expect(res.body.message).to.be.an('object');
-      expect(res.body.message.details[0].message).to.include('is required');
+      expect(res.body.message).to.have.key('title');
     }));
 
 });

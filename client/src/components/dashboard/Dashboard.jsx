@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
+import format from 'date-fns/format';
 import {
   Accordion,
   AccordionItem,
@@ -37,7 +38,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const KEYS_TO_FILTERS = ['id', 'userId', 'updatedAt'];
+    const KEYS_TO_FILTERS = ['id', 'User.firstName', 'User.lastName', 'User.email', 'updatedAt'];
     const isTodayOrder = this.props.orders.length !== 0;
     let filteredOrders;
     if (isTodayOrder) {
@@ -98,6 +99,7 @@ class Dashboard extends React.Component {
                             <th>Order</th>
                             <th>Meals</th>
                             <th>Quantities</th>
+                            <th>Time</th>
                             <th>Total(&#8358;)</th>
                           </tr>
                         </thead>
@@ -109,6 +111,7 @@ class Dashboard extends React.Component {
                               <td>{order.id}</td>
                               <td>{orderDetails.mealTitleList(order)}</td>
                               <td>{orderDetails.mealQuantityList(order)}</td>
+                              <td>{format(order.updatedAt, 'h:m A')}</td>
                               <td>{subTotal(order.Meals)}</td>
                             </tr>
                         ))

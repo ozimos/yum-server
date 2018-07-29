@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
+import isEqual from 'lodash.isequal';
 import MyInput from '../helpers/MyInput';
 import { userActions } from '../../redux/actions';
 import '../../../public/styles/auth.scss';
@@ -15,7 +16,9 @@ class Login extends React.Component {
     this.props.dispatch(userActions.logout());
 
     this.state = {
-      canSubmit: false
+      canSubmit: false,
+      newError: false,
+      prevLoginError: {}
     };
 
     this.disableButton = this.disableButton.bind(this);
@@ -24,10 +27,23 @@ class Login extends React.Component {
     this.serverFeedback = this.serverFeedback.bind(this);
     this.formEl = null;
   }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.loginError && !isEqual(nextProps.loginError, prevState.prevLoginError)) {
+      return {
+        prevLoginError: nextProps.loginError,
+        newError: true
+      };
+    }
+    return null;
+  }
+
   componentDidUpdate() {
-    const { loginError } = this.props;
-    if (Object.keys(loginError).length !== 0) {
-      this.serverFeedback(loginError);
+    const { prevLoginError, newError } = this.state;
+
+    if (newError && Object.keys(prevLoginError).length !== 0) {
+      this.serverFeedback(prevLoginError);
+      // eslint-disable-next-line
+      this.setState({ newError: false });
     }
   }
 
@@ -121,11 +137,8 @@ class Login extends React.Component {
     );
   }
 }
-Login.defaultProps = {
-  loginError: {}
-};
+
 Login.propTypes = {
-  loginError: PropTypes.objectOf(PropTypes.string),
   dispatch: PropTypes.func.isRequired,
 };
 const mapStateToProps = state => ({

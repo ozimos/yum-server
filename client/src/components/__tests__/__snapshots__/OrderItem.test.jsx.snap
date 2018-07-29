@@ -13,7 +13,7 @@ exports[`OrderItem Component renders correctly 1`] = `
     className="col s1 text_left"
   />
   <div
-    className="col s9 text_left"
+    className="col s9"
   >
     <div
       className="row"
@@ -53,14 +53,12 @@ exports[`OrderItem Component renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="col s1 text_right"
+    className="col s1 text_left"
   >
-    <button
-      className="btn title-button"
-      onClick={[Function]}
-    >
-      Edit
-    </button>
+    Invalid Date
   </div>
+  <div
+    className="col s1 text_right"
+  />
 </div>
 `;
