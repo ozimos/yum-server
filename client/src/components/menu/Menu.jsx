@@ -27,13 +27,41 @@ class Menu extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
-      menu: []
+      menu: [],
+      dbMenu: []
     };
     this.addToMenu = this.addToMenu.bind(this);
     this.postMenu = this.postMenu.bind(this);
   }
-  componentDidMount() {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let incomingMenu = [];
+    let prevMenu = [];
+    if (prevState.dbMenu) {
+      prevMenu = prevState.dbMenu.map(meal => meal.id);
+    }
+    if (nextProps.menu) {
+      incomingMenu = nextProps.menu.map(meal => meal.id);
+    }
+    const incomingMenuSet = new Set(incomingMenu);
+    const difference = prevMenu.filter(x => !incomingMenuSet.has(x));
+    if (difference.length > 0) {
+      const newMenu = [...nextProps.menu];
+      newMenu
+        .forEach((meal) => { delete meal.MealMenus; });
+      return {
+        dbMenu: nextProps.menu,
+        menu: newMenu };
+    }
+    return null;
+  }
+  async componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
+    await this.props.dispatch(menuActions.getMenu());
+    const newMenu = [...this.props.menu];
+    newMenu
+      .forEach((meal) => { delete meal.MealMenus; });
+    // eslint-disable-next-line
+     this.setState({ menu: newMenu, dbMenu: this.props.menu });
   }
 
   addToMenu(meal) {
@@ -139,6 +167,7 @@ class Menu extends React.Component {
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,
+  menu: PropTypes.arrayOf(PropTypes.object).isRequired,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string
@@ -149,6 +178,7 @@ const mapStateToProps = state => ({
   connecting: state.mealsReducer.connecting,
   deleted: state.mealsReducer.deleted,
   meals: state.mealsReducer.meals,
+  menu: state.menuReducer.menu.Meals,
   authenticated: state.loginReducer.authenticated,
   user: state.loginReducer.user.data
 });

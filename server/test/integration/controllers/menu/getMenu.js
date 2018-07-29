@@ -32,35 +32,33 @@ describe('Integration Controller Menu', () => {
     it('Empty Menu: returns error message if the menu for the day empty', async () => {
 
       await db.Menu.upsert({
-        title: 'Today',
+        id: '879f1ce3-8ff3-4cdd-afbd-0ca15e80b576',
       });
       const response = await menuController.getMenu();
       expect(response.message).to.equal('menu for the day has not been set');
       expect(response.statusCode).to.equal(404);
     });
 
-    it('Old Menu: returns error message if the menu has not been set for today ', async () => {
+    it('Old Menu: returns error message if the menu has not been set for today ', () => {
       const pastDay2 = subDays(new Date(), 2);
       MockDate.set(pastDay2);
       const body = {
-        title: 'Today',
-        description: 'New Menu',
         meals: [defaultMeal3.id]
       };
-      await menuController.postMenu({
+      menuController.postMenu({
         body
+      }).then(() => {
+        MockDate.reset();
+        menuController.getMenu().then((response) => {
+          expect(response.message).to.equal('menu for the day has not been set');
+          expect(response.statusCode).to.equal(404);
+        });
       });
-
-      MockDate.reset();
-      const response = await menuController.getMenu();
-      expect(response.message).to.equal('menu for the day has not been set');
-      expect(response.statusCode).to.equal(404);
     });
     it('getMenu returns error message after invalid meal is set', async () => {
       const phantomMealId = '91bf8437-b2f3-4e2b-a8ac-d86fd643dfb7';
 
       const body = {
-        description: "Wednesday's Menu",
         meals: [phantomMealId]
       };
       try {
@@ -80,7 +78,6 @@ describe('Integration Controller Menu', () => {
 
     it('getMenu returns the menu for the day', async () => {
       const body = {
-        description: "Wednesday's Menu",
         meals: [defaultMeal3.id, defaultMeal4.id]
       };
       await menuController.postMenu({

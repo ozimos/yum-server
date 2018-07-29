@@ -11,12 +11,12 @@ export default {
             key: 'id',
           },
         },
-        menuTitle: {
-          type: Sequelize.STRING,
+        menuId: {
+          type: Sequelize.UUID,
           allowNull: true,
           references: {
             model: 'Menus',
-            key: 'title',
+            key: 'id',
           },
         },
         createdAt: {
