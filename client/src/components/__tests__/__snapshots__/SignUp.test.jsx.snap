@@ -69,8 +69,20 @@ exports[`SignUp Component renders correctly 1`] = `
             required={true}
             typeOfInput="email"
             validationError="This is not a valid email"
-            validationErrors={Object {}}
-            validations="isEmail"
+            validationErrors={
+              Object {
+                "isEmail": "This is not a valid email",
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 5 character",
+              }
+            }
+            validations={
+              Object {
+                "isEmail": true,
+                "maxLength": 48,
+                "minLength": 5,
+              }
+            }
           />
           <div
             className="invalid-feedback"
@@ -82,8 +94,18 @@ exports[`SignUp Component renders correctly 1`] = `
             required={true}
             typeOfInput="text"
             validationError="Please enter your first name"
-            validationErrors={Object {}}
-            validations="minLength:1"
+            validationErrors={
+              Object {
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 1 character",
+              }
+            }
+            validations={
+              Object {
+                "maxLength": 48,
+                "minLength": 1,
+              }
+            }
           />
           <div
             className="invalid-feedback"
@@ -95,8 +117,18 @@ exports[`SignUp Component renders correctly 1`] = `
             required={true}
             typeOfInput="text"
             validationError="Please enter your last name"
-            validationErrors={Object {}}
-            validations="minLength:1"
+            validationErrors={
+              Object {
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 1 character",
+              }
+            }
+            validations={
+              Object {
+                "maxLength": 48,
+                "minLength": 1,
+              }
+            }
           />
           <Formsy(Input)
             innerRef={[Function]}
@@ -111,6 +143,7 @@ exports[`SignUp Component renders correctly 1`] = `
                 "hasNumber": "Must have a number or you can use a passphrase of minimum length 16 characters",
                 "hasSpecialCharacter": "Must have a special character or you can use a passphrase of minimum length 16 characters",
                 "hasUpperCase": "Must have uppercase letter or you can use a passphrase of minimum length 16 characters",
+                "maxLength": "input must be shorter than 50 characters",
                 "minLength": "Must have at least 8 characters",
               }
             }
@@ -120,6 +153,7 @@ exports[`SignUp Component renders correctly 1`] = `
                 "hasNumber": [Function],
                 "hasSpecialCharacter": [Function],
                 "hasUpperCase": [Function],
+                "maxLength": 48,
                 "minLength": 8,
               }
             }
@@ -131,8 +165,20 @@ exports[`SignUp Component renders correctly 1`] = `
             required={true}
             typeOfInput="password"
             validationError="Passwords do not match"
-            validationErrors={Object {}}
-            validations="equalsField:password"
+            validationErrors={
+              Object {
+                "equalsField": "Passwords do not match",
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "Must have at least 8 characters",
+              }
+            }
+            validations={
+              Object {
+                "equalsField": "password",
+                "maxLength": 48,
+                "minLength": 8,
+              }
+            }
           />
           <div>
             <label

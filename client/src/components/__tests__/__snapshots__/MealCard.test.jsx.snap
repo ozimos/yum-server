@@ -94,8 +94,18 @@ exports[`MealCard Component renders correctly 1`] = `
         required={false}
         typeOfInput="text"
         validationError="Please enter the meal title"
-        validationErrors={Object {}}
-        validations="minLength:1"
+        validationErrors={
+          Object {
+            "maxLength": "input must be shorter than 50 characters",
+            "minLength": "input must be longer than 1 character",
+          }
+        }
+        validations={
+          Object {
+            "maxLength": 48,
+            "minLength": 1,
+          }
+        }
       />
       <Formsy(Input)
         innerRef={[Function]}
@@ -107,11 +117,15 @@ exports[`MealCard Component renders correctly 1`] = `
         validationErrors={
           Object {
             "isOnlyInt": "price must be integer",
+            "maxLength": "input must be shorter than 50 characters",
+            "minLength": "input must be longer than 1 character",
           }
         }
         validations={
           Object {
             "isOnlyInt": [Function],
+            "maxLength": 48,
+            "minLength": 1,
           }
         }
       />
@@ -121,8 +135,18 @@ exports[`MealCard Component renders correctly 1`] = `
         placeholder="nice"
         required={false}
         validationError=""
-        validationErrors={Object {}}
-        validations={null}
+        validationErrors={
+          Object {
+            "maxLength": "input must be shorter than 100 characters",
+            "minLength": "input must be longer than 5 characters",
+          }
+        }
+        validations={
+          Object {
+            "maxLength": 98,
+            "minLength": 5,
+          }
+        }
       />
       <Formsy(Input)
         innerRef={[Function]}
@@ -135,8 +159,20 @@ exports[`MealCard Component renders correctly 1`] = `
         }
         typeOfInput="url"
         validationError="Please select an image"
-        validationErrors={Object {}}
-        validations="minLength:5"
+        validationErrors={
+          Object {
+            "isUrl": "A valid url was not supplied",
+            "maxLength": "input must be shorter than 50 characters",
+            "minLength": "input must be longer than 5 characters",
+          }
+        }
+        validations={
+          Object {
+            "isUrl": true,
+            "maxLength": 48,
+            "minLength": 5,
+          }
+        }
       />
     </Formsy>
     <t

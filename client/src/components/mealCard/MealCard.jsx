@@ -102,22 +102,37 @@ class PlainMealCard extends React.Component {
               typeOfInput="text"
               name="title"
               placeholder={title || 'Meal Title'}
-              validations="minLength:1"
+              validations={{ minLength: 1, maxLength: 48 }}
               validationError="Please enter the meal title"
+              validationErrors={{
+                minLength: 'input must be longer than 1 character',
+                maxLength: 'input must be shorter than 50 characters',
+              }}
             />
             <MyFormsyInput
               typeOfInput="number"
               name="price"
               placeholder={`\u20A6${price}` || 'Price'}
               validations={{
-                  isOnlyInt: (values, value = '') => /^(\s?|[1-9]\d*)$/.test(value)
+                  isOnlyInt: (values, value = '') => /^(\s?|[1-9]\d*)$/.test(value),
+                  minLength: 1,
+                  maxLength: 48
                 }}
               validationError="Please enter a price"
-              validationErrors={{ isOnlyInt: 'price must be integer' }}
+              validationErrors={{
+                isOnlyInt: 'price must be integer',
+                minLength: 'input must be longer than 1 character',
+                maxLength: 'input must be shorter than 50 characters',
+              }}
             />
             <MyFormsyTextArea
               name="description"
               placeholder={description || 'Description'}
+              validations={{ minLength: 5, maxLength: 98 }}
+              validationErrors={{
+                minLength: 'input must be longer than 5 characters',
+                maxLength: 'input must be shorter than 100 characters',
+              }}
             />
 
             <MyFormsyInput
@@ -126,8 +141,14 @@ class PlainMealCard extends React.Component {
               style={{ display: 'none' }}
               typeOfInput="url"
               name="imageUrl"
-              validations="minLength:5"
+              validations={{ isUrl: true, minLength: 5, maxLength: 48 }}
               validationError="Please select an image"
+              validationErrors={{
+                isUrl: 'A valid url was not supplied',
+                minLength: 'input must be longer than 5 characters',
+                maxLength: 'input must be shorter than 50 characters',
+              }}
+
             />
           </Formsy>
           <Dropzone
