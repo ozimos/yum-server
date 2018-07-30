@@ -90,8 +90,13 @@ class Login extends React.Component {
                   typeOfInput="text"
                   name="email"
                   placeholder="Email"
-                  validations="isEmail"
+                  validations={{ isEmail: true, minLength: 5, maxLength: 48 }}
                   validationError="This is not a valid email"
+                  validationErrors={{
+                    minLength: 'input must be longer than 5 character',
+                    maxLength: 'input must be shorter than 50 characters',
+                    isEmail: 'This is not a valid email'
+                  }}
                 />
                 <MyInput
                   typeOfInput="password"
@@ -103,14 +108,16 @@ class Login extends React.Component {
                     hasLowerCase: (values, value) => /[a-z]+|.{16,}/.test(value),
                     hasNumber: (values, value) => /\d+|.{16,}/.test(value),
                     hasSpecialCharacter: (values, value) => /\W+|.{16,}/.test(value),
-                    minLength: 8
+                    minLength: 8,
+                    maxLength: 48
                   }}
                   validationErrors={{
                     hasUpperCase: 'Must have uppercase letter or you can use a passphrase of minimum length 16 characters',
                     hasLowerCase: 'Must have lowercase letter or you can use a passphrase of minimum length 16 characters',
                     hasNumber: 'Must have a number or you can use a passphrase of minimum length 16 characters',
                     hasSpecialCharacter: 'Must have a special character or you can use a passphrase of minimum length 16 characters',
-                    minLength: 'Must have at least 8 characters'
+                    minLength: 'Must have at least 8 characters',
+                    maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
                 <button

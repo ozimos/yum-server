@@ -90,16 +90,25 @@ class SignUp extends React.Component {
                   name="email"
                   required
                   placeholder="Email"
-                  validations="isEmail"
+                  validations={{ isEmail: true, minLength: 5, maxLength: 48 }}
                   validationError="This is not a valid email"
+                  validationErrors={{
+                    minLength: 'input must be longer than 5 character',
+                    maxLength: 'input must be shorter than 50 characters',
+                    isEmail: 'This is not a valid email'
+                  }}
                 />
                 <div className="invalid-feedback" />
                 <MyInput
                   typeOfInput="text"
                   name="firstName"
                   placeholder="First Name"
-                  validations="minLength:1"
+                  validations={{minLength: 1, maxLength: 48}}
                   validationError="Please enter your first name"
+                  validationErrors={{
+                    minLength: 'input must be longer than 1 character',
+                    maxLength: 'input must be shorter than 50 characters',
+                  }}
                   required
                 />
                 <div className="invalid-feedback" />
@@ -107,8 +116,12 @@ class SignUp extends React.Component {
                   typeOfInput="text"
                   name="lastName"
                   placeholder="Last Name"
-                  validations="minLength:1"
+                  validations={{minLength: 1, maxLength: 48}}
                   validationError="Please enter your last name"
+                  validationErrors={{
+                    minLength: 'input must be longer than 1 character',
+                    maxLength: 'input must be shorter than 50 characters',
+                  }}
                   required
                 />
                 <MyInput
@@ -121,14 +134,16 @@ class SignUp extends React.Component {
                     hasLowerCase: (values, value) => /[a-z]+|.{16,}/.test(value),
                     hasNumber: (values, value) => /\d+|.{16,}/.test(value),
                     hasSpecialCharacter: (values, value) => /\W+|.{16,}/.test(value),
-                    minLength: 8
+                    minLength: 8,
+                    maxLength: 48                    
                   }}
                   validationErrors={{
                     hasUpperCase: 'Must have uppercase letter or you can use a passphrase of minimum length 16 characters',
                     hasLowerCase: 'Must have lowercase letter or you can use a passphrase of minimum length 16 characters',
                     hasNumber: 'Must have a number or you can use a passphrase of minimum length 16 characters',
                     hasSpecialCharacter: 'Must have a special character or you can use a passphrase of minimum length 16 characters',
-                    minLength: 'Must have at least 8 characters'
+                    minLength: 'Must have at least 8 characters',
+                    maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
                 <MyInput
@@ -136,8 +151,17 @@ class SignUp extends React.Component {
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   required
-                  validations="equalsField:password"
+                  validations={{
+                    equalsField: 'password',
+                    minLength: 8,
+                    maxLength: 48
+                  }}
                   validationError="Passwords do not match"
+                  validationErrors={{
+                    equalsField: 'Passwords do not match',
+                    minLength: 'Must have at least 8 characters',
+                    maxLength: 'input must be shorter than 50 characters',
+                  }}
                 />
                 <div>
                   <label htmlFor="isCaterer">

@@ -25,7 +25,8 @@ class Input extends React.Component {
           type={this.props.typeOfInput}
           value={this.props.getValue() || ''}
           placeholder={this.props.placeholder}
-          maxLength="100"
+          maxLength="50"
+          max="99999"
         />
         <div
           style={{

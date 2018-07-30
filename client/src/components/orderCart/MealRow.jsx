@@ -14,6 +14,7 @@ const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) =>
             placeholder="1"
             onChange={event => setQuantity(event, id)}
             value={quantity}
+            maxLength="4"
           />
         </td>
         <td>{subTotal}</td>

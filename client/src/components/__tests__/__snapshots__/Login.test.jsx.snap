@@ -69,8 +69,20 @@ exports[`Login Component renders correctly 1`] = `
             required={false}
             typeOfInput="text"
             validationError="This is not a valid email"
-            validationErrors={Object {}}
-            validations="isEmail"
+            validationErrors={
+              Object {
+                "isEmail": "This is not a valid email",
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 5 character",
+              }
+            }
+            validations={
+              Object {
+                "isEmail": true,
+                "maxLength": 48,
+                "minLength": 5,
+              }
+            }
           />
           <Formsy(Input)
             innerRef={[Function]}
@@ -85,6 +97,7 @@ exports[`Login Component renders correctly 1`] = `
                 "hasNumber": "Must have a number or you can use a passphrase of minimum length 16 characters",
                 "hasSpecialCharacter": "Must have a special character or you can use a passphrase of minimum length 16 characters",
                 "hasUpperCase": "Must have uppercase letter or you can use a passphrase of minimum length 16 characters",
+                "maxLength": "input must be shorter than 50 characters",
                 "minLength": "Must have at least 8 characters",
               }
             }
@@ -94,6 +107,7 @@ exports[`Login Component renders correctly 1`] = `
                 "hasNumber": [Function],
                 "hasSpecialCharacter": [Function],
                 "hasUpperCase": [Function],
+                "maxLength": 48,
                 "minLength": 8,
               }
             }
