@@ -73,7 +73,7 @@ class BaseMealOptionsCard extends React.Component {
           <div className="overlay-container">
             <div className="overlay" >
               <div className="flexbox">
-                <span className="long_string">
+                <span className="long_string text_left">
                   {title}
                 </span>
                 <span>

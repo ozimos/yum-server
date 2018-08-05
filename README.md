@@ -36,14 +36,14 @@ API Endpoints
 * Get the menu for the day - GET /api/v1/menu
 * Setup the menu for the day - POST /api/v1/menu
 * Get All Orders  - GET /api/v1/orders
-* Select the meal option from the menu  - POST /api/v1/orders
+* Place an order  - POST /api/v1/orders
 * Modify an order  - PUT /api/v1/orders/:orderId
 * View API Documentation  - GET /api/v1/docs
 
 ## Getting Started
 
 * [View UI Templates](<https://ozimos.github.io/Book-A-Meal/UI> "Github Project Hosting")
-* [View the application server side hosted on Heroku](https://book-a-meal-andela-31.herokuapp.com/)
+* [View the full application hosted on Heroku](https://book-a-meal-andela-31.herokuapp.com/)
 * [View the application API Documentation](https://book-a-meal-andela-31.herokuapp.com/api/v1/docs)
 * [Track progress on application features with Pivotal Tracker](<https://www.pivotaltracker.com/n/projects/2165548> "Pivotal Tracker Project")
 * Requirements
@@ -53,12 +53,14 @@ API Endpoints
 
 * How to setup the project/Installation/Configuration
 
-  * Clone or download the repo
-  * npm install - to install the dependencies need by the app
-  * npm run start - to run the app
+  * Clone or download the repository
+  * npm install - to install the dependencies required by the app
+  * Create a .env file in the root directory of the app using the .env.example file as a template
+  * npm run start:dev - to run the app
 
 * How to run tests
   * Setup the app as detailed above
-  * npm run test - to test the app
+  * npm run test:client - to test the app client side
+  * npm run test:server - to test the app server side
   * Using Postman import this endpoint collection link <https://www.getpostman.com/collections/85eee7927738b7112a13>
   * Test the API Endponts with Postman
