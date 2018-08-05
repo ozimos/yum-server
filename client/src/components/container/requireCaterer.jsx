@@ -14,7 +14,8 @@ const AuthenticatedComponent = (props) => {
   return (
     <Fragment>
       { authenticated && user.data.isCaterer && <MyComponent {...rest} />}
-      { authenticated && !user.data.isCaterer && <h1>This page is for Caterers</h1>}
+      { authenticated && !user.data.isCaterer
+        && <h1>This page is for Caterers</h1>}
       { !authenticated && <Redirect to="/login" />}
     </Fragment>
   );

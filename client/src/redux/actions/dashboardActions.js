@@ -23,7 +23,10 @@ const getOrdersByDate = date => (dispatch) => {
           orders: response.data.data
         }),
       error =>
-        dispatch(failure(error.response.data.message, dashboardTypes.ORDER_DASHBOARD_FAILURE))
+        dispatch(failure(
+          error.response.data.message,
+          dashboardTypes.ORDER_DASHBOARD_FAILURE
+        ))
 
     );
 };

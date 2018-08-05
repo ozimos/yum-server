@@ -163,7 +163,7 @@ exports[`Menu Component renders correctly 1`] = `
           <div
             className="menu-message"
           >
-            You have not added meals to the menu. Select a meal from the meal section above to add meal to menu.
+            \`You have not added meals to the menu. Select a meal from the meal section above to add meal to menu.\`
           </div>
         </AccordionItemBodyWrapper>
       </AccordionItemWrapper>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../../public/styles/mealcard3.scss';
 
-const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
+const OrderCard = ({ id, title, imageUrl, price, description, ...props }) => {
   const meal = { id, title, imageUrl, price, description };
   return (
     <React.Fragment>
@@ -17,11 +17,17 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
           &#8358;{price}
             </div>
             {props.addToOrder &&
-            <button className="btn title-button row_button" onClick={() => props.addToOrder(meal)} >
+            <button
+              className="btn title-button row_button"
+              onClick={() => props.addToOrder(meal)}
+            >
               <div className="long_string2">Add to Cart</div>
             </button>}
             {props.removeFromOrder &&
-            <button className="btn title-button icon" onClick={() => props.removeFromOrder(id)}>
+            <button
+              className="btn title-button icon"
+              onClick={() => props.removeFromOrder(id)}
+            >
                 &#10006;
             </button>}
           </div>
@@ -31,11 +37,11 @@ const MealCard3 = ({ id, title, imageUrl, price, description, ...props }) => {
   );
 };
 
-MealCard3.defaultProps = {
+OrderCard.defaultProps = {
   addToOrder: null,
   removeFromOrder: null,
 };
-MealCard3.propTypes = {
+OrderCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
@@ -44,5 +50,5 @@ MealCard3.propTypes = {
   addToOrder: PropTypes.func,
   removeFromOrder: PropTypes.func,
 };
-export default MealCard3;
+export default OrderCard;
 

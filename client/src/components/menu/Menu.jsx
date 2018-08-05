@@ -11,7 +11,7 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchInput, { createFilter } from 'react-search-input';
-import MealCard2 from '../mealCard/MealCard2';
+import MealDisplayCard from '../mealCard/MealDisplayCard';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import ConnectedGreeting from '../greeting/Greeting';
 import { mealActions, menuActions } from '../../redux/actions';
@@ -103,22 +103,29 @@ class Menu extends React.Component {
           <ToastContainer autoClose={2000} />
 
           <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
-          <Accordion accordion={false}>
+          <Accordion accordion>
             <AccordionItem expanded>
               <AccordionItemTitle>
                 <div className="title-element flexbox">
                   <h5>
                   Your Meals
                   </h5>
-                  <div className="accordion__arrow u-position-relative" role="presentation" />
+                  <div
+                    className="accordion__arrow u-position-relative"
+                    role="presentation"
+                  />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
-                <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
+                <SearchInput
+                  className="search-input input-field"
+                  onChange={this.searchUpdated}
+                />
                 <MealCardContainer
                   meals={filteredMeals}
-                  MealCard={MealCard2}
-                  addToMenu={this.addToMenu}
+                  MealCard={MealDisplayCard}
+                  collection="Menu"
+                  addToCollection={this.addToMenu}
                   addClass="scroll"
                 />
               </AccordionItemBody>
@@ -129,7 +136,10 @@ class Menu extends React.Component {
                   <h5>
           Today&#39;s Menu
                   </h5>
-                  <div className="accordion__arrow u-position-relative" role="presentation" />
+                  <div
+                    className="accordion__arrow u-position-relative"
+                    role="presentation"
+                  />
                 </div>
               </AccordionItemTitle>
               <AccordionItemBody>
@@ -137,7 +147,11 @@ class Menu extends React.Component {
                   <button className="btn title-button" onClick={this.postMenu}>
                     <p>Post Menu</p>
                   </button>
-                  <button className="title-button btn" onClick={() => this.setState({ menu: [] })}>
+                  <button
+                    className="title-button btn"
+                    onClick={() => this.setState({ menu: [] })
+                  }
+                  >
                     <p>Clear Menu</p>
                   </button>
                 </div>
@@ -146,13 +160,15 @@ class Menu extends React.Component {
                   isMenuSet ?
                     <MealCardContainer
                       meals={this.state.menu}
-                      MealCard={MealCard2}
-                      removeFromMenu={this.removeFromMenu}
+                      MealCard={MealDisplayCard}
+                      collection="Menu"
+                      removeFremoveFromCollectionromMenu={this.removeFromMenu}
                       addClass="scroll"
                     /> :
                     <div className="menu-message">
-                  You have not added meals to the menu.
-                   Select a meal from the meal section above to add meal to menu.
+                  `You have not added meals to the menu.
+                   Select a meal from the meal section
+                   above to add meal to menu.`
                     </div>
                  }
               </AccordionItemBody>

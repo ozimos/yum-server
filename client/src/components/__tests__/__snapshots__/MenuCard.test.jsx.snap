@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MealCard2 Component renders correctly 1`] = `
+exports[`MenuCard Component renders correctly 1`] = `
 <React.Fragment>
   <div
     className="card"

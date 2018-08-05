@@ -11,18 +11,34 @@ const Nav = ({ user }) =>
         <h3 className="shrink heading">Book A Meal</h3>
         <div className="flexbox">
           {user.isCaterer &&
-          <NavLink activeClassName="active" className="nav-item long_string" to="/dashboard">
+          <NavLink
+            activeClassName="active"
+            className="nav-item long_string"
+            to="/dashboard"
+          >
         DashBoard
           </NavLink >}
           {user.isCaterer &&
-          <NavLink activeClassName="active" className="nav-item" to="/meals">
+          <NavLink
+            activeClassName="active"
+            className="nav-item"
+            to="/meals"
+          >
           Meals
           </NavLink >}
           {user.isCaterer &&
-          <NavLink activeClassName="active" className="nav-item" to="/menu">
+          <NavLink
+            activeClassName="active"
+            className="nav-item"
+            to="/menu"
+          >
           Menu
           </NavLink>}
-          <NavLink activeClassName="active" className="nav-item" to="/orders">
+          <NavLink
+            activeClassName="active"
+            className="nav-item"
+            to="/orders"
+          >
           Meal Booking
           </NavLink>
           <Link to="/login">

@@ -53,7 +53,10 @@ const updateMeal = (meal, mealId) => (dispatch) => {
           type: mealTypes.UPDATE_MEAL_SUCCESS,
           meal: response.data.data
         }),
-      error => dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
+      error => dispatch(failure(
+        error.response.data.message,
+        mealTypes.MEALS_FAILURE
+      ))
     );
 };
 
@@ -70,7 +73,10 @@ const deleteMeal = mealId => (dispatch) => {
           });
         }
       },
-      error => dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
+      error => dispatch(failure(
+        error.response.data.message,
+        mealTypes.MEALS_FAILURE
+      ))
     );
 };
 

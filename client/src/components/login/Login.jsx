@@ -28,7 +28,8 @@ class Login extends React.Component {
     this.formEl = null;
   }
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.loginError && !isEqual(nextProps.loginError, prevState.prevLoginError)) {
+    if (nextProps.loginError &&
+      !isEqual(nextProps.loginError, prevState.prevLoginError)) {
       return {
         prevLoginError: nextProps.loginError,
         newError: true
@@ -104,18 +105,26 @@ class Login extends React.Component {
                   placeholder="Password"
                   required
                   validations={{
-                    hasUpperCase: (values, value) => /[A-Z]+|.{16,}/.test(value),
-                    hasLowerCase: (values, value) => /[a-z]+|.{16,}/.test(value),
-                    hasNumber: (values, value) => /\d+|.{16,}/.test(value),
-                    hasSpecialCharacter: (values, value) => /\W+|.{16,}/.test(value),
+                    hasUpperCase: (values, value) =>
+                    /[A-Z]+|.{16,}/.test(value),
+                    hasLowerCase: (values, value) =>
+                    /[a-z]+|.{16,}/.test(value),
+                    hasNumber: (values, value) =>
+                    /\d+|.{16,}/.test(value),
+                    hasSpecialCharacter: (values, value) =>
+                    /\W+|.{16,}/.test(value),
                     minLength: 8,
                     maxLength: 48
                   }}
                   validationErrors={{
-                    hasUpperCase: 'Must have uppercase letter or you can use a passphrase of minimum length 16 characters',
-                    hasLowerCase: 'Must have lowercase letter or you can use a passphrase of minimum length 16 characters',
-                    hasNumber: 'Must have a number or you can use a passphrase of minimum length 16 characters',
-                    hasSpecialCharacter: 'Must have a special character or you can use a passphrase of minimum length 16 characters',
+                    hasUpperCase: `Must have uppercase letter or you can 
+                    use a passphrase of minimum length 16 characters`,
+                    hasLowerCase: `Must have lowercase letter or you can
+                     use a passphrase of minimum length 16 characters`,
+                    hasNumber: `Must have a number or you can
+                     use a passphrase of minimum length 16 characters`,
+                    hasSpecialCharacter: `Must have a special character or 
+                    you can use a passphrase of minimum length 16 characters`,
                     minLength: 'Must have at least 8 characters',
                     maxLength: 'input must be shorter than 50 characters',
                   }}
