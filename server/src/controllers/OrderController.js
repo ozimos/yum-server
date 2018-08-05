@@ -10,15 +10,19 @@ export default class OrderController extends Controller {
   static orderClose(req, res, next) {
     const hourInterval = parseInt(process.env.ORDER_INTERVAL_HOUR, 10) || 4;
     const minuteInterval = parseInt(process.env.ORDER_INTERVAL_MIN, 10) || 0;
-    const computedCloseHour = parseInt(process.env.ORDER_START_HOUR, 10) + hourInterval;
+    const computedCloseHour
+    = parseInt(process.env.ORDER_START_HOUR, 10) + hourInterval;
     const computedCloseMin = parseInt(process.env.ORDER_START_MIN, 10) +
       minuteInterval;
-    const closeHour = parseInt(process.env.ORDER_CLOSE_HOUR, 10) || computedCloseHour || 23;
-    const closeMin = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 50;
+    const closeHour
+    = parseInt(process.env.ORDER_CLOSE_HOUR, 10) || computedCloseHour || 23;
+    const closeMin
+    = parseInt(process.env.ORDER_CLOSE_MIN, 10) || computedCloseMin || 50;
     const closeDate = new Date().setHours(closeHour, closeMin, 0);
     const date = new Date();
     if ((date - closeDate) >= 0) {
-      const message = `Orders for the day have closed. Please place your order before ${closeHour}:${closeMin} Hours`;
+      const message = `Orders for the day have closed.
+       Please place your order before ${closeHour}:${closeMin} Hours`;
       return res.status(403).json({
         message
       });
@@ -30,31 +34,16 @@ export default class OrderController extends Controller {
      - differenceInMinutes(new Date(), date) > 0;
     return (isToday(date) && hasEditMinutes);
   }
-  getAllOrders() {
+  getAllOrders(req) {
+    return super.getAllRecords(req, 'includeMealsUsers');
+  }
+  getAllUserOrders(req) {
+    const { userId } = req.decoded;
+
     const options = {
-      include: [{
-        association: 'Meals',
-        required: false,
-        paranoid: false,
-        attributes: ['id', 'title', 'description', 'price'],
-        through: {
-          attributes: ['quantity']
-        }
-      },
-      {
-        association: 'User',
-        attributes: ['firstName', 'lastName', 'email']
-      }]
+      where: { userId },
     };
-    return this.Model
-      .findAll(options)
-      .then((result) => {
-        if (result && result.length > 0) {
-          return OrderController.defaultResponse(result);
-        }
-        return OrderController.errorResponse('no records available', 404);
-      })
-      .catch(error => OrderController.errorResponse(error.message));
+    return super.getAllRecords(req, 'includeMealsUsers', options);
   }
   getUserOrdersByDate(req) {
     const { userId } = req.decoded;
@@ -66,60 +55,20 @@ export default class OrderController extends Controller {
     const options = {
       where: { userId,
         createdAt: { [Op.gt]: date, [Op.lt]: nextDate } },
-      include: [{
-        association: 'Meals',
-        required: false,
-        paranoid: false,
-        attributes: ['id', 'title', 'description', 'price'],
-        through: {
-          attributes: ['quantity']
-        }
-      },
-      {
-        association: 'User',
-        attributes: ['firstName', 'lastName', 'email']
-      }]
     };
-    return this.Model
-      .findAll(options)
-      .then((result) => {
-        if (result && result.length > 0) {
-          return OrderController.defaultResponse(result);
-        }
-        return OrderController.errorResponse('no records available', 404);
-      })
-      .catch(error => OrderController.errorResponse(error.message));
+    return super.getAllRecords(req, 'includeMealsUsers', options);
   }
   getOrdersByDate(req) {
+    const { userId } = req.decoded;
     const currentDate = format(new Date(), 'YYYY-MM-DD');
     const date = req.params.date || currentDate;
     const nextDate = addDays(date, 1);
     const { Op } = Sequelize;
     const options = {
       where: { createdAt: { [Op.gt]: date, [Op.lt]: nextDate } },
-      include: [{
-        association: 'Meals',
-        required: false,
-        paranoid: false,
-        attributes: ['id', 'title', 'description', 'price'],
-        through: {
-          attributes: ['quantity']
-        }
-      },
-      {
-        association: 'User',
-        attributes: ['firstName', 'lastName', 'email']
-      }]
     };
-    return this.Model
-      .findAll(options)
-      .then((result) => {
-        if (result && result.length > 0) {
-          return OrderController.defaultResponse(result);
-        }
-        return OrderController.errorResponse('no records available', 404);
-      })
-      .catch(error => OrderController.errorResponse(error.message));
+    const scope = [{ method: ['forCaterers', userId] }];
+    return super.getAllRecords(req, scope, options);
   }
   postOrder(req) {
     const {
@@ -137,7 +86,9 @@ export default class OrderController extends Controller {
     return this.Model.findById(req.params.id)
       .then((order) => {
         orderRef = order;
-        if (OrderController.canEdit(order.createdAt)) { return order.setMeals([]); }
+        if (OrderController.canEdit(order.createdAt)) {
+          return order.setMeals([]);
+        }
         return Promise.reject(new Error('Order edit period has expired'));
       })
       .then(() => orderRef.reload())
@@ -164,7 +115,8 @@ export default class OrderController extends Controller {
         postedOrder.quantityList = quantityList;
         return OrderController.defaultResponse(postedOrder, successCode);
       }
-      return OrderController.errorResponse('Order was not processed. Try again', 404);
+      return OrderController
+        .errorResponse('Order was not processed. Try again', 404);
     } catch (error) {
       return OrderController.errorResponse(error.message);
     }

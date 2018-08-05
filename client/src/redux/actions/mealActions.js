@@ -25,7 +25,20 @@ const getAllMeals = () => (dispatch) => {
         dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
     );
 };
+const getAllUserMeals = () => (dispatch) => {
+  dispatch(request(mealTypes.MEALS_REQUEST));
 
+  return requestServices.noSend('/api/v1/meals/user')
+    .then(
+      response =>
+        dispatch({
+          type: mealTypes.ALL_MEALS_SUCCESS,
+          meals: response.data.data
+        }),
+      error =>
+        dispatch(failure(error.response.data.message, mealTypes.MEALS_FAILURE))
+    );
+};
 
 const createMeal = meal => (dispatch) => {
   dispatch(request(mealTypes.MEALS_REQUEST));
@@ -82,6 +95,7 @@ const deleteMeal = mealId => (dispatch) => {
 
 export default {
   getAllMeals,
+  getAllUserMeals,
   createMeal,
   updateMeal,
   deleteMeal

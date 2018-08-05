@@ -1,86 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MenuCard Component renders correctly 1`] = `
+exports[`MealDisplayCard Component renders correctly 1`] = `
 <React.Fragment>
   <div
     className="card"
   >
-    <img
-      alt="Meal"
-      className="fluid-img"
-      src="nice"
-    />
     <div
-      className="title-element flexbox wrap"
+      className="overlay-container"
     >
-      <button
-        className="modal-open modal-trigger"
-        onClick={[Function]}
-      >
-        nice
-      </button>
-      <button
-        className="btn title-button icon"
-        onClick={[Function]}
-      >
-        ✔
-      </button>
-      <button
-        className="btn title-button icon"
-        onClick={[Function]}
-      >
-        ✖
-      </button>
-    </div>
-  </div>
-  <Modal
-    ariaHideApp={true}
-    bodyOpenClassName="ReactModal__Body--open"
-    className="modal-content"
-    closeTimeoutMS={0}
-    contentLabel="Input Modal"
-    isOpen={false}
-    onRequestClose={[Function]}
-    parentSelector={[Function]}
-    portalClassName="ReactModalPortal"
-    shouldCloseOnEsc={true}
-    shouldCloseOnOverlayClick={true}
-    shouldFocusAfterRender={true}
-    shouldReturnFocusAfterClose={true}
-  >
-    <div
-      className="flexbox"
-    >
-      <h4
-        className="shrink"
-      >
-        Meal Details
-      </h4>
       <div
-        className="flexbox"
+        className="overlay"
       >
-        <button
-          className="btn title-button"
-          onClick={[Function]}
+        <div
+          className="flexbox"
         >
-          ✖
-        </button>
+          <span
+            className="long_string"
+          >
+            nice
+          </span>
+          <span>
+            ₦
+            200
+          </span>
+        </div>
       </div>
+      <img
+        alt="Meal"
+        className="fluid-img"
+        src="nice"
+      />
     </div>
-    <div
-      className="menu-info"
+    <p
+      className="descrip long_string"
     >
-      <div>
-        nice
-      </div>
-      <div>
-        nice
-      </div>
-      <div>
-        ₦
-        200
-      </div>
-    </div>
-  </Modal>
+      nice
+    </p>
+  </div>
 </React.Fragment>
 `;

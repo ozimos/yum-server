@@ -15,30 +15,21 @@ exports[`MealManager Component renders correctly 1`] = `
       isCaterer={true}
     />
     <div
-      className="title flexbox"
+      className="title-element flexbox"
     >
       <h5
         className="shrink"
       >
         Your Meals
       </h5>
-      <div
-        className="flexbox"
+      <button
+        className="btn title-button"
+        onClick={[Function]}
       >
-        <p
-          className="info-spacer"
-        >
-          Click on a meal title to edit the meal or
+        <p>
+          Add Meal
         </p>
-        <button
-          className="btn title-button"
-          onClick={[Function]}
-        >
-          <p>
-            Add Meal
-          </p>
-        </button>
-      </div>
+      </button>
     </div>
     <Search
       caseSensitive={false}
@@ -81,137 +72,199 @@ exports[`MealManager Component renders correctly 1`] = `
     shouldReturnFocusAfterClose={true}
   >
     <div
-      className="title flexbox"
+      className="title flexbox navbar-fixed"
     >
       <h4
         className="shrink"
       >
         Meal Editor
       </h4>
-      <div
-        className="flexbox"
+      <button
+        className="btn title-button"
+        onClick={[Function]}
       >
-        <button
-          className="btn title-button"
-          onClick={[Function]}
-        >
-          ✖
-        </button>
-      </div>
+        ✖
+      </button>
     </div>
-    <Formsy
-      className="form3"
-      disabled={false}
-      getErrorMessage={[Function]}
-      getErrorMessages={[Function]}
-      getValue={[Function]}
-      hasValue={[Function]}
-      isFormDisabled={[Function]}
-      isFormSubmitted={[Function]}
-      isPristine={[Function]}
-      isRequired={[Function]}
-      isValid={[Function]}
-      isValidValue={[Function]}
-      mapping={null}
-      onChange={[Function]}
-      onError={[Function]}
-      onInvalid={[Function]}
-      onInvalidSubmit={[Function]}
-      onReset={[Function]}
-      onSubmit={[Function]}
-      onValid={[Function]}
-      onValidSubmit={[Function]}
-      preventExternalInvalidation={false}
-      resetValue={[Function]}
-      setValidations={[Function]}
-      setValue={[Function]}
-      showError={[Function]}
-      showRequired={[Function]}
-      validationErrors={null}
+    <div
+      className="form3-grid"
     >
-      <Formsy(Input)
-        innerRef={[Function]}
-        name="title"
-        placeholder="Meal Title"
-        required={true}
-        typeOfInput="text"
-        validationError="Please enter the meal title"
-        validationErrors={Object {}}
-        validations="minLength:1"
-      />
-      <Formsy(Input)
-        innerRef={[Function]}
-        name="price"
-        placeholder="Price"
-        required={true}
-        typeOfInput="number"
-        validationError="Please enter a price"
-        validationErrors={
-          Object {
-            "isOnlyInt": "price must be integer",
-          }
-        }
-        validations={
-          Object {
-            "isOnlyInt": [Function],
-          }
-        }
-      />
-      <Formsy(TextArea)
-        innerRef={[Function]}
-        name="description"
-        placeholder="Description"
-        required={true}
-        validationError=""
-        validationErrors={Object {}}
-        validations={null}
-      />
-      <Formsy(Input)
-        innerRef={[Function]}
-        name="imageUrl"
-        required={true}
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-        typeOfInput="url"
-        validationError="Please select an image"
-        validationErrors={Object {}}
-        validations="minLength:5"
-      />
-    </Formsy>
-    <t
-      accept="image/*"
-      className="dropzone"
-      disableClick={false}
-      disablePreview={false}
-      disabled={false}
-      maxSize={Infinity}
-      minSize={0}
-      multiple={true}
-      onDrop={[Function]}
-      preventDropOnDocument={true}
-    >
+      <div>
+        <Formsy
+          className="form3"
+          disabled={false}
+          getErrorMessage={[Function]}
+          getErrorMessages={[Function]}
+          getValue={[Function]}
+          hasValue={[Function]}
+          isFormDisabled={[Function]}
+          isFormSubmitted={[Function]}
+          isPristine={[Function]}
+          isRequired={[Function]}
+          isValid={[Function]}
+          isValidValue={[Function]}
+          mapping={null}
+          onChange={[Function]}
+          onError={[Function]}
+          onInvalid={[Function]}
+          onInvalidSubmit={[Function]}
+          onReset={[Function]}
+          onSubmit={[Function]}
+          onValid={[Function]}
+          onValidSubmit={[Function]}
+          preventExternalInvalidation={false}
+          resetValue={[Function]}
+          setValidations={[Function]}
+          setValue={[Function]}
+          showError={[Function]}
+          showRequired={[Function]}
+          validationErrors={null}
+        >
+          <Formsy(Input)
+            innerRef={[Function]}
+            name="title"
+            placeholder="Meal Title"
+            required={true}
+            typeOfInput="text"
+            validationError="Please enter the meal title"
+            validationErrors={
+              Object {
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 1 character",
+              }
+            }
+            validations={
+              Object {
+                "maxLength": 48,
+                "minLength": 1,
+              }
+            }
+          />
+          <Formsy(Input)
+            innerRef={[Function]}
+            name="price"
+            placeholder="Price"
+            required={true}
+            typeOfInput="number"
+            validationError="Please enter a price"
+            validationErrors={
+              Object {
+                "isOnlyInt": "price must be integer",
+                "maxLength": "input must be shorter than 50 characters",
+                "minLength": "input must be longer than 1 character",
+              }
+            }
+            validations={
+              Object {
+                "isOnlyInt": [Function],
+                "maxLength": 48,
+                "minLength": 1,
+              }
+            }
+          />
+          <Formsy(TextArea)
+            innerRef={[Function]}
+            name="description"
+            placeholder="Description"
+            required={true}
+            validationError=""
+            validationErrors={
+              Object {
+                "maxLength": "input must be shorter than 100 characters",
+                "minLength": "input must be longer than 5 characters",
+              }
+            }
+            validations={
+              Object {
+                "maxLength": 98,
+                "minLength": 5,
+              }
+            }
+          />
+          <Formsy(Input)
+            innerRef={[Function]}
+            name="imageUrl"
+            required={true}
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+            typeOfInput="url"
+            validationError="Please select an image"
+            validationErrors={
+              Object {
+                "isUrl": "A valid url was not supplied",
+                "maxLength": "input must be shorter than 100 characters",
+                "minLength": "input must be longer than 5 characters",
+              }
+            }
+            validations={
+              Object {
+                "isUrl": true,
+                "maxLength": 98,
+                "minLength": 5,
+              }
+            }
+          />
+        </Formsy>
+      </div>
+      <div
+        className="overlay-container"
+      >
+        <div
+          className="overlay full"
+        >
+          <t
+            accept="image/*"
+            className="dropzone"
+            disableClick={false}
+            disablePreview={false}
+            disabled={false}
+            maxSize={Infinity}
+            minSize={0}
+            multiple={true}
+            onDrop={[Function]}
+            preventDropOnDocument={true}
+          >
+            <button
+              className="btn"
+            >
+               Select an Image
+            </button>
+          </t>
+        </div>
+        <div
+          id="meal_image"
+        >
+          <div
+            className="dropzone"
+            style={
+              Object {
+                "align-items": "center",
+                "display": "flex",
+              }
+            }
+          >
+            <button
+              className="btn"
+            >
+               Select an Image
+            </button>
+          </div>
+        </div>
+      </div>
       <button
         className="btn"
+        disabled={true}
+        onClick={[Function]}
+        type="submit"
       >
-         Select an Image
+        <p>
+          Continue
+        </p>
       </button>
-    </t>
-    <div
-      id="meal_image"
-    />
-    <button
-      className="btn"
-      disabled={true}
-      onClick={[Function]}
-      type="submit"
-    >
-      <p>
-        Continue
-      </p>
-    </button>
+    </div>
   </Modal>
 </div>
 `;

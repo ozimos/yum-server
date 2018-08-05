@@ -21,7 +21,7 @@ const OrderItem = ({ id, Meals, addOrderToCart, position, updatedAt }) => {
       <div className="col s9">
         {details}
       </div>
-      <div className="col s1 text_left">{format(updatedAt, 'h:m A')}</div>
+      <div className="col s1 text_left">{format(updatedAt, 'h:mm A')}</div>
       <div className="col s1 text_right">
         {
           isToday(updatedAt) && hasEditMinutes &&

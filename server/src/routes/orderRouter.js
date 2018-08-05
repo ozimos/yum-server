@@ -3,7 +3,6 @@ import express from 'express';
 import Validator from 'express-joi-validation';
 
 import OrderController from '../controllers/OrderController';
-import params from '../middleware/paramSchema';
 import orderSchema from '../middleware/orderSchemas';
 import Authenticate from '../middleware/Authenticate';
 import db from '../models';
@@ -13,24 +12,46 @@ const validator = Validator({ passError: true });
 const orderController = new OrderController(db.Order, db.Meal);
 
 // Params validation
-orderRouter.param('id', validator.params(params));
+
 
 orderRouter
   .route('/')
-  .get(Authenticate.isUser, Authenticate.isAdmin, OrderController.select(orderController, 'getAllOrders'))
-  .post(Authenticate.isUser, validator.body(orderSchema), OrderController.orderClose, OrderController.select(orderController, 'postOrder'));
+  .get(
+    Authenticate.isUser,
+    Authenticate.isAdmin,
+    OrderController.select(orderController, 'getAllOrders')
+  )
+  .post(
+    Authenticate.isUser,
+    validator.body(orderSchema),
+    OrderController.orderClose,
+    OrderController.select(orderController, 'postOrder')
+  );
 
 orderRouter
   .route('/:id')
-  .put(Authenticate.isUser, validator.body(orderSchema), OrderController.orderClose, OrderController.select(orderController, 'updateOrder'));
+  .put(
+    Authenticate.isUser,
+    validator.body(orderSchema),
+    OrderController.orderClose,
+    OrderController.select(orderController, 'updateOrder')
+  );
 
 orderRouter
   .route('/user/:date?')
-  .get(Authenticate.isUser, Authenticate.isAdmin, validator.body(orderSchema), OrderController.select(orderController, 'getUserOrdersByDate'));
+  .get(
+    Authenticate.isUser,
+    validator.body(orderSchema),
+    OrderController.select(orderController, 'getUserOrdersByDate')
+  );
 
 orderRouter
   .route('/all/:date?')
-  .get(Authenticate.isUser, validator.body(orderSchema), OrderController.select(orderController, 'getOrdersByDate'));
+  .get(
+    Authenticate.isUser,
+    validator.body(orderSchema),
+    OrderController.select(orderController, 'getOrdersByDate')
+  );
 
 // Return orderRouter
 export default orderRouter;

@@ -9,10 +9,14 @@ import cors from 'cors';
 import {
   config
 } from 'dotenv';
+import Validator from 'express-joi-validation';
+
 import swaggerDocument from './swagger.json';
 import routers from './routes';
 import validationErrors from './middleware/validationErrors';
 import configWp from '../../webpack.dev.js';
+import params from './middleware/paramSchema';
+
 
 config();
 const app = express();
@@ -32,6 +36,10 @@ if (process.env.NODE_ENV === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler));
 }
+
+// Params validation
+const validator = Validator({ passError: true });
+app.param(['id', 'date'], validator.params(params));
 
 
 app.use('/api/v1/meals', routers.mealRouter);

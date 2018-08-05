@@ -38,7 +38,7 @@ exports[`Menu Component renders correctly 1`] = `
       isCaterer={true}
     />
     <AccordionWrapper
-      accordion={false}
+      accordion={true}
       className="accordion"
       onChange={[Function]}
     >
@@ -88,7 +88,8 @@ exports[`Menu Component renders correctly 1`] = `
           <MealCardContainer
             MealCard={[Function]}
             addClass="scroll"
-            addToMenu={[Function]}
+            addToCollection={[Function]}
+            collection="Menu"
             meals={
               Array [
                 Object {

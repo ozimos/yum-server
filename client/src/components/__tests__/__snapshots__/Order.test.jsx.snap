@@ -9,10 +9,30 @@ exports[`Order Component renders correctly 1`] = `
   >
     <Connect(Nav) />
   </header>
-  <Greeting
-    firstName="user"
-    isCaterer={true}
-  />
+  <div
+    className="flexbox"
+  >
+    <Greeting
+      firstName="user"
+      isCaterer={true}
+    />
+    <button
+      className="btn title-button"
+      disabled={true}
+      onClick={[Function]}
+    >
+      <p
+        className="cart-notification"
+      >
+        Cart
+        <span
+          className="badge"
+        >
+          0
+        </span>
+      </p>
+    </button>
+  </div>
   <div
     className="row"
   >
@@ -43,7 +63,7 @@ exports[`Order Component renders correctly 1`] = `
         transition={[Function]}
       />
       <AccordionWrapper
-        accordion={false}
+        accordion={true}
         className="accordion"
         onChange={[Function]}
       >
@@ -95,27 +115,12 @@ exports[`Order Component renders correctly 1`] = `
                 onChange={[Function]}
                 throttle={200}
               />
-              <button
-                className="btn title-button"
-                disabled={true}
-                onClick={[Function]}
-              >
-                <p
-                  className="cart-notification"
-                >
-                  Cart
-                  <span
-                    className="badge"
-                  >
-                    0
-                  </span>
-                </p>
-              </button>
             </div>
             <MealCardContainer
               MealCard={[Function]}
               addClass="scroll"
-              addToOrder={[Function]}
+              addToCollection={[Function]}
+              collection="cart"
               meals={
                 Array [
                   Object {
@@ -178,7 +183,7 @@ exports[`Order Component renders correctly 1`] = `
             </p>
             <OrderContainer
               OrderItem={[Function]}
-              addOrder={[Function]}
+              addOrderToCart={[Function]}
               orders={
                 Array [
                   Object {

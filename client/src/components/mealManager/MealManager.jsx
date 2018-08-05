@@ -38,7 +38,7 @@ export class MealManager extends React.Component {
     if (!this.props.authenticated) {
       this.props.dispatch(push('/login'));
     }
-    this.props.dispatch(mealActions.getAllMeals());
+    this.props.dispatch(mealActions.getAllUserMeals());
   }
   setUploadPercent(percentProgress) {
     this.setState({ uploadPercent: percentProgress });

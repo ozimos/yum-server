@@ -5,7 +5,7 @@ exports[`SignUp Component renders correctly 1`] = `
   className="canvas"
 >
   <div
-    className="container2"
+    className="container2 container2-height"
   >
     <header
       className="header"

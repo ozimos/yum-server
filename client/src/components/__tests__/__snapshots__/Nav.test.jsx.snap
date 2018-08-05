@@ -39,14 +39,6 @@ exports[`Nav Component renders correctly 1`] = `
       >
         Menu
       </NavLink>
-      <NavLink
-        activeClassName="active"
-        aria-current="page"
-        className="nav-item"
-        to="/orders"
-      >
-        Meal Booking
-      </NavLink>
       <Link
         replace={false}
         to="/login"

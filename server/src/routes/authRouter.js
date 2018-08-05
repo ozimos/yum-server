@@ -15,9 +15,21 @@ authRouter.post(
   UserController.select(userController, 'signUp')
 );
 
-authRouter.post('/login', validator.body(schemas.login), UserController.select(userController, 'login'));
-authRouter.get('/all', Authenticate.isUser, Authenticate.isAdmin, UserController.select(userController, 'getAllRecords'));
-authRouter.get('/check', Authenticate.isUser, UserController.checkUser);
+authRouter.post(
+  '/login',
+  validator.body(schemas.login),
+  UserController.select(userController, 'login')
+);
+authRouter.get(
+  '/all',
+  Authenticate.isUser, Authenticate.isAdmin,
+  UserController.select(userController, 'getAllRecords')
+);
+authRouter.get(
+  '/check',
+  Authenticate.isUser,
+  UserController.checkUser
+);
 
 // Return authRouter
 export default authRouter;

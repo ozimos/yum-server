@@ -29,27 +29,37 @@ describe('Controllers', () => {
           price: 2000,
         }
       ];
+      const scope = 'string';
+      const req = {};
+      td.when(Table.scope(scope)).thenReturn(Table);
+      td.when(Table.findAll({})).thenResolve(expectedResponse);
 
-      td.when(Table.findAll()).thenResolve(expectedResponse);
-
-      return controller.getAllRecords()
+      return controller.getAllRecords(req, scope)
         .then(response => expect(response.data).to.eql(expectedResponse));
     });
     it('should return an error message if no data in database', () => {
       const expectedResponse = 'no records available';
-
-      td.when(Table.findAll()).thenResolve([]);
-      return controller.getAllRecords()
+      const scope = 'string';
+      const req = {};
+      td.when(Table.scope(scope)).thenReturn(Table);
+      td.when(Table.findAll({})).thenResolve([]);
+      return controller.getAllRecords(req, scope)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
-      td.when(Table.findAll()).thenReject(error);
-      return controller.getAllRecords()
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
+        const scope = 'string';
+        const req = {};
+        td.when(Table.scope(scope)).thenReturn(Table);
+        td.when(Table.findAll({})).thenReject(error);
+        return controller.getAllRecords(req, scope)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 
   describe('getSingleRecord()', () => {
@@ -79,14 +89,17 @@ describe('Controllers', () => {
       return controller.getSingleRecord(req)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
-      td.when(Table.findById(req.params.id)).thenReject(error);
-      return controller.getSingleRecord(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
+        td.when(Table.findById(req.params.id)).thenReject(error);
+        return controller.getSingleRecord(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 
   describe('postRecord()', () => {
@@ -113,17 +126,20 @@ describe('Controllers', () => {
           expect(response.data).to.eql(returnValue.body);
         });
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const req = {
-        body: 'wrong input',
-      };
-      const error = {
-        message: 'database error'
-      };
-      td.when(Table.create(req.body)).thenReject(error);
-      return controller.postRecord(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const req = {
+          body: 'wrong input',
+        };
+        const error = {
+          message: 'database error'
+        };
+        td.when(Table.create(req.body)).thenReject(error);
+        return controller.postRecord(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 
   describe('updateRecord()', () => {
@@ -150,19 +166,22 @@ describe('Controllers', () => {
         .then(response =>
           expect(response.data).to.eql(req.body));
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
-      td.when(Table.update(req.body, {
-        where: {
-          id: req.params.id
-        },
-        returning: true
-      })).thenReject(error);
-      return controller.updateRecord(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
+        td.when(Table.update(req.body, {
+          where: {
+            id: req.params.id
+          },
+          returning: true
+        })).thenReject(error);
+        return controller.updateRecord(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
   describe('deleteRecord()', () => {
     const req = {
@@ -186,17 +205,20 @@ describe('Controllers', () => {
         .then(response =>
           expect(response.data).to.equal(result));
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
-      td.when(Table.destroy({
-        where: {
-          id: req.params.id
-        },
-      })).thenReject(error);
-      return controller.deleteRecord(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
+        td.when(Table.destroy({
+          where: {
+            id: req.params.id
+          },
+        })).thenReject(error);
+        return controller.deleteRecord(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 });

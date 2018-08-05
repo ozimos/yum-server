@@ -34,13 +34,14 @@ const Nav = ({ user }) =>
           >
           Menu
           </NavLink>}
+          {!user.isCaterer &&
           <NavLink
             activeClassName="active"
             className="nav-item"
             to="/orders"
           >
           Meal Booking
-          </NavLink>
+          </NavLink>}
           <Link to="/login">
           Log Out
           </Link>

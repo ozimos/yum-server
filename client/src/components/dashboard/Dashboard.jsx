@@ -153,7 +153,7 @@ class Dashboard extends React.Component {
                               <td>{order.id}</td>
                               <td>{orderDetails.mealTitleList(order)}</td>
                               <td>{orderDetails.mealQuantityList(order)}</td>
-                              <td>{format(order.updatedAt, 'h:m A')}</td>
+                              <td>{format(order.updatedAt, 'h:mm A')}</td>
                               <td>{subTotal(order.Meals)}</td>
                             </tr>
                         ))

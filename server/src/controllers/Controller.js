@@ -90,16 +90,30 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  getAllRecords() {
-    return this.Model
-      .findAll()
+  getAllRecords(req, scope = 'defaultScope', options = {}) {
+    return this.Model.scope(scope)
+      .findAll(options)
       .then((result) => {
-        if (result.length > 0) {
+        if (result && result.length > 0) {
           return Controller.defaultResponse(result);
         }
         return Controller.errorResponse('no records available', 404);
       })
       .catch(error => Controller.errorResponse(error.message));
+  }
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {obj} Model
+   * @memberof Controller
+   */
+  getAllUserRecords(req) {
+    const whereCondition = {
+      where: { userId: req.decoded.userId }
+    };
+    return this.getAllRecords(req, whereCondition);
   }
   /**
    *
