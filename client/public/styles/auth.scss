@@ -19,9 +19,12 @@
       background-color: #fafafa;
       background-attachment: scroll;
       background-size: 200vw 200vh;
-.header{
-  padding-top: 30px
-}
+      &-height{
+      height: 110vh;
+      }
+      .header{
+        padding-top: 30px
+      }
       .welcome {
         box-sizing: border-box;
         min-height: 6em;
@@ -46,6 +49,7 @@
   .btn{
 padding-top: 5px;
 padding-bottom: 5px;
+height: 60px
   }
   &>input,
   &>p {

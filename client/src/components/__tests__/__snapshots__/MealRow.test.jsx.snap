@@ -13,9 +13,12 @@ exports[`MealRow Component renders correctly 1`] = `
     </td>
     <td>
       <input
+        max="99"
         maxLength="4"
+        min="1"
         onChange={[Function]}
         placeholder="1"
+        step="1"
         type="number"
         value={4}
       />

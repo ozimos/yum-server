@@ -38,7 +38,8 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const KEYS_TO_FILTERS = ['id', 'User.firstName', 'User.lastName', 'User.email', 'updatedAt'];
+    const KEYS_TO_FILTERS = [
+      'id', 'User.firstName', 'User.lastName', 'User.email', 'updatedAt'];
     const isTodayOrder = this.props.orders.length !== 0;
     let filteredOrders;
     if (isTodayOrder) {
@@ -59,31 +60,68 @@ class Dashboard extends React.Component {
             <div className="flexbox">
               <div className="card order_summary">
                 <div className="flexbox">
-                  <span className="order_span summary_value flow-text">{this.props.orders.length}</span>
-                  <span className="order_span shrink"><img alt="cutlery" className="responsive-img" src="./images/food.png" /></span>
+                  <span
+                    className="order_span summary_value flow-text"
+                  >{this.props.orders.length}
+                  </span>
+                  <span
+                    className="order_span shrink"
+                  >
+                    <img
+                      alt="cutlery"
+                      className="responsive-img"
+                      src="./images/food.png"
+                    />
+                  </span>
                 </div>
                 <h5 className="flow-text" >Orders</h5>
               </div >
               <div className="card order_summary">
                 <div className="flexbox">
-                  <span className="order_span summary_value flow-text">{uniqueUsers(this.props.orders)}</span>
-                  <span className="order_span shrink"><img alt="head profile" className="responsive-img" src="./images/profile.png" /></span>
+                  <span
+                    className="order_span summary_value flow-text"
+                  >{uniqueUsers(this.props.orders)}
+                  </span>
+                  <span
+                    className="order_span shrink"
+                  >
+                    <img
+                      alt="head profile"
+                      className="responsive-img"
+                      src="./images/profile.png"
+                    />
+                  </span>
                 </div>
                 <h5 className="flow-text">Customer(s)</h5>
               </div >
               <div className="card order_summary">
                 <div className="flexbox">
-                  <span className="order_span summary_value flow-text">&#8358;{cashTotal(this.props.orders)}</span>
-                  <span className="order_span shrink"><img alt="upward stock chart" className="responsive-img" src="./images/chart.png" /></span>
+                  <span
+                    className="order_span summary_value flow-text"
+                  >
+                  &#8358;{cashTotal(this.props.orders)}
+                  </span>
+                  <span
+                    className="order_span shrink"
+                  >
+                    <img
+                      alt="upward stock chart"
+                      className="responsive-img"
+                      src="./images/chart.png"
+                    />
+                  </span>
                 </div>
                 <h5 className="flow-text">Total Sales</h5>
               </div>
             </div>
-            <div className="order_detail flexbox">
+            <div className="order_detail flexbox title-element">
               <h5>
                 Today&#39;s Orders
               </h5>
-              <SearchInput className="search-input input-field" onChange={this.searchUpdated} />
+              <SearchInput
+                className="search-input input-field"
+                onChange={this.searchUpdated}
+              />
             </div>
             <Accordion accordion={false}>
               <AccordionItem expanded>
@@ -104,14 +142,18 @@ class Dashboard extends React.Component {
                           </tr>
                         </thead>
                         <tbody>
-                          {filteredOrders && filteredOrders.map((order, index) => (
+                          {filteredOrders && filteredOrders
+                          .map((order, index) => (
                             <tr key={order.id}>
                               <td>{index + 1}</td>
-                              <td>{`${order.User.firstName} ${order.User.lastName}`}</td>
+                              <td>
+                                {`${order.User.firstName} 
+                                ${order.User.lastName}`}
+                              </td>
                               <td>{order.id}</td>
                               <td>{orderDetails.mealTitleList(order)}</td>
                               <td>{orderDetails.mealQuantityList(order)}</td>
-                              <td>{format(order.updatedAt, 'h:m A')}</td>
+                              <td>{format(order.updatedAt, 'h:mm A')}</td>
                               <td>{subTotal(order.Meals)}</td>
                             </tr>
                         ))

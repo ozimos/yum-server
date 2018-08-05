@@ -70,7 +70,10 @@ const postOrder = order => (dispatch) => {
           order: response.data.data
         }),
       error =>
-        dispatch(failure(error.response.data.message, orderTypes.ORDER_FAILURE))
+        dispatch(failure(
+          error.response.data.message,
+          orderTypes.ORDER_FAILURE
+        ))
 
     );
 };

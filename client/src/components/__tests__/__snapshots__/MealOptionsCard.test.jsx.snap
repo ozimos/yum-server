@@ -1,61 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MealManager Component renders correctly 1`] = `
-<div
-  className="contain"
->
-  <header
-    className="header"
+exports[`MealCard Component renders correctly 1`] = `
+<React.Fragment>
+  <div
+    className="card"
   >
-    <Connect(Nav) />
-  </header>
-  <main>
-    <Greeting
-      firstName="user"
-      isCaterer={true}
-    />
     <div
-      className="title-element flexbox"
+      className="overlay-container"
     >
-      <h5
-        className="shrink"
+      <div
+        className="overlay"
       >
-        Your Meals
-      </h5>
-      <button
-        className="btn title-button"
-        onClick={[Function]}
-      >
-        <p>
-          Add Meal
-        </p>
-      </button>
+        <div
+          className="flexbox"
+        >
+          <span
+            className="long_string"
+          >
+            nice
+          </span>
+          <span>
+            ₦
+            200
+          </span>
+        </div>
+      </div>
+      <img
+        alt="Meal"
+        className="fluid-img"
+        src="nice"
+      />
     </div>
-    <Search
-      caseSensitive={false}
-      className="search-input input-field"
-      fuzzy={false}
-      onChange={[Function]}
-      throttle={200}
-    />
-    <MealCardContainer
-      MealCard={[Function]}
-      addClass="scroll2"
-      connecting={false}
-      meals={
-        Array [
-          Object {
-            "id": "abc",
-            "price": 1200,
-          },
-          Object {
-            "id": "def",
-            "price": 2000,
-          },
-        ]
-      }
-    />
-  </main>
+    <p
+      className="descrip long_string"
+    >
+      nice
+    </p>
+    <button
+      className="btn pad-btn modal-open"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <button
+      className="title-button card-btn"
+      onClick={[Function]}
+    >
+      ✖
+    </button>
+  </div>
   <Modal
     ariaHideApp={true}
     bodyOpenClassName="ReactModal__Body--open"
@@ -123,8 +116,8 @@ exports[`MealManager Component renders correctly 1`] = `
           <Formsy(Input)
             innerRef={[Function]}
             name="title"
-            placeholder="Meal Title"
-            required={true}
+            placeholder="nice"
+            required={false}
             typeOfInput="text"
             validationError="Please enter the meal title"
             validationErrors={
@@ -143,8 +136,8 @@ exports[`MealManager Component renders correctly 1`] = `
           <Formsy(Input)
             innerRef={[Function]}
             name="price"
-            placeholder="Price"
-            required={true}
+            placeholder="₦200"
+            required={false}
             typeOfInput="number"
             validationError="Please enter a price"
             validationErrors={
@@ -165,8 +158,8 @@ exports[`MealManager Component renders correctly 1`] = `
           <Formsy(TextArea)
             innerRef={[Function]}
             name="description"
-            placeholder="Description"
-            required={true}
+            placeholder="nice"
+            required={false}
             validationError=""
             validationErrors={
               Object {
@@ -184,7 +177,7 @@ exports[`MealManager Component renders correctly 1`] = `
           <Formsy(Input)
             innerRef={[Function]}
             name="imageUrl"
-            required={true}
+            required={false}
             style={
               Object {
                 "display": "none",
@@ -237,21 +230,11 @@ exports[`MealManager Component renders correctly 1`] = `
         <div
           id="meal_image"
         >
-          <div
-            className="dropzone"
-            style={
-              Object {
-                "align-items": "center",
-                "display": "flex",
-              }
-            }
-          >
-            <button
-              className="btn"
-            >
-               Select an Image
-            </button>
-          </div>
+          <img
+            alt="meal"
+            className="fluid-img"
+            src="nice"
+          />
         </div>
       </div>
       <button
@@ -266,5 +249,49 @@ exports[`MealManager Component renders correctly 1`] = `
       </button>
     </div>
   </Modal>
-</div>
+  <Modal
+    ariaHideApp={true}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="modal-content"
+    closeTimeoutMS={0}
+    contentLabel="Confirmation Modal"
+    isOpen={false}
+    onRequestClose={[Function]}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={false}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <p>
+      This action will delete your meal. Do you want to continue
+    </p>
+    <div
+      className="title flexbox"
+    >
+      <button
+        className="btn"
+        onClick={[Function]}
+        style={
+          Object {
+            "backgroundColor": "red !important",
+          }
+        }
+      >
+        <p>
+          Yes
+        </p>
+      </button>
+      <button
+        className="btn"
+        onClick={[Function]}
+      >
+        <p>
+          No
+        </p>
+      </button>
+    </div>
+  </Modal>
+</React.Fragment>
 `;

@@ -5,7 +5,7 @@ exports[`SignUp Component renders correctly 1`] = `
   className="canvas"
 >
   <div
-    className="container2"
+    className="container2 container2-height"
   >
     <header
       className="header"
@@ -139,10 +139,14 @@ exports[`SignUp Component renders correctly 1`] = `
             validationError=""
             validationErrors={
               Object {
-                "hasLowerCase": "Must have lowercase letter or you can use a passphrase of minimum length 16 characters",
-                "hasNumber": "Must have a number or you can use a passphrase of minimum length 16 characters",
-                "hasSpecialCharacter": "Must have a special character or you can use a passphrase of minimum length 16 characters",
-                "hasUpperCase": "Must have uppercase letter or you can use a passphrase of minimum length 16 characters",
+                "hasLowerCase": "Must have lowercase letter or you can
+                     use a passphrase of minimum length 16 characters",
+                "hasNumber": "Must have a number or you can
+                     use a passphrase of minimum length 16 characters",
+                "hasSpecialCharacter": "Must have a special character or 
+                    you can use a passphrase of minimum length 16 characters",
+                "hasUpperCase": "Must have uppercase letter or you can 
+                    use a passphrase of minimum length 16 characters",
                 "maxLength": "input must be shorter than 50 characters",
                 "minLength": "Must have at least 8 characters",
               }

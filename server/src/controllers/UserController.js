@@ -29,7 +29,8 @@ class UserController extends Controller {
           }, 404);
         }
         // check if password is correct
-        const isCorrectPassword = bcrypt.compareSync(req.body.password, response.password);
+        const isCorrectPassword = bcrypt
+          .compareSync(req.body.password, response.password);
 
         if (isCorrectPassword) {
           return UserController.sendResponseWithToken(response);

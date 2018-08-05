@@ -5,7 +5,7 @@ const Greeting = props =>
   (
     <div>
       <h4>
-                Welcome {props.isCaterer ? 'Caterer' : 'Customer'} {props.firstName}
+        Welcome {props.isCaterer ? 'Caterer' : 'Customer'} {props.firstName}
       </h4>
     </div>
   );

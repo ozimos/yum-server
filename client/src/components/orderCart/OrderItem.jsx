@@ -5,7 +5,7 @@ import differenceInMinutes from 'date-fns/difference_in_minutes';
 import isToday from 'date-fns/is_today';
 import '../../../public/styles/order_item.scss';
 
-const OrderItem = ({ id, Meals, addOrder, position, updatedAt }) => {
+const OrderItem = ({ id, Meals, addOrderToCart, position, updatedAt }) => {
   const details = Meals.map(meal => (
     <div key={meal.id} className="row">
       <div className="col s7 text_left long_string left_pad">{meal.title}</div>
@@ -21,11 +21,16 @@ const OrderItem = ({ id, Meals, addOrder, position, updatedAt }) => {
       <div className="col s9">
         {details}
       </div>
-      <div className="col s1 text_left">{format(updatedAt, 'h:m A')}</div>
+      <div className="col s1 text_left">{format(updatedAt, 'h:mm A')}</div>
       <div className="col s1 text_right">
         {
           isToday(updatedAt) && hasEditMinutes &&
-          <button onClick={() => addOrder(id)} className="btn title-button">Edit</button>
+          <button
+            onClick={() => addOrderToCart(id)}
+            className="btn title-button"
+          >
+          Edit
+          </button>
         }
       </div>
     </div>
@@ -37,7 +42,7 @@ OrderItem.propTypes = {
   updatedAt: PropTypes.string.isRequired,
   position: PropTypes.number.isRequired,
   Meals: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addOrder: PropTypes.func.isRequired
+  addOrderToCart: PropTypes.func.isRequired
 };
 export default OrderItem;
 

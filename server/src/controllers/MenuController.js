@@ -23,7 +23,8 @@ export default class MenuController extends Controller {
         if (response && response.Meals[0]) {
           return MenuController.defaultResponse(response);
         }
-        return MenuController.errorResponse('menu for the day has not been set', 404);
+        return MenuController
+          .errorResponse('menu for the day has not been set', 404);
       })
       .catch(err => MenuController.errorResponse(err.message));
   }
@@ -61,7 +62,8 @@ export default class MenuController extends Controller {
           process.env.ORDER_START_MINS = new Date().getMinutes();
           return MenuController.defaultResponse(response, 201);
         }
-        return MenuController.errorResponse('Menu was not posted. Try again', 404);
+        return MenuController
+          .errorResponse('Menu was not posted. Try again', 404);
       })
       .catch(err => MenuController.errorResponse(err.message));
   }

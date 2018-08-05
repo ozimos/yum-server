@@ -10,9 +10,15 @@ const imageUpload = (files, callback) => {
   const config = {
     onUploadProgress(ProgressEvent) {
       let percentCompleted = 0;
-      const totalLength = ProgressEvent.lengthComputable ? ProgressEvent.total : ProgressEvent.target.getResponseHeader('content-length') || ProgressEvent.target.getResponseHeader('x-decompressed-content-length');
+      const totalLength = ProgressEvent.lengthComputable
+        ? ProgressEvent.total
+        : ProgressEvent.target
+          .getResponseHeader('content-length')
+        || ProgressEvent.target
+          .getResponseHeader('x-decompressed-content-length');
       if (totalLength !== null) {
-        percentCompleted = Math.round((ProgressEvent.loaded * 100) / totalLength);
+        percentCompleted = Math
+          .round((ProgressEvent.loaded * 100) / totalLength);
       }
       callback(percentCompleted);
     }

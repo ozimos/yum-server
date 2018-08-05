@@ -22,7 +22,10 @@ const getMenu = () => (dispatch) => {
           menu: response.data.data
         }),
       error =>
-        dispatch(failure(error.response.data.message, menuTypes.MENU_FAILURE))
+        dispatch(failure(
+          error.response.data.message,
+          menuTypes.MENU_FAILURE
+        ))
 
     );
 };

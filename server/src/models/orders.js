@@ -1,11 +1,52 @@
 export default (sequelize, DataTypes) => {
-  const Order = sequelize.define('Order', {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+  const Order = sequelize.define(
+    'Order', {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      }
+    },
+    {
+      scopes: {
+        includeMealsUsers() {
+          return {
+            include: [{
+              association: 'Meals',
+              required: false,
+              paranoid: false,
+              attributes: ['id', 'userId', 'title', 'description', 'price'],
+              through: {
+                attributes: ['quantity']
+              }
+            },
+            {
+              association: 'User',
+              attributes: ['firstName', 'lastName', 'email']
+            }]
+          };
+        },
+        forCaterers(userId) {
+          return {
+            include: [{
+              association: 'Meals',
+              where: { userId },
+              required: false,
+              paranoid: false,
+              attributes: ['id', 'userId', 'title', 'description', 'price'],
+              through: {
+                attributes: ['quantity']
+              }
+            },
+            {
+              association: 'User',
+              attributes: ['firstName', 'lastName', 'email']
+            }]
+          };
+        }
+      }
     }
-  });
+  );
 
   // Relations
   Order.associate = (models) => {

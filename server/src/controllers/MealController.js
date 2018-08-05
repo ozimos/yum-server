@@ -2,7 +2,7 @@ import Controller from './Controller';
 
 export default class MealController extends Controller {
 
-  postRecord(req) {
+  addMeal(req) {
     if (req.decoded && req.decoded.userId) {
       req.body.userId = req.decoded.userId;
       return super.postRecord(req);

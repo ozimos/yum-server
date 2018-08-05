@@ -39,7 +39,10 @@ const login = userData => (dispatch) => {
         }
       },
       (error) => {
-        dispatch(failure(error.response.data.message, userTypes.LOGIN_FAILURE));
+        dispatch(failure(
+          error.response.data.message,
+          userTypes.LOGIN_FAILURE
+        ));
       }
     );
 };
@@ -68,7 +71,10 @@ const signUp = user => (dispatch) => {
         }
       },
       (error) => {
-        dispatch(failure(error.response.data.message, userTypes.SIGNUP_FAILURE));
+        dispatch(failure(
+          error.response.data.message,
+          userTypes.SIGNUP_FAILURE
+        ));
       }
     );
 };
@@ -78,8 +84,14 @@ const getAll = () => (dispatch) => {
 
   return requestServices.noSend('/api/v1/auth/all')
     .then(
-      response => dispatch(success(response.data.data, userTypes.GETALL_SUCCESS)),
-      error => dispatch(failure(error.response.data.message, userTypes.GETALL_FAILURE))
+      response => dispatch(success(
+        response.data.data,
+        userTypes.GETALL_SUCCESS
+      )),
+      error => dispatch(failure(
+        error.response.data.message,
+        userTypes.GETALL_FAILURE
+      ))
     );
 };
 

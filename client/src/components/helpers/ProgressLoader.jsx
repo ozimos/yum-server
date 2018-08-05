@@ -8,10 +8,11 @@ const ProgressLoader = props =>
     <div>
       <Row>
         <Col s={12}>
-          <ProgressBar progress={props.upload} />
+          <ProgressBar className="progression" progress={props.upload} />
         </Col>
       </Row>
-    </div>);
+    </div>
+  );
 
 ProgressLoader.propTypes = {
   upload: PropTypes.number.isRequired,

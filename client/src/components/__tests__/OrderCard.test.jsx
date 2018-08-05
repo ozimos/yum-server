@@ -1,20 +1,24 @@
 /* global React:false, shallow:false toJson:false */
 
-import { PlainMealCard } from '../mealCard/MealCard';
+import OrderCard from '../mealCard/OrderCard';
 import { meal } from '../mocks/mealDataMock';
 
-describe('MealCard Component', () => {
+describe('OrderCard Component', () => {
   it('should render without throwing an error', () => {
-    expect(shallow(<PlainMealCard
+    expect(shallow(<OrderCard
       {...meal.data}
       dispatch={jest.fn()}
+      addToOrder={jest.fn()}
+      removeFromOrder={jest.fn()}
     />)
       .exists(<div className="card" />)).toBe(true);
   });
   it('renders correctly', () => {
-    const wrapper = shallow(<PlainMealCard
+    const wrapper = shallow(<OrderCard
       {...meal.data}
       dispatch={jest.fn()}
+      addToOrder={jest.fn()}
+      removeFromOrder={jest.fn()}
     />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });

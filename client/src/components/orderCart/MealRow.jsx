@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) => {
+const MealRow = ({
+  id,
+  title,
+  price,
+  quantity,
+  setQuantity,
+  removeFromCart
+}) => {
   const subTotal = price * (quantity || 1);
   return (
     <React.Fragment>
@@ -15,6 +22,9 @@ const MealRow = ({ id, title, price, quantity, setQuantity, removeFromCart }) =>
             onChange={event => setQuantity(event, id)}
             value={quantity}
             maxLength="4"
+            max="99"
+            min="1"
+            step="1"
           />
         </td>
         <td>{subTotal}</td>
@@ -32,7 +42,9 @@ MealRow.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  quantity: PropTypes
+    .oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
   removeFromCart: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
 };

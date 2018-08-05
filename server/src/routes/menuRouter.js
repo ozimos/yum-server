@@ -14,7 +14,12 @@ const menuController = new MenuController(db.Menu, db.Meal);
 
 menuRouter.route('/')
   .get(Authenticate.isUser, MenuController.select(menuController, 'getMenu'))
-  .post(Authenticate.isUser, Authenticate.isAdmin, validator.body(menuSchema), MenuController.select(menuController, 'postMenu'));
+  .post(
+    Authenticate.isUser,
+    Authenticate.isAdmin,
+    validator.body(menuSchema),
+    MenuController.select(menuController, 'postMenu')
+  );
 
 // Return menuRouter
 export default menuRouter;

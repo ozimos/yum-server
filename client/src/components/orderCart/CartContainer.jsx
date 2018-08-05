@@ -18,7 +18,9 @@ class PlainCartContainer extends React.Component {
     const newOrderQuantity = {};
     if (nextProps.orderId !== prevState.prevPropsOrderId) {
       nextProps.order
-        .forEach((elem) => { newOrderQuantity[elem.id] = elem.MealOrders.quantity; });
+        .forEach((elem) => {
+          newOrderQuantity[elem.id] = elem.MealOrders.quantity;
+        });
       return {
         prevPropsOrderId: nextProps.orderId,
         orderQuantity: newOrderQuantity };
@@ -30,14 +32,23 @@ class PlainCartContainer extends React.Component {
       const newOrderQuantity = {};
 
       this.props.order
-        .forEach((elem) => { newOrderQuantity[elem.id] = elem.MealOrders.quantity; });
+        .forEach((elem) => {
+          newOrderQuantity[elem.id] = elem.MealOrders.quantity;
+        });
       // eslint-disable-next-line
       this.setState({ orderQuantity: newOrderQuantity });
 
     }
   }
   setQuantity = (e, id) => {
-    const inputValue = e.target.value;
+    let inputValue;
+    if (e.target.value < 1) {
+      inputValue = 1;
+    } else if (e.target.value > 99) {
+      inputValue = 99;
+    } else {
+      inputValue = e.target.value;
+    }
     this.setState(prevState =>
       ({ orderQuantity: { ...prevState.orderQuantity, [id]: inputValue } }));
   };
@@ -47,7 +58,10 @@ class PlainCartContainer extends React.Component {
        quantity: this.state.orderQuantity[meal.id] || 1 }));
    if (this.props.orderId) {
      await this.props
-       .dispatch(orderActions.updateOrder({ meals: actualOrder }, this.props.orderId));
+       .dispatch(orderActions.updateOrder(
+         { meals: actualOrder },
+         this.props.orderId
+       ));
    } else {
      await this.props.dispatch(orderActions.postOrder({ meals: actualOrder }));
    }
@@ -63,7 +77,8 @@ class PlainCartContainer extends React.Component {
 
  render() {
    const { MealRow, order, ...rest } = this.props;
-   const reducer = (total, meal) => total + (meal.price * (this.state.orderQuantity[meal.id] || 1));
+   const reducer = (total, meal) =>
+     total + (meal.price * (this.state.orderQuantity[meal.id] || 1));
    const calcTotal = () => this.props.order
      .reduce(reducer, 0);
    const total = calcTotal();
