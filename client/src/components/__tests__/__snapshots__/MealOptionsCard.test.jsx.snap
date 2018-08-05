@@ -15,7 +15,7 @@ exports[`MealCard Component renders correctly 1`] = `
           className="flexbox"
         >
           <span
-            className="long_string"
+            className="long_string text_left"
           >
             nice
           </span>
