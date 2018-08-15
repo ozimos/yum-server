@@ -43,7 +43,7 @@ exports[`Nav Component renders correctly 1`] = `
         replace={false}
         to="/login"
       >
-        Log Out
+        Log In
       </Link>
     </div>
   </nav>

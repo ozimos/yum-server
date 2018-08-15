@@ -13,9 +13,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import SearchInput, { createFilter } from 'react-search-input';
 import MealDisplayCard from '../mealCard/MealDisplayCard';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import ConnectedGreeting from '../greeting/Greeting';
+import Greeting from '../greeting/Greeting';
 import { mealActions, menuActions } from '../../redux/actions';
-import ConnectedNav from '../nav/Nav';
+import ConnectedNav from '../nav/ConnectedNav';
 import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/modalOpenButton.scss';
 import '../../../public/styles/search-input.css';
@@ -102,7 +102,7 @@ class Menu extends React.Component {
         <main>
           <ToastContainer autoClose={2000} />
 
-          <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
+          <Greeting isCaterer={isCaterer} firstName={firstName} />
           <Accordion accordion>
             <AccordionItem expanded>
               <AccordionItemTitle>

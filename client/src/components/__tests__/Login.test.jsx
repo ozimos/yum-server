@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { Login } from '../login/Login';
+import { Login } from '../login/ConnectedLogin';
 
 describe('Login Component', () => {
 

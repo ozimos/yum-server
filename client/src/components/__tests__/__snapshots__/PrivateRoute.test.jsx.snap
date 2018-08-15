@@ -2,6 +2,7 @@
 
 exports[`PrivateRoute Component renders correctly 1`] = `
 <Route
+  component={[MockFunction]}
   render={[Function]}
 />
 `;

@@ -1,5 +1,5 @@
 /* global React:false, shallow:false toJson:false */
-import { MealManager } from '../mealManager/MealManager';
+import { MealManager } from '../mealManager/ConnectedMealManager';
 import { allMeals } from '../mocks/mealDataMock';
 
 describe('MealManager Component', () => {

@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { Nav } from '../nav/Nav';
+import { Nav } from '../nav/ConnectedNav';
 
 describe('Nav Component', () => {
   const user = { isCaterer: true };

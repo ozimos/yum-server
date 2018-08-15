@@ -52,7 +52,10 @@ export const orderIdUrl = `${rootURL}/orders/1`;
  * @returns {function} mocha test suite
  */
 
-export const templateTest = function generateTest(title, method, url, content, key, type, status = '200') {
+export const templateTest = function generateTest(
+  title,
+  method, url, content, key, type, status = '200'
+) {
   let requester, boundRequest;
   beforeEach('create http server', () => {
     requester = request(app);

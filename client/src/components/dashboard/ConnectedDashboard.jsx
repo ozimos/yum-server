@@ -12,7 +12,7 @@ import {
 import SearchInput, { createFilter } from 'react-search-input';
 import Greeting from '../greeting/Greeting';
 import { dashboardActions } from '../../redux/actions';
-import ConnectedNav from '../nav/Nav';
+import ConnectedNav from '../nav/ConnectedNav';
 import uniqueUsers from '../../utils/uniqueUsers';
 import cashTotal, { subTotal } from '../../utils/cashTotal';
 import orderDetails from '../../utils/orderDetails';

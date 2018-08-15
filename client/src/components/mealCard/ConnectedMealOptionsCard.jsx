@@ -11,7 +11,7 @@ import { mealActions } from '../../redux/actions';
 import imageUpload from '../../services/imageUpload';
 
 ReactModal.setAppElement(document.getElementById('root'));
-class BaseMealOptionsCard extends React.Component {
+class MealOptionsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -254,10 +254,10 @@ class BaseMealOptionsCard extends React.Component {
     );
   }
 }
-BaseMealOptionsCard.defaultProps = {
+MealOptionsCard.defaultProps = {
   connecting: false,
 };
-BaseMealOptionsCard.propTypes = {
+MealOptionsCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   connecting: PropTypes.bool,
@@ -266,6 +266,6 @@ BaseMealOptionsCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-export { BaseMealOptionsCard };
-export default connect(state => state)(BaseMealOptionsCard);
+export { MealOptionsCard };
+export default connect(state => state)(MealOptionsCard);
 

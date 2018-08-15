@@ -11,7 +11,9 @@ if (user) {
 }
 
 if (!result.valid) { localStorage.removeItem('user'); }
-const initialState = result.valid ? { authenticated: true, user } : {};
+const initialState = result.valid
+  ? { authenticated: true, user }
+  : { authenticated: false, user: {} };
 
 export default (state = initialState, action) => {
   switch (action.type) {

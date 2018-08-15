@@ -1,5 +1,5 @@
 /* global React:false, shallow:false toJson:false */
-import { SignUp } from '../signup/SignUp';
+import { SignUp } from '../signup/ConnectedSignUp';
 
 describe('SignUp Component', () => {
 

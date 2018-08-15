@@ -21,7 +21,8 @@ class UserController extends Controller {
       .findOne({
         where: {
           email: req.body.email
-        }
+        },
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
       }).then((response) => {
         if (!response) {
           return UserController.errorResponse({
@@ -59,6 +60,7 @@ class UserController extends Controller {
       where: {
         email
       },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       defaults: rest
     }).then(([response, created]) => {
       if (!created) {

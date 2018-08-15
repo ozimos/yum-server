@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { Dashboard } from '../dashboard/Dashboard';
+import { Dashboard } from '../dashboard/ConnectedDashboard';
 import { allOrders } from '../mocks/orderDataMock';
 
 describe('Dashboard Component', () => {

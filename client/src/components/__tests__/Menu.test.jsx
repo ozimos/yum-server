@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { Menu } from '../menu/Menu';
+import { Menu } from '../menu/ConnectedMenu';
 import { allMeals } from '../mocks/mealDataMock';
 
 describe('Menu Component', () => {
