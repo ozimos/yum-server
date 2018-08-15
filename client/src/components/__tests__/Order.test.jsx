@@ -1,6 +1,6 @@
 /* global React:false, shallow:false toJson:false */
 
-import { Order } from '../orders/Order';
+import { Order } from '../orders/ConnectedOrder';
 import { allOrders } from '../mocks/orderDataMock';
 import { allMeals } from '../mocks/mealDataMock';
 

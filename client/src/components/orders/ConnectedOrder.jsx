@@ -21,7 +21,7 @@ import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
-import ConnectedNav from '../nav/Nav';
+import ConnectedNav from '../nav/ConnectedNav';
 import '../../../public/styles/bookameal.scss';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';

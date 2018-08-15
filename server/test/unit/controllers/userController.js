@@ -19,6 +19,7 @@ describe('User Controllers', () => {
     where: {
       email: req.body.email
     },
+    attributes: { exclude: ['createdAt', 'updatedAt'] }
   };
   beforeEach('Stub User model', () => {
     User = td.object();
@@ -47,19 +48,23 @@ describe('User Controllers', () => {
       };
 
       td.when(User.findOne(input)).thenResolve(response);
-      td.when(bcrypt.compareSync(req.body.password, response.password)).thenResolve(false);
+      td.when(bcrypt.compareSync(req.body.password, response.password))
+        .thenResolve(false);
       return userController.login(req)
         .then(response2 => expect(response2.message).to.eql(expectedResponse));
     });
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
 
-      td.when(User.findOne(input)).thenReject(error);
-      return userController.login(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+        td.when(User.findOne(input)).thenReject(error);
+        return userController.login(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 
   describe('signUp(req)', () => {
@@ -70,20 +75,24 @@ describe('User Controllers', () => {
       const dummyUser = {
         email: req.body.email,
       };
-      td.when(User.findOrCreate(td.matchers.anything())).thenResolve([dummyUser, false]);
+      td.when(User.findOrCreate(td.matchers.anything()))
+        .thenResolve([dummyUser, false]);
       return userController.signUp(req)
         .then(response => expect(response.message).to.eql(expectedResponse));
     });
 
-    it('should return an error message if error occurs when accessing database', () => {
-      const error = {
-        message: 'database error'
-      };
+    it(
+      'should return an error message if error occurs when accessing database',
+      () => {
+        const error = {
+          message: 'database error'
+        };
 
-      td.when(User.findOrCreate(td.matchers.anything())).thenReject(error);
-      return userController.signUp(req)
-        .catch(response => expect(response.message).to.equal(error.message));
-    });
+        td.when(User.findOrCreate(td.matchers.anything())).thenReject(error);
+        return userController.signUp(req)
+          .catch(response => expect(response.message).to.equal(error.message));
+      }
+    );
   });
 
   describe('sendResponseWithToken(data)', () => {

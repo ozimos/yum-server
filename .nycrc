@@ -6,6 +6,9 @@
   "include": [
     "server/**/*.js"
   ],
+  "exclude": [
+    "server/test/**/*.js"
+  ],
   "require": [
     "esm"
   ],

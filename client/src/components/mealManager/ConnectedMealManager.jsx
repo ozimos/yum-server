@@ -7,13 +7,13 @@ import SearchInput, { createFilter } from 'react-search-input';
 import { push } from 'react-router-redux';
 import Formsy from 'formsy-react';
 import MyFormsyInput from '../helpers/MyInput';
-import MealOptionsCard from '../mealCard/MealOptionsCard';
+import ConnectedMealOptionsCard from '../mealCard/ConnectedMealOptionsCard';
 import MyFormsyTextArea from '../helpers/MyTextArea';
 import ProgressLoader from '../helpers/ProgressLoader';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import ConnectedGreeting from '../greeting/Greeting';
+import Greeting from '../greeting/Greeting';
 import { mealActions } from '../../redux/actions';
-import ConnectedNav from '../nav/Nav';
+import ConnectedNav from '../nav/ConnectedNav';
 import imageUpload from '../../services/imageUpload';
 import '../../../public/styles/search-input.css';
 import '../../../public/styles/bookameal.scss';
@@ -85,7 +85,7 @@ export class MealManager extends React.Component {
           <ConnectedNav />
         </header>
         <main>
-          <ConnectedGreeting isCaterer={isCaterer} firstName={firstName} />
+          <Greeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title-element flexbox">
             <h5 className="shrink">
               Your Meals
@@ -105,7 +105,7 @@ export class MealManager extends React.Component {
 
           <MealCardContainer
             meals={filteredMeals}
-            MealCard={MealOptionsCard}
+            MealCard={ConnectedMealOptionsCard}
             addClass="scroll2"
             connecting={this.props.connecting}
           />

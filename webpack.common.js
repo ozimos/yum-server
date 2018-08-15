@@ -46,7 +46,8 @@ export default {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         CLOUDINARY_URL: JSON.stringify(process.env.CLOUDINARY_URL),
-        CLOUDINARY_UPLOAD_PRESET: JSON.stringify(process.env.CLOUDINARY_UPLOAD_PRESET),
+        CLOUDINARY_UPLOAD_PRESET:
+        JSON.stringify(process.env.CLOUDINARY_UPLOAD_PRESET),
         CLOUDINARY_API_KEY: JSON.stringify(process.env.CLOUDINARY_API_KEY),
       },
     }),
@@ -66,7 +67,9 @@ export default {
         },
         {
           module: 'materialize',
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js',
+          entry:
+          `https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/
+          js/materialize.min.js`,
         }
       ],
     }),

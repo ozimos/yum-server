@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../../public/styles/nav.scss';
 
-const Nav = ({ user }) =>
+const Nav = ({ user, authenticated }) =>
   (
     <div className="navbar-fixed">
       <nav className="flexbox">
@@ -42,17 +42,26 @@ const Nav = ({ user }) =>
           >
           Meal Booking
           </NavLink>}
+          {authenticated &&
           <Link to="/login">
           Log Out
-          </Link>
+          </Link>}
+          {!authenticated &&
+          <Link to="/login">
+          Log In
+          </Link>}
         </div>
       </nav>
     </div>
   );
+Nav.defaultProps = {
+  user: { isCaterer: false }
+};
 Nav.propTypes = {
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
-  }).isRequired,
+  }),
+  authenticated: PropTypes.bool.isRequired,
 };
 const mapStateToProps = state => ({
   user: state.loginReducer.user.data,
