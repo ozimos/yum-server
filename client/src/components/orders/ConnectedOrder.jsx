@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 
@@ -15,8 +14,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MealDisplayCard from '../mealCard/MealDisplayCard';
 import MealRow from '../orderCart/MealRow';
-import CartContainer from '../orderCart/CartContainer';
-import OrderItem from '../orderCart/OrderItem';
+import ConnectedCartContainer from '../orderCart/ConnectedCartContainer';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
 import Greeting from '../greeting/Greeting';
@@ -35,7 +33,8 @@ class Order extends React.Component {
       searchTerm: '',
       currentOrder: [],
       currentOrderId: '',
-      showModal: false,
+      showOrderModal: false,
+      currentPage: 0
     };
     this.openCartModal = this.openCartModal.bind(this);
     this.closeCartModal = this.closeCartModal.bind(this);
@@ -46,13 +45,20 @@ class Order extends React.Component {
     this.notify = this.notify.bind(this);
   }
   componentDidMount() {
+    const { offset = 0, limit = 5 } = this.props.pagination;
     this.props.dispatch(menuActions.getMenu());
-    this.props.dispatch(orderActions.getUserOrdersByDate());
+    this.props.dispatch(orderActions.getOrdersWithMealLinks({ limit, offset }));
+  }
+  onFetchData = (state) => {
+    const { page, pageSize } = state;
+    const offset = pageSize * page;
+    this.props.dispatch(orderActions
+      .getOrdersWithMealLinks({ limit: pageSize, offset }));
   }
   openCartModal() {
-    return this.setState({ showModal: true });
+    return this.setState({ showOrderModal: true });
   }
-  closeCartModal() { return this.setState({ showModal: false }); }
+  closeCartModal() { return this.setState({ showOrderModal: false }); }
   notify = message => toast(message, { className: 'toaster' });
   addMealToCart(meal) {
     if (this.state.currentOrderId) {
@@ -109,8 +115,8 @@ class Order extends React.Component {
     const isTodayOrder = this.props.orders.length !== 0;
     let filteredMeals;
     if (isMenuSet) {
-      filteredMeals = this.props.menu
-        .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+      filteredMeals = this.props.menu.length ? this.props.menu
+        .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     }
     const { isCaterer, firstName } = this.props.user;
     return (
@@ -177,7 +183,7 @@ class Order extends React.Component {
                 <AccordionItemTitle>
                   <div className="title-element flexbox">
                     <h4 className="long_string">
-                      Your Orders for Today
+                      Your Order History
                     </h4>
                     <div
                       className="accordion__arrow u-position-relative"
@@ -193,8 +199,11 @@ class Order extends React.Component {
                   </p>
                   { isTodayOrder ? <OrderContainer
                     orders={this.props.orders}
-                    OrderItem={OrderItem}
+                    loading={this.props.orderConnecting}
+                    pagination={this.props.pagination}
                     addOrderToCart={this.addOrderToCart}
+                    onFetchData={this.onFetchData}
+                    defaultPage={this.state.currentPage}
                   /> :
                   <div>
                   You have not placed an order today
@@ -205,14 +214,14 @@ class Order extends React.Component {
             </Accordion>
           </main>
           <ReactModal
-            isOpen={this.state.showModal}
+            isOpen={this.state.showOrderModal}
             contentLabel="Input Modal"
             className="modal-content"
             onRequestClose={this.closeCartModal}
             shouldCloseOnOverlayClick
           >
             <aside className="col s12" >
-              {isMealSelected ? <CartContainer
+              {isMealSelected ? <ConnectedCartContainer
                 order={this.state.currentOrder}
                 orderId={this.state.currentOrderId}
                 MealRow={MealRow}
@@ -239,12 +248,24 @@ class Order extends React.Component {
 }
 Order.defaultProps = {
   menu: [],
-  orders: []
+  orders: [],
+  orderConnecting: false,
+  pagination: {
+    pages: 1,
+    limit: 5,
+    offset: 0
+  },
 };
 Order.propTypes = {
   dispatch: PropTypes.func.isRequired,
   orders: PropTypes.arrayOf(PropTypes.object),
   menu: PropTypes.arrayOf(PropTypes.object),
+  pagination: PropTypes.shape({
+    pages: PropTypes.number,
+    limit: PropTypes.number,
+    offset: PropTypes.number
+  }),
+  orderConnecting: PropTypes.bool,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string,
@@ -253,11 +274,13 @@ Order.propTypes = {
 };
 const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
-  connecting: state.orderReducer.connecting,
-  menu: state.menuReducer.menu.Meals,
+  pagination: state.orderReducer.pagination,
+  orderConnecting: state.orderReducer.connecting,
+  menuConnecting: state.menuReducer.connecting,
+  menu: state.menuReducer.menu,
   orders: state.orderReducer.orders,
   user: state.loginReducer.user.data
 });
 
 export { Order };
-export default connect(mapStateToProps)(hot(module)(Order));
+export default connect(mapStateToProps)(Order);

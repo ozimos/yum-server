@@ -9,16 +9,19 @@ export default (sequelize, DataTypes) => {
     },
     {
       scopes: {
-        includeMealsUsers() {
+        forNonCaterers() {
           return {
             include: [{
               association: 'Meals',
-              required: false,
+              required: true,
               paranoid: false,
-              attributes: ['id', 'userId', 'title', 'description', 'price'],
+              attributes: ['id', 'userId', 'title', 'description', 'price',
+                [sequelize
+                  .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+                'subTotal']],
               through: {
                 attributes: ['quantity']
-              }
+              },
             },
             {
               association: 'User',
@@ -31,9 +34,12 @@ export default (sequelize, DataTypes) => {
             include: [{
               association: 'Meals',
               where: { userId },
-              required: false,
+              required: true,
               paranoid: false,
-              attributes: ['id', 'userId', 'title', 'description', 'price'],
+              attributes: ['id', 'userId', 'title', 'description', 'price',
+                [sequelize
+                  .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+                'subTotal']],
               through: {
                 attributes: ['quantity']
               }

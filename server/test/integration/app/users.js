@@ -2,8 +2,6 @@
 import {
   expect,
   request,
-  token,
-  tokenUser,
   defaultUser,
   rootURL
 } from '../../../testHelpers/appHelper';
@@ -12,7 +10,6 @@ import app from '../../../src/app';
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;
   const logInUrl = `${rootURL}/auth/login`;
-  const checkUserUrl = `${rootURL}/auth/check`;
   const defaultPassword = 'test';
 
   // SignUp A User
@@ -37,23 +34,12 @@ describe('Routes Users', () => {
       email: defaultUser.email,
       password: defaultPassword,
     };
-    it('should login new user', () => request(app).post(logInUrl).send(credentials).then((res) => {
-      expect(res.body.data.email).to.equal(defaultUser.email);
-      expect(res.body.token).to.be.a('string');
-    }));
-  });
-  describe('GET /auth/check', () => {
-    it('returns false if not caterer', () => {
-      request(app)
-        .get(checkUserUrl).set('authorization', `JWT ${tokenUser}`)
-        .then(res =>
-          expect(res.body.data.isCaterer).to.be.false);
-    });
-    it('returns true if caterer', () => {
-      request(app)
-        .get(checkUserUrl).set('authorization', `JWT ${token}`)
-        .then(res =>
-          expect(res.body.data.isCaterer).to.be.true);
-    });
+    it(
+      'should login new user',
+      () => request(app).post(logInUrl).send(credentials).then((res) => {
+        expect(res.body.data.email).to.equal(defaultUser.email);
+        expect(res.body.token).to.be.a('string');
+      })
+    );
   });
 });

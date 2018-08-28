@@ -49,27 +49,33 @@ context('Validation with Joi schemas', () => {
       const result = orderSchemas.validate(modified);
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
-    it('does not throw error when all required fields are in request body', () => {
-      const result = orderSchemas.validate(order);
-      assert.equal(result.error, null, `Joi output: ${result.error}`);
-    });
-    it('converts strings to number data types in request body for number fields', () => {
-      const modified = {
-        meals: [{
-          id: '20a0dcc4-0a78-43f6-881b-884dd6f32861',
-          quantity: '1'
-        },
-        {
-          id: '20a0dcc4-0a78-43f6-881b-884dd6f32861',
-          quantity: 2
-        }
-        ]
-      };
-      // Make quantity a string
-      const result = orderSchemas.validate(modified);
-      assert.equal(result.error, null, `Joi output: ${result.error}`);
-      assert.deepEqual(result.value, order, `Joi output: ${result.error}`);
-    });
+    it(
+      'does not throw error when all required fields are in request body',
+      () => {
+        const result = orderSchemas.validate(order);
+        assert.equal(result.error, null, `Joi output: ${result.error}`);
+      }
+    );
+    it(
+      'converts strings to number data types in request body for number fields',
+      () => {
+        const modified = {
+          meals: [{
+            id: '20a0dcc4-0a78-43f6-881b-884dd6f32861',
+            quantity: '1'
+          },
+          {
+            id: '20a0dcc4-0a78-43f6-881b-884dd6f32861',
+            quantity: 2
+          }
+          ]
+        };
+        // Make quantity a string
+        const result = orderSchemas.validate(modified);
+        assert.equal(result.error, null, `Joi output: ${result.error}`);
+        assert.deepEqual(result.value, order, `Joi output: ${result.error}`);
+      }
+    );
   });
 
-});
+})

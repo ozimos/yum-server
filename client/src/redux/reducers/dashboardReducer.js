@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
       };
     case dashboardTypes.GET_ORDER_DASHBOARD_SUCCESS:
       return {
+        ...state,
         orders: action.orders,
       };
     case dashboardTypes.ORDER_DASHBOARD_FAILURE:

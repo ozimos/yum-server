@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
     this.searchUpdated = this.searchUpdated.bind(this);
   }
   componentDidMount() {
-    this.props.dispatch(dashboardActions.getOrdersByDate());
+    this.props.dispatch(dashboardActions.getOrdersWithMealLinksByDate());
   }
   searchUpdated(term) {
     this.setState({ searchTerm: term });
@@ -172,10 +172,12 @@ class Dashboard extends React.Component {
     );
   }
 }
-
+Dashboard.defaultProps = {
+  orders: []
+};
 Dashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  orders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  orders: PropTypes.arrayOf(PropTypes.object),
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string

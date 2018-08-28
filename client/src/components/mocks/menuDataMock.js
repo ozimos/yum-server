@@ -1,5 +1,5 @@
 import { allMeals } from './mealDataMock';
 
 export default {
-  data: { Meals: allMeals.data }
+  data: { rows: [{ Meals: allMeals.data.rows }] }
 };

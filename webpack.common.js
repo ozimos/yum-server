@@ -67,9 +67,9 @@ export default {
         },
         {
           module: 'materialize',
-          entry:
-          `https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/
-          js/materialize.min.js`,
+          // eslint-disable-next-line
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js',
+          global: 'M',
         }
       ],
     }),
@@ -78,5 +78,10 @@ export default {
       from: 'client/public/images',
       to: 'images'
     }]),
+    new webpack.ProvidePlugin({
+      M: 'materialize',
+      Materialize: 'materialize',
+      'window.M': 'materialize',
+    })
   ],
 };

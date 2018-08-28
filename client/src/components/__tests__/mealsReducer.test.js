@@ -6,7 +6,12 @@ describe('mealsReducer', () => {
   const initialState = {
     connecting: false,
     mealError: null,
-    meals: []
+    meals: [],
+    pagination: {
+      limit: 10,
+      offset: 0,
+      count: 1,
+      pages: 1 }
   };
   it('should return the initial state', () => {
     expect(mealsReducer(undefined, {})).toEqual(initialState);
@@ -19,16 +24,18 @@ describe('mealsReducer', () => {
       meals: []
     };
     const action = { type: mealTypes.MEALS_REQUEST };
-    expect(mealsReducer(undefined, action)).toEqual(newState);
+    expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle ALL_MEALS_SUCCESS', () => {
     const newState = {
-      meals: allMeals.data
+      meals: allMeals.data,
+      pagination: {}
     };
-    const action = { type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data };
+    const action = {
+      type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data, pagination: {} };
 
-    expect(mealsReducer(undefined, action)).toEqual(newState);
+    expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle MEALS_FAILURE', () => {
@@ -37,9 +44,10 @@ describe('mealsReducer', () => {
       mealError: { message: 'error' },
       meals: []
     };
-    const action = { type: mealTypes.MEALS_FAILURE, error: { message: 'error' } };
+    const action = { type: mealTypes.MEALS_FAILURE,
+      error: { message: 'error' } };
 
-    expect(mealsReducer(undefined, action)).toEqual(newState);
+    expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle CREATE_MEAL_SUCCESS', () => {
@@ -47,7 +55,7 @@ describe('mealsReducer', () => {
       meals: [meal.data]
     };
     const action = { type: mealTypes.CREATE_MEAL_SUCCESS, meal: meal.data };
-    expect(mealsReducer(undefined, action)).toEqual(newState);
+    expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
   it('should handle UPDATE_MEAL_SUCCESS', () => {
     const beforeState = {
@@ -58,7 +66,7 @@ describe('mealsReducer', () => {
       meals: [meal.data]
     };
     const action = { type: mealTypes.UPDATE_MEAL_SUCCESS, meal: meal.data };
-    expect(mealsReducer(beforeState, action)).toEqual(newState);
+    expect(mealsReducer(beforeState, action)).toMatchObject(newState);
   });
   it('should handle DELETE_MEAL_SUCCESS', () => {
     const beforeState = {

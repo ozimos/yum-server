@@ -36,12 +36,14 @@ const OrderItem = ({ id, Meals, addOrderToCart, position, updatedAt }) => {
     </div>
   );
 };
-
+OrderItem.defaultProps = {
+  Meals: []
+};
 OrderItem.propTypes = {
   id: PropTypes.string.isRequired,
   updatedAt: PropTypes.string.isRequired,
   position: PropTypes.number.isRequired,
-  Meals: PropTypes.arrayOf(PropTypes.object).isRequired,
+  Meals: PropTypes.arrayOf(PropTypes.object),
   addOrderToCart: PropTypes.func.isRequired
 };
 export default OrderItem;

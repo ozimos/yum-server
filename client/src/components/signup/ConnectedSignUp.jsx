@@ -46,6 +46,7 @@ class SignUp extends React.Component {
     }
   }
   handleSubmit(user) {
+    this.setState({ prevSignupError: {} });
     this.props.dispatch(userActions.logout(user));
     this.props.dispatch(userActions.signUp(user));
   }
@@ -172,15 +173,14 @@ class SignUp extends React.Component {
                     maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
-                <div>
-                  <label htmlFor="isCaterer">
+                
+                <label htmlFor="isCaterer">
                     <MyCheckBox
                       name="isCaterer"
                       id="isCaterer"
                     />
                     <span>Caterer</span>
                   </label>
-                </div>
 
                 <button
                   className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}

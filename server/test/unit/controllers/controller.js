@@ -14,6 +14,7 @@ describe('Controllers', () => {
   });
   afterEach('Remove Stubbing', () => td.reset());
   describe('getAllRecords()', () => {
+    const query = { limit: 8, offset: 0 };
     it('should return a list of rows if data is returned from database', () => {
       const expectedResponse = [
         {
@@ -30,22 +31,15 @@ describe('Controllers', () => {
         }
       ];
       const scope = 'string';
-      const req = {};
+      const req = { query };
       td.when(Table.scope(scope)).thenReturn(Table);
-      td.when(Table.findAll({})).thenResolve(expectedResponse);
+      td.when(Table.findAndCountAll(td.matchers.anything()))
+        .thenResolve({ count: 1, rows: expectedResponse });
 
       return controller.getAllRecords(req, scope)
-        .then(response => expect(response.data).to.eql(expectedResponse));
+        .then(response => expect(response.data.rows).to.eql(expectedResponse));
     });
-    it('should return an error message if no data in database', () => {
-      const expectedResponse = 'no records available';
-      const scope = 'string';
-      const req = {};
-      td.when(Table.scope(scope)).thenReturn(Table);
-      td.when(Table.findAll({})).thenResolve([]);
-      return controller.getAllRecords(req, scope)
-        .then(response => expect(response.message).to.equal(expectedResponse));
-    });
+
     it(
       'should return an error message if error occurs when accessing database',
       () => {
@@ -53,9 +47,10 @@ describe('Controllers', () => {
           message: 'database error'
         };
         const scope = 'string';
-        const req = {};
+        const req = { query };
         td.when(Table.scope(scope)).thenReturn(Table);
-        td.when(Table.findAll({})).thenReject(error);
+        td.when(Table.findAndCountAll(td.matchers.anything()))
+          .thenReject(error);
         return controller.getAllRecords(req, scope)
           .catch(response => expect(response.message).to.equal(error.message));
       }
@@ -198,7 +193,8 @@ describe('Controllers', () => {
       const result = 1;
       td.when(Table.destroy({
         where: {
-          id: req.params.id
+          id: req.params.id,
+          deletedAt: new Date('2100')
         },
       })).thenResolve(result);
       return controller.deleteRecord(req)
@@ -213,7 +209,8 @@ describe('Controllers', () => {
         };
         td.when(Table.destroy({
           where: {
-            id: req.params.id
+            id: req.params.id,
+            deletedAt: new Date('2100')
           },
         })).thenReject(error);
         return controller.deleteRecord(req)
