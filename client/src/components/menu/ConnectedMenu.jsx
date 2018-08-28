@@ -1,4 +1,3 @@
-/* global M:false */
 import React from 'react';
 import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -32,7 +31,6 @@ class Menu extends React.Component {
       showMenuModal: false,
       currentMenu: [],
       searchTerm: '',
-      menuDate: ''
     };
     this.addToMenu = this.addToMenu.bind(this);
     this.postMenu = this.postMenu.bind(this);
@@ -40,16 +38,6 @@ class Menu extends React.Component {
   componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
     this.props.dispatch(menuActions.getMenu());
-    document.addEventListener('DOMContentLoaded', () => {
-      const elems = document.querySelectorAll('.datepicker');
-      M.Datepicker.init(elems);
-    });
-  }
-  componentWillUnmount() {
-    document.removeEventListener('DOMContentLoaded', () => {
-      const elems = document.querySelectorAll('.datepicker');
-      M.Datepicker.init(elems);
-    });
   }
 
 handleMealCheck = (event, meal) => {
@@ -127,8 +115,8 @@ addToMenu(meal) {
   render() {
     const KEYS_TO_FILTERS = ['id', 'title', 'description', 'price'];
 
-    const filteredMeals = this.props.meals
-      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+    const filteredMeals = this.props.meals.length ? this.props.meals
+      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     const { isCaterer, firstName } = this.props.user;
     const isMenuSet = this.props.menu.length !== 0;
     const mealPages = this.props.mealsPagination.pages;
@@ -214,13 +202,6 @@ addToMenu(meal) {
               </AccordionItemTitle>
               <AccordionItemBody>
                 <div className="title-element flexbox">
-                  <input
-                    name="menuDate"
-                    className="datepicker"
-                    type="date"
-                    onChange={(e) => { this.setState({ menuDate: e.target.value }); }}
-                  />
-
                   <button
                     className="title-button btn"
                     onClick={() =>
@@ -297,23 +278,34 @@ addToMenu(meal) {
 }
 Menu.defaultProps = {
   menu: [],
-  menuError: null
+  meals: [],
+  menuError: null,
+  menuPagination: {
+    pages: 1,
+    count: 1,
+    limit: 8
+  },
+  mealsPagination: {
+    pages: 1,
+    count: 1,
+    limit: 8
+  }
 };
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  meals: PropTypes.arrayOf(PropTypes.object).isRequired,
+  meals: PropTypes.arrayOf(PropTypes.object),
   menu: PropTypes.arrayOf(PropTypes.object),
   menuError: PropTypes.string,
   menuPagination: PropTypes.shape({
     pages: PropTypes.number,
     count: PropTypes.number,
     limit: PropTypes.number,
-  }).isRequired,
+  }),
   mealsPagination: PropTypes.shape({
     pages: PropTypes.number,
     count: PropTypes.number,
     limit: PropTypes.number,
-  }).isRequired,
+  }),
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string

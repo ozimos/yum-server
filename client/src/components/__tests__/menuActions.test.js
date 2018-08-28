@@ -18,25 +18,27 @@ describe('meal async actions', () => {
     moxios.uninstall();
   });
 
-  it('dispatches MENU_REQUEST and GET_MENU_SUCCESS on successfully fetching menu', () => {
+  it('dispatches MENU_REQUEST and GET_MENU_SUCCESS' +
+  ' on successfully fetching menu', () => {
 
-    moxios.stubRequest('/api/v1/menu', {
+    moxios.stubRequest('/api/v1/menu?limit=8&offset=0', {
       status: 200,
       response: menu
     });
     const expectedActions = [
       { type: menuTypes.MENU_REQUEST },
-      { type: menuTypes.GET_MENU_SUCCESS, menu: menu.data },
+      { type: menuTypes.GET_MENU_SUCCESS, menu: menu.data.rows[0].Meals },
     ];
     return store.dispatch(menuActions.getMenu())
       .then(() => {
         const dispatchedActions = store.getActions();
-        expect(dispatchedActions).toEqual(expectedActions);
+        expect(dispatchedActions).toMatchObject(expectedActions);
       });
   });
-  it('dispatches MENU_REQUEST and MENU_FAILURE on failing creating menu', () => {
+  it('dispatches MENU_REQUEST and MENU_FAILURE' +
+  ' on failing to fetch menu', () => {
 
-    moxios.stubRequest('/api/v1/menu', {
+    moxios.stubRequest('/api/v1/menu?limit=8&offset=0', {
       status: 400,
       response: { message: 'problem' }
     });
@@ -50,7 +52,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MENU_REQUEST and POST_MENU_SUCCESS on successfully creating menu', () => {
+  it('dispatches MENU_REQUEST and POST_MENU_SUCCESS' +
+  ' on successfully creating menu', () => {
 
     moxios.stubRequest('/api/v1/menu', {
       status: 200,
@@ -58,15 +61,16 @@ describe('meal async actions', () => {
     });
     const expectedActions = [
       { type: menuTypes.MENU_REQUEST },
-      { type: menuTypes.POST_MENU_SUCCESS, menu: menu.data },
+      { type: menuTypes.POST_MENU_SUCCESS, menu: menu.data.rows[0].Meals },
     ];
     return store.dispatch(menuActions.postMenu())
       .then(() => {
         const dispatchedActions = store.getActions();
-        expect(dispatchedActions).toEqual(expectedActions);
+        expect(dispatchedActions).toMatchObject(expectedActions);
       });
   });
-  it('dispatches MENU_REQUEST and MENU_FAILURE on failing creating menu', () => {
+  it('dispatches MENU_REQUEST and MENU_FAILURE' +
+  ' on failing to create menu', () => {
 
     moxios.stubRequest('/api/v1/menu', {
       status: 400,

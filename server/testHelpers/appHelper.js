@@ -64,7 +64,7 @@ export const templateTest = function generateTest(
   });
 
   describe(title, () => {
-    it('return 200 for successful', async () => {
+    it('return 200 or correct success code', async () => {
       try {
         const res = await boundRequest()
           .set('authorization', `JWT ${token}`)

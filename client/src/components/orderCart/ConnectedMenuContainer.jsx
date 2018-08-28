@@ -9,12 +9,6 @@ import '../../../public/styles/cart_layout.scss';
 
 
 class MenuContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuDate: new Date()
-    };
-  }
  placeOrder = async () => {
 
    if (this.props.postMenu) {
@@ -42,20 +36,6 @@ class MenuContainer extends React.Component {
          <button className="btn title-button" onClick={rest.closeMenuModal}>
                 &#10006;
          </button>
-       </div>
-       <div className="flexbox">
-         <label htmlFor="menu-date">
-           <input
-             className="datepicker"
-             style={{ width: '20%' }}
-             name="menuDate"
-             id="menu-date"
-             type="date"
-             onChange={(e) => { this.setState({ menuDate: e.target.value }); }}
-           />
-
-         Select the Date for the menu
-         </label>
        </div>
 
        <div className="scroll">

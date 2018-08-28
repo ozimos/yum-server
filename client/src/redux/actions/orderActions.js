@@ -7,7 +7,7 @@ import paginationExtract from '../../utils/paginationExtract';
 const baseUrl = '/api/v1/orders';
 
 
-const getOrdersWithMealLinks = ({ limit = 8, offset = 0 } = {}) =>
+const getOrdersWithMealLinks = ({ limit = 5, offset = 0 } = {}) =>
   (dispatch) => {
     dispatch({ type: orderTypes.ORDER_REQUEST });
 
@@ -28,7 +28,7 @@ const getOrdersWithMealLinks = ({ limit = 8, offset = 0 } = {}) =>
   };
 
 const getOrdersWithMealLinksByDate
-= (date, { limit = 8, offset = 0 } = {}) => (dispatch) => {
+= (date, { limit = 5, offset = 0 } = {}) => (dispatch) => {
   const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
     : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;
   dispatch({ type: orderTypes.ORDER_REQUEST });
@@ -50,7 +50,7 @@ const getOrdersWithMealLinksByDate
     );
 };
 const getMealsInOrder
-= (orderId, { limit = 8, offset = 0 } = {}) => (dispatch) => {
+= (orderId, { limit = 4, offset = 0 } = {}) => (dispatch) => {
   const url = `${baseUrl}/${orderId}/meals?limit=${limit}&offset=${offset}`;
   dispatch({ type: orderTypes.ORDER_MEALS_REQUEST,
     order: { id: orderId, connecting: true, mealError: null }

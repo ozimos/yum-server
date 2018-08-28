@@ -61,9 +61,14 @@ export default {
     new HtmlWebpackExternalsPlugin({
       externals: [
         {
+          module: 'jquery',
+          entry: 'https://unpkg.com/jquery@3.3.1/dist/jquery.min.js',
+          global: 'jQuery',
+        },
+        {
           module: 'materialize',
           // eslint-disable-next-line
-          entry: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js',
+          entry: 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js',
           global: 'M',
         }
       ],

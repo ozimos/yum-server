@@ -173,18 +173,14 @@ class SignUp extends React.Component {
                     maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
-                <MyCheckBox
-                  name="isCaterer"
-                />
-                <div>
-                  <label htmlFor="isCaterer">
+                
+                <label htmlFor="isCaterer">
                     <MyCheckBox
                       name="isCaterer"
                       id="isCaterer"
                     />
                     <span>Caterer</span>
                   </label>
-                </div>
 
                 <button
                   className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}

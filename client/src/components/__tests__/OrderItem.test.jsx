@@ -11,7 +11,10 @@ describe('OrderItem Component', () => {
       Meals={order.data.Meals}
       addOrder={jest.fn()}
     />)
-      .exists(<div className="row" style={{ borderBottom: '1px solid' }} />)).toBe(true);
+      .exists(<div
+        className="row"
+        style={{ borderBottom: '1px solid' }}
+      />)).toBe(true);
   });
   it('renders correctly', () => {
     const wrapper = shallow(<OrderItem

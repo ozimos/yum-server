@@ -82,8 +82,8 @@ export class MealManager extends React.Component {
   }
   render() {
     const KEYS_TO_FILTERS = ['id', 'title', 'description', 'price'];
-    const filteredMeals = this.props.meals
-      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+    const filteredMeals = this.props.meals.length ? this.props.meals
+      .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     const { isCaterer, firstName } = this.props.user;
     const { pages } = this.props.pagination;
 
@@ -281,6 +281,12 @@ export class MealManager extends React.Component {
 MealManager.defaultProps = {
   authenticated: false,
   connecting: false,
+  meals: [],
+  pagination: {
+    pages: 1,
+    count: 1,
+    limit: 8
+  }
 };
 MealManager.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -290,12 +296,12 @@ MealManager.propTypes = {
     pages: PropTypes.number,
     count: PropTypes.number,
     limit: PropTypes.number,
-  }).isRequired,
+  }),
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string
   }).isRequired,
-  meals: PropTypes.arrayOf(PropTypes.object).isRequired,
+  meals: PropTypes.arrayOf(PropTypes.object),
 };
 const mapStateToProps = state =>
   ({ authenticated: state.loginReducer.authenticated,

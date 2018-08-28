@@ -45,27 +45,15 @@ class Order extends React.Component {
     this.notify = this.notify.bind(this);
   }
   componentDidMount() {
+    const { offset = 0, limit = 5 } = this.props.pagination;
     this.props.dispatch(menuActions.getMenu());
-    this.props.dispatch(orderActions.getOrdersWithMealLinks());
+    this.props.dispatch(orderActions.getOrdersWithMealLinks({ limit, offset }));
   }
   onFetchData = (state) => {
     const { page, pageSize } = state;
-    console.log(page);
-    console.log(pageSize);
-    const offset = state.pageSize * state.page;
-    console.log(offset);
+    const offset = pageSize * page;
     this.props.dispatch(orderActions
       .getOrdersWithMealLinks({ limit: pageSize, offset }));
-  }
-  getNextPage = (page) => {
-    console.log(page);
-    const { limit } = this.props.pagination;
-    console.log(limit);
-    const offset = limit * page;
-    console.log(offset);
-    this.props.dispatch(orderActions
-      .getOrdersWithMealLinks({ limit, offset }));
-    this.setState({ currentPage: page - 1 });
   }
   openCartModal() {
     return this.setState({ showOrderModal: true });
@@ -127,8 +115,8 @@ class Order extends React.Component {
     const isTodayOrder = this.props.orders.length !== 0;
     let filteredMeals;
     if (isMenuSet) {
-      filteredMeals = this.props.menu
-        .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
+      filteredMeals = this.props.menu.length ? this.props.menu
+        .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     }
     const { isCaterer, firstName } = this.props.user;
     return (
@@ -214,7 +202,6 @@ class Order extends React.Component {
                     loading={this.props.orderConnecting}
                     pagination={this.props.pagination}
                     addOrderToCart={this.addOrderToCart}
-                    getNextPage={this.getNextPage}
                     onFetchData={this.onFetchData}
                     defaultPage={this.state.currentPage}
                   /> :
@@ -265,7 +252,7 @@ Order.defaultProps = {
   orderConnecting: false,
   pagination: {
     pages: 1,
-    limit: 10,
+    limit: 5,
     offset: 0
   },
 };

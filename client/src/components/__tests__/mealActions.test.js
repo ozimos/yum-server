@@ -22,25 +22,27 @@ describe('meal async actions', () => {
     moxios.uninstall();
   });
 
-  it('dispatches MEALS_REQUEST and ALL_MEALS_SUCCESS on successfully fetching meals', () => {
+  it('dispatches MEALS_REQUEST and ALL_MEALS_SUCCESS' +
+  ' on successfully fetching meals', () => {
 
-    moxios.stubRequest('/api/v1/meals', {
+    moxios.stubRequest('/api/v1/meals?limit=8&offset=0', {
       status: 200,
       response: allMeals
     });
     const expectedActions = [
       { type: mealTypes.MEALS_REQUEST },
-      { type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data },
+      { type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data.rows },
     ];
     return store.dispatch(mealActions.getAllMeals())
       .then(() => {
         const dispatchedActions = store.getActions();
-        expect(dispatchedActions).toEqual(expectedActions);
+        expect(dispatchedActions).toMatchObject(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing fetching meals', () => {
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
+  ' on failing fetching meals', () => {
 
-    moxios.stubRequest('/api/v1/meals', {
+    moxios.stubRequest('/api/v1/meals?limit=8&offset=0', {
       status: 400,
       response: { message: 'problem' }
     });
@@ -54,7 +56,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and CREATE_MEAL_SUCCESS on successfully creating a meal', () => {
+  it('dispatches MEALS_REQUEST and CREATE_MEAL_SUCCESS' +
+  'on successfully creating a meal', () => {
 
     moxios.stubRequest('/api/v1/meals', {
       status: 200,
@@ -70,7 +73,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing creating a meal', () => {
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
+  'on failing creating a meal', () => {
 
     moxios.stubRequest('/api/v1/meals', {
       status: 400,
@@ -86,7 +90,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and UPDATE_MEAL_SUCCESS on successfully updating a meal', () => {
+  it('dispatches MEALS_REQUEST and UPDATE_MEAL_SUCCESS' +
+  'on successfully updating a meal', () => {
     const mealId = 'abc';
     moxios.stubRequest(`/api/v1/meals/${mealId}`, {
       status: 200,
@@ -102,7 +107,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing updating a meal', () => {
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
+  'on failing updating a meal', () => {
     const mealId = 'abc';
 
     moxios.stubRequest(`/api/v1/meals/${mealId}`, {
@@ -119,7 +125,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and DELETE_MEAL_SUCCESS on successfully deleting a meal', () => {
+  it('dispatches MEALS_REQUEST and DELETE_MEAL_SUCCESS' +
+  'on successfully deleting a meal', () => {
     const mealId = 'abc';
     moxios.stubRequest(`/api/v1/meals/${mealId}`, {
       status: 200,
@@ -135,7 +142,8 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches MEALS_REQUEST and MEALS_FAILURE on failing deleting a meal', () => {
+  it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
+  'on failing deleting a meal', () => {
     const mealId = 'abc';
     moxios.stubRequest(`/api/v1/meals/${mealId}`, {
       status: 400,

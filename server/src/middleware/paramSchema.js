@@ -6,7 +6,7 @@ const paramSchema = Joi.object({
       'uuidv4'
     ]
   }),
-  date: Joi.date()
+  date: Joi.date(),
 });
 
 export default paramSchema;

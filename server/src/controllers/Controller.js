@@ -99,7 +99,7 @@ class Controller {
   getAllRecords(
     req, scope = 'defaultScope', options = {},
     { message = 'no records available', acceptCallback = () => true,
-      raw = false } = {}
+      raw = false, statusCode = 200 } = {}
   ) {
     let { offset = 0, limit = 8 } = req.query;
     limit = Number(limit);
@@ -112,13 +112,13 @@ class Controller {
         const { count, rows } = data;
         const pages = Math.ceil(count / limit);
         if (raw) return { limit, offset, pages, count, rows };
-        if ((rows && rows.length > 0) || acceptCallback(rows)) {
+        if ((rows && rows.length) || acceptCallback(rows)) {
           return Controller.defaultResponse({
             limit,
             offset,
             pages,
             count,
-            rows });
+            rows }, statusCode);
         }
         return Controller.errorResponse(message, 404);
       })

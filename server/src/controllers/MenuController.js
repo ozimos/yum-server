@@ -4,7 +4,7 @@ import Controller from './Controller';
 
 const today = new Date().setHours(0, 0, 0, 0, 0);
 export default class MenuController extends Controller {
-  getMenu(req, msg) {
+  getMenu(req, msg, statusCode = 200) {
     let scope;
     const date = (req.query && req.query.date) || today;
     const nextDate = addDays(date, 1);
@@ -19,7 +19,7 @@ export default class MenuController extends Controller {
     }
     const acceptCallback = rows =>
       (req.body && !req.body.meals[0]) ||
-     rows[0].Meals.length > 0;
+     (rows.length && rows[0].Meals.length);
     const message = msg || 'menu for the day has not been set';
     const { userId, isCaterer } = req.decoded;
     if (isCaterer) {
@@ -28,7 +28,10 @@ export default class MenuController extends Controller {
       scope = 'forNonCaterers';
     }
     return this
-      .getAllRecords(req, scope, options, { message, acceptCallback })
+      .getAllRecords(
+        req, scope, options,
+        { message, acceptCallback, statusCode }
+      )
       .catch(error => MenuController.errorResponse(error.message));
 
   }
@@ -56,7 +59,7 @@ export default class MenuController extends Controller {
       .then((req2) => {
         process.env.ORDER_START_HOUR = new Date().getHours();
         process.env.ORDER_START_MINS = new Date().getMinutes();
-        return this.getMenu(req2, 'Menu was not posted. Try again');
+        return this.getMenu(req2, 'Menu was not posted. Try again', 201);
       })
       .catch(err => MenuController.errorResponse(err.message));
   }

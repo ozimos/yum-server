@@ -3,6 +3,8 @@ import Validator from 'express-joi-validation';
 
 import OrderController from '../controllers/OrderController';
 import orderSchema from '../middleware/orderSchemas';
+import params from '../middleware/paramSchema';
+import query from '../middleware/querySchema';
 import Authenticate from '../middleware/Authenticate';
 import db from '../models';
 
@@ -13,11 +15,11 @@ const orderController = new OrderController(db.Order, db.Meal);
 orderRouter
   .route('/')
   .get(
-    Authenticate.isUser,
+    Authenticate.isUser, validator.query(query),
     OrderController.select(orderController, 'getOrdersWithMealLinks')
   )
   .post(
-    Authenticate.isUser,
+    Authenticate.isUser, validator.query(query),
     validator.body(orderSchema),
     OrderController.orderClose,
     OrderController.select(orderController, 'postOrder')
@@ -25,7 +27,7 @@ orderRouter
 orderRouter
   .route('/:id')
   .put(
-    Authenticate.isUser,
+    Authenticate.isUser, validator.params(params), validator.query(query),
     validator.body(orderSchema),
     OrderController.orderClose,
     OrderController.select(orderController, 'updateOrder')
@@ -33,13 +35,13 @@ orderRouter
 orderRouter
   .route('/:id/meals')
   .get(
-    Authenticate.isUser,
+    Authenticate.isUser, validator.params(params), validator.query(query),
     OrderController.select(orderController, 'getMealsInOrder')
   );
 orderRouter
   .route('/date/:date?')
   .get(
-    Authenticate.isUser,
+    Authenticate.isUser, validator.params(params), validator.query(query),
     OrderController.select(orderController, 'getOrdersWithMealLinksByDate')
   );
 

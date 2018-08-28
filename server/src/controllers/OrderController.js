@@ -58,7 +58,7 @@ export default class OrderController extends Controller {
     let scope;
     const { userId, isCaterer } = req.decoded;
     options.order = [['createdAt', 'DESC']];
-
+    if (!options.include) { options.include = [{}]; }
     if (isCaterer) {
       options.include[0].where = { userId };
     } else {
@@ -66,10 +66,13 @@ export default class OrderController extends Controller {
     }
     return this.getAllRecords(req, scope, options, { raw: true })
       .then(({ limit, offset, pages, count, rows }) => {
-        const newRows = rows.map((row) => {
+        const newRows = rows ? rows.map((row) => {
           row.dataValues.MealsURL = `/api/v1/orders/${row.id}/meals`;
           return row.dataValues;
-        });
+        }) : [];
+        if (!newRows.length) {
+          return OrderController.errorResponse('no records available', 404);
+        }
         return OrderController.defaultResponse({
           limit,
           offset,
@@ -107,6 +110,8 @@ export default class OrderController extends Controller {
    */
   getMealsInOrder(req, options = {}) {
     options.where = { id: req.params.id };
+    options.subQuery = false;
+    options.distinct = false;
     const { userId, isCaterer } = req.decoded;
     let message, scope;
     const acceptCallback = rows => rows[0].Meals.length > 0;

@@ -2,26 +2,39 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 
-import { connect } from 'react-redux';
-import { orderActions } from '../../redux/actions';
-
+import requestServices from '../../services/requestServices';
 
 class MealsTable extends Component {
 
-  componentDidMount() {
-    this.props.dispatch(orderActions.getMealsInOrder(this.props.id));
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      order: { Meals: [] },
+      pages: 1
+    };
   }
 
-  getNextPage = (page) => {
-    const { orders, id } = this.props;
-    const { pagination }
-     = orders.find(order => order.id === id);
-    const { limit } = pagination;
-    const offset = limit * page;
-    this.props.dispatch(orderActions
-      .getMealsInOrder({ limit, offset }));
+  onFetchData=(state) => {
+    this.setState({ loading: true });
+    const { page, pageSize } = state;
+    const { id } = this.props;
+    const offset = page * pageSize;
+    const baseUrl = '/api/v1/orders';
+    const url = `${baseUrl}/${id}/meals?limit=${pageSize}&offset=${offset}`;
+
+    requestServices(url)
+      .then((res) => {
+        this.setState({
+          pages: res.data.data.pages,
+          order: res.data.data.rows[0],
+          loading: false
+        });
+      });
   }
+
   render() {
+
     const columns = [
       {
         headerStyle: { height: '0' },
@@ -47,37 +60,34 @@ class MealsTable extends Component {
         width: 100
       }
     ];
-    const { orders, id } = this.props;
-    const { Meals, pagination = {}, connecting }
-     = orders.find(order => order.id === id);
+
+    const { Meals } = this.state.order;
+
 
     return (
       <ReactTable
+        ref={(refReactTable) => { this.refReactTable = refReactTable; }}
         data={Meals}
         columns={columns}
         minRows={0}
-        defaultPageSize={pagination.limit || 5}
+        defaultPageSize={4}
         pivotBy={['pivot']}
-        loading={connecting}
-        pages={pagination.pages || 1}
-        onPageChange={this.getNextPage}
+        loading={this.state.loading}
+        pages={this.state.pages}
+        onFetchData={this.onFetchData}
+        sortable={false}
+        manual
         collapseOnSortingChange={false}
+        collapseOnDataChange={false}
+        collapseOnPageChange={false}
         nextText=">>"
         previousText="<<"
       />
     );
   }
 }
-MealsTable.defaultProps = {
-  orders: [],
-};
+
 MealsTable.propTypes = {
   id: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  orders: PropTypes.arrayOf(PropTypes.object),
 };
-const mapStateToProps = state => ({
-  orders: state.orderReducer.orders,
-});
-export { MealsTable };
-export default connect(mapStateToProps)(MealsTable);
+export default MealsTable;

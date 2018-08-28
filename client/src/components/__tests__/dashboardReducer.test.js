@@ -2,15 +2,7 @@ import dashboardReducer from '../../redux/reducers/dashboardReducer';
 import { dashboardTypes } from '../../redux/types';
 import { allOrders } from '../mocks/orderDataMock';
 
-describe('post dashboardReducer', () => {
-  const initialState = {
-    connecting: false,
-    orderError: null,
-    orders: []
-  };
-  it('should return the initial state', () => {
-    expect(dashboardReducer(undefined, {})).toEqual(initialState);
-  });
+describe('dashboardReducer', () => {
 
   it('should handle ORDER_DASHBOARD_REQUEST', () => {
     const newState = {
@@ -26,9 +18,10 @@ describe('post dashboardReducer', () => {
     const newState = {
       orders: allOrders.data
     };
-    const action = { type: dashboardTypes.GET_ORDER_DASHBOARD_SUCCESS, orders: allOrders.data };
+    const action = { type: dashboardTypes.GET_ORDER_DASHBOARD_SUCCESS,
+      orders: allOrders.data };
 
-    expect(dashboardReducer(undefined, action)).toEqual(newState);
+    expect(dashboardReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle ORDER_DASHBOARD_FAILURE', () => {
@@ -37,7 +30,8 @@ describe('post dashboardReducer', () => {
       orderError: { message: 'error' },
       orders: []
     };
-    const action = { type: dashboardTypes.ORDER_DASHBOARD_FAILURE, error: { message: 'error' } };
+    const action = { type: dashboardTypes.ORDER_DASHBOARD_FAILURE,
+      error: { message: 'error' } };
 
     expect(dashboardReducer(undefined, action)).toEqual(newState);
   });

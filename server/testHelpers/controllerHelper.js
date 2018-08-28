@@ -22,4 +22,4 @@ export const defaultPassword = 'test';
 export const userController = new UserController(db.User);
 export const orderController = new OrderController(db.Order);
 export const mealController = new MealController(db.Meal);
-export const menuController = new MenuController(db.Menu, db.Meal);
+export const menuController = new MenuController(db.Menu);

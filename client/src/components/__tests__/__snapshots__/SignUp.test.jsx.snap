@@ -184,24 +184,22 @@ exports[`SignUp Component renders correctly 1`] = `
               }
             }
           />
-          <div>
-            <label
-              htmlFor="isCaterer"
-            >
-              <Formsy(CheckBox)
-                id="isCaterer"
-                innerRef={[Function]}
-                name="isCaterer"
-                required={false}
-                validationError=""
-                validationErrors={Object {}}
-                validations={null}
-              />
-              <span>
-                Caterer
-              </span>
-            </label>
-          </div>
+          <label
+            htmlFor="isCaterer"
+          >
+            <Formsy(CheckBox)
+              id="isCaterer"
+              innerRef={[Function]}
+              name="isCaterer"
+              required={false}
+              validationError=""
+              validationErrors={Object {}}
+              validations={null}
+            />
+            <span>
+              Caterer
+            </span>
+          </label>
           <button
             className="btn btn-disabled"
             disabled={true}

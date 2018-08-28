@@ -5,7 +5,7 @@ import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
 import differenceInMinutes from 'date-fns/difference_in_minutes';
 import 'react-table/react-table.css';
-import ConnectedMealsTable from '../mealCard/ConnectedMealsTable';
+import MealsTable from '../mealCard/MealsTable';
 
 const OrderContainer = ({ orders, ...props }) => {
   const hasEditMinutes = (updatedAt) => {
@@ -30,12 +30,10 @@ const OrderContainer = ({ orders, ...props }) => {
       Header: 'Order Id',
       accessor: 'id',
       width: 150,
-      filterable: true
     }, {
       Header: 'Date',
       accessor: 'date',
       width: 150,
-      filterable: true
     }, {
       Header: 'Time',
       accessor: 'time',
@@ -60,7 +58,7 @@ const OrderContainer = ({ orders, ...props }) => {
       ),
       accessor: 'id',
       Cell: columnProps =>
-        (<ConnectedMealsTable
+        (<MealsTable
           id={columnProps.value}
         />),
       width: 900,
@@ -89,10 +87,9 @@ const OrderContainer = ({ orders, ...props }) => {
         defaultPageSize={props.pagination.limit}
         loading={props.loading}
         pages={props.pagination.pages}
-        // page={Math.trunc(props.pagination.offset / props.pagination.limit)}
-        onPageChange={props.getNextPage}
-        page={props.defaultPage}
-        // manual
+        onFetchData={props.onFetchData}
+        sortable={false}
+        manual
       />
     </div>
   );
@@ -100,7 +97,7 @@ const OrderContainer = ({ orders, ...props }) => {
 OrderContainer.defaultProps = {
   pagination: {
     pages: 1,
-    limit: 10,
+    limit: 5,
     offset: 0
   },
   loading: false
@@ -108,7 +105,7 @@ OrderContainer.defaultProps = {
 OrderContainer.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrderToCart: PropTypes.func.isRequired,
-  getNextPage: PropTypes.func.isRequired,
+  onFetchData: PropTypes.func.isRequired,
   pagination: PropTypes.shape({
     pages: PropTypes.number,
     limit: PropTypes.number,

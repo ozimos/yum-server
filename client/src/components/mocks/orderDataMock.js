@@ -1,16 +1,27 @@
-import { allMeals } from './mealDataMock';
 import { userIncludes } from './userDataMock';
 
-const Meals = allMeals.data.map(meal =>
+const rows = [
+  { id: 'abc', price: 1200 }, { id: 'def', price: 2000 }
+];
+const Meals = rows.map(meal =>
   ({ ...meal, MealOrders: { quantity: 2 } }));
+const template = {
+  id: 'orderId',
+  userId: 'userId',
+  Meals,
+  User: userIncludes,
+};
 export const order = {
-  data: { id: 'orderId',
-    userId: 'userId',
-    Meals,
-    User: userIncludes,
-    mealList: ['abc', 'def'],
-    quantityList: [2, 2] }
+  data: {
+    pages: 1,
+    offset: 0,
+    rows: [template]
+  }
+};
+export const orderActionData = {
+  order: template
+
 };
 export const allOrders = {
-  data: [{ ...order.data, id: 'order1' }, { ...order.data, id: 'order2' }]
+  data: [{ ...template, id: 'order1' }, { ...template, id: 'order2' }]
 };

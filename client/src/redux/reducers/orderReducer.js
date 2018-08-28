@@ -24,12 +24,17 @@ export default (state = initialState, action) => {
     case orderTypes.ORDER_MEALS_REQUEST:
       return {
         ...state,
-        orders: state.orders.map((order) => {
-          if (order.id === action.order.id) {
-            return { ...order, ...action.order };
-          }
-          return order;
-        }),
+        orders: (() => {
+          let isNewOrder = true;
+          const newOrders = state.orders.map((order) => {
+            if (order.id === action.order.id) {
+              isNewOrder = false;
+              return { ...order, ...action.order };
+            }
+            return order;
+          });
+          return isNewOrder ? [...newOrders, action.order] : newOrders;
+        })(),
       };
     case orderTypes.GET_ORDER_MEAL_FAILURE:
       return {
@@ -44,7 +49,11 @@ export default (state = initialState, action) => {
       };
     case orderTypes.GET_ORDER_ALL_SUCCESS:
       return {
-        orders: action.orders,
+        orders: action.orders.map((order) => {
+          const oldOrder = state.orders
+            .find(currentOrder => currentOrder.id === order.id);
+          return oldOrder ? { ...oldOrder, ...order } : order;
+        }),
         pagination: action.pagination
       };
     case orderTypes.ORDER_FAILURE:
@@ -74,12 +83,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         connecting: false,
-        orders: state.orders.map((order) => {
-          if (order.id === action.order.id) {
-            return action.order;
-          }
-          return order;
-        }),
+        orders: (() => {
+          let isNewOrder = true;
+          const newOrders = state.orders.map((order) => {
+            if (order.id === action.order.id) {
+              isNewOrder = false;
+              return { ...order, ...action.order };
+            }
+            return order;
+          });
+          return isNewOrder ? [...newOrders, action.order] : newOrders;
+        })(),
       };
     default:
       return state;

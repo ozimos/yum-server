@@ -10,7 +10,12 @@ exports[`Nav Component renders correctly 1`] = `
     <h3
       className="shrink heading"
     >
-      Book A Meal
+      <Link
+        replace={false}
+        to="/"
+      >
+        Book A Meal
+      </Link>
     </h3>
     <div
       className="flexbox"

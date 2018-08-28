@@ -71,21 +71,9 @@ exports[`CartContainer Component renders correctly 1`] = `
           dispatch={[MockFunction]}
           id="order1"
           key="order1"
-          mealList={
-            Array [
-              "abc",
-              "def",
-            ]
-          }
           orderError=""
           orderId=""
           quantity=""
-          quantityList={
-            Array [
-              2,
-              2,
-            ]
-          }
           setQuantity={[Function]}
           userId="userId"
         />
@@ -120,21 +108,9 @@ exports[`CartContainer Component renders correctly 1`] = `
           dispatch={[MockFunction]}
           id="order2"
           key="order2"
-          mealList={
-            Array [
-              "abc",
-              "def",
-            ]
-          }
           orderError=""
           orderId=""
           quantity=""
-          quantityList={
-            Array [
-              2,
-              2,
-            ]
-          }
           setQuantity={[Function]}
           userId="userId"
         />

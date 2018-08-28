@@ -22,33 +22,37 @@ describe('order async actions', () => {
     moxios.uninstall();
   });
 
-  it('dispatches ORDER_DASHBOARD_REQUEST and GET_ORDER_DASHBOARD_SUCCESS on successfully fetching orders', () => {
+  it('dispatches ORDER_DASHBOARD_REQUEST and GET_ORDER_DASHBOARD_SUCCESS' +
+  ' on successfully fetching orders', () => {
 
-    moxios.stubRequest('/api/v1/orders/all/', {
+    moxios.stubRequest('/api/v1/orders', {
       status: 200,
       response: allOrders
     });
     const expectedActions = [
       { type: dashboardTypes.ORDER_DASHBOARD_REQUEST },
-      { type: dashboardTypes.GET_ORDER_DASHBOARD_SUCCESS, orders: allOrders.data },
+      { type: dashboardTypes.ORDER_DASHBOARD_HISTORY_SUCCESS,
+        orders: allOrders.data },
     ];
-    return store.dispatch(dashboardActions.getOrdersByDate())
+    return store.dispatch(dashboardActions.getOrdersWithMealLinks())
       .then(() => {
         const dispatchedActions = store.getActions();
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
-  it('dispatches ORDER_DASHBOARD_REQUEST and ORDER_DASHBOARD_FAILURE on failing fetching orders', () => {
+  it('dispatches ORDER_DASHBOARD_REQUEST and ORDER_DASHBOARD_FAILURE ' +
+  'on failing to fetch orders', () => {
 
-    moxios.stubRequest('/api/v1/orders/all/', {
+    moxios.stubRequest('/api/v1/orders', {
       status: 400,
       response: { message: 'problem' }
     });
     const expectedActions = [
       { type: dashboardTypes.ORDER_DASHBOARD_REQUEST },
-      { type: dashboardTypes.ORDER_DASHBOARD_FAILURE, error: 'problem' },
+      { type: dashboardTypes.ORDER_DASHBOARD_HISTORY_FAILURE,
+        error: 'problem' },
     ];
-    return store.dispatch(dashboardActions.getOrdersByDate())
+    return store.dispatch(dashboardActions.getOrdersWithMealLinks())
       .then(() => {
         const dispatchedActions = store.getActions();
         expect(dispatchedActions).toEqual(expectedActions);
