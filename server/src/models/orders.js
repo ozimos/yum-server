@@ -49,6 +49,25 @@ export default (sequelize, DataTypes) => {
               attributes: ['firstName', 'lastName', 'email']
             }]
           };
+        },
+        forCaterersOrders(userId) {
+          return {
+            include: [{
+              association: 'Meals',
+              duplicating: false,
+              where: { userId },
+              required: true,
+              paranoid: false,
+              attributes: [],
+              through: {
+                attributes: []
+              }
+            },
+            {
+              association: 'User',
+              attributes: ['firstName', 'lastName', 'email']
+            }]
+          };
         }
       }
     }

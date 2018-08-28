@@ -58,9 +58,8 @@ export default class OrderController extends Controller {
     let scope;
     const { userId, isCaterer } = req.decoded;
     options.order = [['createdAt', 'DESC']];
-    if (!options.include) { options.include = [{}]; }
     if (isCaterer) {
-      options.include[0].where = { userId };
+      scope = [{ method: ['forCaterers', userId] }];
     } else {
       options.where = { userId };
     }

@@ -31,7 +31,7 @@ class Dashboard extends React.Component {
     this.searchUpdated = this.searchUpdated.bind(this);
   }
   componentDidMount() {
-    this.props.dispatch(dashboardActions.getOrdersWithMealLinksByDate());
+    this.props.dispatch(dashboardActions.getOrdersWithMealLinks());
   }
   searchUpdated(term) {
     this.setState({ searchTerm: term });
@@ -40,7 +40,7 @@ class Dashboard extends React.Component {
   render() {
     const KEYS_TO_FILTERS = [
       'id', 'User.firstName', 'User.lastName', 'User.email', 'updatedAt'];
-    const isTodayOrder = this.props.orders.length !== 0;
+    const isTodayOrder = Boolean(this.props.orders.length );
     let filteredOrders;
     if (isTodayOrder) {
       filteredOrders = this.props.orders
