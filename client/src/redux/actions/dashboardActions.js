@@ -8,7 +8,7 @@ import paginationExtract from '../../utils/paginationExtract';
 const baseUrl = '/api/v1/orders';
 
 
-const getOrdersWithMealLinks = ({ limit = 5, offset = 0 } = {}) =>
+const getOrdersWithMealLinks = ({ limit = 10, offset = 0 } = {}) =>
   (dispatch) => {
     dispatch({ type: dashboardTypes.ORDER_DASHBOARD_REQUEST });
 
@@ -28,20 +28,53 @@ const getOrdersWithMealLinks = ({ limit = 5, offset = 0 } = {}) =>
       );
   };
 
-const getOrdersWithMealLinksByDate
-= (date, { limit = 5, offset = 0 } = {}) => (dispatch) => {
-  const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
-    : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;
+
+const getMealsInOrder
+= (orderId, { limit = 4, offset = 0 } = {}) => (dispatch) => {
+  const url = `${baseUrl}/${orderId}/meals?limit=${limit}&offset=${offset}`;
+  dispatch({ type: dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST });
+  return requestServices(url)
+    .then(
+      response => dispatch({
+        type: dashboardTypes.ORDER_MEALS_DASHBOARD_SUCCESS,
+        orderMeals: response.data.data.rows[0].Meals,
+        mealsPagination: paginationExtract(response.data.data)
+      }),
+      error =>
+        dispatch({
+          type: dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE,
+          orderMealsError: error.response.data.message
+        })
+
+    );
+};
+
+const getOrderTotal = orderId => (dispatch) => {
+  const url = `${baseUrl}/total/${orderId}`;
+  dispatch({ type: dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST });
+  return requestServices(url)
+    .then(
+      response => dispatch({
+        type: dashboardTypes.ORDER_DASHBOARD_TOTAL_SUCCESS,
+        total: response.data.data.revenue
+      }),
+      error =>
+        dispatch({
+          type: dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE,
+          orderMealsError: error.response.data.message
+        })
+
+    );
+};
+const getDaysOrdersTotal = () => (dispatch) => {
+  const url = `${baseUrl}/total/date/`;
   dispatch({ type: dashboardTypes.ORDER_DASHBOARD_REQUEST });
   return requestServices(url)
     .then(
-      response =>
-        dispatch({
-          type: dashboardTypes.ORDER_DASHBOARD_SUCCESS,
-          orders: response.data.data.rows,
-          pagination: paginationExtract(response.data.data)
-
-        }),
+      response => dispatch({
+        type: dashboardTypes.DASHBOARD_TOTAL_SUCCESS,
+        total: response.data.data
+      }),
       error =>
         dispatch({
           type: dashboardTypes.ORDER_DASHBOARD_FAILURE,
@@ -50,35 +83,10 @@ const getOrdersWithMealLinksByDate
 
     );
 };
-const getMealsInOrder
-= (orderId, { limit = 4, offset = 0 } = {}) => (dispatch) => {
-  const url = `${baseUrl}/${orderId}/meals?limit=${limit}&offset=${offset}`;
-  dispatch({ type: dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST,
-    order: { id: orderId, connecting: true, mealError: null }
-  });
-  return requestServices(url)
-    .then(
-      response => dispatch({
-        type: dashboardTypes.ORDER_MEALS_DASHBOARD_SUCCESS,
-        order: { ...response.data.data.rows[0],
-          pagination: paginationExtract(response.data.data),
-          connecting: false
-        }
-      }),
-      error =>
-        dispatch({
-          type: dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE,
-          order: { id: orderId,
-            connecting: false,
-            mealError: error.response.data.message }
-        })
-
-    );
-};
-
 
 export default {
-  getOrdersWithMealLinksByDate,
   getOrdersWithMealLinks,
-  getMealsInOrder
+  getMealsInOrder,
+  getDaysOrdersTotal,
+  getOrderTotal
 };

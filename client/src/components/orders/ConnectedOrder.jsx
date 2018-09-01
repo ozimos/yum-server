@@ -17,6 +17,7 @@ import MealRow from '../orderCart/MealRow';
 import ConnectedCartContainer from '../orderCart/ConnectedCartContainer';
 import MealCardContainer from '../mealCard/MealCardContainer';
 import OrderContainer from '../mealCard/OrderContainer';
+import MealsTable from '../mealCard/MealsTable';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
 import ConnectedNav from '../nav/ConnectedNav';
@@ -33,40 +34,50 @@ class Order extends React.Component {
       searchTerm: '',
       currentOrder: [],
       currentOrderId: '',
+      selectedOrderId: '',
       showOrderModal: false,
+      showMealDetailModal: false,
       currentPage: 0
     };
-    this.openCartModal = this.openCartModal.bind(this);
-    this.closeCartModal = this.closeCartModal.bind(this);
-    this.removeMealFromCart = this.removeMealFromCart.bind(this);
-    this.clearOrder = this.clearOrder.bind(this);
-    this.addOrderToCart = this.addOrderToCart.bind(this);
-    this.addMealToCart = this.addMealToCart.bind(this);
-    this.notify = this.notify.bind(this);
   }
+
   componentDidMount() {
     const { offset = 0, limit = 5 } = this.props.pagination;
     this.props.dispatch(menuActions.getMenu());
     this.props.dispatch(orderActions.getOrdersWithMealLinks({ limit, offset }));
   }
-  onFetchData = (state) => {
+
+  onFetchMealData = (state) => {
+    const id = this.state.selectedOrderId || this.props.orders[0].id;
     const { page, pageSize } = state;
     const offset = pageSize * page;
-    this.props.dispatch(orderActions
-      .getOrdersWithMealLinks({ limit: pageSize, offset }));
+    return this.props.dispatch(orderActions
+      .getMealsInOrder(id, { limit: pageSize, offset }));
   }
-  openCartModal() {
-    return this.setState({ showOrderModal: true });
+
+   onFetchOrderData = (state) => {
+     const { page, pageSize } = state;
+     const offset = pageSize * page;
+     this.props.dispatch(orderActions
+       .getOrdersWithMealLinks({ limit: pageSize, offset }));
+   }
+   getOrderMealsTotals = id =>
+     this.props.dispatch(orderActions.getOrderTotal(id))
+  getOrderMeals = (id) => {
+    const { offset = 0, limit = 5 } = this.props.mealsPagination;
+    this.setState({ showMealDetailModal: true, selectedOrderId: id });
+    this.props.dispatch(orderActions.getMealsInOrder(id, { limit, offset }));
   }
-  closeCartModal() { return this.setState({ showOrderModal: false }); }
+
+  openCartModal = () => this.setState({ showOrderModal: true })
+
+  closeCartModal = () => this.setState({ showOrderModal: false })
+
+  closeMealDetailModal = () => this.setState({ showMealDetailModal: false });
+
   notify = message => toast(message, { className: 'toaster' });
-  addMealToCart(meal) {
-    if (this.state.currentOrderId) {
-      return toast(
-        'New meals cannot be added to existing orders',
-        { className: 'toaster' }
-      );
-    }
+
+  addMealToCart = (meal) => {
     const inOrder = this.state.currentOrder.some(elem => elem.id === meal.id);
     if (!inOrder) {
       this.setState(prevState =>
@@ -76,12 +87,14 @@ class Order extends React.Component {
       toast('Meal is already in cart', { className: 'toaster' });
     }
   }
-  addOrderToCart(id) {
-    const order = this.props.orders.find(elem => elem.id === id);
+
+  addOrderToCart = (id) => {
+    const order = this.props.pendingOrders.find(elem => elem.id === id);
     this.setState({ currentOrder: order.Meals, currentOrderId: id });
     toast('Meal has been added to cart for editing', { className: 'toaster' });
   }
-  removeMealFromCart(id) {
+
+  removeMealFromCart = (id) => {
     if (this.state.currentOrder.length <= 1) {
       toast.error(
         `There must be at least one meal in the cart. 
@@ -94,13 +107,16 @@ class Order extends React.Component {
           .currentOrder.filter(elem => elem.id !== id) }));
     }
   }
-  clearOrder() {
+
+  clearOrder = () => {
     this.setState({ currentOrder: [], currentOrderId: '' });
     this.closeCartModal();
   }
+
   searchUpdated = (term) => {
     this.setState({ searchTerm: term });
   }
+
   postOrder = () => {
     const orderIdArray = this.state.currentOrder.map(meal => meal.id);
     this.props.dispatch(orderActions.postOrder({ currentOrder: orderIdArray }));
@@ -111,7 +127,8 @@ class Order extends React.Component {
 
 
     const isMenuSet = this.props.menu.length !== 0;
-    const isMealSelected = this.state.currentOrder.length !== 0;
+    const isMealSelected = this.state.currentOrder
+    && this.state.currentOrder.length;
     const isTodayOrder = this.props.orders.length !== 0;
     let filteredMeals;
     if (isMenuSet) {
@@ -119,6 +136,7 @@ class Order extends React.Component {
         .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     }
     const { isCaterer, firstName } = this.props.user;
+
     return (
       <div className="contain">
         <header className="header">
@@ -202,8 +220,11 @@ class Order extends React.Component {
                     loading={this.props.orderConnecting}
                     pagination={this.props.pagination}
                     addOrderToCart={this.addOrderToCart}
-                    onFetchData={this.onFetchData}
+                    onFetchData={this.onFetchOrderData}
+                    getOrderMeals={this.getOrderMeals}
+                    getOrderMealsTotals={this.getOrderMealsTotals}
                     defaultPage={this.state.currentPage}
+                    currentOrderId={this.state.currentOrderId}
                   /> :
                   <div>
                   You have not placed an order today
@@ -213,6 +234,7 @@ class Order extends React.Component {
               </AccordionItem>
             </Accordion>
           </main>
+
           <ReactModal
             isOpen={this.state.showOrderModal}
             contentLabel="Input Modal"
@@ -240,47 +262,94 @@ class Order extends React.Component {
                 }
             </aside>
           </ReactModal>
+
+          <ReactModal
+            isOpen={this.state.showMealDetailModal}
+            contentLabel="Input Modal"
+            className="modal-content"
+            onRequestClose={this.closeMealDetailModal}
+            shouldCloseOnOverlayClick
+            style={{ content: { width: '60%' } }}
+          >
+            <MealsTable
+              meals={this.props.orderMeals}
+              total={this.props.total}
+              mealsPagination={this.props.mealsPagination}
+              loading={this.props.loadingMeals}
+              onFetchData={this.onFetchMealData}
+              closeMealDetailModal={this.closeMealDetailModal}
+              getTrProps={() => ({ style: { cursor: 'pointer' } })}
+            />
+          </ReactModal>
         </div>
 
       </div>
     );
   }
 }
+
 Order.defaultProps = {
   menu: [],
   orders: [],
+  pendingOrders: [],
+  orderMeals: [],
   orderConnecting: false,
+  loadingMeals: false,
+  total: 0,
   pagination: {
+    pages: 1,
+    limit: 10,
+    offset: 0
+  },
+  mealsPagination: {
     pages: 1,
     limit: 5,
     offset: 0
   },
 };
+
 Order.propTypes = {
   dispatch: PropTypes.func.isRequired,
   orders: PropTypes.arrayOf(PropTypes.object),
   menu: PropTypes.arrayOf(PropTypes.object),
+  orderMeals: PropTypes.arrayOf(PropTypes.object),
   pagination: PropTypes.shape({
     pages: PropTypes.number,
     limit: PropTypes.number,
     offset: PropTypes.number
   }),
+  mealsPagination: PropTypes.shape({
+    pages: PropTypes.number,
+    limit: PropTypes.number,
+    offset: PropTypes.number
+  }),
   orderConnecting: PropTypes.bool,
+  loadingMeals: PropTypes.bool,
+  pendingOrders: PropTypes.arrayOf(PropTypes.object),
+  total: PropTypes.number,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
     firstName: PropTypes.string,
     id: PropTypes.string
   }).isRequired,
 };
+
 const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
+  orderMealsError: state.orderReducer.orderMealsError,
+  loadingMeals: state.orderReducer.loadingMeals,
+  total: state.orderReducer.total,
   pagination: state.orderReducer.pagination,
+  mealsPagination: state.orderReducer.mealsPagination,
   orderConnecting: state.orderReducer.connecting,
   menuConnecting: state.menuReducer.connecting,
   menu: state.menuReducer.menu,
   orders: state.orderReducer.orders,
+  pendingOrders: state.orderReducer.pendingOrders,
+  orderMeals: state.orderReducer.orderMeals,
   user: state.loginReducer.user.data
 });
 
 export { Order };
+
 export default connect(mapStateToProps)(Order);

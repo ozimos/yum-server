@@ -27,54 +27,43 @@ const getOrdersWithMealLinks = ({ limit = 5, offset = 0 } = {}) =>
       );
   };
 
-const getOrdersWithMealLinksByDate
-= (date, { limit = 5, offset = 0 } = {}) => (dispatch) => {
-  const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
-    : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;
-  dispatch({ type: orderTypes.ORDER_REQUEST });
-  return requestServices(url)
-    .then(
-      response =>
-        dispatch({
-          type: orderTypes.GET_ORDER_ALL_SUCCESS,
-          orders: response.data.data.rows,
-          pagination: paginationExtract(response.data.data)
-
-        }),
-      error =>
-        dispatch({
-          type: orderTypes.ORDER_FAILURE,
-          error: error.response.data.message
-        })
-
-    );
-};
 const getMealsInOrder
 = (orderId, { limit = 4, offset = 0 } = {}) => (dispatch) => {
   const url = `${baseUrl}/${orderId}/meals?limit=${limit}&offset=${offset}`;
-  dispatch({ type: orderTypes.ORDER_MEALS_REQUEST,
-    order: { id: orderId, connecting: true, mealError: null }
-  });
+  dispatch({ type: orderTypes.ORDER_MEALS_REQUEST });
   return requestServices(url)
     .then(
       response => dispatch({
         type: orderTypes.GET_ORDER_MEAL_SUCCESS,
-        order: { ...response.data.data.rows[0],
-          pagination: paginationExtract(response.data.data),
-          connecting: false
-        }
+        orderMeals: response.data.data.rows[0].Meals,
+        mealsPagination: paginationExtract(response.data.data),
       }),
       error =>
         dispatch({
           type: orderTypes.GET_ORDER_MEAL_FAILURE,
-          order: { id: orderId,
-            connecting: false,
-            mealError: error.response.data.message }
+          orderMealsError: error.response.data.message
         })
 
     );
 };
 
+const getOrderTotal = orderId => (dispatch) => {
+  const url = `${baseUrl}/total/${orderId}`;
+  dispatch({ type: orderTypes.ORDER_MEALS_REQUEST });
+  return requestServices(url)
+    .then(
+      response => dispatch({
+        type: orderTypes.GET_ORDER_TOTAL_SUCCESS,
+        total: response.data.data.revenue
+      }),
+      error =>
+        dispatch({
+          type: orderTypes.GET_ORDER_MEAL_FAILURE,
+          orderMealsError: error.response.data.message
+        })
+
+    );
+};
 const postOrder = order => (dispatch) => {
   dispatch({ type: orderTypes.ORDER_REQUEST });
 
@@ -119,8 +108,8 @@ const updateOrder = (order, orderId) => (dispatch) => {
 
 export default {
   getOrdersWithMealLinks,
-  getOrdersWithMealLinksByDate,
   getMealsInOrder,
+  getOrderTotal,
   postOrder,
   updateOrder
 };

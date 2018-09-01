@@ -4,7 +4,13 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
-
+.ReactTable.clickable{
+  .rt-tbody{
+    .rt-tr-group{
+      cursor: pointer
+    }
+  }
+}
 body {
   text-align: center;
   font-family: Roboto, Monserrat, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -111,7 +117,21 @@ a {
     vertical-align: middle;
     align-self: flex-start;
   }
-  
+  .order-meal-modal{
+    .flexbox{
+      h5{
+        margin: 20px auto
+      }
+      span{
+        margin: 10px;
+        &:last-child{
+          margin-right: auto;
+          font-size: 2rem
+        }
+      }
+     
+    }
+  }
   .shrink {
     min-width: 1rem;
     flex: 0 1 auto;

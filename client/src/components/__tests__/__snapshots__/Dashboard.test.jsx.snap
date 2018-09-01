@@ -29,9 +29,7 @@ exports[`Dashboard Component renders correctly 1`] = `
           >
             <span
               className="order_span summary_value flow-text"
-            >
-              2
-            </span>
+            />
             <span
               className="order_span shrink"
             >
@@ -56,9 +54,7 @@ exports[`Dashboard Component renders correctly 1`] = `
           >
             <span
               className="order_span summary_value flow-text"
-            >
-              1
-            </span>
+            />
             <span
               className="order_span shrink"
             >
@@ -85,7 +81,6 @@ exports[`Dashboard Component renders correctly 1`] = `
               className="order_span summary_value flow-text"
             >
               ₦
-              12800
             </span>
             <span
               className="order_span shrink"
@@ -108,7 +103,7 @@ exports[`Dashboard Component renders correctly 1`] = `
         className="order_detail flexbox title-element"
       >
         <h5>
-          Today's Orders
+          Order History
         </h5>
         <Search
           caseSensitive={false}
@@ -147,95 +142,116 @@ exports[`Dashboard Component renders correctly 1`] = `
             className="accordion__body"
             hideBodyClassName="accordion__body--hidden"
           >
-            <div>
-              <table
-                className="striped responsive-table"
-              >
-                <thead>
-                  <tr>
-                    <th>
-                      S/N
-                    </th>
-                    <th>
-                      Customer
-                    </th>
-                    <th>
-                      Order
-                    </th>
-                    <th>
-                      Meals
-                    </th>
-                    <th>
-                      Quantities
-                    </th>
-                    <th>
-                      Time
-                    </th>
-                    <th>
-                      Total(₦)
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    key="order1"
-                  >
-                    <td>
-                      1
-                    </td>
-                    <td>
-                      first 
-                                last
-                    </td>
-                    <td>
-                      order1
-                    </td>
-                    <td>
-                      , 
-                    </td>
-                    <td>
-                      2, 2
-                    </td>
-                    <td>
-                      Invalid Date
-                    </td>
-                    <td>
-                      6400
-                    </td>
-                  </tr>
-                  <tr
-                    key="order2"
-                  >
-                    <td>
-                      2
-                    </td>
-                    <td>
-                      first 
-                                last
-                    </td>
-                    <td>
-                      order2
-                    </td>
-                    <td>
-                      , 
-                    </td>
-                    <td>
-                      2, 2
-                    </td>
-                    <td>
-                      Invalid Date
-                    </td>
-                    <td>
-                      6400
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <div />
+            <DashboardContainer
+              getOrderMeals={[Function]}
+              getOrderMealsTotals={[Function]}
+              loading={false}
+              onFetchData={[Function]}
+              orders={
+                Array [
+                  Object {
+                    "Meals": Array [
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "abc",
+                        "price": 1200,
+                      },
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "def",
+                        "price": 2000,
+                      },
+                    ],
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
+                    "id": "order1",
+                    "userId": "userId",
+                  },
+                  Object {
+                    "Meals": Array [
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "abc",
+                        "price": 1200,
+                      },
+                      Object {
+                        "MealOrders": Object {
+                          "quantity": 2,
+                        },
+                        "id": "def",
+                        "price": 2000,
+                      },
+                    ],
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
+                    "id": "order2",
+                    "userId": "userId",
+                  },
+                ]
+              }
+              pagination={
+                Object {
+                  "limit": 10,
+                  "offset": 0,
+                  "pages": 1,
+                }
+              }
+            />
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
       </AccordionWrapper>
     </main>
+    <Modal
+      ariaHideApp={true}
+      bodyOpenClassName="ReactModal__Body--open"
+      className="modal-content"
+      closeTimeoutMS={0}
+      contentLabel="Input Modal"
+      isOpen={false}
+      onRequestClose={[Function]}
+      parentSelector={[Function]}
+      portalClassName="ReactModalPortal"
+      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick={true}
+      shouldFocusAfterRender={true}
+      shouldReturnFocusAfterClose={true}
+      style={
+        Object {
+          "content": Object {
+            "width": "60%",
+          },
+        }
+      }
+    >
+      <MealsTable
+        closeMealDetailModal={[Function]}
+        getTrProps={[Function]}
+        loading={false}
+        meals={Array []}
+        mealsPagination={
+          Object {
+            "limit": 5,
+            "offset": 0,
+            "pages": 1,
+          }
+        }
+        onFetchData={[Function]}
+        total={Object {}}
+      />
+    </Modal>
   </div>
 </div>
 `;

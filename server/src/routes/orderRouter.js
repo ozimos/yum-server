@@ -10,7 +10,7 @@ import db from '../models';
 
 const orderRouter = express.Router();
 const validator = Validator({ passError: true });
-const orderController = new OrderController(db.Order, db.Meal);
+const orderController = new OrderController(db.Order);
 
 orderRouter
   .route('/')
@@ -39,10 +39,17 @@ orderRouter
     OrderController.select(orderController, 'getMealsInOrder')
   );
 orderRouter
-  .route('/date/:date?')
+  .route('/total/date')
   .get(
-    Authenticate.isUser, validator.params(params), validator.query(query),
-    OrderController.select(orderController, 'getOrdersWithMealLinksByDate')
+    Authenticate.isUser, validator.query(query),
+    OrderController.select(orderController, 'getTotalDaySales')
   );
+orderRouter
+  .route('/total/:id')
+  .get(
+    Authenticate.isUser, validator.params(params),
+    OrderController.select(orderController, 'getTotalOrderSales')
+  );
+
 
 export default orderRouter;

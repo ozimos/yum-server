@@ -88,7 +88,8 @@ class UserController extends Controller {
     let message = extraMessage;
     const payload = {
       isCaterer: data.isCaterer,
-      userId: data.id
+      userId: data.id,
+      firstName: data.firstName
     };
     if (data.password) {
       delete data.password;

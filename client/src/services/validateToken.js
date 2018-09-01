@@ -1,15 +1,14 @@
 import jwt from 'jsonwebtoken';
 
-const validateToken = (user) => {
-  const { token } = user;
+const validateToken = (token) => {
   let valid = true;
   const decoded = jwt.decode(token);
 
-  const { exp, isCaterer } = decoded;
+  const { exp, isCaterer, userId, firstName } = decoded;
   if (exp < Math.floor(Date.now() / 1000)) {
     valid = false;
   }
-  return { valid, isCaterer };
+  return { valid, isCaterer, userId, firstName };
 };
 
 export default validateToken;

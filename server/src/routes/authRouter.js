@@ -4,6 +4,8 @@ import Validator from 'express-joi-validation';
 import UserController from '../controllers/UserController';
 import Authenticate from '../middleware/Authenticate';
 import schemas from '../middleware/userSchemas';
+import params from '../middleware/paramSchema';
+
 import db from '../models';
 
 const authRouter = express.Router();
@@ -21,9 +23,9 @@ authRouter.post(
   UserController.select(userController, 'login')
 );
 authRouter.get(
-  '/all',
-  Authenticate.isUser, Authenticate.isAdmin,
-  UserController.select(userController, 'getAllRecords')
+  '/user/:id',
+  Authenticate.isUser, validator.params(params),
+  UserController.select(userController, 'getSingleRecord')
 );
 
 // Return authRouter

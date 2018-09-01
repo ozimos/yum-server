@@ -54,11 +54,12 @@ export default (sequelize, DataTypes) => {
           return {
             include: [{
               association: 'Meals',
-              duplicating: false,
               where: { userId },
-              required: true,
               paranoid: false,
-              attributes: [],
+              required: false,
+              attributes: [[sequelize
+                .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+              'subTotal']],
               through: {
                 attributes: []
               }
@@ -68,7 +69,22 @@ export default (sequelize, DataTypes) => {
               attributes: ['firstName', 'lastName', 'email']
             }]
           };
-        }
+        },
+        forNonCaterersOrders() {
+          return {
+            include: [{
+              association: 'Meals',
+              paranoid: false,
+              required: true,
+              attributes: [[sequelize
+                .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+              'subTotal']],
+              through: {
+                attributes: []
+              }
+            }]
+          };
+        },
       }
     }
   );

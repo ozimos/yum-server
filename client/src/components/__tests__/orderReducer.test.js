@@ -5,8 +5,18 @@ import { order, allOrders } from '../mocks/orderDataMock';
 describe('post orderReducer', () => {
   const initialState = {
     connecting: false,
+    loadingMeals: false,
     orderError: null,
+    orderMealsError: null,
     orders: [],
+    pendingOrders: [],
+    orderMeals: [],
+    total: 0,
+    mealsPagination: {
+      limits: 10,
+      offset: 0,
+      count: 1,
+      pages: 1 },
     pagination: {
       limits: 10,
       offset: 0,
@@ -34,7 +44,7 @@ describe('post orderReducer', () => {
     const action = { type: orderTypes.GET_ORDER_ALL_SUCCESS,
       orders: allOrders.data };
 
-    expect(orderReducer(undefined, action)).toEqual(newState);
+    expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle ORDER_FAILURE', () => {

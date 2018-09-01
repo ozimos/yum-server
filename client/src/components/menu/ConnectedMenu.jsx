@@ -218,8 +218,6 @@ addToMenu(meal) {
                       <MealCardContainer
                         meals={this.props.menu}
                         MealCard={MealDisplayCard}
-                        collection="Menu"
-                        removeFromCollection={this.removeFromMenu}
                         addClass="scroll"
                       />
                       <ReactPaginate
