@@ -1,7 +1,5 @@
 export default (orders) => {
-  const uniqueUsers = new Set();
-
-  orders.forEach(order => uniqueUsers.add(order.userId));
-  return uniqueUsers.size;
+  const userId = orders.map(order => order.userId);
+  return new Set(userId).size;
 };
 

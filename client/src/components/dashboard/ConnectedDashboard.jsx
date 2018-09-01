@@ -9,7 +9,7 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
-import DashboardContainer from '../mealCard/DashboardContainer';
+import DashboardTableContainer from '../mealCard/DashboardTableContainer';
 import MealsTable from '../mealCard/MealsTable';
 
 import Greeting from '../greeting/Greeting';
@@ -32,7 +32,9 @@ class Dashboard extends React.Component {
     this.searchUpdated = this.searchUpdated.bind(this);
   }
   componentDidMount() {
-    this.props.dispatch(dashboardActions.getOrdersWithMealLinks());
+    const { offset = 0, limit = 10 } = this.props.pagination;
+    this.props
+      .dispatch(dashboardActions.getOrdersWithMealLinks({ limit, offset }));
     this.props.dispatch(dashboardActions.getDaysOrdersTotal());
   }
   onFetchMealData = (state) => {
@@ -153,7 +155,7 @@ class Dashboard extends React.Component {
                 <AccordionItemTitle />
                 <AccordionItemBody>
                   <div />
-                  { isTodayOrder ? <DashboardContainer
+                  { isTodayOrder ? <DashboardTableContainer
                     orders={filteredOrders}
                     loading={this.props.orderConnecting}
                     pagination={this.props.pagination}

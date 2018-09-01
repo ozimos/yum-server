@@ -16,7 +16,7 @@ import MealDisplayCard from '../mealCard/MealDisplayCard';
 import MealRow from '../orderCart/MealRow';
 import ConnectedCartContainer from '../orderCart/ConnectedCartContainer';
 import MealCardContainer from '../mealCard/MealCardContainer';
-import OrderContainer from '../mealCard/OrderContainer';
+import OrderTableContainer from '../mealCard/OrderTableContainer';
 import MealsTable from '../mealCard/MealsTable';
 import Greeting from '../greeting/Greeting';
 import { menuActions, orderActions } from '../../redux/actions';
@@ -42,7 +42,7 @@ class Order extends React.Component {
   }
 
   componentDidMount() {
-    const { offset = 0, limit = 5 } = this.props.pagination;
+    const { offset = 0, limit = 10 } = this.props.pagination;
     this.props.dispatch(menuActions.getMenu());
     this.props.dispatch(orderActions.getOrdersWithMealLinks({ limit, offset }));
   }
@@ -215,7 +215,7 @@ class Order extends React.Component {
                     ${process.env.ORDER_EDIT_MINUTES || 15}
                      minutes after order is placed`}
                   </p>
-                  { isTodayOrder ? <OrderContainer
+                  { isTodayOrder ? <OrderTableContainer
                     orders={this.props.orders}
                     loading={this.props.orderConnecting}
                     pagination={this.props.pagination}

@@ -7,7 +7,7 @@ import paginationExtract from '../../utils/paginationExtract';
 const baseUrl = '/api/v1/orders';
 
 
-const getOrdersWithMealLinks = ({ limit = 5, offset = 0 } = {}) =>
+const getOrdersWithMealLinks = ({ limit = 10, offset = 0 } = {}) =>
   (dispatch) => {
     dispatch({ type: orderTypes.ORDER_REQUEST });
 

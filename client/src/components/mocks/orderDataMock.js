@@ -23,5 +23,7 @@ export const orderActionData = {
 
 };
 export const allOrders = {
-  data: [{ ...template, id: 'order1' }, { ...template, id: 'order2' }]
+  data: {
+    rows: [{ ...template, id: 'order1' },
+      { ...template, id: 'order2' }] }
 };

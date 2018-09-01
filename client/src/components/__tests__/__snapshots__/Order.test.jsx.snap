@@ -121,7 +121,18 @@ exports[`Order Component renders correctly 1`] = `
               addClass="scroll"
               addToCollection={[Function]}
               collection="cart"
-              meals={Array []}
+              meals={
+                Array [
+                  Object {
+                    "id": "abc",
+                    "price": 1200,
+                  },
+                  Object {
+                    "id": "def",
+                    "price": 2000,
+                  },
+                ]
+              }
             />
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
@@ -170,7 +181,7 @@ exports[`Order Component renders correctly 1`] = `
                     15
                      minutes after order is placed
             </p>
-            <OrderContainer
+            <OrderTableContainer
               addOrderToCart={[Function]}
               currentOrderId=""
               defaultPage={0}

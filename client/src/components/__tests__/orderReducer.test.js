@@ -13,7 +13,7 @@ describe('post orderReducer', () => {
     orderMeals: [],
     total: 0,
     mealsPagination: {
-      limits: 10,
+      limits: 5,
       offset: 0,
       count: 1,
       pages: 1 },

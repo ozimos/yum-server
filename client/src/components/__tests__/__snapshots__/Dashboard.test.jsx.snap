@@ -143,73 +143,9 @@ exports[`Dashboard Component renders correctly 1`] = `
             hideBodyClassName="accordion__body--hidden"
           >
             <div />
-            <DashboardContainer
-              getOrderMeals={[Function]}
-              getOrderMealsTotals={[Function]}
-              loading={false}
-              onFetchData={[Function]}
-              orders={
-                Array [
-                  Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "abc",
-                        "price": 1200,
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "def",
-                        "price": 2000,
-                      },
-                    ],
-                    "User": Object {
-                      "email": "asdf",
-                      "firstName": "first",
-                      "lastName": "last",
-                    },
-                    "id": "order1",
-                    "userId": "userId",
-                  },
-                  Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "abc",
-                        "price": 1200,
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "def",
-                        "price": 2000,
-                      },
-                    ],
-                    "User": Object {
-                      "email": "asdf",
-                      "firstName": "first",
-                      "lastName": "last",
-                    },
-                    "id": "order2",
-                    "userId": "userId",
-                  },
-                ]
-              }
-              pagination={
-                Object {
-                  "limit": 10,
-                  "offset": 0,
-                  "pages": 1,
-                }
-              }
-            />
+            <div>
+              You have not placed an order today
+            </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
       </AccordionWrapper>
