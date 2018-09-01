@@ -6,16 +6,19 @@ import validateToken from '../../services/validateToken';
 
 config();
 
-const token = jwt.sign({ isCaterer: true }, process.env.TOKEN_PASSWORD, { expiresIn: '1h' });
+const token = jwt.sign(
+  { isCaterer: true },
+  process.env.TOKEN_PASSWORD, { expiresIn: '1h' }
+);
 const nextDay2 = addDays(new Date(), 2);
 
 describe('validate token', () => {
 
   it('returns true if token has not expired', () => {
-    expect(validateToken({ token }).valid).toBe(true);
+    expect(validateToken(token).valid).toBe(true);
   });
   it('returns data in token', () => {
-    expect(validateToken({ token }).isCaterer).toBe(true);
+    expect(validateToken(token).isCaterer).toBe(true);
   });
   describe('when token has expired', () => {
     beforeEach(() => {
@@ -25,7 +28,7 @@ describe('validate token', () => {
       MockDate.reset();
     });
     it('returns false', () => {
-      expect(validateToken({ token }).valid).toBe(false);
+      expect(validateToken(token).valid).toBe(false);
     });
   });
 });

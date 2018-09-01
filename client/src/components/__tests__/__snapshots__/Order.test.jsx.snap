@@ -121,7 +121,18 @@ exports[`Order Component renders correctly 1`] = `
               addClass="scroll"
               addToCollection={[Function]}
               collection="cart"
-              meals={Array []}
+              meals={
+                Array [
+                  Object {
+                    "id": "abc",
+                    "price": 1200,
+                  },
+                  Object {
+                    "id": "def",
+                    "price": 2000,
+                  },
+                ]
+              }
             />
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
@@ -170,9 +181,12 @@ exports[`Order Component renders correctly 1`] = `
                     15
                      minutes after order is placed
             </p>
-            <OrderContainer
+            <OrderTableContainer
               addOrderToCart={[Function]}
+              currentOrderId=""
               defaultPage={0}
+              getOrderMeals={[Function]}
+              getOrderMealsTotals={[Function]}
               loading={false}
               onFetchData={[Function]}
               orders={
@@ -231,7 +245,7 @@ exports[`Order Component renders correctly 1`] = `
               }
               pagination={
                 Object {
-                  "limit": 5,
+                  "limit": 10,
                   "offset": 0,
                   "pages": 1,
                 }
@@ -268,6 +282,44 @@ exports[`Order Component renders correctly 1`] = `
           </p>
         </div>
       </aside>
+    </Modal>
+    <Modal
+      ariaHideApp={true}
+      bodyOpenClassName="ReactModal__Body--open"
+      className="modal-content"
+      closeTimeoutMS={0}
+      contentLabel="Input Modal"
+      isOpen={false}
+      onRequestClose={[Function]}
+      parentSelector={[Function]}
+      portalClassName="ReactModalPortal"
+      shouldCloseOnEsc={true}
+      shouldCloseOnOverlayClick={true}
+      shouldFocusAfterRender={true}
+      shouldReturnFocusAfterClose={true}
+      style={
+        Object {
+          "content": Object {
+            "width": "60%",
+          },
+        }
+      }
+    >
+      <MealsTable
+        closeMealDetailModal={[Function]}
+        getTrProps={[Function]}
+        loading={false}
+        meals={Array []}
+        mealsPagination={
+          Object {
+            "limit": 5,
+            "offset": 0,
+            "pages": 1,
+          }
+        }
+        onFetchData={[Function]}
+        total={0}
+      />
     </Modal>
   </div>
 </div>

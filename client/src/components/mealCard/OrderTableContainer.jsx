@@ -5,84 +5,62 @@ import format from 'date-fns/format';
 import isToday from 'date-fns/is_today';
 import differenceInMinutes from 'date-fns/difference_in_minutes';
 import 'react-table/react-table.css';
-import MealsTable from '../mealCard/MealsTable';
 
-const OrderContainer = ({ orders, ...props }) => {
+const OrderTableContainer = ({ orders, ...props }) => {
   const hasEditMinutes = (updatedAt) => {
     const orderEditMinutes = parseInt(process.env.ORDER_EDIT_MINUTES, 10) || 15;
     const minutesSinceOrder = differenceInMinutes(new Date(), updatedAt);
     return orderEditMinutes - minutesSinceOrder > 0;
   };
 
-  const newOrders = orders.map((order) => {
-    const { updatedAt, id } = order;
-    const formattedOrder = {
-      id,
-      time: format(updatedAt, 'h:mm A'),
-      date: format(updatedAt, 'DD MMM, YYYY'),
-      hasEditMinutes: isToday(updatedAt) && hasEditMinutes(updatedAt)
-    };
-    return formattedOrder;
-  });
 
   const columns = [
     {
       Header: 'Order Id',
       accessor: 'id',
-      width: 150,
+      width: 550,
     }, {
       Header: 'Date',
-      accessor: 'date',
-      width: 150,
+      accessor: 'updatedAt',
+      Cell: columnProps =>
+        (<span>{format(columnProps.value, 'DD MMM, YYYY')}</span>),
+      width: 250,
     }, {
       Header: 'Time',
-      accessor: 'time',
-      width: 100
-    }, {
-      Header: () => (
-        <div className="flexbox">
-          <span style={{ width: '50%' }}>
-        Title
-          </span>
-          <span style={{ width: '17%' }}>
-        Quantity
-          </span>
-          <span style={{ width: '17%' }}>
-        Price (&#8358;)
-          </span>
-          <span style={{ width: '20%' }}>
-        Total (&#8358;)
-          </span>
-
-        </div>
-      ),
-      accessor: 'id',
-      Cell: columnProps =>
-        (<MealsTable
-          id={columnProps.value}
-        />),
-      width: 900,
-      style: { padding: '0' }
+      accessor: 'updatedAt',
+      Cell: columnProps => (<span>{format(columnProps.value, 'h:mm A')}</span>),
+      width: 200
     }, {
       Header: '',
-      accessor: 'hasEditMinutes',
-      Cell: columnProps => columnProps.value &&
+      accessor: 'updatedAt',
+      Cell: columnProps => isToday(columnProps.value) &&
+        hasEditMinutes(columnProps.value) &&
       (
       <button
         className="btn title-button"
         onClick={() => props.addOrderToCart(columnProps.row.id)}
-      >Edit
+        disabled={props.currentOrderId === columnProps.row.id}
+      >
+      Edit
       </button>
       ),
+      getProps: () => ({
+        style: {
+          cursor: 'auto',
+          marginRight: 'auto',
+          marginLeft: 'auto',
+        }
+      }),
+      className: 'normal-cursor',
       width: 50
     }
   ];
   return (
     <div>
       <ReactTable
-        data={newOrders}
+        data={orders}
         columns={columns}
-        className="-striped -highlight"
+        className="-striped -highlight clickable"
         minRows={0}
         defaultPageSize={props.pagination.limit}
         loading={props.loading}
@@ -90,22 +68,38 @@ const OrderContainer = ({ orders, ...props }) => {
         onFetchData={props.onFetchData}
         sortable={false}
         manual
+        getTdProps={(state, rowInfo, column) => ({
+            onClick: (e, handleOriginal) => {
+              if (column.Header) {
+                props.getOrderMeals(rowInfo.row.id);
+                props.getOrderMealsTotals(rowInfo.row.id);
+              }
+
+              if (handleOriginal) {
+                handleOriginal();
+              }
+            }
+          })}
       />
     </div>
   );
 };
-OrderContainer.defaultProps = {
+OrderTableContainer.defaultProps = {
   pagination: {
     pages: 1,
-    limit: 5,
+    limit: 10,
     offset: 0
   },
-  loading: false
+  loading: false,
+  currentOrderId: ''
 };
-OrderContainer.propTypes = {
+OrderTableContainer.propTypes = {
   orders: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrderToCart: PropTypes.func.isRequired,
+  getOrderMeals: PropTypes.func.isRequired,
+  getOrderMealsTotals: PropTypes.func.isRequired,
   onFetchData: PropTypes.func.isRequired,
+  currentOrderId: PropTypes.string,
   pagination: PropTypes.shape({
     pages: PropTypes.number,
     limit: PropTypes.number,
@@ -114,5 +108,5 @@ OrderContainer.propTypes = {
   loading: PropTypes.bool
 };
 
-export default OrderContainer;
+export default OrderTableContainer;
 

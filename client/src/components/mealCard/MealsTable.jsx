@@ -2,92 +2,91 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 
-import requestServices from '../../services/requestServices';
 
 class MealsTable extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false,
-      order: { Meals: [] },
-      pages: 1
-    };
-  }
-
-  onFetchData=(state) => {
-    this.setState({ loading: true });
-    const { page, pageSize } = state;
-    const { id } = this.props;
-    const offset = page * pageSize;
-    const baseUrl = '/api/v1/orders';
-    const url = `${baseUrl}/${id}/meals?limit=${pageSize}&offset=${offset}`;
-
-    requestServices(url)
-      .then((res) => {
-        this.setState({
-          pages: res.data.data.pages,
-          order: res.data.data.rows[0],
-          loading: false
-        });
-      });
-  }
 
   render() {
 
     const columns = [
       {
-        headerStyle: { height: '0' },
-        id: 'pivot',
-        accessor: () => '',
-        width: 30
-      }, {
-        headerStyle: { height: '0' },
+        Header: 'Meal Title',
         accessor: 'title',
-        width: 400
+        width: 275
       }, {
-        headerStyle: { height: '0' },
+        Header: 'Quantity',
         accessor: 'MealOrders.quantity',
-        width: 150
+        width: 75
       }, {
-        headerStyle: { height: '0' },
+        Header: () => (<span>Price (&#8358;)</span>),
         accessor: 'price',
-        width: 150
+        width: 175
       }, {
-        headerStyle: { height: '0' },
+        Header: () => (<span>Subtotal (&#8358;)</span>),
         aggregate: vals => vals.reduce((accum, val) => accum + val),
         accessor: 'subTotal',
-        width: 100
+        width: 175
       }
     ];
 
-    const { Meals } = this.state.order;
-
-
     return (
-      <ReactTable
-        ref={(refReactTable) => { this.refReactTable = refReactTable; }}
-        data={Meals}
-        columns={columns}
-        minRows={0}
-        defaultPageSize={4}
-        pivotBy={['pivot']}
-        loading={this.state.loading}
-        pages={this.state.pages}
-        onFetchData={this.onFetchData}
-        sortable={false}
-        manual
-        collapseOnSortingChange={false}
-        collapseOnDataChange={false}
-        collapseOnPageChange={false}
-        nextText=">>"
-        previousText="<<"
-      />
+      <div className="order-meal-modal">
+        <div className="flexbox top">
+          <h5>Order Details</h5>
+          <button
+            className="btn title-button"
+            onClick={this.props.closeMealDetailModal}
+          >
+                &#10006;
+          </button>
+        </div>
+        <div className="flexbox">
+          <span>
+        Total Charge:
+          </span>
+          <span>&#8358;{this.props.total}</span>
+        </div>
+        <ReactTable
+          ref={(refReactTable) => { this.refReactTable = refReactTable; }}
+          data={this.props.meals}
+          columns={columns}
+          minRows={0}
+          defaultPageSize={this.props.mealsPagination.limit}
+          loading={this.props.loading}
+          pages={this.props.mealsPagination.pages}
+          onFetchData={this.props.onFetchData}
+          sortable={false}
+          manual
+          collapseOnSortingChange={false}
+          collapseOnDataChange={false}
+          collapseOnPageChange={false}
+          nextText=">>"
+          previousText="<<"
+        />
+      </div>
     );
   }
 }
 
+MealsTable.defaultProps = {
+  mealsPagination: {
+    pages: 1,
+    limit: 5,
+    offset: 0
+  },
+  loading: false,
+  total: 0,
+};
+
 MealsTable.propTypes = {
-  id: PropTypes.string.isRequired,
+  meals: PropTypes.arrayOf(PropTypes.object).isRequired,
+  mealsPagination: PropTypes.shape({
+    pages: PropTypes.number,
+    limit: PropTypes.number,
+    offset: PropTypes.number,
+  }),
+  onFetchData: PropTypes.func.isRequired,
+  closeMealDetailModal: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  total: PropTypes.number
 };
 export default MealsTable;

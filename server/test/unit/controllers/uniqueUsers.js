@@ -1,4 +1,9 @@
-import uniqueUsers from './uniqueUsers';
+/* eslint import/no-extraneous-dependencies: off */
+
+import {
+  expect
+} from 'chai';
+import uniqueUsers from '../../../src/controllers/util/uniqueUsers';
 
 const sampleOrder = [
   {
@@ -46,6 +51,6 @@ const sampleOrder = [
 ];
 describe('uniqueUsers', () => {
   it('should return how many unique ids in order', () => {
-    expect(uniqueUsers(sampleOrder)).toBe(3);
+    expect(uniqueUsers(sampleOrder)).to.equal(3);
   });
 });

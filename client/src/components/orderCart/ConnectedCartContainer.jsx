@@ -33,7 +33,8 @@ class CartContainer extends React.Component {
 
       this.props.order
         .forEach((elem) => {
-          newOrderQuantity[elem.id] = elem.MealOrders.quantity;
+          const quantity = elem.MealOrders ? elem.MealOrders.quantity : 1;
+          newOrderQuantity[elem.id] = quantity;
         });
       // eslint-disable-next-line
       this.setState({ orderQuantity: newOrderQuantity });

@@ -13,7 +13,8 @@ const AuthenticatedComponent = (props) => {
 
   return (
     <Fragment>
-      { authenticated && user.data.isCaterer && <MyComponent {...rest} />}
+      { authenticated
+        && user.data.isCaterer && <MyComponent {...rest} />}
       { authenticated && !user.data.isCaterer
         && <h1>This page is for Caterers</h1>}
       { !authenticated && <Redirect to="/login" />}
@@ -27,7 +28,9 @@ AuthenticatedComponent.defaultProps = {
 AuthenticatedComponent.propTypes = {
   authenticated: PropTypes.bool,
   MyComponent: PropTypes.func.isRequired,
-  user: PropTypes.shape({ data: PropTypes.object, token: PropTypes.string })
+  user: PropTypes.shape({ data: PropTypes.object,
+    token: PropTypes.string,
+  })
 };
 
 const requireCaterer = (MyComponent) => {

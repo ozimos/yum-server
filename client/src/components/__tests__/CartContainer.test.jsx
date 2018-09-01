@@ -7,7 +7,7 @@ describe('CartContainer Component', () => {
 
   it('should render without throwing an error', () => {
     expect(shallow(<CartContainer
-      order={allOrders.data}
+      order={allOrders.data.rows}
       MealRow={jest.fn()}
       clearCart={jest.fn()}
       dispatch={jest.fn()}
@@ -17,7 +17,7 @@ describe('CartContainer Component', () => {
   });
   it('renders correctly', () => {
     const wrapper = shallow(<CartContainer
-      order={allOrders.data}
+      order={allOrders.data.rows}
       MealRow={jest.fn()}
       clearCart={jest.fn()}
       dispatch={jest.fn()}

@@ -3,16 +3,21 @@ import {
 } from '../types';
 import validateToken from '../../services/validateToken';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
 let result = {};
-if (user) {
-  result = validateToken(user);
+if (token) {
+  result = validateToken(token);
 }
 
-if (!result.valid) { localStorage.removeItem('user'); }
+if (!result.valid) { localStorage.removeItem('token'); }
 const initialState = result.valid
-  ? { authenticated: true, user }
+  ? { authenticated: true,
+    user: { data: {
+      isCaterer: result.isCaterer,
+      userId: result.userId,
+      firstName: result.firstName,
+    } } }
   : { authenticated: false, user: {} };
 
 export default (state = initialState, action) => {

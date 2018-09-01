@@ -11,8 +11,8 @@ describe('Order Component', () => {
     expect(shallow(<Order
       dispatch={jest.fn()}
       user={user}
-      menu={allMeals.data}
-      orders={allOrders.data}
+      menu={allMeals.data.rows}
+      orders={allOrders.data.rows}
     />)
       .exists(<main className="col-12 col-md-8" />)).toBe(true);
   });
@@ -20,8 +20,8 @@ describe('Order Component', () => {
     const wrapper = shallow(<Order
       dispatch={jest.fn()}
       user={user}
-      menu={allMeals.data}
-      orders={allOrders.data}
+      menu={allMeals.data.rows}
+      orders={allOrders.data.rows}
     />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
