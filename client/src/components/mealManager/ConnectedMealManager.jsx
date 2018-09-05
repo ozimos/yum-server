@@ -22,6 +22,7 @@ import '../../../public/styles/modalOpenButton.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
 export class MealManager extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,9 +42,11 @@ export class MealManager extends React.Component {
     }
     this.props.dispatch(mealActions.getAllMeals());
   }
+
   setUploadPercent(percentProgress) {
     this.setState({ uploadPercent: percentProgress });
   }
+
   handleImageDrop(files) {
     this.setState({ uploading: true });
     imageUpload(files, this.setUploadPercent).then((response) => {
@@ -56,30 +59,39 @@ export class MealManager extends React.Component {
 
     });
   }
+
   openNewMealModal = () =>
     this.setState({ showNewMealModal: true });
+
   closeNewMealModal = () =>
     this.setState({ showNewMealModal: false, displayImage: '' });
+
   handleCreateMeal = async (meal) => {
     await this.props.dispatch(mealActions.createMeal(meal));
     this.setState({ displayImage: '' });
     this.closeNewMealModal();
     await this.props.dispatch(mealActions.getAllMeals());
   }
+
   disableButton = () =>
     this.setState({ canSubmit: false });
+
   enableButton = () =>
     this.setState({ canSubmit: true });
+
   serverFeedback = error =>
     this.formEl.updateInputsWithError(error);
+
   searchUpdated = (term) => {
     this.setState({ searchTerm: term });
   }
+
   handlePaginationClick = (data) => {
     const { limit } = this.props.pagination;
     const nextOffset = (data.selected) * limit;
     this.props.dispatch(mealActions.getAllMeals({ limit, offset: nextOffset }));
   }
+
   render() {
     const KEYS_TO_FILTERS = ['id', 'title', 'description', 'price'];
     const filteredMeals = this.props.meals.length ? this.props.meals

@@ -25,6 +25,7 @@ import '../../../public/styles/accordion.css';
 
 ReactModal.setAppElement(document.getElementById('root'));
 class Menu extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -35,21 +36,14 @@ class Menu extends React.Component {
     this.addToMenu = this.addToMenu.bind(this);
     this.postMenu = this.postMenu.bind(this);
   }
+
   componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
     this.props.dispatch(menuActions.getMenu());
   }
 
-handleMealCheck = (event, meal) => {
-  if (event.target.checked) {
-    this.addToMenu(meal);
-  } else {
-    this.removeFromMenu(meal.id);
-  }
-}
 notify = message => toast(message, { className: 'toaster' });
 
-checkMeal = id => this.state.currentMenu.some(elem => elem.id === id)
 addToMenu(meal) {
   const inMenu = this.state.currentMenu.some(elem => elem.id === meal.id);
   if (!inMenu) {
@@ -61,10 +55,13 @@ addToMenu(meal) {
   }
 }
   openMenuModal = () => this.setState({ showMenuModal: true })
+
   closeMenuModal= () => this.setState({ showMenuModal: false })
+
   searchUpdated = (term) => {
     this.setState({ searchTerm: term });
   }
+
   async postMenu(menu, meals, msg) {
     const mealList = meals || this.state.currentMenu.map(meal => meal.id);
     await this.props.dispatch(menuActions.postMenu({ meals: mealList }));
@@ -78,6 +75,7 @@ addToMenu(meal) {
       );
     }
   }
+
   removeFromMenu = (id) => {
     const inMenu = this.state.currentMenu.some(elem => elem.id === id);
     if (inMenu) {
@@ -98,20 +96,24 @@ addToMenu(meal) {
       );
     }
   }
+
   handleMealPaginationClick = (data) => {
     const { limit } = this.props.mealsPagination;
     const nextOffset = (data.selected) * limit;
     this.props.dispatch(mealActions.getAllMeals({ limit, offset: nextOffset }));
   }
+
   clearMenu = () => {
     this.setState({ currentMenu: [] });
     this.closeMenuModal();
   }
+
   handleMenuPaginationClick = (data) => {
     const { limit } = this.props.menuPagination;
     const nextOffset = (data.selected) * limit;
     this.props.dispatch(menuActions.getMenu({ limit, offset: nextOffset }));
   }
+
   render() {
     const KEYS_TO_FILTERS = ['id', 'title', 'description', 'price'];
 
@@ -167,8 +169,6 @@ addToMenu(meal) {
                 />
                 <MealCardContainer
                   meals={filteredMeals}
-                  // handleMealCheck={this.handleMealCheck}
-                  // checkMeal={this.checkMeal}
                   MealCard={MealDisplayCard}
                   collection="Menu"
                   addToCollection={this.addToMenu}

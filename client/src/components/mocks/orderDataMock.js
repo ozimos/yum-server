@@ -1,16 +1,17 @@
 import { userIncludes } from './userDataMock';
+import { rows } from './mealDataMock';
 
-const rows = [
-  { id: 'abc', price: 1200 }, { id: 'def', price: 2000 }
-];
 const Meals = rows.map(meal =>
   ({ ...meal, MealOrders: { quantity: 2 } }));
+
 const template = {
   id: 'orderId',
+  updatedAt: '2018-08-24T16:47:55.783Z',
   userId: 'userId',
   Meals,
   User: userIncludes,
 };
+
 export const order = {
   data: {
     pages: 1,
@@ -18,10 +19,12 @@ export const order = {
     rows: [template]
   }
 };
+
 export const orderActionData = {
   order: template
 
 };
+
 export const allOrders = {
   data: {
     rows: [{ ...template, id: 'order1' },

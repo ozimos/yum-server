@@ -12,6 +12,7 @@ const store = mockStore({
   mealError: null,
   meals: []
 });
+
 describe('meal async actions', () => {
   beforeEach(() => {
     moxios.install();
@@ -39,6 +40,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toMatchObject(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
   ' on failing fetching meals', () => {
 
@@ -56,6 +58,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and CREATE_MEAL_SUCCESS' +
   'on successfully creating a meal', () => {
 
@@ -73,6 +76,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
   'on failing creating a meal', () => {
 
@@ -90,6 +94,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and UPDATE_MEAL_SUCCESS' +
   'on successfully updating a meal', () => {
     const mealId = 'abc';
@@ -107,6 +112,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
   'on failing updating a meal', () => {
     const mealId = 'abc';
@@ -125,8 +131,9 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and DELETE_MEAL_SUCCESS' +
-  'on successfully deleting a meal', () => {
+  ' on successfully deleting a meal', () => {
     const mealId = 'abc';
     moxios.stubRequest(`/api/v1/meals/${mealId}`, {
       status: 200,
@@ -142,6 +149,7 @@ describe('meal async actions', () => {
         expect(dispatchedActions).toEqual(expectedActions);
       });
   });
+
   it('dispatches MEALS_REQUEST and MEALS_FAILURE' +
   'on failing deleting a meal', () => {
     const mealId = 'abc';
