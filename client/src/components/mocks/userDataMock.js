@@ -3,9 +3,11 @@ export const userData = {
   message: 'abc',
   token: 'abc'
 };
+
 export const userInput = {
   data: { email: 'asdf' }
 };
+
 export const userIncludes = {
   email: 'asdf',
   firstName: 'first',

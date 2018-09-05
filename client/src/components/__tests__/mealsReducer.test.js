@@ -13,6 +13,7 @@ describe('mealsReducer', () => {
       count: 1,
       pages: 1 }
   };
+
   it('should return the initial state', () => {
     expect(mealsReducer(undefined, {})).toEqual(initialState);
   });
@@ -57,6 +58,7 @@ describe('mealsReducer', () => {
     const action = { type: mealTypes.CREATE_MEAL_SUCCESS, meal: meal.data };
     expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
+
   it('should handle UPDATE_MEAL_SUCCESS', () => {
     const beforeState = {
       connecting: true,
@@ -68,6 +70,7 @@ describe('mealsReducer', () => {
     const action = { type: mealTypes.UPDATE_MEAL_SUCCESS, meal: meal.data };
     expect(mealsReducer(beforeState, action)).toMatchObject(newState);
   });
+
   it('should handle DELETE_MEAL_SUCCESS', () => {
     const beforeState = {
       connecting: true,

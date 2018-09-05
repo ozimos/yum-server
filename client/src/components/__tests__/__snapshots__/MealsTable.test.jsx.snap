@@ -1,7 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OrderTableContainer Component renders correctly 1`] = `
-<div>
+exports[`MealsTable Component renders correctly 1`] = `
+<div
+  className="order-meal-modal"
+>
+  <div
+    className="flexbox top"
+  >
+    <h5>
+      Order Details
+    </h5>
+    <button
+      className="btn title-button"
+      onClick={[MockFunction]}
+    >
+      ✖
+    </button>
+  </div>
+  <div
+    className="flexbox"
+  >
+    <span>
+      Total Charge:
+    </span>
+    <span>
+      ₦
+      0
+    </span>
+  </div>
   <ReactTable
     AggregatedComponent={[Function]}
     ExpanderComponent={[Function]}
@@ -21,10 +47,10 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
     TrComponent={[Function]}
     TrGroupComponent={[Function]}
     aggregatedKey="_aggregated"
-    className="-striped -highlight clickable"
-    collapseOnDataChange={true}
-    collapseOnPageChange={true}
-    collapseOnSortingChange={true}
+    className=""
+    collapseOnDataChange={false}
+    collapseOnPageChange={false}
+    collapseOnSortingChange={false}
     column={
       Object {
         "Aggregated": undefined,
@@ -58,85 +84,37 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
     columns={
       Array [
         Object {
-          "Header": "Order Id",
-          "accessor": "id",
-          "width": 550,
+          "Header": "Meal Title",
+          "accessor": "title",
+          "width": 275,
         },
         Object {
-          "Cell": [Function],
-          "Header": "Date",
-          "accessor": "updatedAt",
-          "width": 250,
+          "Header": "Quantity",
+          "accessor": "MealOrders.quantity",
+          "width": 75,
         },
         Object {
-          "Cell": [Function],
-          "Header": "Time",
-          "accessor": "updatedAt",
-          "width": 200,
+          "Header": [Function],
+          "accessor": "price",
+          "width": 175,
         },
         Object {
-          "Cell": [Function],
-          "Header": "",
-          "accessor": "updatedAt",
-          "className": "normal-cursor",
-          "getProps": [Function],
-          "width": 50,
+          "Header": [Function],
+          "accessor": "subTotal",
+          "aggregate": [Function],
+          "width": 175,
         },
       ]
     }
     data={
       Array [
         Object {
-          "Meals": Array [
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "abc",
-              "price": 1200,
-            },
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "def",
-              "price": 2000,
-            },
-          ],
-          "User": Object {
-            "email": "asdf",
-            "firstName": "first",
-            "lastName": "last",
-          },
-          "id": "order1",
-          "updatedAt": "2018-08-24T16:47:55.783Z",
-          "userId": "userId",
+          "id": "abc",
+          "price": 1200,
         },
         Object {
-          "Meals": Array [
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "abc",
-              "price": 1200,
-            },
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "def",
-              "price": 2000,
-            },
-          ],
-          "User": Object {
-            "email": "asdf",
-            "firstName": "first",
-            "lastName": "last",
-          },
-          "id": "order2",
-          "updatedAt": "2018-08-24T16:47:55.783Z",
-          "userId": "userId",
+          "id": "def",
+          "price": 2000,
         },
       ]
     }
@@ -188,7 +166,7 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
     minRows={0}
     multiSort={true}
     nestingLevelKey="_nestingLevel"
-    nextText="Next"
+    nextText=">>"
     noDataText="No rows found"
     ofText="of"
     onFetchData={[MockFunction]}
@@ -208,7 +186,7 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
     pivotDefaults={Object {}}
     pivotIDKey="_pivotID"
     pivotValKey="_pivotVal"
-    previousText="Previous"
+    previousText="<<"
     resizable={true}
     resolveData={[Function]}
     rowsText="rows"

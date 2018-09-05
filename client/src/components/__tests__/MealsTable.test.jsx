@@ -1,25 +1,25 @@
 /* global React:false, shallow:false toJson:false */
 
-import OrderTableContainer from '../mealCard/OrderTableContainer';
-import { allOrders } from '../mocks/orderDataMock';
+import MealsTable from '../mealCard/MealsTable';
+import { rows } from '../mocks/mealDataMock';
 
 const props = {
-  pagination: {
+  mealsPagination: {
     limit: 10,
     offset: 0,
     pages: 1
   },
   currentOrderId: 'abc',
   loading: false,
-  orders: allOrders.data.rows,
-  addOrderToCart: jest.fn(),
-  getOrderMeals: jest.fn(),
-  getOrderMealsTotals: jest.fn(),
+  meals: rows,
+  total: 0,
+  closeMealDetailModal: jest.fn(),
   onFetchData: jest.fn(),
 };
-describe('OrderTableContainer Component', () => {
 
-  const setup = () => shallow(<OrderTableContainer {...props} />);
+describe('MealsTable Component', () => {
+
+  const setup = () => shallow(<MealsTable {...props} />);
 
 
   it('should render without throwing an error', () => {
@@ -27,6 +27,7 @@ describe('OrderTableContainer Component', () => {
     expect(wrapper
       .exists(<table className="table" />)).toBe(true);
   });
+
   it('renders correctly', () => {
     const wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();

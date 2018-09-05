@@ -48,14 +48,10 @@ const DashboardTableContainer = ({ orders, ...props }) => {
         sortable={false}
         manual
         getTdProps={(state, rowInfo, column) => ({
-            onClick: (e, handleOriginal) => {
+            onClick: () => {
               if (column.Header) {
                 props.getOrderMeals(rowInfo.row.id);
                 props.getOrderMealsTotals(rowInfo.row.id);
-              }
-
-              if (handleOriginal) {
-                handleOriginal();
               }
             }
           })}
