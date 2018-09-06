@@ -31,12 +31,14 @@ class Dashboard extends React.Component {
     };
     this.searchUpdated = this.searchUpdated.bind(this);
   }
+
   componentDidMount() {
     const { offset = 0, limit = 10 } = this.props.pagination;
     this.props
       .dispatch(dashboardActions.getOrdersWithMealLinks({ limit, offset }));
     this.props.dispatch(dashboardActions.getDaysOrdersTotal());
   }
+
   onFetchMealData = (state) => {
     const id = this.state.selectedOrderId || this.props.orders[0].id;
     const { page, pageSize } = state;
@@ -51,20 +53,25 @@ class Dashboard extends React.Component {
     return this.props.dispatch(dashboardActions
       .getOrdersWithMealLinks({ limit: pageSize, offset }));
   }
+
   getOrderMealsTotals = id =>
     this.props.dispatch(dashboardActions.getOrderTotal(id))
+
   getOrderMeals = (id) => {
     const { offset = 0, limit = 5 } = this.props.mealsPagination;
     this.setState({ showMealDetailModal: true, selectedOrderId: id });
     this.props
       .dispatch(dashboardActions.getMealsInOrder(id, { limit, offset }));
   }
+
   closeMealDetailModal = () => this.setState({ showMealDetailModal: false });
 
   searchUpdated(term) {
     this.setState({ searchTerm: term });
   }
+
   render() {
+
     const KEYS_TO_FILTERS = [
       'id', 'User.firstName', 'User.lastName', 'User.email', 'updatedAt'];
     const isTodayOrder = Boolean(this.props.orders.length);
@@ -73,7 +80,9 @@ class Dashboard extends React.Component {
       filteredOrders = this.props.orders
         .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     }
+
     const { isCaterer, firstName } = this.props.user;
+
     return (
       <div id="dashboard" className="canvas2">
         <div className="container3">
@@ -81,16 +90,19 @@ class Dashboard extends React.Component {
           <header className="header extra">
             <ConnectedNav />
           </header>
+
           <main>
             <Greeting isCaterer={isCaterer} firstName={firstName} />
 
             <div className="flexbox">
               <div className="card order_summary">
                 <div className="flexbox">
+
                   <span
                     className="order_span summary_value flow-text"
                   >{this.props.daysTotal.orders}
                   </span>
+
                   <span
                     className="order_span shrink"
                   >
@@ -100,10 +112,14 @@ class Dashboard extends React.Component {
                       src="./images/food.png"
                     />
                   </span>
+
                 </div>
+
                 <h5 className="flow-text" >Orders</h5>
+
               </div >
               <div className="card order_summary">
+
                 <div className="flexbox">
                   <span
                     className="order_span summary_value flow-text"
@@ -119,15 +135,21 @@ class Dashboard extends React.Component {
                     />
                   </span>
                 </div>
+
                 <h5 className="flow-text">Customer(s)</h5>
+
               </div >
+
               <div className="card order_summary">
+
                 <div className="flexbox">
+
                   <span
                     className="order_span summary_value flow-text"
                   >
                   &#8358;{this.props.daysTotal.revenue}
                   </span>
+
                   <span
                     className="order_span shrink"
                   >
@@ -137,43 +159,60 @@ class Dashboard extends React.Component {
                       src="./images/chart.png"
                     />
                   </span>
+
                 </div>
+
                 <h5 className="flow-text">Total Sales</h5>
+
               </div>
+
             </div>
+
             <div className="order_detail flexbox title-element">
+
               <h5>
               Order History
               </h5>
+
               <SearchInput
                 className="search-input input-field"
                 onChange={this.searchUpdated}
               />
+
             </div>
+
             <Accordion accordion={false}>
+
               <AccordionItem expanded>
                 <AccordionItemTitle />
+
                 <AccordionItemBody>
+
                   <div />
-                  { isTodayOrder ? <DashboardTableContainer
-                    orders={filteredOrders}
-                    loading={this.props.orderConnecting}
-                    pagination={this.props.pagination}
-                    addOrderToCart={this.addOrderToCart}
-                    onFetchData={this.onFetchOrderData}
-                    getOrderMeals={this.getOrderMeals}
-                    getOrderMealsTotals={this.getOrderMealsTotals}
-                    defaultPage={this.state.currentPage}
-                    currentOrderId={this.state.currentOrderId}
-                  /> :
-                  <div>
+
+                  { isTodayOrder ?
+                    <DashboardTableContainer
+                      orders={filteredOrders}
+                      loading={this.props.orderConnecting}
+                      pagination={this.props.pagination}
+                      addOrderToCart={this.addOrderToCart}
+                      onFetchData={this.onFetchOrderData}
+                      getOrderMeals={this.getOrderMeals}
+                      getOrderMealsTotals={this.getOrderMealsTotals}
+                      defaultPage={this.state.currentPage}
+                      currentOrderId={this.state.currentOrderId}
+                    /> :
+                    <div>
                   You have not placed an order today
-                  </div>
+                    </div>
                 }
                 </AccordionItemBody>
+
               </AccordionItem>
+
             </Accordion>
           </main>
+
           <ReactModal
             isOpen={this.state.showMealDetailModal}
             contentLabel="Input Modal"
@@ -182,6 +221,7 @@ class Dashboard extends React.Component {
             shouldCloseOnOverlayClick
             style={{ content: { width: '60%' } }}
           >
+
             <MealsTable
               meals={this.props.orderMeals}
               total={this.props.total}
@@ -191,12 +231,15 @@ class Dashboard extends React.Component {
               closeMealDetailModal={this.closeMealDetailModal}
               getTrProps={() => ({ style: { cursor: 'pointer' } })}
             />
+
           </ReactModal>
+
         </div>
       </div>
     );
   }
 }
+
 Dashboard.defaultProps = {
   orders: [],
   orderMeals: [],
@@ -215,6 +258,7 @@ Dashboard.defaultProps = {
     offset: 0
   },
 };
+
 Dashboard.propTypes = {
   dispatch: PropTypes.func.isRequired,
   orders: PropTypes.arrayOf(PropTypes.object),
@@ -246,6 +290,7 @@ Dashboard.propTypes = {
     firstName: PropTypes.string
   }).isRequired,
 };
+
 const mapStateToProps = state => ({
   user: state.loginReducer.user.data,
   meals: state.mealsReducer.meals,
@@ -261,5 +306,7 @@ const mapStateToProps = state => ({
   mealsPagination: state.dashboardReducer.mealsPagination,
   orderConnecting: state.dashboardReducer.connecting,
 });
+
 export { Dashboard };
+
 export default connect(mapStateToProps)(Dashboard);

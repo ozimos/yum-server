@@ -116,24 +116,42 @@ exports[`Order Component renders correctly 1`] = `
                 throttle={200}
               />
             </div>
-            <MealCardContainer
-              MealCard={[Function]}
-              addClass="scroll"
-              addToCollection={[Function]}
-              collection="cart"
-              meals={
-                Array [
-                  Object {
-                    "id": "abc",
-                    "price": 1200,
-                  },
-                  Object {
-                    "id": "def",
-                    "price": 2000,
-                  },
-                ]
-              }
-            />
+            <div>
+              <MealCardContainer
+                MealCard={[Function]}
+                addClass="scroll"
+                addToCollection={[Function]}
+                collection="cart"
+                meals={
+                  Array [
+                    Object {
+                      "id": "abc",
+                      "price": 1200,
+                    },
+                    Object {
+                      "id": "def",
+                      "price": 2000,
+                    },
+                  ]
+                }
+              />
+              <PaginationBoxView
+                activeClassName="active"
+                breakLabel="..."
+                containerClassName="pagination"
+                disableInitialCallback={false}
+                disabledClassName="disabled"
+                marginPagesDisplayed={2}
+                nextClassName="next"
+                nextLabel="next"
+                onPageChange={[Function]}
+                pageCount={1}
+                pageRangeDisplayed={5}
+                previousClassName="previous"
+                previousLabel="previous"
+                subContainerClassName="pages pagination"
+              />
+            </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
         <AccordionItemWrapper
@@ -777,24 +795,42 @@ exports[`Order Component renders correctly 3`] = `
                 throttle={200}
               />
             </div>
-            <MealCardContainer
-              MealCard={[Function]}
-              addClass="scroll"
-              addToCollection={[Function]}
-              collection="cart"
-              meals={
-                Array [
-                  Object {
-                    "id": "abc",
-                    "price": 1200,
-                  },
-                  Object {
-                    "id": "def",
-                    "price": 2000,
-                  },
-                ]
-              }
-            />
+            <div>
+              <MealCardContainer
+                MealCard={[Function]}
+                addClass="scroll"
+                addToCollection={[Function]}
+                collection="cart"
+                meals={
+                  Array [
+                    Object {
+                      "id": "abc",
+                      "price": 1200,
+                    },
+                    Object {
+                      "id": "def",
+                      "price": 2000,
+                    },
+                  ]
+                }
+              />
+              <PaginationBoxView
+                activeClassName="active"
+                breakLabel="..."
+                containerClassName="pagination"
+                disableInitialCallback={false}
+                disabledClassName="disabled"
+                marginPagesDisplayed={2}
+                nextClassName="next"
+                nextLabel="next"
+                onPageChange={[Function]}
+                pageCount={1}
+                pageRangeDisplayed={5}
+                previousClassName="previous"
+                previousLabel="previous"
+                subContainerClassName="pages pagination"
+              />
+            </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
         <AccordionItemWrapper
@@ -843,7 +879,7 @@ exports[`Order Component renders correctly 3`] = `
                      minutes after order is placed
             </p>
             <div>
-              You have not placed an order today
+              You have not placed an order on this application
             </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
@@ -1097,7 +1133,7 @@ exports[`Order Component renders correctly 4`] = `
                      minutes after order is placed
             </p>
             <div>
-              You have not placed an order today
+              You have not placed an order on this application
             </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
@@ -1300,24 +1336,42 @@ exports[`Order Component renders correctly 5`] = `
                 throttle={200}
               />
             </div>
-            <MealCardContainer
-              MealCard={[Function]}
-              addClass="scroll"
-              addToCollection={[Function]}
-              collection="cart"
-              meals={
-                Array [
-                  Object {
-                    "id": "abc",
-                    "price": 1200,
-                  },
-                  Object {
-                    "id": "def",
-                    "price": 2000,
-                  },
-                ]
-              }
-            />
+            <div>
+              <MealCardContainer
+                MealCard={[Function]}
+                addClass="scroll"
+                addToCollection={[Function]}
+                collection="cart"
+                meals={
+                  Array [
+                    Object {
+                      "id": "abc",
+                      "price": 1200,
+                    },
+                    Object {
+                      "id": "def",
+                      "price": 2000,
+                    },
+                  ]
+                }
+              />
+              <PaginationBoxView
+                activeClassName="active"
+                breakLabel="..."
+                containerClassName="pagination"
+                disableInitialCallback={false}
+                disabledClassName="disabled"
+                marginPagesDisplayed={2}
+                nextClassName="next"
+                nextLabel="next"
+                onPageChange={[Function]}
+                pageCount={1}
+                pageRangeDisplayed={5}
+                previousClassName="previous"
+                previousLabel="previous"
+                subContainerClassName="pages pagination"
+              />
+            </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
         <AccordionItemWrapper

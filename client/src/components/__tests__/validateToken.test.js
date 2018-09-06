@@ -17,18 +17,23 @@ describe('validate token', () => {
   it('returns true if token has not expired', () => {
     expect(validateToken(token).valid).toBe(true);
   });
+
   it('returns data in token', () => {
     expect(validateToken(token).isCaterer).toBe(true);
   });
+
   describe('when token has expired', () => {
+
     beforeEach(() => {
       MockDate.set(nextDay2);
     });
     afterEach(() => {
       MockDate.reset();
     });
+
     it('returns false', () => {
       expect(validateToken(token).valid).toBe(false);
     });
+
   });
 });

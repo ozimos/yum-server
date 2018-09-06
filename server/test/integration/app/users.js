@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
 import {
   expect,
   request,
-  defaultUser,
+  catererTovieye,
   rootURL
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
@@ -31,13 +30,13 @@ describe('Routes Users', () => {
   // Login A User
   describe('POST /auth/login', () => {
     const credentials = {
-      email: defaultUser.email,
+      email: catererTovieye.email,
       password: defaultPassword,
     };
     it(
       'should login new user',
       () => request(app).post(logInUrl).send(credentials).then((res) => {
-        expect(res.body.data.email).to.equal(defaultUser.email);
+        expect(res.body.data.email).to.equal(catererTovieye.email);
         expect(res.body.token).to.be.a('string');
       })
     );

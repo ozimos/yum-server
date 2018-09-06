@@ -17,6 +17,7 @@ const props = {
   getOrderMealsTotals: jest.fn(),
   onFetchData: jest.fn(),
 };
+
 describe('OrderTableContainer Component', () => {
 
   const setup = () => shallow(<OrderTableContainer {...props} />);
@@ -27,6 +28,7 @@ describe('OrderTableContainer Component', () => {
     expect(wrapper
       .exists(<table className="table" />)).toBe(true);
   });
+
   it('renders correctly', () => {
     const wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();

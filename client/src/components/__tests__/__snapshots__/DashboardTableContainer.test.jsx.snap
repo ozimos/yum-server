@@ -60,12 +60,17 @@ exports[`DashboardTableContainer Component renders correctly 1`] = `
         Object {
           "Header": "Order Id",
           "accessor": "id",
-          "width": 350,
+          "width": 300,
         },
         Object {
           "Cell": [Function],
           "Header": "Customer",
           "accessor": "User",
+          "width": 150,
+        },
+        Object {
+          "Header": "Customer Id",
+          "accessor": "userId",
           "width": 200,
         },
         Object {

@@ -9,6 +9,24 @@ export const seedUsers = [{
   isCaterer: true
 },
 {
+  id: '35ef394f-bc07-4e52-9f5f-6ab326d45f85',
+  firstName: 'Douglas',
+  lastName: 'Asede',
+  email: 'douglas@gmail.com',
+  // eslint-disable-next-line max-len
+  password: '$2a$10$JNmon8b2KLUT.31FsTwyDeSz3ge/BZ5OOpc6mq32CzdAfU.DCz.4e',
+  isCaterer: true
+},
+{
+  id: '1242fe68-67ee-4de2-80d0-0859f3d0f361',
+  firstName: 'Dienebi',
+  lastName: 'Ombu',
+  email: 'dienebi@gmail.com',
+  // eslint-disable-next-line max-len
+  password: '$2a$10$JNmon8b2KLUT.31FsTwyDeSz3ge/BZ5OOpc6mq32CzdAfU.DCz.4e',
+  isCaterer: false
+},
+{
   id: '20a0dcc4-0a78-43f6-881b-884dd6f32861',
   firstName: 'Toviey',
   lastName: 'Oz',
@@ -48,7 +66,7 @@ export const seedMeals = [{
 },
 {
   id: '226ecfc3-82bf-4075-b623-ea0c1fe1bb25',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  userId: '1242fe68-67ee-4de2-80d0-0859f3d0f361',
   title: 'Starch and Owho',
   description: 'affordable',
   // eslint-disable-next-line max-len
@@ -57,7 +75,7 @@ export const seedMeals = [{
 },
 {
   id: '443b76e7-b152-4937-890e-492c842b45a8',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  userId: '1242fe68-67ee-4de2-80d0-0859f3d0f361',
   title: 'Pancake and Syrup',
   description: 'affordable',
   // eslint-disable-next-line max-len
@@ -66,7 +84,7 @@ export const seedMeals = [{
 },
 {
   id: 'a49498b3-889a-43f9-8582-058da7b8402a',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  userId: '1242fe68-67ee-4de2-80d0-0859f3d0f361',
   title: 'Starch and Owho',
   description: 'affordable',
   // eslint-disable-next-line max-len

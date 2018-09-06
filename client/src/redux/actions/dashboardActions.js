@@ -28,10 +28,35 @@ const getOrdersWithMealLinks = ({ limit = 10, offset = 0 } = {}) =>
       );
   };
 
+const getOrdersWithMealLinksByDate
+  = (date, { limit = 8, offset = 0 } = {}) => (dispatch) => {
+
+    const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
+      : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;
+
+    dispatch({ type: dashboardTypes.ORDER_DASHBOARD_REQUEST });
+
+    return requestServices(url)
+      .then(
+        response =>
+          dispatch({
+            type: dashboardTypes.ORDER_DASHBOARD_HISTORY_SUCCESS,
+            orders: response.data.data.rows,
+            pagination: paginationExtract(response.data.data)
+
+          }),
+        error =>
+          dispatch({
+            type: dashboardTypes.ORDER_DASHBOARD_HISTORY_FAILURE,
+            error: error.response.data.message
+          })
+
+      );
+  };
 
 const getMealsInOrder
-= (orderId, { limit = 4, offset = 0 } = {}) => (dispatch) => {
-  const url = `${baseUrl}/${orderId}/meals?limit=${limit}&offset=${offset}`;
+= (orderId, { offset = 0 } = {}) => (dispatch) => {
+  const url = `${baseUrl}/${orderId}/meals?limit=5&offset=${offset}`;
   dispatch({ type: dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST });
   return requestServices(url)
     .then(
@@ -86,6 +111,7 @@ const getDaysOrdersTotal = () => (dispatch) => {
 
 export default {
   getOrdersWithMealLinks,
+  getOrdersWithMealLinksByDate,
   getMealsInOrder,
   getDaysOrdersTotal,
   getOrderTotal

@@ -8,6 +8,15 @@ export default {
           primaryKey: true,
           defaultValue: Sequelize.UUIDV4
         },
+        userId: {
+          type: Sequelize.UUID,
+          references: {
+            model: 'Users',
+            key: 'id',
+            as: 'userId',
+            onDelete: 'CASCADE'
+          },
+        },
         menuDate: {
           allowNull: false,
           type: Sequelize.DATEONLY,

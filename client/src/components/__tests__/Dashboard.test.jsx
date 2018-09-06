@@ -37,6 +37,7 @@ describe('Dashboard Component', () => {
       .exists(<table className="table" />)).toBe(true);
 
   });
+
   it('renders correctly', () => {
     const orders = [];
     const pagination = {
@@ -62,6 +63,7 @@ describe('Dashboard Component', () => {
     wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
   it('should call `onFetchMealData`', () => {
     const wrapper = setup();
 
@@ -72,6 +74,7 @@ describe('Dashboard Component', () => {
     wrapper.instance().onFetchMealData({ page: 1, pageSize: 10 });
     expect(onFetchMealDataSpy).toHaveBeenCalled();
   });
+
   it('should call `onFetchOrderData`', () => {
     const wrapper = setup();
 
@@ -82,6 +85,7 @@ describe('Dashboard Component', () => {
     wrapper.instance().onFetchOrderData({ page: 1, pageSize: 10 });
     expect(onFetchOrderDataSpy).toHaveBeenCalled();
   });
+
   it('should call `getOrderMealsTotals`', () => {
     const wrapper = setup();
 
@@ -92,6 +96,7 @@ describe('Dashboard Component', () => {
     wrapper.instance().getOrderMealsTotals('abc');
     expect(getOrderMealsTotalsSpy).toHaveBeenCalled();
   });
+
   it('should call `getOrderMeals`', () => {
     const wrapper = setup();
 
@@ -102,6 +107,7 @@ describe('Dashboard Component', () => {
     wrapper.instance().getOrderMeals('abc');
     expect(getOrderMealsSpy).toHaveBeenCalled();
   });
+
   it('should call `closeMealDetailModal`', () => {
     const wrapper = setup();
 
@@ -112,6 +118,7 @@ describe('Dashboard Component', () => {
     wrapper.instance().closeMealDetailModal();
     expect(closeMealDetailModalSpy).toHaveBeenCalled();
   });
+
   it('should call `searchUpdated`', () => {
     const wrapper = setup();
 

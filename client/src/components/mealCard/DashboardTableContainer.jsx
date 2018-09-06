@@ -10,7 +10,7 @@ const DashboardTableContainer = ({ orders, ...props }) => {
     {
       Header: 'Order Id',
       accessor: 'id',
-      width: 350,
+      width: 300,
     }, {
       Header: 'Customer',
       accessor: 'User',
@@ -20,6 +20,10 @@ const DashboardTableContainer = ({ orders, ...props }) => {
           {columnProps.row.User.lastName}
         </span>
       ),
+      width: 150,
+    }, {
+      Header: 'Customer Id',
+      accessor: 'userId',
       width: 200,
     }, {
       Header: 'Date',

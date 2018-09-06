@@ -4,7 +4,7 @@ import {
   request,
   rootURL,
   menuMeal,
-  token,
+  tovieyeCatererToken,
   templateTest
 } from '../../../testHelpers/appHelper';
 
@@ -19,17 +19,22 @@ context('menu integration test', () => {
     const newMenu = {
       meals: [menuMeal.id]
     };
+
     templateTest('Add Menu', 'post', menuUrl, newMenu, 'rows', 'object', '201');
   });
+
   // Get  Menu
   describe('GET /menu', () => {
+
     it('should return the menu for today', () =>
       request(app)
         .get(getMenuUrl)
-        .set('authorization', `JWT ${token}`)
+        .set('authorization', `JWT ${tovieyeCatererToken}`)
         .then((res) => {
           expect(res.body.data.rows[0].Meals[0].id).to.equal(menuMeal.id);
         }));
+
     templateTest('Get Menu', 'get', getMenuUrl, null, 'rows', 'object');
   });
+
 });

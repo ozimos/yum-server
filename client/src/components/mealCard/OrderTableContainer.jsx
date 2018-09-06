@@ -15,18 +15,18 @@ const OrderTableContainer = ({ orders, ...props }) => {
       width: 550,
     }, {
       Header: 'Date',
-      accessor: 'updatedAt',
+      accessor: 'createdAt',
       Cell: columnProps =>
         (<span>{format(columnProps.value, 'DD MMM, YYYY')}</span>),
       width: 250,
     }, {
       Header: 'Time',
-      accessor: 'updatedAt',
+      accessor: 'createdAt',
       Cell: columnProps => (<span>{format(columnProps.value, 'h:mm A')}</span>),
       width: 200
     }, {
       Header: '',
-      accessor: 'updatedAt',
+      accessor: 'createdAt',
       Cell: columnProps => isToday(columnProps.value) &&
       canEdit(columnProps.value) &&
       (
@@ -51,6 +51,7 @@ const OrderTableContainer = ({ orders, ...props }) => {
   ];
   return (
     <div>
+
       <ReactTable
         data={orders}
         columns={columns}
@@ -71,10 +72,12 @@ const OrderTableContainer = ({ orders, ...props }) => {
             }
           })}
       />
+
     </div>
   );
 };
 OrderTableContainer.defaultProps = {
+
   pagination: {
     pages: 1,
     limit: 10,
@@ -82,8 +85,11 @@ OrderTableContainer.defaultProps = {
   },
   loading: false,
   currentOrderId: ''
+
 };
+
 OrderTableContainer.propTypes = {
+
   orders: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrderToCart: PropTypes.func.isRequired,
   getOrderMeals: PropTypes.func.isRequired,
@@ -96,6 +102,7 @@ OrderTableContainer.propTypes = {
     offset: PropTypes.number,
   }),
   loading: PropTypes.bool
+
 };
 
 export default OrderTableContainer;

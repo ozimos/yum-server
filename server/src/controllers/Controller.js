@@ -102,9 +102,10 @@ class Controller {
       raw = false, statusCode = 200 } = {}
   ) {
     let { offset = 0, limit = 8 } = req.query;
-    limit = Number(limit);
-    offset = Number(offset);
-    options.limit = Number(limit);
+
+    limit = parseInt(limit, 10);
+    offset = parseInt(offset, 10);
+    options.limit = limit;
     options.offset = offset;
     return this.Model.scope(scope)
       .findAndCountAll(options)

@@ -21,10 +21,12 @@ const AuthenticatedComponent = (props) => {
     </Fragment>
   );
 };
+
 AuthenticatedComponent.defaultProps = {
   authenticated: false,
   user: { data: {} }
 };
+
 AuthenticatedComponent.propTypes = {
   authenticated: PropTypes.bool,
   MyComponent: PropTypes.func.isRequired,

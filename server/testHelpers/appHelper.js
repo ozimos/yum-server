@@ -12,26 +12,52 @@ export const {
 } = chai;
 
 
-export const defaultUser = seedUsers[0];
+export const catererTovieye = seedUsers[0];
+export const catererDouglas = seedUsers[1];
+export const customerDienebi = seedUsers[2];
 export const defaultMeal = seedMeals[0];
 export const menuMeal = seedMeals[1];
 export const deleteMeal = seedMeals[2];
 export const extraMeal = seedMeals[3];
 
-export const payload = {
-  isCaterer: defaultUser.isCaterer,
-  userId: defaultUser.id
+export const payloadTovieye = {
+  isCaterer: catererTovieye.isCaterer,
+  userId: catererTovieye.id,
+  firstName: catererTovieye.firstName
 };
-const payloadNonAdmin = {
-  isCaterer: seedUsers[1].isCaterer,
-  userId: seedUsers[1].id
+export const payloadDouglas = {
+  isCaterer: catererTovieye.isCaterer,
+  userId: catererTovieye.id,
+  firstName: catererTovieye.firstName
 };
-export const token = jwt.sign(payload, process.env.TOKEN_PASSWORD, {
-  expiresIn: '1h'
-});
-export const tokenUser = jwt.sign(payloadNonAdmin, process.env.TOKEN_PASSWORD, {
-  expiresIn: '1h'
-});
+
+const payloadCustomer = {
+  isCaterer: customerDienebi.isCaterer,
+  userId: customerDienebi.id,
+  firstName: customerDienebi.firstName
+};
+
+export const tovieyeCatererToken = jwt.sign(
+  payloadTovieye,
+  process.env.TOKEN_PASSWORD, {
+    expiresIn: '1h'
+  }
+);
+
+export const douglasCatererToken = jwt.sign(
+  payloadDouglas,
+  process.env.TOKEN_PASSWORD, {
+    expiresIn: '1h'
+  }
+);
+
+export const customerToken = jwt.sign(
+  payloadCustomer,
+  process.env.TOKEN_PASSWORD, {
+    expiresIn: '1h'
+  }
+);
+
 // endpoint urls
 export const rootURL = '/api/v1';
 export const menuUrl = `${rootURL}/menu`;
@@ -67,7 +93,7 @@ export const templateTest = function generateTest(
     it('return 200 or correct success code', async () => {
       try {
         const res = await boundRequest()
-          .set('authorization', `JWT ${token}`)
+          .set('authorization', `JWT ${tovieyeCatererToken}`)
           .send(content);
         return expect(res).to.have.status(status);
       } catch (err) {
@@ -78,32 +104,35 @@ export const templateTest = function generateTest(
     it('response should be json', async () => {
       try {
         const res = await boundRequest()
-          .set('authorization', `JWT ${token}`)
+          .set('authorization', `JWT ${tovieyeCatererToken}`)
           .send(content);
         return expect(res).to.have.header('content-type', /json/);
       } catch (err) {
         throw err;
       }
     });
+
     it('response should have required keys', async () => {
       try {
         const res = await boundRequest()
-          .set('authorization', `JWT ${token}`)
+          .set('authorization', `JWT ${tovieyeCatererToken}`)
           .send(content);
         return expect(res.body.data).to.include.all.keys(key);
       } catch (err) {
         throw err;
       }
     });
+
     it('response data to be of required type', async () => {
       try {
         const res = await boundRequest()
-          .set('authorization', `JWT ${token}`)
+          .set('authorization', `JWT ${tovieyeCatererToken}`)
           .send(content);
         return expect(res.body.data).to.be.an(type);
       } catch (err) {
         throw err;
       }
     });
+
   });
 };

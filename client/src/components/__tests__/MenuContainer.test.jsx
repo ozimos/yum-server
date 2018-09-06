@@ -11,6 +11,7 @@ const props = {
   postMenu: jest.fn(),
   clearMenu: jest.fn(),
 };
+
 describe('MenuContainer Component', () => {
   const setup = () => shallow(<MenuContainer {...props} />);
 
@@ -55,5 +56,6 @@ describe('MenuContainer Component', () => {
     wrapper.instance().placeOrder();
     expect(placeOrderSpy).toHaveBeenCalled();
   });
+
 });
 

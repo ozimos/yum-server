@@ -23,6 +23,7 @@ describe('CartContainer Component', () => {
     expect(wrapper
       .exists(<table className="table" />)).toBe(true);
   });
+
   it('renders correctly', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -31,6 +32,7 @@ describe('CartContainer Component', () => {
     wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
+
   it('should call `placeOrder`', () => {
     const wrapper = setup();
 
@@ -41,6 +43,7 @@ describe('CartContainer Component', () => {
     wrapper.instance().placeOrder();
     expect(placeOrderSpy).toHaveBeenCalled();
   });
+
   it('should call `placeOrder`', () => {
     const orderId = '';
     const props2 = { ...props, orderId };
@@ -55,6 +58,7 @@ describe('CartContainer Component', () => {
     wrapper.instance().placeOrder();
     expect(placeOrderSpy).toHaveBeenCalled();
   });
+
   it('should call `setQuantity` for negative values', () => {
     const wrapper = setup();
 
@@ -65,6 +69,7 @@ describe('CartContainer Component', () => {
     wrapper.instance().setQuantity({ target: { value: -1 } }, 'abc');
     expect(setQuantitySpy).toHaveBeenCalled();
   });
+
   it('should call `setQuantity` for high values', () => {
     const wrapper = setup();
 
@@ -75,6 +80,7 @@ describe('CartContainer Component', () => {
     wrapper.instance().setQuantity({ target: { value: 99 } }, 'abc');
     expect(setQuantitySpy).toHaveBeenCalled();
   });
+
   it('should call `setQuantity`', () => {
     const wrapper = setup();
 
