@@ -4,7 +4,7 @@ import {
   request,
   rootURL,
   defaultMeal,
-  token,
+  tovieyeCatererToken,
   templateTest
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
@@ -29,7 +29,7 @@ context('meals integration test', () => {
   // Get All Meals
   describe('GET /meals', () => {
     it('should return all meals', () => request(app).get(getMealsUrl)
-      .set('authorization', `JWT ${token}`)
+      .set('authorization', `JWT ${tovieyeCatererToken}`)
       .then((res) => {
         expect(res.body.data.rows[0].id).to.equal(deletedMeal.id);
         expect(res.body.data.rows[0].price).to.equal(deletedMeal.price);
@@ -41,7 +41,7 @@ context('meals integration test', () => {
   describe('GET /meals/:id', () => {
     it('should return a meal', () =>
       request(app).get(mealIdUrl)
-        .set('authorization', `JWT ${token}`)
+        .set('authorization', `JWT ${tovieyeCatererToken}`)
         .then((res) => {
           expect(res.body.data.title).to.equal(defaultMeal.title);
           expect(res.body.data.price).to.equal(defaultMeal.price);
@@ -56,7 +56,7 @@ context('meals integration test', () => {
     };
 
     it('should update a meal', () => request(app).put(mealIdUrl)
-      .set('authorization', `JWT ${token}`)
+      .set('authorization', `JWT ${tovieyeCatererToken}`)
       .send(updatedMeal)
       .then((res) => {
         expect(res.body.data.title).to.equal(updatedMeal.title);
@@ -78,7 +78,7 @@ context('meals integration test', () => {
       price: 1500,
     };
     it('should create a meal', () => request(app).post(mealsUrl)
-      .set('authorization', `JWT ${token}`).send(newMeal)
+      .set('authorization', `JWT ${tovieyeCatererToken}`).send(newMeal)
       .then((res) => {
         expect(res.body.data.title).to.equal(newMeal.title);
         expect(res.body.data.description).to.equal(newMeal.description);

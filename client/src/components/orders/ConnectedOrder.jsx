@@ -11,6 +11,7 @@ import {
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
 import { ToastContainer, toast } from 'react-toastify';
+import ReactPaginate from 'react-paginate';
 import 'react-toastify/dist/ReactToastify.css';
 import MealDisplayCard from '../mealCard/MealDisplayCard';
 import MealRow from '../orderCart/MealRow';
@@ -61,12 +62,19 @@ class Order extends React.Component {
      this.props.dispatch(orderActions
        .getOrdersWithMealLinks({ limit: pageSize, offset }));
    }
-   getOrderMealsTotals = id =>
-     this.props.dispatch(orderActions.getOrderTotal(id))
+  getOrderMealsTotals = id =>
+    this.props.dispatch(orderActions.getOrderTotal(id))
+
   getOrderMeals = (id) => {
     const { offset = 0, limit = 5 } = this.props.mealsPagination;
     this.setState({ showMealDetailModal: true, selectedOrderId: id });
     this.props.dispatch(orderActions.getMealsInOrder(id, { limit, offset }));
+  }
+
+  handleMenuPaginationClick = (pages) => {
+    const { limit } = this.props.menuPagination;
+    const nextOffset = (pages.selected) * limit;
+    this.props.dispatch(menuActions.getMenu({ limit, offset: nextOffset }));
   }
 
   openCartModal = () => this.setState({ showOrderModal: true })
@@ -136,6 +144,8 @@ class Order extends React.Component {
         .filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS)) : [];
     }
     const { isCaterer, firstName } = this.props.user;
+    const menuPages = this.props.menuPagination.pages;
+
 
     return (
       <div className="contain">
@@ -164,6 +174,7 @@ class Order extends React.Component {
           <main className="col s12">
             <ToastContainer autoClose={2000} />
             <Accordion accordion>
+
               <AccordionItem expanded>
                 <AccordionItemTitle>
                   <div className="title-element flexbox">
@@ -176,6 +187,7 @@ class Order extends React.Component {
                     />
                   </div>
                 </AccordionItemTitle>
+
                 <AccordionItemBody>
                   <div className="flexbox">
                     <SearchInput
@@ -184,19 +196,36 @@ class Order extends React.Component {
                     />
 
                   </div>
-                  {isMenuSet ? <MealCardContainer
-                    meals={filteredMeals}
-                    MealCard={MealDisplayCard}
-                    addToCollection={this.addMealToCart}
-                    collection="cart"
-                    addClass="scroll"
-                  /> :
-                  <div>
+                  {isMenuSet ?
+                    <div>
+                      <MealCardContainer
+                        meals={filteredMeals}
+                        MealCard={MealDisplayCard}
+                        addToCollection={this.addMealToCart}
+                        collection="cart"
+                        addClass="scroll"
+                      />
+                      <ReactPaginate
+                        previousLabel="previous"
+                        nextLabel="next"
+                        pageCount={menuPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handleMenuPaginationClick}
+                        containerClassName="pagination"
+                        subContainerClassName="pages pagination"
+                        activeClassName="active"
+                      />
+                    </div>
+                  :
+                    <div>
                   The menu for the day has not been set
-                  </div>
+                    </div>
                 }
                 </AccordionItemBody>
+
               </AccordionItem>
+
               <AccordionItem>
                 <AccordionItemTitle>
                   <div className="title-element flexbox">
@@ -209,6 +238,7 @@ class Order extends React.Component {
                     />
                   </div>
                 </AccordionItemTitle>
+
                 <AccordionItemBody>
                   <p className="mr-auto">
                     {`Orders can only be edited up to 
@@ -227,11 +257,13 @@ class Order extends React.Component {
                     currentOrderId={this.state.currentOrderId}
                   /> :
                   <div>
-                  You have not placed an order today
+                  You have not placed an order on this application
                   </div>
                 }
                 </AccordionItemBody>
+
               </AccordionItem>
+
             </Accordion>
           </main>
 
@@ -306,6 +338,11 @@ Order.defaultProps = {
     limit: 5,
     offset: 0
   },
+  menuPagination: {
+    pages: 1,
+    count: 1,
+    limit: 8
+  }
 };
 
 Order.propTypes = {
@@ -322,6 +359,11 @@ Order.propTypes = {
     pages: PropTypes.number,
     limit: PropTypes.number,
     offset: PropTypes.number
+  }),
+  menuPagination: PropTypes.shape({
+    pages: PropTypes.number,
+    count: PropTypes.number,
+    limit: PropTypes.number,
   }),
   orderConnecting: PropTypes.bool,
   loadingMeals: PropTypes.bool,
@@ -341,6 +383,7 @@ const mapStateToProps = state => ({
   total: state.orderReducer.total,
   pagination: state.orderReducer.pagination,
   mealsPagination: state.orderReducer.mealsPagination,
+  menuPagination: state.menuReducer.pagination,
   orderConnecting: state.orderReducer.connecting,
   menuConnecting: state.menuReducer.connecting,
   menu: state.menuReducer.menu,

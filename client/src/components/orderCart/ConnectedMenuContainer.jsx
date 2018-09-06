@@ -14,11 +14,13 @@ class MenuContainer extends React.Component {
    } else {
      await this.props.dispatch(menuActions.postMenu(this.props.menu));
    }
+
    if (!this.props.menuError) {
      const message = this.props.postMenu ? 'added to' : 'removed from';
      this.props.notify(`The selected meals have been ${message} the menu`);
      this.props.clearMenu();
    }
+
    if (this.props.menuError) {
      this.props.notify(this.props.menuError);
    }
@@ -58,6 +60,7 @@ class MenuContainer extends React.Component {
        </div>
 
        <div className="flexbox">
+
          <button className="btn btn-cart" onClick={this.placeOrder}>
               Post meals to Menu
          </button>
@@ -65,6 +68,7 @@ class MenuContainer extends React.Component {
          <button className="btn btn-cart" onClick={rest.clearMenu}>
                    Clear Menu
          </button>
+
        </div>
 
      </div>
@@ -76,6 +80,7 @@ MenuContainer.defaultProps = {
   addClass: '',
   menuError: '',
 };
+
 MenuContainer.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.object).isRequired,
   addClass: PropTypes.string,
@@ -85,10 +90,12 @@ MenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   postMenu: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = state => ({
   menuError: state.menuReducer.menuError,
   connecting: state.menuReducer.connecting,
 });
+
 export { MenuContainer };
 export default connect(mapStateToProps)(MenuContainer);
 

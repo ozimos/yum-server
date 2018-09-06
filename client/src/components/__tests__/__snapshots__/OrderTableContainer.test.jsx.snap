@@ -65,19 +65,19 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
         Object {
           "Cell": [Function],
           "Header": "Date",
-          "accessor": "updatedAt",
+          "accessor": "createdAt",
           "width": 250,
         },
         Object {
           "Cell": [Function],
           "Header": "Time",
-          "accessor": "updatedAt",
+          "accessor": "createdAt",
           "width": 200,
         },
         Object {
           "Cell": [Function],
           "Header": "",
-          "accessor": "updatedAt",
+          "accessor": "createdAt",
           "className": "normal-cursor",
           "getProps": [Function],
           "width": 50,

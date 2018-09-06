@@ -33,6 +33,7 @@ describe('Order Component', () => {
     expect((wrapper)
       .exists(<main className="col-12 col-md-8" />)).toBe(true);
   });
+
   it('renders correctly', () => {
     const menu = [];
     const orders = [];
@@ -71,6 +72,7 @@ describe('Order Component', () => {
     wrapper.instance().openCartModal();
     expect(openCartModalSpy).toHaveBeenCalled();
   });
+
   it('should call `closeCartModal`', () => {
     const wrapper = setup();
 
@@ -78,6 +80,7 @@ describe('Order Component', () => {
     wrapper.instance().closeCartModal();
     expect(closeCartModalSpy).toHaveBeenCalled();
   });
+
   it('should call `closeMealDetailModal`', () => {
     const wrapper = setup();
 
@@ -88,6 +91,7 @@ describe('Order Component', () => {
     wrapper.instance().closeMealDetailModal();
     expect(closeMealDetailModalSpy).toHaveBeenCalled();
   });
+
   it('should call `clearOrder`', () => {
     const wrapper = setup();
 
@@ -98,6 +102,7 @@ describe('Order Component', () => {
     wrapper.instance().clearOrder();
     expect(clearOrderSpy).toHaveBeenCalled();
   });
+
   it('should call `postOrder`', () => {
     const wrapper = setup();
 
@@ -108,6 +113,7 @@ describe('Order Component', () => {
     wrapper.instance().postOrder();
     expect(postOrderSpy).toHaveBeenCalled();
   });
+
   it('should call `addOrderToCart`', () => {
     const wrapper = setup();
 
@@ -118,6 +124,7 @@ describe('Order Component', () => {
     wrapper.instance().addOrderToCart('order1');
     expect(addOrderToCartSpy).toHaveBeenCalled();
   });
+
   it('should call `addMealToCart`', () => {
     const wrapper = setup();
 
@@ -128,6 +135,7 @@ describe('Order Component', () => {
     wrapper.instance().addMealToCart(meal.data);
     expect(addMealToCartSpy).toHaveBeenCalled();
   });
+
   it('should call `onFetchMealData`', () => {
     const wrapper = setup();
 
@@ -138,6 +146,7 @@ describe('Order Component', () => {
     wrapper.instance().onFetchMealData(meal.data);
     expect(onFetchMealDataSpy).toHaveBeenCalled();
   });
+
   it('should call `onFetchOrderData`', () => {
     const wrapper = setup();
 
@@ -148,6 +157,7 @@ describe('Order Component', () => {
     wrapper.instance().onFetchOrderData(meal.data);
     expect(onFetchOrderDataSpy).toHaveBeenCalled();
   });
+
   it('should call `getOrderMealsTotals`', () => {
     const wrapper = setup();
 
@@ -158,6 +168,7 @@ describe('Order Component', () => {
     wrapper.instance().getOrderMealsTotals(meal.data);
     expect(getOrderMealsTotalsSpy).toHaveBeenCalled();
   });
+
   it('should call `getOrderMeals`', () => {
     const wrapper = setup();
 
@@ -168,6 +179,7 @@ describe('Order Component', () => {
     wrapper.instance().getOrderMeals(meal.data);
     expect(getOrderMealsSpy).toHaveBeenCalled();
   });
+
   it('should call `notify`', () => {
     const wrapper = setup();
 

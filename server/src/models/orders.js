@@ -1,95 +1,11 @@
 export default (sequelize, DataTypes) => {
-  const Order = sequelize.define(
-    'Order', {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-      }
-    },
-    {
-      scopes: {
-        forNonCaterers() {
-          return {
-            include: [{
-              association: 'Meals',
-              required: true,
-              paranoid: false,
-              attributes: ['id', 'userId', 'title', 'description', 'price',
-                'updatedAt',
-                [sequelize
-                  .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
-                'subTotal']],
-              through: {
-                attributes: ['quantity']
-              },
-            },
-            {
-              association: 'User',
-              attributes: ['firstName', 'lastName', 'email']
-            }]
-          };
-        },
-        forCaterers(userId) {
-          return {
-            include: [{
-              association: 'Meals',
-              where: { userId },
-              required: true,
-              paranoid: false,
-              attributes: ['id', 'userId', 'title', 'description', 'price',
-                'updatedAt',
-                [sequelize
-                  .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
-                'subTotal']],
-              through: {
-                attributes: ['quantity']
-              }
-            },
-            {
-              association: 'User',
-              attributes: ['firstName', 'lastName', 'email']
-            }]
-          };
-        },
-        forCaterersOrders(userId) {
-          return {
-            include: [{
-              association: 'Meals',
-              where: { userId },
-              paranoid: false,
-              required: false,
-              attributes: [[sequelize
-                .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
-              'subTotal']],
-              through: {
-                attributes: []
-              }
-            },
-            {
-              association: 'User',
-              attributes: ['firstName', 'lastName', 'email']
-            }]
-          };
-        },
-        forNonCaterersOrders() {
-          return {
-            include: [{
-              association: 'Meals',
-              paranoid: false,
-              required: true,
-              attributes: [[sequelize
-                .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
-              'subTotal']],
-              through: {
-                attributes: []
-              }
-            }]
-          };
-        },
-      }
+  const Order = sequelize.define('Order', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
     }
-  );
+  });
 
   // Relations
   Order.associate = (models) => {

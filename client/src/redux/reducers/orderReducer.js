@@ -59,8 +59,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         connecting: false,
-        orders: [...state.orders, action.order],
-        pendingOrders: [...state.pendingOrders, action.order],
+        orders: [action.order, ...state.orders],
+        pendingOrders: [action.order, ...state.pendingOrders],
         pagination: { ...state.pagination,
           count: state.pagination.count + 1 },
       };
@@ -69,6 +69,12 @@ export default (state = initialState, action) => {
         ...state,
         connecting: false,
         orders: state.orders.map((order) => {
+          if (order.id === action.order.id) {
+            return action.order;
+          }
+          return order;
+        }),
+        pendingOrders: state.pendingOrders.map((order) => {
           if (order.id === action.order.id) {
             return action.order;
           }

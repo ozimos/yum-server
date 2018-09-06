@@ -10,7 +10,8 @@ const mockStore = configureMockStore(middlewares);
 const store = mockStore({
   connecting: false,
   mealError: null,
-  orders: []
+  orders: [],
+  pendingOrders: [],
 });
 describe('order async actions', () => {
   beforeEach(() => {
@@ -62,7 +63,7 @@ describe('order async actions', () => {
 
     moxios.stubRequest(
       // eslint-disable-next-line
-      '/api/v1/orders/51c6b0ee-0ac0-43b2-9972-7d44683dfe07/meals?limit=4&offset=0',
+      '/api/v1/orders/51c6b0ee-0ac0-43b2-9972-7d44683dfe07/meals?limit=5&offset=0',
       {
         status: 200,
         response: order
@@ -85,7 +86,7 @@ describe('order async actions', () => {
 
     moxios.stubRequest(
       // eslint-disable-next-line
-      '/api/v1/orders/51c6b0ee-0ac0-43b2-9972-7d44683dfe07/meals?limit=4&offset=0',
+      '/api/v1/orders/51c6b0ee-0ac0-43b2-9972-7d44683dfe07/meals?limit=5&offset=0',
       {
         status: 400,
         response: { message: 'problem' }

@@ -3,8 +3,8 @@ import Validator from 'express-joi-validation';
 
 import OrderController from '../controllers/OrderController';
 import orderSchema from '../middleware/orderSchemas';
-import params from '../middleware/paramSchema';
-import query from '../middleware/querySchema';
+import paramSchema from '../middleware/paramSchema';
+import querySchema from '../middleware/querySchema';
 import Authenticate from '../middleware/Authenticate';
 import db from '../models';
 
@@ -15,11 +15,11 @@ const orderController = new OrderController(db.Order);
 orderRouter
   .route('/')
   .get(
-    Authenticate.isUser, validator.query(query),
+    Authenticate.isUser, validator.query(querySchema),
     OrderController.select(orderController, 'getOrdersWithMealLinks')
   )
   .post(
-    Authenticate.isUser, validator.query(query),
+    Authenticate.isUser, validator.query(querySchema),
     validator.body(orderSchema),
     OrderController.orderClose,
     OrderController.select(orderController, 'postOrder')
@@ -27,7 +27,8 @@ orderRouter
 orderRouter
   .route('/:id')
   .put(
-    Authenticate.isUser, validator.params(params), validator.query(query),
+    Authenticate.isUser, validator.params(paramSchema),
+    validator.query(querySchema),
     validator.body(orderSchema),
     OrderController.orderClose,
     OrderController.select(orderController, 'updateOrder')
@@ -35,19 +36,26 @@ orderRouter
 orderRouter
   .route('/:id/meals')
   .get(
-    Authenticate.isUser, validator.params(params), validator.query(query),
+    Authenticate.isUser, validator.params(paramSchema),
+    validator.query(querySchema),
     OrderController.select(orderController, 'getMealsInOrder')
+  );
+orderRouter
+  .route('/date/:date?')
+  .get(
+    Authenticate.isUser, validator.params(paramSchema),
+    OrderController.select(orderController, 'getOrdersWithMealLinksByDate')
   );
 orderRouter
   .route('/total/date')
   .get(
-    Authenticate.isUser, validator.query(query),
+    Authenticate.isUser, validator.query(querySchema),
     OrderController.select(orderController, 'getTotalDaySales')
   );
 orderRouter
   .route('/total/:id')
   .get(
-    Authenticate.isUser, validator.params(params),
+    Authenticate.isUser, validator.params(paramSchema),
     OrderController.select(orderController, 'getTotalOrderSales')
   );
 

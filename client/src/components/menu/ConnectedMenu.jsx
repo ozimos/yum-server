@@ -46,6 +46,7 @@ notify = message => toast(message, { className: 'toaster' });
 
 addToMenu(meal) {
   const inMenu = this.state.currentMenu.some(elem => elem.id === meal.id);
+
   if (!inMenu) {
     this.setState(prevState =>
       ({ currentMenu: [...prevState.currentMenu, meal] }));
@@ -78,7 +79,9 @@ addToMenu(meal) {
 
   removeFromMenu = (id) => {
     const inMenu = this.state.currentMenu.some(elem => elem.id === id);
+
     if (inMenu) {
+
       this.setState(prevState =>
         ({ currentMenu: prevState
           .currentMenu.filter(elem => elem.id !== id) }));
@@ -86,20 +89,24 @@ addToMenu(meal) {
         'Meal was sucessfully removed',
         { className: 'toaster' }
       );
+
       if (this.state.currentMenu.length <= 1) {
         this.closeMenuModal();
       }
+
     } else {
+
       toast.error(
         'Meal is not in menu',
         { className: 'toaster' }
       );
+
     }
   }
 
-  handleMealPaginationClick = (data) => {
+  handleMealPaginationClick = (pages) => {
     const { limit } = this.props.mealsPagination;
-    const nextOffset = (data.selected) * limit;
+    const nextOffset = (pages.selected) * limit;
     this.props.dispatch(mealActions.getAllMeals({ limit, offset: nextOffset }));
   }
 
@@ -108,9 +115,9 @@ addToMenu(meal) {
     this.closeMenuModal();
   }
 
-  handleMenuPaginationClick = (data) => {
+  handleMenuPaginationClick = (pages) => {
     const { limit } = this.props.menuPagination;
-    const nextOffset = (data.selected) * limit;
+    const nextOffset = (pages.selected) * limit;
     this.props.dispatch(menuActions.getMenu({ limit, offset: nextOffset }));
   }
 
@@ -127,46 +134,67 @@ addToMenu(meal) {
 
     return (
       <div className="contain">
+
         <header className="header">
           <ConnectedNav />
         </header>
+
         <main>
+
           <ToastContainer autoClose={2000} />
+
           <div className="flexbox">
+
             <Greeting isCaterer={isCaterer} firstName={firstName} />
+
             <button
               className="btn title-button"
               onClick={this.openMenuModal}
               disabled={!isMealSelected}
             >
+
               <p
                 className="cart-notification"
               >
                       Menu
+
                 <span className="badge">
                   {this.state.currentMenu.length}
                 </span>
+
               </p>
+
             </button>
+
           </div>
+
           <Accordion accordion>
+
             <AccordionItem expanded>
+
               <AccordionItemTitle>
+
                 <div className="title-element flexbox">
+
                   <h5>
                   Your Meals
                   </h5>
+
                   <div
                     className="accordion__arrow u-position-relative"
                     role="presentation"
                   />
                 </div>
+
               </AccordionItemTitle>
+
               <AccordionItemBody>
+
                 <SearchInput
                   className="search-input input-field"
                   onChange={this.searchUpdated}
                 />
+
                 <MealCardContainer
                   meals={filteredMeals}
                   MealCard={MealDisplayCard}
@@ -175,6 +203,7 @@ addToMenu(meal) {
                   addClass="scroll"
 
                 />
+
                 <ReactPaginate
                   previousLabel="previous"
                   nextLabel="next"
@@ -187,21 +216,32 @@ addToMenu(meal) {
                   activeClassName="active"
                 />
               </AccordionItemBody>
+
             </AccordionItem>
+
             <AccordionItem>
+
               <AccordionItemTitle>
+
                 <div className="title-element flexbox wrap">
+
                   <h5>
           Today&#39;s Menu
                   </h5>
+
                   <div
                     className="accordion__arrow u-position-relative"
                     role="presentation"
                   />
+
                 </div>
+
               </AccordionItemTitle>
+
               <AccordionItemBody>
+
                 <div className="title-element flexbox">
+
                   <button
                     className="title-button btn"
                     onClick={() =>
@@ -210,16 +250,20 @@ addToMenu(meal) {
                   >
                     <p>Clear Menu</p>
                   </button>
+
                 </div>
 
                 {
                   isMenuSet ?
+
                     <div>
+
                       <MealCardContainer
                         meals={this.props.menu}
                         MealCard={MealDisplayCard}
                         addClass="scroll"
                       />
+
                       <ReactPaginate
                         previousLabel="previous"
                         nextLabel="next"
@@ -231,6 +275,7 @@ addToMenu(meal) {
                         subContainerClassName="pages pagination"
                         activeClassName="active"
                       />
+
                     </div>
                   :
                     <div className="menu-message">
@@ -239,11 +284,14 @@ addToMenu(meal) {
                    above to add meal to menu.
                     </div>
                  }
+
               </AccordionItemBody>
+
             </AccordionItem>
 
           </Accordion>
         </main>
+
         <ReactModal
           isOpen={this.state.showMenuModal}
           contentLabel="Input Modal"
@@ -252,28 +300,35 @@ addToMenu(meal) {
           shouldCloseOnOverlayClick
         >
           <aside className="col s12" >
-            {isMealSelected ? <ConnectedMenuContainer
-              menu={this.state.currentMenu}
-              postMenu={this.postMenu}
-              removeFromMenu={this.removeFromMenu}
-              clearMenu={this.clearMenu}
-              closeMenuModal={this.closeMenuModal}
-              notify={this.notify}
-            /> :
-            <div>
-              <h3>Menu</h3>
-              <p>
-                  No meals here. Select a meal and click the Add to Menu button
-              </p>
 
-            </div>
+            {isMealSelected ?
+
+              <ConnectedMenuContainer
+                menu={this.state.currentMenu}
+                postMenu={this.postMenu}
+                removeFromMenu={this.removeFromMenu}
+                clearMenu={this.clearMenu}
+                closeMenuModal={this.closeMenuModal}
+                notify={this.notify}
+              /> :
+
+              <div>
+                <h3>Menu</h3>
+                <p>
+                  No meals here. Select a meal and click the Add to Menu button
+                </p>
+              </div>
+
                 }
           </aside>
+
         </ReactModal>
+
       </div>
     );
   }
 }
+
 Menu.defaultProps = {
   menu: [],
   meals: [],
@@ -289,6 +344,7 @@ Menu.defaultProps = {
     limit: 8
   }
 };
+
 Menu.propTypes = {
   dispatch: PropTypes.func.isRequired,
   meals: PropTypes.arrayOf(PropTypes.object),
@@ -309,6 +365,7 @@ Menu.propTypes = {
     firstName: PropTypes.string
   }).isRequired,
 };
+
 const mapStateToProps = state => ({
   mealError: state.mealsReducer.mealError,
   menuError: state.menuReducer.menuError,

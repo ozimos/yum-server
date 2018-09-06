@@ -13,8 +13,8 @@ export default class OrderController extends Controller {
 
   /**
    * Express middleware to check if orders can still be made
-   * @param {obj} res express response object
    * @param {obj} req express request object
+   * @param {obj} res express response object
    * @param {obj} next express callback
    */
 
@@ -51,6 +51,8 @@ export default class OrderController extends Controller {
   /**
    * Checks if order is editable
    * @param {obj} date Date object
+   * @returns {Boolean}
+   *
    */
 
   static isOrderEditable(date) {
@@ -60,35 +62,56 @@ export default class OrderController extends Controller {
   }
 
   /**
- * Gets the total sales for the day
- * @param {obj} req express request object
- */
+  * Gets the total sales
+  * @param {obj} req express request object
+  * @param {obj} sequelize query options object
+  * @returns {obj} revenue, orders and unique users
+  *
+  */
 
   getTotalSales(req, input = {}) {
-    let scope;
     const { userId, isCaterer } = req.decoded;
+    let scope;
     const settings = {
       where: {},
-      distinct: false,
-      attributes: ['userId']
+      attributes: ['userId'],
+      include: [{
+        association: 'Meals',
+        where: (isCaterer) && { userId },
+        paranoid: false,
+        attributes: [[Sequelize
+          .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+        'subTotal']],
+        through: {
+          attributes: []
+        }
+      },
+      {
+        association: 'User',
+        attributes: ['firstName', 'lastName', 'email']
+      }]
     };
     const options = { ...settings, ...input };
-    if (isCaterer) {
-      scope = [{ method: ['forCaterersOrders', userId] }];
-    } else {
+    if (!isCaterer) {
       options.where.userId = userId;
-      scope = 'forNonCaterersOrders';
     }
     return this.Model.scope(scope).findAll(options)
-      .then((data) => {
-        const revenue = cashTotal(data);
-        const users = uniqueUsers(data);
-        const orders = data.length;
+      .then((response) => {
+        const revenue = cashTotal(response);
+        const users = uniqueUsers(response);
+        const orders = response.length;
         return Controller.defaultResponse({ revenue, orders, users });
       })
       .catch(error => Controller.errorResponse(error.message));
   }
 
+  /**
+  * Gets the total sales for the day
+  * @param {obj} req express request object
+  * @param {obj} sequelize query options object
+  * @returns {obj} revenue, orders and unique users
+  *
+  */
   getTotalDaySales(req) {
     const date = req.query.date || currentDate;
     const nextDate = addDays(date, 1);
@@ -98,11 +121,19 @@ export default class OrderController extends Controller {
     return this.getTotalSales(req, options);
   }
 
+  /**
+  * Gets the total sales for the order
+  * @param {obj} req express request object
+  * @param {obj} sequelize query options object
+  * @returns {obj} revenue, orders and unique users
+  *
+  */
   getTotalOrderSales(req) {
     const { id } = req.params;
     const options = { where: { id } };
     return this.getTotalSales(req, options);
   }
+
   /**
    * Gets orders that match the query options
    * Meals are not included
@@ -111,22 +142,20 @@ export default class OrderController extends Controller {
    * @returns {obj}
    */
 
-  getOrdersWithMealLinks(req) {
+  getOrdersWithMealLinks(req, newOptions) {
 
     let scope;
     const { userId, isCaterer } = req.decoded;
-    const options = {
+    const defaultOptions = {
       include: [{
         association: 'User',
         attributes: ['firstName', 'lastName', 'email']
       },
       {
         association: 'Meals',
-        attributes: [[Sequelize
-          .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
-        'subTotal']],
+        attributes: [],
         where: (isCaterer) && { userId },
-        paranoid: true,
+        paranoid: false,
         through: {
           attributes: [],
         },
@@ -136,7 +165,10 @@ export default class OrderController extends Controller {
       where: (!isCaterer) && { userId },
       order: [['updatedAt', 'DESC']]
     };
-
+    const options = { ...defaultOptions, ...newOptions };
+    if (!isCaterer) {
+      options.where.userId = userId;
+    }
     return this.getAllRecords(req, scope, options, { raw: true })
       .then(({ limit, offset, pages, count, rows }) => {
         const newRows = rows ? rows.map((row) => {
@@ -158,33 +190,69 @@ export default class OrderController extends Controller {
       .catch(error => OrderController.errorResponse(error.message));
   }
 
+  /**
+   * Gets orders that match the query options
+   * orders are for the current day or the date in query params
+   * Meals are not included
+   * @param {obj} req  express request object
+   * @param {obj} options sequelize query options object
+   * @returns {obj}
+   */
+  getOrdersWithMealLinksByDate(req) {
+    const date = req.params.date || currentDate;
+    const nextDate = addDays(date, 1);
+
+    const options = {
+      where: { createdAt: { [Op.gte]: date, [Op.lt]: nextDate } },
+    };
+    return this.getOrdersWithMealLinks(req, options)
+      .catch(error => OrderController.errorResponse(error.message));
+  }
 
   /**
    * Gets meals that match the order id parameter supplied in the route
    * for caterers, gets only the meals created by caterer
    * for users, gets the meals only if the order belongs to user
    * @param {obj} req express request object
-   * @param {obj} options seequelize query options object
+   * @param {obj} options sequelize query options object
    * @returns {obj}
    */
 
-  getMealsInOrder(req, options = {}) {
-
-    options.where = { id: req.params.id };
-    options.order = [['updatedAt', 'DESC']];
-
+  getMealsInOrder(req) {
     const { userId, isCaterer } = req.decoded;
+    let scope;
 
-    let message, scope;
+    const options = {
+      where: { id: req.params.id },
+      include: [{
+        association: 'Meals',
+        where: (isCaterer) && { userId },
+        duplicating: false,
+        paranoid: false,
+        attributes: ['id', 'userId', 'title', 'description', 'price',
+          'updatedAt',
+          [Sequelize
+            .literal('"Meals"."price" * "Meals->MealOrders"."quantity"'),
+          'subTotal']],
+        through: {
+          attributes: ['quantity'],
+        }
+      },
+      {
+        association: 'User',
+        attributes: ['firstName', 'lastName', 'email']
+      }]
+    };
+
+
+    let message;
     const acceptCallback = rows => rows[0].Meals.length > 0;
 
     if (isCaterer) {
-      scope = [{ method: ['forCaterers', userId] }];
       message = 'This order does not have your meals';
     } else {
       message = 'This order does not belong to you';
       options.where.userId = userId;
-      scope = 'forNonCaterers';
     }
 
     return this.getAllRecords(req, scope, options, { message, acceptCallback })
@@ -250,15 +318,26 @@ export default class OrderController extends Controller {
         }));
 
       await Promise.all(promise);
-      const options = { where: { id: order.id } };
       const { userId, isCaterer } = req.decoded;
       let scope;
-
-      if (isCaterer) {
-        scope = [{ method: ['forCaterers', userId] }];
-      } else {
-        scope = 'forNonCaterers';
-      }
+      const options = {
+        include: [{
+          association: 'User',
+          attributes: ['firstName', 'lastName', 'email']
+        },
+        {
+          association: 'Meals',
+          where: (isCaterer) && { userId },
+          paranoid: false,
+          through: {
+            attributes: ['quantity'],
+          },
+        }
+        ],
+        distinct: true,
+        where: { id: order.id },
+        order: [['updatedAt', 'DESC']]
+      };
 
       const { pages, count, rows }
         = await this.getAllRecords(req, scope, options, { raw: true });

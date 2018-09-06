@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import SearchInput, { createFilter } from 'react-search-input';
-import { push } from 'react-router-redux';
 import Formsy from 'formsy-react';
 import ReactPaginate from 'react-paginate';
 import MyFormsyInput from '../helpers/MyInput';
@@ -36,10 +35,8 @@ export class MealManager extends React.Component {
     this.handleImageDrop = this.handleImageDrop.bind(this);
     this.setUploadPercent = this.setUploadPercent.bind(this);
   }
+
   componentDidMount() {
-    if (!this.props.authenticated) {
-      this.props.dispatch(push('/login'));
-    }
     this.props.dispatch(mealActions.getAllMeals());
   }
 
@@ -86,9 +83,9 @@ export class MealManager extends React.Component {
     this.setState({ searchTerm: term });
   }
 
-  handlePaginationClick = (data) => {
+  handlePaginationClick = (pages) => {
     const { limit } = this.props.pagination;
-    const nextOffset = (data.selected) * limit;
+    const nextOffset = (pages.selected) * limit;
     this.props.dispatch(mealActions.getAllMeals({ limit, offset: nextOffset }));
   }
 
@@ -101,9 +98,11 @@ export class MealManager extends React.Component {
 
     return (
       <div className="contain">
+
         <header className="header">
           <ConnectedNav />
         </header>
+
         <main className="min-height">
           <Greeting isCaterer={isCaterer} firstName={firstName} />
           <div className="title-element flexbox">
@@ -117,9 +116,11 @@ export class MealManager extends React.Component {
             >
               <p>Add Meal</p>
             </button>
+
           </div>
           {
           this.props.meals[0] ?
+
             <React.Fragment>
               <SearchInput
                 className="search-input input-field"
@@ -132,6 +133,7 @@ export class MealManager extends React.Component {
                 addClass="scroll2"
                 connecting={this.props.connecting}
               />
+
               <ReactPaginate
                 previousLabel="previous"
                 nextLabel="next"
@@ -143,6 +145,7 @@ export class MealManager extends React.Component {
                 subContainerClassName="pages pagination"
                 activeClassName="active"
               />
+
             </React.Fragment>
           :
             <div>
@@ -154,6 +157,7 @@ export class MealManager extends React.Component {
             }
 
         </main>
+
         <ReactModal
           isOpen={this.state.showNewMealModal}
           contentLabel="Input Modal"
@@ -161,6 +165,7 @@ export class MealManager extends React.Component {
           onRequestClose={this.closeNewMealModal}
           shouldCloseOnOverlayClick
         >
+
           <div className="title flexbox navbar-fixed">
             <h4 className="shrink">
               Meal Editor
@@ -172,6 +177,7 @@ export class MealManager extends React.Component {
                 &#10006;
             </button>
           </div>
+
           <div className="form3-grid">
             <div>
               <Formsy
@@ -181,6 +187,7 @@ export class MealManager extends React.Component {
                 onInvalid={this.disableButton}
                 ref={(form) => { this.formEl = form; }}
               >
+
                 <MyFormsyInput
                   typeOfInput="text"
                   name="title"
@@ -240,6 +247,7 @@ export class MealManager extends React.Component {
               </Formsy>
             </div>
             <div className="overlay-container">
+
               <div className="overlay full" >
                 <Dropzone
                   onDrop={this.handleImageDrop}
@@ -283,15 +291,17 @@ export class MealManager extends React.Component {
             >
               <p>Continue</p>
             </button>
+
           </div>
 
         </ReactModal>
+
       </div>
     );
   }
 }
+
 MealManager.defaultProps = {
-  authenticated: false,
   connecting: false,
   meals: [],
   pagination: {
@@ -300,9 +310,9 @@ MealManager.defaultProps = {
     limit: 8
   }
 };
+
 MealManager.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  authenticated: PropTypes.bool,
   connecting: PropTypes.bool,
   pagination: PropTypes.shape({
     pages: PropTypes.number,
@@ -315,6 +325,7 @@ MealManager.propTypes = {
   }).isRequired,
   meals: PropTypes.arrayOf(PropTypes.object),
 };
+
 const mapStateToProps = state =>
   ({ authenticated: state.loginReducer.authenticated,
     user: state.loginReducer.user.data,

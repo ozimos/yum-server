@@ -14,12 +14,13 @@ const PrivateRoute = ({ caterer: Caterer, customer: Customer, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
+
       if (result.valid && result.isCaterer) {
         return (<Caterer {...props} />);
-
       } else if (result.valid && !result.isCaterer) {
         return (<Customer {...props} />);
       } return (<Redirect to="/login" />);
+
     }}
     />
   );

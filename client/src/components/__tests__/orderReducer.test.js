@@ -61,7 +61,8 @@ describe('post orderReducer', () => {
 
   it('should handle POST_ORDER_SUCCESS', () => {
     const newState = {
-      orders: [order.data]
+      orders: [order.data],
+      pendingOrders: [order.data],
     };
     const action = { type: orderTypes.POST_ORDER_SUCCESS, order: order.data };
     expect(orderReducer(undefined, action)).toMatchObject(newState);
@@ -69,10 +70,12 @@ describe('post orderReducer', () => {
   it('should handle UPDATE_ORDER_SUCCESS', () => {
     const newOrder = { ...order.data, mealList: ['ghi', 'jkl'] };
     const oldState = {
-      orders: [order.data]
+      orders: [order.data],
+      pendingOrders: [order.data],
     };
     const newState = {
-      orders: [newOrder]
+      orders: [newOrder],
+      pendingOrders: [newOrder]
     };
     const action = { type: orderTypes.UPDATE_ORDER_SUCCESS, order: newOrder };
     expect(orderReducer(oldState, action)).toMatchObject(newState);

@@ -30,21 +30,32 @@ class MealsTable extends Component {
 
     return (
       <div className="order-meal-modal">
+
         <div className="flexbox top">
+
           <h5>Order Details</h5>
+
           <button
             className="btn title-button"
             onClick={this.props.closeMealDetailModal}
           >
                 &#10006;
           </button>
+
         </div>
+
         <div className="flexbox">
+
           <span>
         Total Charge:
           </span>
-          <span>&#8358;{this.props.total}</span>
+
+          <span>
+            &#8358;{this.props.total}
+          </span>
+
         </div>
+
         <ReactTable
           ref={(refReactTable) => { this.refReactTable = refReactTable; }}
           data={this.props.meals}
@@ -56,12 +67,14 @@ class MealsTable extends Component {
           onFetchData={this.props.onFetchData}
           sortable={false}
           manual
+          resizable={false}
           collapseOnSortingChange={false}
           collapseOnDataChange={false}
           collapseOnPageChange={false}
           nextText=">>"
           previousText="<<"
         />
+
       </div>
     );
   }
@@ -89,4 +102,5 @@ MealsTable.propTypes = {
   loading: PropTypes.bool,
   total: PropTypes.number
 };
+
 export default MealsTable;

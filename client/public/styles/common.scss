@@ -21,6 +21,9 @@ body {
     font-family: Courgette, Pacifico, Satisfy, Montserrat, cursive, 'sans-serif'
   }
 }
+.pagination li a {
+  cursor: pointer
+}
 .absolute {
     position: absolute;
     top: 0;

@@ -20,7 +20,7 @@ export default class Authenticate {
   static isUser(req, res, next) {
     const bearerHeader = req.headers.authorization;
     if (typeof bearerHeader === 'undefined') {
-      return res.status(401).send({
+      return res.status(401).json({
         message: 'No token provided.'
       });
     }
@@ -51,7 +51,7 @@ export default class Authenticate {
     if (req.decoded && req.decoded.isCaterer) {
       return next();
     }
-    return res.status(401).send({
+    return res.status(403).json({
       message: 'You Are not Authorized to access this page!'
     });
   }

@@ -4,7 +4,7 @@ import Validator from 'express-joi-validation';
 
 import MenuController from '../controllers/MenuController';
 import menuSchema from '../middleware/menuSchemas';
-import query from '../middleware/querySchema';
+import querySchema from '../middleware/querySchema';
 import Authenticate from '../middleware/Authenticate';
 import db from '../models';
 
@@ -15,12 +15,13 @@ const menuController = new MenuController(db.Menu, db.Meal);
 menuRouter.route('/')
   .get(
     Authenticate.isUser,
-    validator.query(query), MenuController.select(menuController, 'getMenu')
+    validator.query(querySchema),
+    MenuController.select(menuController, 'getMenu')
   )
   .post(
     Authenticate.isUser,
     Authenticate.isAdmin,
-    validator.query(query),
+    validator.query(querySchema),
     validator.body(menuSchema),
     MenuController.select(menuController, 'postMenu')
   );

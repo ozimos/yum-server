@@ -11,11 +11,13 @@ const props2 = {
   firstName: 'alias'
 };
 describe('Login Component', () => {
+
   it('renders correctly', () => {
     let wrapper = shallow(<Greeting {...props} />);
     expect(wrapper).toMatchSnapshot();
     wrapper = shallow(<Greeting {...props2} />);
     expect(wrapper).toMatchSnapshot();
   });
+
 });
 
