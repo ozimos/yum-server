@@ -2,7 +2,7 @@ import {
   dashboardTypes
 } from '../types';
 
-const initialState = {
+export const dashboardInitialState = {
   connecting: false,
   loadingMeals: false,
   orderError: null,
@@ -27,14 +27,16 @@ const initialState = {
     pages: 1 }
 };
 
-export default (state = initialState, action) => {
+export default (state = dashboardInitialState, action) => {
   switch (action.type) {
+
     case dashboardTypes.ORDER_DASHBOARD_REQUEST:
       return {
         ...state,
         connecting: true,
         orderError: null
       };
+
     case dashboardTypes.ORDER_DASHBOARD_HISTORY_SUCCESS:
       return {
         ...state,
@@ -42,18 +44,21 @@ export default (state = initialState, action) => {
         orders: action.orders,
         pagination: action.pagination,
       };
+
     case dashboardTypes.ORDER_DASHBOARD_FAILURE:
       return {
         ...state,
         connecting: false,
         orderError: action.error
       };
+
     case dashboardTypes.ORDER_DASHBOARD_HISTORY_FAILURE:
       return {
         ...state,
         connecting: false,
         orderError: action.error
       };
+
     case dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST:
       return {
         ...state,
@@ -65,6 +70,7 @@ export default (state = initialState, action) => {
         loadingMeals: false,
         orderMealsError: action.orderMealsError,
       };
+
     case dashboardTypes.ORDER_MEALS_DASHBOARD_SUCCESS:
       return {
         ...state,
@@ -72,16 +78,19 @@ export default (state = initialState, action) => {
         orderMeals: action.orderMeals,
         mealsPagination: action.mealsPagination,
       };
+
     case dashboardTypes.ORDER_DASHBOARD_TOTAL_SUCCESS:
       return {
         ...state,
         total: action.total
       };
+
     case dashboardTypes.DASHBOARD_TOTAL_SUCCESS:
       return {
         ...state,
         daysTotal: action.total
       };
+
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import {
   menuTypes
 } from '../types';
 
-const initialState = {
+export const initialMenuState = {
   connecting: false,
   menuError: null,
   menu: [],
@@ -14,7 +14,7 @@ const initialState = {
     pages: 1 }
 };
 
-export default (state = initialState, action) => {
+export default (state = initialMenuState, action) => {
   switch (action.type) {
     case menuTypes.MENU_REQUEST:
       return {

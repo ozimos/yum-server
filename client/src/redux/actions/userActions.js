@@ -6,32 +6,23 @@ import {
 } from '../types';
 import requestServices from '../../services/requestServices';
 
-const request = (user, actionType) => ({
-  type: actionType,
-  user
-});
-const success = (user, actionType) => ({
-  type: actionType,
-  user
-});
-const failure = (error, actionType) => ({
-  type: actionType,
-  error
-});
-
 const login = userData => (dispatch) => {
-  dispatch(request({
-    data: {
+  dispatch({
+    type: userTypes.LOGIN_REQUEST,
+    user: {
       email: userData.email
     }
-  }, userTypes.LOGIN_REQUEST));
+  });
 
   return requestServices('/api/v1/auth/login', 'post', userData)
     .then(
       (response) => {
         const user = response.data;
         if (user && user.token) {
-          dispatch(success(user, userTypes.LOGIN_SUCCESS));
+          dispatch({
+            type: userTypes.LOGIN_SUCCESS,
+            user: user.data,
+          });
           localStorage.setItem('token', JSON.stringify(user.token));
           if (user.data.isCaterer) {
             dispatch(push('/meals'));
@@ -39,10 +30,10 @@ const login = userData => (dispatch) => {
         }
       },
       (error) => {
-        dispatch(failure(
-          error.response.data.message,
-          userTypes.LOGIN_FAILURE
-        ));
+        dispatch({
+          type: userTypes.LOGIN_FAILURE,
+          error: error.response.data.message,
+        });
       }
     );
 };
@@ -55,15 +46,24 @@ const logout = () => {
 };
 
 const signUp = user => (dispatch) => {
-  dispatch(request(user, userTypes.SIGNUP_REQUEST));
+  dispatch({
+    type: userTypes.SIGNUP_REQUEST,
+    user,
+  });
 
   return requestServices('/api/v1/auth/signup', 'post', user)
     .then(
       (response) => {
         const userResults = response.data;
         if (userResults && userResults.token) {
-          dispatch(success(userResults, userTypes.SIGNUP_SUCCESS));
-          dispatch(success(userResults, userTypes.LOGIN_SUCCESS));
+          dispatch({
+            type: userTypes.SIGNUP_SUCCESS,
+            user: userResults.data,
+          });
+          dispatch({
+            type: userTypes.LOGIN_SUCCESS,
+            user: userResults.data,
+          });
           localStorage.setItem('token', JSON.stringify(userResults.token));
           if (userResults.data.isCaterer) {
             dispatch(push('/meals'));
@@ -71,38 +71,17 @@ const signUp = user => (dispatch) => {
         }
       },
       (error) => {
-        dispatch(failure(
-          error.response.data.message,
-          userTypes.SIGNUP_FAILURE
-        ));
+        dispatch({
+          type: userTypes.SIGNUP_FAILURE,
+          error: error.response.data.message,
+        });
       }
     );
 };
-const getUser = id => (dispatch) => {
-  dispatch(request({
-    data: {
-      id
-    }
-  }, userTypes.GET_USER));
 
-  return requestServices(`/api/v1/auth/user/${id}`)
-    .then(
-      (response) => {
-        const user = response.data.data;
-        dispatch(success(user, userTypes.GET_USER_SUCCESS));
-      },
-      (error) => {
-        dispatch(failure(
-          error.response.data.message,
-          userTypes.GET_USER_FAILURE
-        ));
-      }
-    );
-};
 
 export default {
   login,
   logout,
-  signUp,
-  getUser
+  signUp
 };

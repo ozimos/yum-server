@@ -10,6 +10,7 @@ const DashboardTableContainer = ({ orders, ...props }) => {
     {
       Header: 'Order Id',
       accessor: 'id',
+      className: 'test-click',
       width: 300,
     }, {
       Header: 'Customer',

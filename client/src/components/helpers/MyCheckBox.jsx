@@ -15,16 +15,18 @@ class CheckBox extends React.Component {
   render() {
 
     return (
-        <React.Fragment>
-         <input
-         style={{visibility: "hidden", margin: '-5px'}}
+      <React.Fragment>
+
+        <input
+          style={{ visibility: 'hidden', margin: '-5px' }}
           onChange={this.changeValue}
           type="checkbox"
           value={this.props.getValue() || false}
           id="isCaterer"
           name="isCaterer"
         />
-        </React.Fragment>
+
+      </React.Fragment>
     );
   }
 }
@@ -32,5 +34,7 @@ class CheckBox extends React.Component {
 CheckBox.propTypes = {
   ...propTypes
 };
+
 export { CheckBox };
+
 export default withFormsy(CheckBox);

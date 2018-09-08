@@ -7,7 +7,6 @@ const AuthenticatedComponent = (props) => {
   const {
     MyComponent,
     authenticated,
-    user,
     ...rest
   } = props;
 
@@ -20,12 +19,10 @@ const AuthenticatedComponent = (props) => {
 };
 AuthenticatedComponent.defaultProps = {
   authenticated: false,
-  user: { data: {} }
 };
 AuthenticatedComponent.propTypes = {
   authenticated: PropTypes.bool,
   MyComponent: PropTypes.func.isRequired,
-  user: PropTypes.shape({ data: PropTypes.object, token: PropTypes.string })
 };
 
 const requireUser = (MyComponent) => {

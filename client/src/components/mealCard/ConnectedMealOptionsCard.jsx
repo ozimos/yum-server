@@ -11,7 +11,8 @@ import { mealActions } from '../../redux/actions';
 import imageUpload from '../../services/imageUpload';
 
 ReactModal.setAppElement(document.getElementById('root'));
-class MealOptionsCard extends React.Component {
+export class MealOptionsCard extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,9 +26,11 @@ class MealOptionsCard extends React.Component {
     this.handleDrop = this.handleDrop.bind(this);
     this.setUploadPercent = this.setUploadPercent.bind(this);
   }
+
   setUploadPercent(percentProgress) {
     this.setState({ uploadPercent: percentProgress });
   }
+
   handleDrop(files) {
     this.setState({ uploading: true });
     imageUpload(files, this.setUploadPercent).then((response) => {
@@ -42,14 +45,19 @@ class MealOptionsCard extends React.Component {
 
     });
   }
+
   openMealEditorModal = () =>
     this.setState({ showMealEditorModal: true });
+
   closeMealEditorModal = () =>
     this.setState({ showMealEditorModal: false });
+
     openDeleteConfirmModal = () =>
       this.setState({ showDeleteConfirmModal: true });
+
   closeDeleteConfirmModal = () =>
     this.setState({ showDeleteConfirmModal: false });
+
   deleteMeal = id =>
     this.props.dispatch(mealActions.deleteMeal(id));
 
@@ -57,13 +65,16 @@ class MealOptionsCard extends React.Component {
     await this.props.dispatch(mealActions.updateMeal(meal, id));
     this.closeMealEditorModal();
   }
+
   disableButton = () =>
     this.setState({ canSubmit: false });
 
   enableButton = () =>
     this.setState({ canSubmit: true });
+
   serverFeedback = error =>
     this.formEl.updateInputsWithError(error);
+
   render() {
     const { title, imageUrl, price, description } = this.props;
 
@@ -234,7 +245,7 @@ class MealOptionsCard extends React.Component {
           <div className="title flexbox">
             <button
               style={{ backgroundColor: 'red !important' }}
-              className="btn"
+              className="btn delete"
               onClick={() => {
                 this.deleteMeal(this.props.id);
                 this.closeDeleteConfirmModal();
@@ -255,9 +266,11 @@ class MealOptionsCard extends React.Component {
     );
   }
 }
+
 MealOptionsCard.defaultProps = {
   connecting: false,
 };
+
 MealOptionsCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
@@ -267,6 +280,11 @@ MealOptionsCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-export { MealOptionsCard };
-export default connect(state => state)(MealOptionsCard);
+
+export const mapStateToProps = state => ({
+  connecting: state.mealsReducer.connecting,
+  mealError: state.mealsReducer.mealError,
+});
+
+export default connect(mapStateToProps)(MealOptionsCard);
 

@@ -27,7 +27,7 @@ import '../../../public/styles/search-input.css';
 import '../../../public/styles/accordion.css';
 
 ReactModal.setAppElement(document.getElementById('root'));
-class Order extends React.Component {
+export class Order extends React.Component {
 
   constructor(props) {
     super(props);
@@ -376,7 +376,7 @@ Order.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   orderError: state.orderReducer.orderError,
   orderMealsError: state.orderReducer.orderMealsError,
   loadingMeals: state.orderReducer.loadingMeals,
@@ -390,9 +390,8 @@ const mapStateToProps = state => ({
   orders: state.orderReducer.orders,
   pendingOrders: state.orderReducer.pendingOrders,
   orderMeals: state.orderReducer.orderMeals,
-  user: state.loginReducer.user.data
+  user: state.loginReducer.user
 });
 
-export { Order };
 
 export default connect(mapStateToProps)(Order);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 class Input extends React.Component {
+
   constructor(props) {
     super(props);
     this.changeValue = this.changeValue.bind(this);
@@ -17,7 +18,9 @@ class Input extends React.Component {
     const errorMessage = this.props.getErrorMessage();
 
     return (
+
       <React.Fragment>
+
         <input
           style={this.props.style}
           ref={this.props.myRef}
@@ -28,6 +31,7 @@ class Input extends React.Component {
           maxLength="50"
           max="99999"
         />
+
         <div
           style={{
             color: 'red', fontSize: '1rem'
@@ -35,13 +39,16 @@ class Input extends React.Component {
         >
           {errorMessage}
         </div>
+
       </React.Fragment>
     );
   }
 }
+
 Input.defaultProps = {
   placeholder: '',
 };
+
 Input.propTypes = {
   typeOfInput: PropTypes.string.isRequired,
   placeholder: PropTypes.oneOfType([
@@ -50,5 +57,7 @@ Input.propTypes = {
   ]),
   ...propTypes
 };
+
 export { Input };
+
 export default withFormsy(Input);

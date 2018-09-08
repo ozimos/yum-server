@@ -2,7 +2,7 @@ import {
   orderTypes
 } from '../types';
 
-const initialState = {
+export const initialOrderState = {
   connecting: false,
   loadingMeals: false,
   orderError: null,
@@ -23,7 +23,7 @@ const initialState = {
     pages: 1 }
 };
 
-export default (state = initialState, action) => {
+export default (state = initialOrderState, action) => {
   switch (action.type) {
     case orderTypes.ORDER_REQUEST:
       return {
