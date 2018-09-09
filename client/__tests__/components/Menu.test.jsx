@@ -1,7 +1,8 @@
 /* global React:false, shallow:false toJson:false */
 
 import { Menu } from '../../src/components/menu/ConnectedMenu';
-import { allMeals, meal } from '../__mocks__/mealDataMock';
+import { Meals, meal } from '../__mocks__/mealDataMock';
+import { menuMeals } from '../__mocks__/menuDataMock';
 
 const props = {
   menuPagination: {
@@ -16,8 +17,8 @@ const props = {
   },
   mealError: '',
   menuError: '',
-  meals: allMeals.data.rows,
-  menu: allMeals.data.rows,
+  meals: Meals,
+  menu: menuMeals,
   user: { isCaterer: true, firstName: 'user' },
   dispatch: jest.fn(),
 };
@@ -48,7 +49,7 @@ describe('Menu Component', () => {
 
     let wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();
-    wrapper.instance().setState({ currentMenu: allMeals.data.rows });
+    wrapper.instance().setState({ currentMenu: menuMeals });
     expect(toJson(wrapper)).toMatchSnapshot();
     setup2 = () => shallow(<Menu {...props2} />);
     wrapper = setup2();
@@ -74,13 +75,13 @@ describe('Menu Component', () => {
 
   it('should call `addToMenu`', () => {
     const wrapper = setup();
-    wrapper.instance().setState({ currentMenu: allMeals.data.rows });
+    wrapper.instance().setState({ currentMenu: menuMeals });
 
     const addToMenuSpy = jest.spyOn(
       wrapper.instance(),
       'addToMenu'
     );
-    wrapper.instance().addToMenu(meal.data);
+    wrapper.instance().addToMenu(meal);
     expect(addToMenuSpy).toHaveBeenCalled();
   });
 
@@ -90,7 +91,7 @@ describe('Menu Component', () => {
       wrapper.instance(),
       'addToMenu'
     );
-    wrapper.instance().addToMenu(meal.data);
+    wrapper.instance().addToMenu(meal);
     expect(addToMenuSpy).toHaveBeenCalled();
   });
 
@@ -165,7 +166,7 @@ describe('Menu Component', () => {
 
   it('should call `removeFromMenu` when items are in menu', () => {
     const wrapper = setup();
-    wrapper.instance().setState({ currentMenu: allMeals.data.rows });
+    wrapper.instance().setState({ currentMenu: menuMeals });
 
     const removeFromMenuSpy = jest.spyOn(
       wrapper.instance(),

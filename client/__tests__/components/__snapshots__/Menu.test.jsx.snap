@@ -118,6 +118,7 @@ exports[`Menu Component renders correctly 1`] = `
                   "imageUrl": "nice",
                   "price": 1200,
                   "title": "Eba and Egusi",
+                  "userId": "user1",
                 },
                 Object {
                   "description": "nice",
@@ -125,6 +126,7 @@ exports[`Menu Component renders correctly 1`] = `
                   "imageUrl": "nice",
                   "price": 2000,
                   "title": "Rice and Stew",
+                  "userId": "user1",
                 },
               ]
             }
@@ -202,18 +204,26 @@ exports[`Menu Component renders correctly 1`] = `
               meals={
                 Array [
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal1",
                     "imageUrl": "nice",
                     "price": 1200,
                     "title": "Eba and Egusi",
+                    "userId": "user1",
                   },
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal2",
                     "imageUrl": "nice",
                     "price": 2000,
                     "title": "Rice and Stew",
+                    "userId": "user1",
                   },
                 ]
               }
@@ -388,6 +398,7 @@ exports[`Menu Component renders correctly 2`] = `
                   "imageUrl": "nice",
                   "price": 1200,
                   "title": "Eba and Egusi",
+                  "userId": "user1",
                 },
                 Object {
                   "description": "nice",
@@ -395,6 +406,7 @@ exports[`Menu Component renders correctly 2`] = `
                   "imageUrl": "nice",
                   "price": 2000,
                   "title": "Rice and Stew",
+                  "userId": "user1",
                 },
               ]
             }
@@ -472,18 +484,26 @@ exports[`Menu Component renders correctly 2`] = `
               meals={
                 Array [
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal1",
                     "imageUrl": "nice",
                     "price": 1200,
                     "title": "Eba and Egusi",
+                    "userId": "user1",
                   },
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal2",
                     "imageUrl": "nice",
                     "price": 2000,
                     "title": "Rice and Stew",
+                    "userId": "user1",
                   },
                 ]
               }
@@ -658,6 +678,7 @@ exports[`Menu Component renders correctly 3`] = `
                   "imageUrl": "nice",
                   "price": 1200,
                   "title": "Eba and Egusi",
+                  "userId": "user1",
                 },
                 Object {
                   "description": "nice",
@@ -665,6 +686,7 @@ exports[`Menu Component renders correctly 3`] = `
                   "imageUrl": "nice",
                   "price": 2000,
                   "title": "Rice and Stew",
+                  "userId": "user1",
                 },
               ]
             }
@@ -893,6 +915,7 @@ exports[`Menu Component renders correctly 4`] = `
                   "imageUrl": "nice",
                   "price": 1200,
                   "title": "Eba and Egusi",
+                  "userId": "user1",
                 },
                 Object {
                   "description": "nice",
@@ -900,6 +923,7 @@ exports[`Menu Component renders correctly 4`] = `
                   "imageUrl": "nice",
                   "price": 2000,
                   "title": "Rice and Stew",
+                  "userId": "user1",
                 },
               ]
             }
@@ -977,18 +1001,26 @@ exports[`Menu Component renders correctly 4`] = `
               meals={
                 Array [
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal1",
                     "imageUrl": "nice",
                     "price": 1200,
                     "title": "Eba and Egusi",
+                    "userId": "user1",
                   },
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal2",
                     "imageUrl": "nice",
                     "price": 2000,
                     "title": "Rice and Stew",
+                    "userId": "user1",
                   },
                 ]
               }
@@ -1163,6 +1195,7 @@ exports[`Menu Component renders correctly 5`] = `
                   "imageUrl": "nice",
                   "price": 1200,
                   "title": "Eba and Egusi",
+                  "userId": "user1",
                 },
                 Object {
                   "description": "nice",
@@ -1170,6 +1203,7 @@ exports[`Menu Component renders correctly 5`] = `
                   "imageUrl": "nice",
                   "price": 2000,
                   "title": "Rice and Stew",
+                  "userId": "user1",
                 },
               ]
             }
@@ -1247,18 +1281,26 @@ exports[`Menu Component renders correctly 5`] = `
               meals={
                 Array [
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal1",
                     "imageUrl": "nice",
                     "price": 1200,
                     "title": "Eba and Egusi",
+                    "userId": "user1",
                   },
                   Object {
+                    "MealMenus": Object {
+                      "userId": "user1",
+                    },
                     "description": "nice",
                     "id": "meal2",
                     "imageUrl": "nice",
                     "price": 2000,
                     "title": "Rice and Stew",
+                    "userId": "user1",
                   },
                 ]
               }

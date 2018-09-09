@@ -2,10 +2,10 @@
 
 import { CartContainer } from
   '../../src/components/orderCart/ConnectedCartContainer';
-import { rows } from '../__mocks__/mealDataMock';
+import { Meals } from '../__mocks__/mealDataMock';
 
 const props = {
-  order: rows,
+  order: Meals,
   orderId: 'abc',
   orderError: '',
   dispatch: jest.fn(),

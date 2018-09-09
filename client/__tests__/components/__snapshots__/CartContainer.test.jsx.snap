@@ -55,6 +55,7 @@ exports[`CartContainer Component renders correctly 1`] = `
           quantity={1}
           setQuantity={[Function]}
           title="Eba and Egusi"
+          userId="user1"
         />
         <mockConstructor
           addClass=""
@@ -71,6 +72,7 @@ exports[`CartContainer Component renders correctly 1`] = `
           quantity={1}
           setQuantity={[Function]}
           title="Rice and Stew"
+          userId="user1"
         />
       </tbody>
       <caption
@@ -169,6 +171,7 @@ exports[`CartContainer Component renders correctly 2`] = `
           quantity={1}
           setQuantity={[Function]}
           title="Eba and Egusi"
+          userId="user1"
         />
         <mockConstructor
           addClass="string"
@@ -185,6 +188,7 @@ exports[`CartContainer Component renders correctly 2`] = `
           quantity={1}
           setQuantity={[Function]}
           title="Rice and Stew"
+          userId="user1"
         />
       </tbody>
       <caption

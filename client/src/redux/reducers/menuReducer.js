@@ -6,7 +6,6 @@ export const initialMenuState = {
   connecting: false,
   menuError: null,
   menu: [],
-  menuDetails: {},
   pagination: {
     limit: 10,
     offset: 0,
@@ -27,7 +26,6 @@ export default (state = initialMenuState, action) => {
         ...state,
         connecting: false,
         menu: action.menu,
-        menuDetails: action.menuDetails,
         pagination: action.pagination
 
       };
@@ -42,7 +40,6 @@ export default (state = initialMenuState, action) => {
         ...state,
         connecting: false,
         menu: action.menu,
-        menuDetails: action.menuDetails,
         pagination: action.pagination
       };
     default:

@@ -1,12 +1,41 @@
-import { allMeals } from './mealDataMock';
+
+export const menuMeals = [
+  {
+    id: 'meal1',
+    price: 1200,
+    title: 'Eba and Egusi',
+    description: 'nice',
+    imageUrl: 'nice',
+    userId: 'user1',
+    MealMenus: {
+      userId: 'user1'
+    }
+  },
+  {
+    id: 'meal2',
+    price: 2000,
+    title: 'Rice and Stew',
+    description: 'nice',
+    imageUrl: 'nice',
+    userId: 'user1',
+    MealMenus: {
+      userId: 'user1'
+    }
+  }
+];
+
+export const pagination = {
+  limit: 10,
+  offset: 0,
+  count: 1,
+  pages: 1,
+};
 
 export default {
   data: {
+    ...pagination,
     rows: [{
-      id: '42858b92-dfb4-4859-98be-7d89765bb3fe',
-      menuDate: '2018-08-28',
-      createdAt: '2018-08-28T14:11:50.210Z',
-      updatedAt: '2018-08-28T14:11:50.210Z',
-      Meals: allMeals.data.rows
-    }] }
+      Meals: menuMeals
+    }]
+  }
 };

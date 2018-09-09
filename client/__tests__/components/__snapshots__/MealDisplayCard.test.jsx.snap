@@ -16,20 +16,26 @@ exports[`MealsDisplayCard Component renders correctly 1`] = `
         >
           <span
             className="long_string"
-          />
+          >
+            nice
+          </span>
           <span>
             ₦
+            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
+        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    />
+    >
+      nice
+    </p>
   </div>
 </React.Fragment>
 `;
@@ -50,20 +56,26 @@ exports[`MealsDisplayCard Component renders correctly 2`] = `
         >
           <span
             className="long_string"
-          />
+          >
+            nice
+          </span>
           <span>
             ₦
+            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
+        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    />
+    >
+      nice
+    </p>
     <button
       className="btn title-button"
       onClick={[Function]}
@@ -90,20 +102,26 @@ exports[`MealsDisplayCard Component renders correctly 3`] = `
         >
           <span
             className="long_string"
-          />
+          >
+            nice
+          </span>
           <span>
             ₦
+            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
+        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    />
+    >
+      nice
+    </p>
     <button
       className="btn title-button"
       onClick={[Function]}
@@ -130,20 +148,26 @@ exports[`MealsDisplayCard Component renders correctly 4`] = `
         >
           <span
             className="long_string"
-          />
+          >
+            nice
+          </span>
           <span>
             ₦
+            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
+        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    />
+    >
+      nice
+    </p>
     <button
       className="btn title-button"
       onClick={[Function]}
@@ -170,20 +194,26 @@ exports[`MealsDisplayCard Component renders correctly 5`] = `
         >
           <span
             className="long_string"
-          />
+          >
+            nice
+          </span>
           <span>
             ₦
+            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
+        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    />
+    >
+      nice
+    </p>
     <button
       className="btn title-button"
       onClick={[Function]}

@@ -1,10 +1,10 @@
 /* global React:false, shallow:false toJson:false */
 
 import MealCardContainer from '../../src/components/mealCard/MealCardContainer';
-import { rows } from '../__mocks__/mealDataMock';
+import { Meals } from '../__mocks__/mealDataMock';
 
 const props = {
-  meals: rows,
+  meals: Meals,
   MealCard: jest.fn(),
 };
 

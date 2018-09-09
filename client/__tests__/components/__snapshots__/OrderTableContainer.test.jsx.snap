@@ -87,32 +87,24 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
     data={
       Array [
         Object {
-          "Meals": Array [
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "meal1",
-              "price": 1200,
-              "quantity": 2,
-              "title": "Eba and Egusi",
-            },
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "meal2",
-              "price": 2000,
-              "quantity": 2,
-              "title": "Rice and Stew",
-            },
-          ],
+          "MealsURL": "url",
           "User": Object {
             "email": "asdf",
             "firstName": "first",
             "lastName": "last",
           },
           "id": "order1",
+          "updatedAt": "2018-08-24T16:47:55.783Z",
+          "userId": "userId",
+        },
+        Object {
+          "MealsURL": "url",
+          "User": Object {
+            "email": "asdf",
+            "firstName": "first",
+            "lastName": "last",
+          },
+          "id": "order2",
           "updatedAt": "2018-08-24T16:47:55.783Z",
           "userId": "userId",
         },
@@ -124,16 +116,16 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
               },
               "id": "meal1",
               "price": 1200,
-              "quantity": 2,
+              "subTotal": 2400,
               "title": "Eba and Egusi",
             },
             Object {
               "MealOrders": Object {
-                "quantity": 2,
+                "quantity": 3,
               },
               "id": "meal2",
               "price": 2000,
-              "quantity": 2,
+              "subTotal": 6000,
               "title": "Rice and Stew",
             },
           ],
@@ -142,7 +134,7 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
             "firstName": "first",
             "lastName": "last",
           },
-          "id": "order2",
+          "id": "order3",
           "updatedAt": "2018-08-24T16:47:55.783Z",
           "userId": "userId",
         },

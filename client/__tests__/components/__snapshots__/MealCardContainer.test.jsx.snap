@@ -12,6 +12,7 @@ exports[`MealCardContainer Component renders correctly 1`] = `
     key="meal1"
     price={1200}
     title="Eba and Egusi"
+    userId="user1"
   />
   <mockConstructor
     addClass=""
@@ -21,6 +22,7 @@ exports[`MealCardContainer Component renders correctly 1`] = `
     key="meal2"
     price={2000}
     title="Rice and Stew"
+    userId="user1"
   />
 </div>
 `;
@@ -37,6 +39,7 @@ exports[`MealCardContainer Component renders correctly 2`] = `
     key="meal1"
     price={1200}
     title="Eba and Egusi"
+    userId="user1"
   />
   <mockConstructor
     addClass="string"
@@ -46,6 +49,7 @@ exports[`MealCardContainer Component renders correctly 2`] = `
     key="meal2"
     price={2000}
     title="Rice and Stew"
+    userId="user1"
   />
 </div>
 `;

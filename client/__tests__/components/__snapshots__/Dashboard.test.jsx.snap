@@ -156,32 +156,24 @@ exports[`Dashboard Component renders correctly 1`] = `
               orders={
                 Array [
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "quantity": 2,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "quantity": 2,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
                       "lastName": "last",
                     },
                     "id": "order1",
+                    "updatedAt": "2018-08-24T16:47:55.783Z",
+                    "userId": "userId",
+                  },
+                  Object {
+                    "MealsURL": "url",
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
+                    "id": "order2",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -193,16 +185,16 @@ exports[`Dashboard Component renders correctly 1`] = `
                         },
                         "id": "meal1",
                         "price": 1200,
-                        "quantity": 2,
+                        "subTotal": 2400,
                         "title": "Eba and Egusi",
                       },
                       Object {
                         "MealOrders": Object {
-                          "quantity": 2,
+                          "quantity": 3,
                         },
                         "id": "meal2",
                         "price": 2000,
-                        "quantity": 2,
+                        "subTotal": 6000,
                         "title": "Rice and Stew",
                       },
                     ],
@@ -211,7 +203,7 @@ exports[`Dashboard Component renders correctly 1`] = `
                       "firstName": "first",
                       "lastName": "last",
                     },
-                    "id": "order2",
+                    "id": "order3",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -263,6 +255,7 @@ exports[`Dashboard Component renders correctly 1`] = `
               "imageUrl": "nice",
               "price": 1200,
               "title": "Eba and Egusi",
+              "userId": "user1",
             },
             Object {
               "description": "nice",
@@ -270,6 +263,7 @@ exports[`Dashboard Component renders correctly 1`] = `
               "imageUrl": "nice",
               "price": 2000,
               "title": "Rice and Stew",
+              "userId": "user1",
             },
           ]
         }
@@ -483,6 +477,7 @@ exports[`Dashboard Component renders correctly 2`] = `
               "imageUrl": "nice",
               "price": 1200,
               "title": "Eba and Egusi",
+              "userId": "user1",
             },
             Object {
               "description": "nice",
@@ -490,6 +485,7 @@ exports[`Dashboard Component renders correctly 2`] = `
               "imageUrl": "nice",
               "price": 2000,
               "title": "Rice and Stew",
+              "userId": "user1",
             },
           ]
         }
@@ -670,32 +666,24 @@ exports[`Dashboard Component renders correctly 3`] = `
               orders={
                 Array [
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "quantity": 2,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "quantity": 2,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
                       "lastName": "last",
                     },
                     "id": "order1",
+                    "updatedAt": "2018-08-24T16:47:55.783Z",
+                    "userId": "userId",
+                  },
+                  Object {
+                    "MealsURL": "url",
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
+                    "id": "order2",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -707,16 +695,16 @@ exports[`Dashboard Component renders correctly 3`] = `
                         },
                         "id": "meal1",
                         "price": 1200,
-                        "quantity": 2,
+                        "subTotal": 2400,
                         "title": "Eba and Egusi",
                       },
                       Object {
                         "MealOrders": Object {
-                          "quantity": 2,
+                          "quantity": 3,
                         },
                         "id": "meal2",
                         "price": 2000,
-                        "quantity": 2,
+                        "subTotal": 6000,
                         "title": "Rice and Stew",
                       },
                     ],
@@ -725,7 +713,7 @@ exports[`Dashboard Component renders correctly 3`] = `
                       "firstName": "first",
                       "lastName": "last",
                     },
-                    "id": "order2",
+                    "id": "order3",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -777,6 +765,7 @@ exports[`Dashboard Component renders correctly 3`] = `
               "imageUrl": "nice",
               "price": 1200,
               "title": "Eba and Egusi",
+              "userId": "user1",
             },
             Object {
               "description": "nice",
@@ -784,6 +773,7 @@ exports[`Dashboard Component renders correctly 3`] = `
               "imageUrl": "nice",
               "price": 2000,
               "title": "Rice and Stew",
+              "userId": "user1",
             },
           ]
         }
@@ -962,32 +952,24 @@ exports[`Dashboard Component renders correctly 4`] = `
               orders={
                 Array [
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "quantity": 2,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "quantity": 2,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
                       "lastName": "last",
                     },
                     "id": "order1",
+                    "updatedAt": "2018-08-24T16:47:55.783Z",
+                    "userId": "userId",
+                  },
+                  Object {
+                    "MealsURL": "url",
+                    "User": Object {
+                      "email": "asdf",
+                      "firstName": "first",
+                      "lastName": "last",
+                    },
+                    "id": "order2",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -999,16 +981,16 @@ exports[`Dashboard Component renders correctly 4`] = `
                         },
                         "id": "meal1",
                         "price": 1200,
-                        "quantity": 2,
+                        "subTotal": 2400,
                         "title": "Eba and Egusi",
                       },
                       Object {
                         "MealOrders": Object {
-                          "quantity": 2,
+                          "quantity": 3,
                         },
                         "id": "meal2",
                         "price": 2000,
-                        "quantity": 2,
+                        "subTotal": 6000,
                         "title": "Rice and Stew",
                       },
                     ],
@@ -1017,7 +999,7 @@ exports[`Dashboard Component renders correctly 4`] = `
                       "firstName": "first",
                       "lastName": "last",
                     },
-                    "id": "order2",
+                    "id": "order3",
                     "updatedAt": "2018-08-24T16:47:55.783Z",
                     "userId": "userId",
                   },
@@ -1067,6 +1049,7 @@ exports[`Dashboard Component renders correctly 4`] = `
               "imageUrl": "nice",
               "price": 1200,
               "title": "Eba and Egusi",
+              "userId": "user1",
             },
             Object {
               "description": "nice",
@@ -1074,6 +1057,7 @@ exports[`Dashboard Component renders correctly 4`] = `
               "imageUrl": "nice",
               "price": 2000,
               "title": "Rice and Stew",
+              "userId": "user1",
             },
           ]
         }

@@ -53,6 +53,7 @@ exports[`MealManager Component renders correctly 1`] = `
               "imageUrl": "nice",
               "price": 1200,
               "title": "Eba and Egusi",
+              "userId": "user1",
             },
             Object {
               "description": "nice",
@@ -60,6 +61,7 @@ exports[`MealManager Component renders correctly 1`] = `
               "imageUrl": "nice",
               "price": 2000,
               "title": "Rice and Stew",
+              "userId": "user1",
             },
           ]
         }

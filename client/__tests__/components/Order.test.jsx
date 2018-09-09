@@ -5,7 +5,8 @@ import { Order, mapStateToProps }
 import { initialOrderState } from '../../src/redux/reducers/orderReducer';
 import { initialMenuState } from '../../src/redux/reducers/menuReducer';
 import { allOrders } from '../__mocks__/orderDataMock';
-import { allMeals, meal } from '../__mocks__/mealDataMock';
+import { Meals, meal } from '../__mocks__/mealDataMock';
+import { menuMeals } from '../__mocks__/menuDataMock';
 
 const props = {
   pagination: {
@@ -21,8 +22,8 @@ const props = {
   loadingMeals: false,
   orders: allOrders.data.rows,
   pendingOrders: allOrders.data.rows,
-  orderMeals: allMeals.data.rows,
-  menu: allMeals.data.rows,
+  orderMeals: Meals,
+  menu: menuMeals,
   user: { isCaterer: true, firstName: 'user' },
   dispatch: jest.fn(),
 };
@@ -124,7 +125,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'addOrderToCart'
     );
-    wrapper.instance().addOrderToCart('order1');
+    wrapper.instance().addOrderToCart('order3');
     expect(addOrderToCartSpy).toHaveBeenCalled();
   });
 
@@ -135,7 +136,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'addMealToCart'
     );
-    wrapper.instance().addMealToCart(meal.data);
+    wrapper.instance().addMealToCart(meal);
     expect(addMealToCartSpy).toHaveBeenCalled();
   });
 
@@ -146,7 +147,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'onFetchMealData'
     );
-    wrapper.instance().onFetchMealData(meal.data);
+    wrapper.instance().onFetchMealData(meal);
     expect(onFetchMealDataSpy).toHaveBeenCalled();
   });
 
@@ -157,7 +158,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'onFetchOrderData'
     );
-    wrapper.instance().onFetchOrderData(meal.data);
+    wrapper.instance().onFetchOrderData(meal);
     expect(onFetchOrderDataSpy).toHaveBeenCalled();
   });
 
@@ -168,7 +169,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'getOrderMealsTotals'
     );
-    wrapper.instance().getOrderMealsTotals(meal.data);
+    wrapper.instance().getOrderMealsTotals(meal);
     expect(getOrderMealsTotalsSpy).toHaveBeenCalled();
   });
 
@@ -179,7 +180,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'getOrderMeals'
     );
-    wrapper.instance().getOrderMeals(meal.data);
+    wrapper.instance().getOrderMeals(meal);
     expect(getOrderMealsSpy).toHaveBeenCalled();
   });
 
@@ -190,7 +191,7 @@ describe('Order Component', () => {
       wrapper.instance(),
       'notify'
     );
-    wrapper.instance().notify(meal.data);
+    wrapper.instance().notify(meal);
     expect(notifySpy).toHaveBeenCalled();
   });
   it('should call `handleMenuPaginationClick`', () => {

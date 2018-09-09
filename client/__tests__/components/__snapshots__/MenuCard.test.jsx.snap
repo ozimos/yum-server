@@ -16,26 +16,20 @@ exports[`MealDisplayCard Component renders correctly 1`] = `
         >
           <span
             className="long_string"
-          >
-            nice
-          </span>
+          />
           <span>
             ₦
-            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
-        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    >
-      nice
-    </p>
+    />
   </div>
 </React.Fragment>
 `;

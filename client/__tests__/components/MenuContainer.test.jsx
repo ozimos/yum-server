@@ -2,10 +2,10 @@
 
 import { MenuContainer } from
   '../../src/components/orderCart/ConnectedMenuContainer';
-import { rows } from '../__mocks__/mealDataMock';
+import { menuMeals } from '../__mocks__/menuDataMock';
 
 const props = {
-  menu: rows,
+  menu: menuMeals,
   menuError: '',
   dispatch: jest.fn(),
   notify: jest.fn(),

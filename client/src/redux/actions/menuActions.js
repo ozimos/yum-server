@@ -34,8 +34,6 @@ const postMenu = menu => (dispatch) => {
       response => dispatch({
         type: menuTypes.POST_MENU_SUCCESS,
         menu: response.data.data.rows[0].Meals,
-        menuDetails: { id: response.data.data.rows[0].id,
-          date: response.data.data.rows[0].menuDate },
         pagination: paginationExtract(response.data.data)
       }),
       error => dispatch({

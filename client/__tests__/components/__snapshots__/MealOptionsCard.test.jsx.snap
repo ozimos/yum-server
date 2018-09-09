@@ -16,26 +16,20 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
         >
           <span
             className="long_string text_left"
-          >
-            nice
-          </span>
+          />
           <span>
             ₦
-            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
-        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    >
-      nice
-    </p>
+    />
     <button
       className="btn pad-btn modal-open"
       onClick={[Function]}
@@ -116,7 +110,7 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
           <Formsy(Input)
             innerRef={[Function]}
             name="title"
-            placeholder="nice"
+            placeholder="Meal Title"
             required={false}
             typeOfInput="text"
             validationError="Please enter the meal title"
@@ -136,7 +130,7 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
           <Formsy(Input)
             innerRef={[Function]}
             name="price"
-            placeholder="₦200"
+            placeholder="₦undefined"
             required={false}
             typeOfInput="number"
             validationError="Please enter a price"
@@ -158,7 +152,7 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
           <Formsy(TextArea)
             innerRef={[Function]}
             name="description"
-            placeholder="nice"
+            placeholder="Description"
             required={false}
             validationError=""
             validationErrors={
@@ -233,7 +227,6 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
           <img
             alt="meal"
             className="fluid-img"
-            src="nice"
           />
         </div>
       </div>
@@ -299,11 +292,7 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
 exports[`MealOptionsCard Component renders mounted component correctly 1`] = `
 <MealOptionsCard
   connecting={false}
-  description="nice"
   dispatch={[MockFunction]}
-  id="mealId"
-  imageUrl="nice"
-  price={200}
   store={
     Object {
       "clearActions": [Function],
@@ -314,7 +303,6 @@ exports[`MealOptionsCard Component renders mounted component correctly 1`] = `
       "subscribe": [Function],
     }
   }
-  title="nice"
 >
   <div
     className="card"
@@ -330,26 +318,20 @@ exports[`MealOptionsCard Component renders mounted component correctly 1`] = `
         >
           <span
             className="long_string text_left"
-          >
-            nice
-          </span>
+          />
           <span>
             ₦
-            200
           </span>
         </div>
       </div>
       <img
         alt="Meal"
         className="fluid-img"
-        src="nice"
       />
     </div>
     <p
       className="descrip long_string"
-    >
-      nice
-    </p>
+    />
     <button
       className="btn pad-btn modal-open"
       onClick={[Function]}

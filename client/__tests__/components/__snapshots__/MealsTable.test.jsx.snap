@@ -106,24 +106,7 @@ exports[`MealsTable Component renders correctly 1`] = `
         },
       ]
     }
-    data={
-      Array [
-        Object {
-          "description": "nice",
-          "id": "meal1",
-          "imageUrl": "nice",
-          "price": 1200,
-          "title": "Eba and Egusi",
-        },
-        Object {
-          "description": "nice",
-          "id": "meal2",
-          "imageUrl": "nice",
-          "price": 2000,
-          "title": "Rice and Stew",
-        },
-      ]
-    }
+    data={Array []}
     defaultExpanded={Object {}}
     defaultFilterMethod={[Function]}
     defaultFiltered={Array []}

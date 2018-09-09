@@ -1,6 +1,10 @@
 import orderReducer from '../../src/redux/reducers/orderReducer';
 import { orderTypes } from '../../src/redux/types';
-import { orderMeals } from '../__mocks__/orderDataMock';
+import { orderMeals,
+  newOrder,
+  modifiedOrder,
+  previousOrders,
+  updatedOrders } from '../__mocks__/orderDataMock';
 
 describe(' orderReducer', () => {
   const initialState = {
@@ -23,42 +27,7 @@ describe(' orderReducer', () => {
       count: 1,
       pages: 1 }
   };
-  const updatedOrder = {
-    id: 'order1',
-    Meals: ['abc', 'def']
-  };
-  const newOrder = {
-    id: 'order4',
-    Meals: ['abc', 'def']
-  };
-  const oldOrders = [
-    {
-      id: 'order1',
-      Meals: ['ghi', 'jkl']
-    },
-    {
-      id: 'order2',
-      Meals: ['mno', 'pqr']
-    },
-    {
-      id: 'order3',
-      Meals: ['stu', 'vwx']
-    }
-  ];
-  const newOrders = [
-    {
-      id: 'order1',
-      Meals: ['abc', 'def']
-    },
-    {
-      id: 'order2',
-      Meals: ['mno', 'pqr']
-    },
-    {
-      id: 'order3',
-      Meals: ['stu', 'vwx']
-    }
-  ];
+
 
   it('should return the initial state for unknown action type', () => {
     expect(orderReducer(undefined, {})).toEqual(initialState);
@@ -84,10 +53,10 @@ describe(' orderReducer', () => {
 
   it('should add orders to state', () => {
     const newState = {
-      orders: oldOrders
+      orders: previousOrders
     };
     const action = { type: orderTypes.GET_ORDER_ALL_SUCCESS,
-      orders: oldOrders };
+      orders: previousOrders };
 
     expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
@@ -117,12 +86,12 @@ describe(' orderReducer', () => {
 
   it('should add new orders to state', () => {
     const oldState = {
-      orders: oldOrders,
+      orders: previousOrders,
       pendingOrders: [],
       pagination: { count: 2 },
     };
     const newState = {
-      orders: [newOrder, ...oldOrders],
+      orders: [newOrder, ...previousOrders],
       pendingOrders: [newOrder],
       pagination: { count: 3 },
 
@@ -131,35 +100,31 @@ describe(' orderReducer', () => {
     expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
   it('should add fetched meals to state', () => {
-    const oldState = {
-      orders: oldOrders,
-      pendingOrders: [],
-      pagination: { count: 2 },
-    };
+
     const newState = {
       loadingMeals: false,
       orderMeals,
-      mealsPagination: { offset: 2 },
+      mealsPagination: { count: 2 },
 
     };
     const action = { type: orderTypes.GET_ORDER_MEAL_SUCCESS,
       orderMeals,
-      mealsPagination: { offset: 2 } };
-    expect(orderReducer(oldState, action)).toMatchObject(newState);
+      mealsPagination: { count: 2 } };
+    expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should add updated orders to state', () => {
     const oldState = {
-      orders: oldOrders,
-      pendingOrders: [oldOrders[0], oldOrders[1]]
+      orders: previousOrders,
+      pendingOrders: [previousOrders[0], previousOrders[1]]
     };
     const newState = {
-      orders: newOrders,
-      pendingOrders: [updatedOrder, oldOrders[1]]
+      orders: updatedOrders,
+      pendingOrders: [modifiedOrder, previousOrders[1]]
     };
 
     const action = { type: orderTypes.UPDATE_ORDER_SUCCESS,
-      order: updatedOrder };
+      order: modifiedOrder };
     expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
 
@@ -176,12 +141,12 @@ describe(' orderReducer', () => {
 
   it('should remove not pending orders from state', () => {
     const oldState = {
-      pendingOrders: [updatedOrder],
+      pendingOrders: [modifiedOrder],
     };
     const newState = {
       pendingOrders: []
     };
-    const action = { type: orderTypes.UPDATE_PENDING, id: updatedOrder.id };
+    const action = { type: orderTypes.UPDATE_PENDING, id: modifiedOrder.id };
     expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
 });

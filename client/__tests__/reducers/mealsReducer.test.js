@@ -1,6 +1,6 @@
 import mealsReducer from '../../src/redux/reducers/mealsReducer';
 import { mealTypes } from '../../src/redux/types';
-import { meal, allMeals } from '../__mocks__/mealDataMock';
+import { meal, Meals, pagination } from '../__mocks__/mealDataMock';
 
 describe('mealsReducer', () => {
   const initialState = {
@@ -30,11 +30,11 @@ describe('mealsReducer', () => {
 
   it('should handle ALL_MEALS_SUCCESS', () => {
     const newState = {
-      meals: allMeals.data,
-      pagination: {}
+      meals: Meals,
+      pagination
     };
     const action = {
-      type: mealTypes.ALL_MEALS_SUCCESS, meals: allMeals.data, pagination: {} };
+      type: mealTypes.ALL_MEALS_SUCCESS, meals: Meals, pagination };
 
     expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
@@ -53,34 +53,34 @@ describe('mealsReducer', () => {
 
   it('should handle CREATE_MEAL_SUCCESS', () => {
     const newState = {
-      meals: [meal.data]
+      meals: [meal]
     };
-    const action = { type: mealTypes.CREATE_MEAL_SUCCESS, meal: meal.data };
+    const action = { type: mealTypes.CREATE_MEAL_SUCCESS, meal };
     expect(mealsReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should handle UPDATE_MEAL_SUCCESS', () => {
     const beforeState = {
       connecting: true,
-      meals: [{ id: 'mealId' }]
+      meals: [{ id: meal.id }]
     };
     const newState = {
-      meals: [meal.data]
+      meals: [meal]
     };
-    const action = { type: mealTypes.UPDATE_MEAL_SUCCESS, meal: meal.data };
+    const action = { type: mealTypes.UPDATE_MEAL_SUCCESS, meal };
     expect(mealsReducer(beforeState, action)).toMatchObject(newState);
   });
 
   it('should handle DELETE_MEAL_SUCCESS', () => {
     const beforeState = {
       connecting: true,
-      meals: [meal.data]
+      meals: [meal]
     };
     const newState = {
       connecting: false,
       meals: []
     };
-    const action = { type: mealTypes.DELETE_MEAL_SUCCESS, id: 'mealId' };
+    const action = { type: mealTypes.DELETE_MEAL_SUCCESS, id: meal.id };
     expect(mealsReducer(beforeState, action)).toEqual(newState);
   });
 });

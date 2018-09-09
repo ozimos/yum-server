@@ -3,12 +3,12 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import menuActions from '../../src/redux/actions/menuActions';
 import menuTypes from '../../src/redux/types/menuTypes';
-import menu from '../__mocks__/menuDataMock';
+import menu, { menuMeals, pagination } from '../__mocks__/menuDataMock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const store = mockStore({});
-describe('meal async actions', () => {
+describe('menu actions', () => {
   beforeEach(() => {
     moxios.install();
     store.clearActions();
@@ -27,7 +27,7 @@ describe('meal async actions', () => {
     });
     const expectedActions = [
       { type: menuTypes.MENU_REQUEST },
-      { type: menuTypes.GET_MENU_SUCCESS, menu: menu.data.rows[0].Meals },
+      { type: menuTypes.GET_MENU_SUCCESS, menu: menuMeals, pagination },
     ];
     return store.dispatch(menuActions.getMenu())
       .then(() => {
@@ -61,7 +61,7 @@ describe('meal async actions', () => {
     });
     const expectedActions = [
       { type: menuTypes.MENU_REQUEST },
-      { type: menuTypes.POST_MENU_SUCCESS, menu: menu.data.rows[0].Meals },
+      { type: menuTypes.POST_MENU_SUCCESS, menu: menuMeals, pagination },
     ];
     return store.dispatch(menuActions.postMenu())
       .then(() => {
