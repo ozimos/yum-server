@@ -376,7 +376,7 @@ const mapStateToProps = state => ({
   menuPagination: state.menuReducer.pagination,
   menu: state.menuReducer.menu,
   authenticated: state.loginReducer.authenticated,
-  user: state.loginReducer.user.data
+  user: state.loginReducer.user
 });
 
 export { Menu };

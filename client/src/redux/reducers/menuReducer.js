@@ -2,11 +2,10 @@ import {
   menuTypes
 } from '../types';
 
-const initialState = {
+export const initialMenuState = {
   connecting: false,
   menuError: null,
   menu: [],
-  menuDetails: {},
   pagination: {
     limit: 10,
     offset: 0,
@@ -14,7 +13,7 @@ const initialState = {
     pages: 1 }
 };
 
-export default (state = initialState, action) => {
+export default (state = initialMenuState, action) => {
   switch (action.type) {
     case menuTypes.MENU_REQUEST:
       return {
@@ -27,7 +26,6 @@ export default (state = initialState, action) => {
         ...state,
         connecting: false,
         menu: action.menu,
-        menuDetails: action.menuDetails,
         pagination: action.pagination
 
       };
@@ -42,7 +40,6 @@ export default (state = initialState, action) => {
         ...state,
         connecting: false,
         menu: action.menu,
-        menuDetails: action.menuDetails,
         pagination: action.pagination
       };
     default:

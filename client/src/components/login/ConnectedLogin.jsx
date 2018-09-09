@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 import isEqual from 'lodash.isequal';
@@ -12,21 +13,19 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
 
-    // reset login status
-    this.props.dispatch(userActions.logout());
-
     this.state = {
       canSubmit: false,
       newError: false,
       prevLoginError: {}
     };
 
-    this.disableButton = this.disableButton.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.disableLoginButton = this.disableLoginButton.bind(this);
+    this.enableLoginButton = this.enableLoginButton.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.serverFeedback = this.serverFeedback.bind(this);
     this.formEl = null;
   }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.loginError &&
       !isEqual(nextProps.loginError, prevState.prevLoginError)) {
@@ -36,6 +35,12 @@ class Login extends React.Component {
       };
     }
     return null;
+  }
+
+  componentDidMount() {
+    if (this.props.authenticated) {
+      this.props.dispatch(push('/'));
+    }
   }
 
   componentDidUpdate() {
@@ -48,30 +53,36 @@ class Login extends React.Component {
     }
   }
 
-  handleSubmit(user) {
+  handleLoginSubmit(user) {
     this.setState({ prevLoginError: {} });
     this.props.dispatch(userActions.logout(user));
     this.props.dispatch(userActions.login(user));
   }
-  disableButton() {
+
+  disableLoginButton() {
     this.setState({ canSubmit: false });
   }
 
-  enableButton() {
+  enableLoginButton() {
     this.setState({ canSubmit: true });
   }
+
   serverFeedback(error) {
     this.formEl.updateInputsWithError(error);
   }
 
   render() {
+
     return (
       <div className="canvas">
         <div className="container2">
+
           <header className="header">
             <h2 className="heading">Book A Meal</h2>
           </header>
+
           <main>
+
             <div className="welcome">
               <h4 className="welcome-text">
                 Welcome!
@@ -80,12 +91,14 @@ class Login extends React.Component {
                 Sign in by entering the information below
               </h5>
             </div>
+
             <div className="form-box">
+
               <Formsy
                 className="form"
-                onValidSubmit={this.handleSubmit}
-                onValid={this.enableButton}
-                onInvalid={this.disableButton}
+                onValidSubmit={this.handleLoginSubmit}
+                onValid={this.enableLoginButton}
+                onInvalid={this.disableLoginButton}
                 ref={(form) => { this.formEl = form; }}
               >
                 <MyInput
@@ -100,6 +113,7 @@ class Login extends React.Component {
                     isEmail: 'This is not a valid email'
                   }}
                 />
+
                 <MyInput
                   typeOfInput="password"
                   name="password"
@@ -130,6 +144,7 @@ class Login extends React.Component {
                     maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
+
                 <button
                   className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
                   type="submit"
@@ -138,14 +153,18 @@ class Login extends React.Component {
                   Continue
                 </button>
               </Formsy>
+
               <div className="stacked-text">
+
                 <Link to="/signup">
                   <p>
                     Don&#39;t have an account?
                      Click here to create one
                   </p>
                 </Link>
+
               </div>
+
             </div>
           </main>
 
@@ -154,12 +173,20 @@ class Login extends React.Component {
     );
   }
 }
+Login.defaultProps = {
+  authenticated: false
+};
 
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool
 };
-const mapStateToProps = state => ({
+
+export const mapStateToProps = state => ({
+  authenticated: state.loginReducer.authenticated,
   loginError: state.loginReducer.loginError
 });
+
 export { Login };
+
 export default connect(mapStateToProps)(Login);

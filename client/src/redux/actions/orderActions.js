@@ -28,7 +28,7 @@ const getOrdersWithMealLinks = ({ limit = 10, offset = 0 } = {}) =>
   };
 
 const getOrdersWithMealLinksByDate
-  = (date, { limit = 8, offset = 0 } = {}) => (dispatch) => {
+  = (date, { limit = 10, offset = 0 } = {}) => (dispatch) => {
 
     const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
       : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;

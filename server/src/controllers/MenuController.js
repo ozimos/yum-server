@@ -60,7 +60,6 @@ export default class MenuController extends Controller {
         }];
         if (rows && rows.length) {
           rows.forEach((row) => {
-            newRows[0].Meals.concat(row.dataValues.Meals);
             newRows[0].Meals = [...newRows[0].Meals, ...row.dataValues.Meals];
           });
 

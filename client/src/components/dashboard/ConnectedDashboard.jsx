@@ -19,7 +19,7 @@ import '../../../public/styles/dashboard.scss';
 
 ReactModal.setAppElement(document.getElementById('root'));
 
-class Dashboard extends React.Component {
+export class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
@@ -245,7 +245,7 @@ Dashboard.defaultProps = {
   orderMeals: [],
   orderConnecting: false,
   loadingMeals: false,
-  total: {},
+  total: 0,
   daysTotal: {},
   pagination: {
     pages: 1,
@@ -275,11 +275,7 @@ Dashboard.propTypes = {
   }),
   orderConnecting: PropTypes.bool,
   loadingMeals: PropTypes.bool,
-  total: PropTypes.shape({
-    revenue: PropTypes.number,
-    users: PropTypes.number,
-    orders: PropTypes.number
-  }),
+  total: PropTypes.number,
   daysTotal: PropTypes.shape({
     revenue: PropTypes.number,
     users: PropTypes.number,
@@ -291,8 +287,8 @@ Dashboard.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.loginReducer.user.data,
+export const mapStateToProps = state => ({
+  user: state.loginReducer.user,
   meals: state.mealsReducer.meals,
   orders: state.dashboardReducer.orders,
   orderMeals: state.dashboardReducer.orderMeals,
@@ -307,6 +303,5 @@ const mapStateToProps = state => ({
   orderConnecting: state.dashboardReducer.connecting,
 });
 
-export { Dashboard };
 
 export default connect(mapStateToProps)(Dashboard);

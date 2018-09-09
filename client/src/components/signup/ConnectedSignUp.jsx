@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import { Link } from 'react-router-dom';
+import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import isEqual from 'lodash.isequal';
 import { userActions } from '../../redux/actions';
@@ -10,7 +11,7 @@ import MyCheckBox from '../helpers/MyCheckBox';
 import '../../../public/styles/auth.scss';
 
 
-class SignUp extends React.Component {
+export class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,12 +21,12 @@ class SignUp extends React.Component {
       newError: false,
       prevSignupError: {}
     };
-    this.disableButton = this.disableButton.bind(this);
-    this.enableButton = this.enableButton.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.disableSignupButton = this.disableSignupButton.bind(this);
+    this.enableSignupButton = this.enableSignupButton.bind(this);
+    this.handleSignupSubmit = this.handleSignupSubmit.bind(this);
     this.serverFeedback = this.serverFeedback.bind(this);
-    this.formEl = null;
   }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.signupError
       && !isEqual(nextProps.signupError, prevState.prevSignupError)) {
@@ -36,6 +37,13 @@ class SignUp extends React.Component {
     }
     return null;
   }
+
+  componentDidMount() {
+    if (this.props.authenticated) {
+      this.props.dispatch(push('/'));
+    }
+  }
+
   componentDidUpdate() {
     const { prevSignupError, newError } = this.state;
 
@@ -45,18 +53,21 @@ class SignUp extends React.Component {
       this.setState({ newError: false });
     }
   }
-  handleSubmit(user) {
+
+  handleSignupSubmit(user) {
     this.setState({ prevSignupError: {} });
     this.props.dispatch(userActions.logout(user));
     this.props.dispatch(userActions.signUp(user));
   }
-  disableButton() {
+
+  disableSignupButton() {
     this.setState({ canSubmit: false });
   }
 
-  enableButton() {
+  enableSignupButton() {
     this.setState({ canSubmit: true });
   }
+
   serverFeedback(error) {
     this.formEl.updateInputsWithError(error);
   }
@@ -81,9 +92,9 @@ class SignUp extends React.Component {
             <div className="form-box">
               <Formsy
                 className="form"
-                onValidSubmit={this.handleSubmit}
-                onValid={this.enableButton}
-                onInvalid={this.disableButton}
+                onValidSubmit={this.handleSignupSubmit}
+                onValid={this.enableSignupButton}
+                onInvalid={this.disableSignupButton}
                 ref={(form) => { this.formEl = form; }}
               >
 
@@ -101,6 +112,7 @@ class SignUp extends React.Component {
                   }}
                 />
                 <div className="invalid-feedback" />
+
                 <MyInput
                   typeOfInput="text"
                   name="firstName"
@@ -114,6 +126,7 @@ class SignUp extends React.Component {
                   required
                 />
                 <div className="invalid-feedback" />
+
                 <MyInput
                   typeOfInput="text"
                   name="lastName"
@@ -126,6 +139,7 @@ class SignUp extends React.Component {
                   }}
                   required
                 />
+
                 <MyInput
                   typeOfInput="password"
                   name="password"
@@ -156,6 +170,7 @@ class SignUp extends React.Component {
                     maxLength: 'input must be shorter than 50 characters',
                   }}
                 />
+
                 <MyInput
                   typeOfInput="password"
                   name="confirmPassword"
@@ -190,6 +205,7 @@ class SignUp extends React.Component {
                   Continue
                 </button>
               </Formsy>
+
               <div className="stacked-text">
                 <Link
                   to="/login"
@@ -208,9 +224,13 @@ class SignUp extends React.Component {
 
 SignUp.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired
 };
-const mapStateToProps = state => ({
+
+export const mapStateToProps = state => ({
+  authenticated: state.loginReducer.authenticated,
   signupError: state.signupReducer.signupError
 });
-export { SignUp };
+
+
 export default connect(mapStateToProps)(SignUp);

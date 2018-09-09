@@ -230,7 +230,6 @@ export class MealManager extends React.Component {
                 />
 
                 <MyFormsyInput
-                  ref={(urlInput) => { this.urlInputMain = urlInput; }}
                   innerRef={(c) => { this.urlInput = c; }}
                   style={{ display: 'none' }}
                   required
@@ -326,9 +325,10 @@ MealManager.propTypes = {
   meals: PropTypes.arrayOf(PropTypes.object),
 };
 
-const mapStateToProps = state =>
-  ({ authenticated: state.loginReducer.authenticated,
-    user: state.loginReducer.user.data,
+export const mapStateToProps = state =>
+  ({
+    authenticated: state.loginReducer.authenticated,
+    user: state.loginReducer.user,
     mealError: state.mealsReducer.mealError,
     pagination: state.mealsReducer.pagination,
     connecting: state.mealsReducer.connecting,

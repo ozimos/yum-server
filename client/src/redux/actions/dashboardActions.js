@@ -29,7 +29,7 @@ const getOrdersWithMealLinks = ({ limit = 10, offset = 0 } = {}) =>
   };
 
 const getOrdersWithMealLinksByDate
-  = (date, { limit = 8, offset = 0 } = {}) => (dispatch) => {
+  = (date, { limit = 10, offset = 0 } = {}) => (dispatch) => {
 
     const url = date ? `${baseUrl}/date/${date}?limit=${limit}&offset=${offset}`
       : `${baseUrl}/date/?limit=${limit}&offset=${offset}`;
@@ -92,7 +92,7 @@ const getOrderTotal = orderId => (dispatch) => {
     );
 };
 const getDaysOrdersTotal = () => (dispatch) => {
-  const url = `${baseUrl}/total/date/`;
+  const url = `${baseUrl}/total/date`;
   dispatch({ type: dashboardTypes.ORDER_DASHBOARD_REQUEST });
   return requestServices(url)
     .then(
