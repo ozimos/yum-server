@@ -35,12 +35,16 @@ class TextArea extends React.Component {
     );
   }
 }
+
 TextArea.defaultProps = {
   placeholder: ''
 };
+
 TextArea.propTypes = {
   placeholder: PropTypes.string,
   ...propTypes
 };
+
 export { TextArea };
+
 export default withFormsy(TextArea);

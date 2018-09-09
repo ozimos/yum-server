@@ -83,6 +83,7 @@ export const templateTest = function generateTest(
   method, url, content, key, type, status = '200'
 ) {
   let requester, boundRequest;
+
   beforeEach('create http server', () => {
     requester = request(app);
     boundRequest = requester[method].bind(request, url);
@@ -90,6 +91,7 @@ export const templateTest = function generateTest(
   });
 
   describe(title, () => {
+
     it('return 200 or correct success code', async () => {
       try {
         const res = await boundRequest()

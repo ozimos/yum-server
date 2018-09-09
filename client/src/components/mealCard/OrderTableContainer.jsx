@@ -33,7 +33,8 @@ const OrderTableContainer = ({ orders, ...props }) => {
       <button
         className="btn title-button"
         onClick={() => props.addOrderToCart(columnProps.row.id)}
-        disabled={props.currentOrderId === columnProps.row.id}
+        disabled={props.loadingMeals ||
+          (props.currentOrderId === columnProps.row.id)}
       >
       Edit
       </button>
@@ -84,6 +85,7 @@ OrderTableContainer.defaultProps = {
     offset: 0
   },
   loading: false,
+  loadingMeals: false,
   currentOrderId: ''
 
 };
@@ -101,7 +103,8 @@ OrderTableContainer.propTypes = {
     limit: PropTypes.number,
     offset: PropTypes.number,
   }),
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  loadingMeals: PropTypes.bool
 
 };
 

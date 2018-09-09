@@ -3,6 +3,7 @@
 import MealRow from '../../src/components/orderCart/MealRow';
 
 describe('MealRow Component', () => {
+
   it('renders correctly', () => {
     const wrapper = shallow(<MealRow
       id="abc"
@@ -13,6 +14,7 @@ describe('MealRow Component', () => {
       setQuantity={jest.fn()}
     />);
     expect(toJson(wrapper)).toMatchSnapshot();
+
     const wrapper2 = shallow(<MealRow
       id="abc"
       title="abc"
@@ -21,12 +23,13 @@ describe('MealRow Component', () => {
       setQuantity={jest.fn()}
     />);
     expect(toJson(wrapper2)).toMatchSnapshot();
+
     wrapper2.find('.btn.btn-cart').simulate('click');
     expect(toJson(wrapper2)).toMatchSnapshot();
+
     wrapper2.find('input').simulate('change');
     expect(toJson(wrapper2)).toMatchSnapshot();
   });
-
 
 });
 

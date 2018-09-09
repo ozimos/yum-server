@@ -19,14 +19,21 @@ context('Validation with Joi schemas', () => {
     };
 
     test.forEach((elem) => {
-      it(`throws error for non-uuid ${typeof elem.id} parameter: ${elem.id}`, () => {
-        const result = params.validate(elem);
-        assert.notEqual(result.error, null, `Joi output: ${result.error}`);
-      });
+
+      it(
+        `throws error for non-uuid ${typeof elem.id} parameter: ${elem.id}`,
+        () => {
+          const result = params.validate(elem);
+
+          assert.notEqual(result.error, null, `Joi output: ${result.error}`);
+        }
+      );
     });
 
-    it('does not throw error for uuid string parameter c848bf5c-27ab-4882-9e43-ffe178c82602', () => {
+    it('does not throw error for uuid string parameter ' +
+    'c848bf5c-27ab-4882-9e43-ffe178c82602', () => {
       const result = params.validate(item);
+
       assert.equal(result.error, null, `Joi output: ${result.error}`);
     });
   });

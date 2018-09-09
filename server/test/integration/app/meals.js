@@ -22,10 +22,12 @@ const deletedMeal = {
 const mealsUrl = `${rootURL}/meals`;
 const getMealsUrl = `${rootURL}/meals?offset=0&limit=8`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
+
 context('meals integration test', () => {
   before('set up meals', async () => {
     await db.Meal.create(deletedMeal);
   });
+
   // Get All Meals
   describe('GET /meals', () => {
     it('should return all meals', () => request(app).get(getMealsUrl)
@@ -39,6 +41,7 @@ context('meals integration test', () => {
 
   // Get One Meal
   describe('GET /meals/:id', () => {
+
     it('should return a meal', () =>
       request(app).get(mealIdUrl)
         .set('authorization', `JWT ${tovieyeCatererToken}`)
@@ -46,8 +49,10 @@ context('meals integration test', () => {
           expect(res.body.data.title).to.equal(defaultMeal.title);
           expect(res.body.data.price).to.equal(defaultMeal.price);
         }));
+
     templateTest('Get Meal', 'get', mealIdUrl, null, 'price', 'object');
   });
+
   // Update A Meal
   describe('PUT /meals/:id', () => {
     const updatedMeal = {
@@ -62,6 +67,7 @@ context('meals integration test', () => {
         expect(res.body.data.title).to.equal(updatedMeal.title);
         expect(res.body.data.price).to.equal(updatedMeal.price);
       }));
+
     templateTest(
       'Modify Meal', 'put',
       mealIdUrl, updatedMeal, 'price', 'object'

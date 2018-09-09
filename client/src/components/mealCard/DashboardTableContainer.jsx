@@ -64,6 +64,7 @@ const DashboardTableContainer = ({ orders, ...props }) => {
     </div>
   );
 };
+
 DashboardTableContainer.defaultProps = {
   pagination: {
     pages: 1,

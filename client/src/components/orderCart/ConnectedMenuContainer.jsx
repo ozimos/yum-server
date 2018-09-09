@@ -97,5 +97,6 @@ const mapStateToProps = state => ({
 });
 
 export { MenuContainer };
+
 export default connect(mapStateToProps)(MenuContainer);
 

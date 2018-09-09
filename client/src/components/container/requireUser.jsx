@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 const AuthenticatedComponent = (props) => {
+
   const {
     MyComponent,
     authenticated,
@@ -17,9 +18,11 @@ const AuthenticatedComponent = (props) => {
     </Fragment>
   );
 };
+
 AuthenticatedComponent.defaultProps = {
   authenticated: false,
 };
+
 AuthenticatedComponent.propTypes = {
   authenticated: PropTypes.bool,
   MyComponent: PropTypes.func.isRequired,

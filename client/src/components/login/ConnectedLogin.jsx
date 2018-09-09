@@ -173,6 +173,7 @@ class Login extends React.Component {
     );
   }
 }
+
 Login.defaultProps = {
   authenticated: false
 };

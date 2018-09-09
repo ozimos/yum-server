@@ -10,6 +10,7 @@ const props = {
 
 describe('MealCardContainer Component', () => {
   const setup = () => shallow(<MealCardContainer {...props} />);
+
   it('renders correctly', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();

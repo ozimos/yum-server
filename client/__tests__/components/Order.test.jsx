@@ -57,15 +57,19 @@ describe('Order Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
     setup2 = () => shallow(<Order {...props2} />);
     wrapper = setup2();
+
     expect(toJson(wrapper)).toMatchSnapshot();
     setup2 = () => shallow(<Order {...props3} />);
     wrapper = setup2();
+
     expect(toJson(wrapper)).toMatchSnapshot();
     setup2 = () => shallow(<Order {...props4} />);
     wrapper = setup2();
+
     expect(toJson(wrapper)).toMatchSnapshot();
     setup2 = () => shallow(<Order {...props5} />);
     wrapper = setup2();
+
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
@@ -194,6 +198,7 @@ describe('Order Component', () => {
     wrapper.instance().notify(meal);
     expect(notifySpy).toHaveBeenCalled();
   });
+
   it('should call `handleMenuPaginationClick`', () => {
     const wrapper = setup();
 

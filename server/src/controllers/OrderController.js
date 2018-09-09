@@ -142,7 +142,7 @@ export default class OrderController extends Controller {
    * @returns {obj}
    */
 
-  getOrdersWithMealLinks(req, newOptions) {
+  getOrdersWithMealLinks(req, newOptions, successCode = 200, message) {
 
     let scope;
     const { userId, isCaterer } = req.decoded;
@@ -177,7 +177,8 @@ export default class OrderController extends Controller {
         }) : [];
 
         if (!newRows.length) {
-          return OrderController.errorResponse('no records available', 404);
+          const msg = message || 'no records available';
+          return OrderController.errorResponse(msg, 404);
         }
 
         return OrderController.defaultResponse({
@@ -185,7 +186,7 @@ export default class OrderController extends Controller {
           offset,
           pages,
           count,
-          rows: newRows });
+          rows: newRows }, successCode);
       })
       .catch(error => OrderController.errorResponse(error.message));
   }
@@ -260,6 +261,27 @@ export default class OrderController extends Controller {
   }
 
   /**
+   * gets all the meals ia an order for editing
+   * @param {obj} req express request object
+   * @returns {obj}
+   */
+
+  getSingleOrder(req) {
+    const options = {
+      include: [{
+        association: 'Meals',
+        attributes: ['id', 'userId', 'title', 'description', 'price',
+          'updatedAt'],
+        through: {
+          attributes: ['quantity'],
+        }
+      }
+      ]
+    };
+    return this.getSingleRecord(req, options);
+  }
+
+  /**
    * Creates a new order
    * @param {obj} req express request object
    * @returns {obj}
@@ -318,37 +340,10 @@ export default class OrderController extends Controller {
         }));
 
       await Promise.all(promise);
-      const { userId, isCaterer } = req.decoded;
-      let scope;
-      const options = {
-        include: [{
-          association: 'User',
-          attributes: ['firstName', 'lastName', 'email']
-        },
-        {
-          association: 'Meals',
-          where: (isCaterer) && { userId },
-          paranoid: false,
-          through: {
-            attributes: ['quantity'],
-          },
-        }
-        ],
-        distinct: true,
-        where: { id: order.id },
-        order: [['updatedAt', 'DESC']]
-      };
+      req.query = { limit: 10 };
+      const message = 'Order was not processed. Try again';
+      return this.getOrdersWithMealLinks(req, {}, successCode, message);
 
-      const { pages, count, rows }
-        = await this.getAllRecords(req, scope, options, { raw: true });
-
-      if (rows.length > 0) {
-        return OrderController
-          .defaultResponse({ pages, count, rows }, successCode);
-      }
-
-      return OrderController
-        .errorResponse('Order was not processed. Try again', 404);
 
     } catch (error) {
       return OrderController.errorResponse(error.message);

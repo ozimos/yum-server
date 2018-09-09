@@ -38,6 +38,7 @@ describe('MealManager Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
 
   });
+
   it('should call `setUploadPercent`', () => {
     const wrapper = setup();
 

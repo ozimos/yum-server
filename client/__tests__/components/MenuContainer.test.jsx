@@ -24,8 +24,10 @@ describe('MenuContainer Component', () => {
   });
 
   it('renders correctly', () => {
+
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
+
     const props2 = { ...props, addClass: 'string' };
     const setup2 = () => shallow(<MenuContainer {...props2} />);
     wrapper = setup2();

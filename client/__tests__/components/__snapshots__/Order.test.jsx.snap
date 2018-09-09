@@ -220,6 +220,7 @@ exports[`Order Component renders correctly 1`] = `
               getOrderMeals={[Function]}
               getOrderMealsTotals={[Function]}
               loading={false}
+              loadingMeals={false}
               onFetchData={[Function]}
               orders={
                 Array [
@@ -246,26 +247,7 @@ exports[`Order Component renders correctly 1`] = `
                     "userId": "userId",
                   },
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "subTotal": 2400,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 3,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "subTotal": 6000,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
@@ -551,6 +533,7 @@ exports[`Order Component renders correctly 2`] = `
               getOrderMeals={[Function]}
               getOrderMealsTotals={[Function]}
               loading={false}
+              loadingMeals={false}
               onFetchData={[Function]}
               orders={
                 Array [
@@ -577,26 +560,7 @@ exports[`Order Component renders correctly 2`] = `
                     "userId": "userId",
                   },
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "subTotal": 2400,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 3,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "subTotal": 6000,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
@@ -1500,6 +1464,7 @@ exports[`Order Component renders correctly 5`] = `
               getOrderMeals={[Function]}
               getOrderMealsTotals={[Function]}
               loading={false}
+              loadingMeals={false}
               onFetchData={[Function]}
               orders={
                 Array [
@@ -1526,26 +1491,7 @@ exports[`Order Component renders correctly 5`] = `
                     "userId": "userId",
                   },
                   Object {
-                    "Meals": Array [
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 2,
-                        },
-                        "id": "meal1",
-                        "price": 1200,
-                        "subTotal": 2400,
-                        "title": "Eba and Egusi",
-                      },
-                      Object {
-                        "MealOrders": Object {
-                          "quantity": 3,
-                        },
-                        "id": "meal2",
-                        "price": 2000,
-                        "subTotal": 6000,
-                        "title": "Rice and Stew",
-                      },
-                    ],
+                    "MealsURL": "url",
                     "User": Object {
                       "email": "asdf",
                       "firstName": "first",
@@ -1659,7 +1605,7 @@ Object {
   "loadingMeals": false,
   "mealsPagination": Object {
     "count": 1,
-    "limits": 5,
+    "limit": 5,
     "offset": 0,
     "pages": 1,
   },
@@ -1672,17 +1618,17 @@ Object {
     "pages": 1,
   },
   "orderConnecting": false,
+  "orderEditMeals": Array [],
   "orderError": null,
   "orderMeals": Array [],
   "orderMealsError": null,
   "orders": Array [],
   "pagination": Object {
     "count": 1,
-    "limits": 10,
+    "limit": 10,
     "offset": 0,
     "pages": 1,
   },
-  "pendingOrders": Array [],
   "total": 0,
   "user": Object {
     "firstName": "Name",

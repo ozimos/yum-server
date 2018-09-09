@@ -13,6 +13,7 @@ describe('Routes Users', () => {
 
   // SignUp A User
   describe('POST /auth/signup', () => {
+
     const newUser = {
       firstName: 'Tovieye',
       lastName: 'Ozi',
@@ -20,6 +21,7 @@ describe('Routes Users', () => {
       password: 'test',
       confirmPassword: 'test',
     };
+
     it('should signup a new user', () => request(app).post(signUpUrl)
       .send(newUser).then((res) => {
         expect(res.body.data.email).to.equal(newUser.email);
@@ -33,6 +35,7 @@ describe('Routes Users', () => {
       email: catererTovieye.email,
       password: defaultPassword,
     };
+
     it(
       'should login new user',
       () => request(app).post(logInUrl).send(credentials).then((res) => {

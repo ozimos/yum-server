@@ -1,40 +1,24 @@
-import orderReducer from '../../src/redux/reducers/orderReducer';
+import orderReducer,
+{ initialOrderState } from '../../src/redux/reducers/orderReducer';
 import { orderTypes } from '../../src/redux/types';
 import { orderMeals,
-  newOrder,
-  modifiedOrder,
   previousOrders,
-  updatedOrders } from '../__mocks__/orderDataMock';
+  updatedOrders,
+  newOrders,
+  pagination,
+  mealsPagination
+} from '../__mocks__/orderDataMock';
 
 describe(' orderReducer', () => {
-  const initialState = {
-    connecting: false,
-    loadingMeals: false,
-    orderError: null,
-    orderMealsError: null,
-    orders: [],
-    pendingOrders: [],
-    orderMeals: [],
-    total: 0,
-    mealsPagination: {
-      limits: 5,
-      offset: 0,
-      count: 1,
-      pages: 1 },
-    pagination: {
-      limits: 10,
-      offset: 0,
-      count: 1,
-      pages: 1 }
-  };
 
 
   it('should return the initial state for unknown action type', () => {
-    expect(orderReducer(undefined, {})).toEqual(initialState);
+    expect(orderReducer(undefined, {})).toEqual(initialOrderState);
   });
 
   it('should set loading state on fetching orders', () => {
     const newState = {
+      ...initialOrderState,
       connecting: true,
       orderError: null,
       orders: []
@@ -45,18 +29,21 @@ describe(' orderReducer', () => {
 
   it('should set loading state on fetching meals', () => {
     const newState = {
+      ...initialOrderState,
       loadingMeals: true
     };
     const action = { type: orderTypes.ORDER_MEALS_REQUEST };
     expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
 
-  it('should add orders to state', () => {
+  it('should add fetched orders to state', () => {
     const newState = {
+      ...initialOrderState,
       orders: previousOrders
     };
     const action = { type: orderTypes.GET_ORDER_ALL_SUCCESS,
-      orders: previousOrders };
+      pagination,
+      orders: previousOrders, };
 
     expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
@@ -87,44 +74,36 @@ describe(' orderReducer', () => {
   it('should add new orders to state', () => {
     const oldState = {
       orders: previousOrders,
-      pendingOrders: [],
-      pagination: { count: 2 },
     };
     const newState = {
-      orders: [newOrder, ...previousOrders],
-      pendingOrders: [newOrder],
-      pagination: { count: 3 },
-
+      orders: newOrders,
     };
-    const action = { type: orderTypes.POST_ORDER_SUCCESS, order: newOrder };
+    const action = { type: orderTypes.POST_ORDER_SUCCESS, orders: newOrders };
     expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
+
   it('should add fetched meals to state', () => {
 
     const newState = {
       loadingMeals: false,
       orderMeals,
-      mealsPagination: { count: 2 },
-
     };
     const action = { type: orderTypes.GET_ORDER_MEAL_SUCCESS,
       orderMeals,
-      mealsPagination: { count: 2 } };
+      mealsPagination };
     expect(orderReducer(undefined, action)).toMatchObject(newState);
   });
 
   it('should add updated orders to state', () => {
     const oldState = {
       orders: previousOrders,
-      pendingOrders: [previousOrders[0], previousOrders[1]]
     };
     const newState = {
       orders: updatedOrders,
-      pendingOrders: [modifiedOrder, previousOrders[1]]
     };
 
     const action = { type: orderTypes.UPDATE_ORDER_SUCCESS,
-      order: modifiedOrder };
+      orders: updatedOrders };
     expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
 
@@ -137,17 +116,6 @@ describe(' orderReducer', () => {
     const action = { type: orderTypes.GET_ORDER_TOTAL_SUCCESS,
       total: 20 };
     expect(orderReducer(undefined, action)).toMatchObject(newState);
-  });
-
-  it('should remove not pending orders from state', () => {
-    const oldState = {
-      pendingOrders: [modifiedOrder],
-    };
-    const newState = {
-      pendingOrders: []
-    };
-    const action = { type: orderTypes.UPDATE_PENDING, id: modifiedOrder.id };
-    expect(orderReducer(oldState, action)).toMatchObject(newState);
   });
 });
 

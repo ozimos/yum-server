@@ -12,6 +12,7 @@ import app from '../../../src/app';
 
 const menuUrl = `${rootURL}/menu`;
 const getMenuUrl = `${rootURL}/menu?offset=0&limit=8`;
+
 context('menu integration test', () => {
 
   // Post Menu

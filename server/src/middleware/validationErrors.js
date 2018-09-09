@@ -1,4 +1,5 @@
 const validationErrors = (err, req, res, next) => {
+
   if (err.error && err.error.isJoi) {
     const key = err.error.details[0].path[0];
     res.status(400).json({

@@ -24,34 +24,21 @@ orderRouter
     OrderController.orderClose,
     OrderController.select(orderController, 'postOrder')
   );
-orderRouter
-  .route('/:id')
-  .put(
-    Authenticate.isUser, validator.params(paramSchema),
-    validator.query(querySchema),
-    validator.body(orderSchema),
-    OrderController.orderClose,
-    OrderController.select(orderController, 'updateOrder')
-  );
-orderRouter
-  .route('/:id/meals')
-  .get(
-    Authenticate.isUser, validator.params(paramSchema),
-    validator.query(querySchema),
-    OrderController.select(orderController, 'getMealsInOrder')
-  );
+
 orderRouter
   .route('/date/:date?')
   .get(
     Authenticate.isUser, validator.params(paramSchema),
     OrderController.select(orderController, 'getOrdersWithMealLinksByDate')
   );
+
 orderRouter
   .route('/total/date')
   .get(
     Authenticate.isUser, validator.query(querySchema),
     OrderController.select(orderController, 'getTotalDaySales')
   );
+
 orderRouter
   .route('/total/:id')
   .get(
@@ -59,5 +46,27 @@ orderRouter
     OrderController.select(orderController, 'getTotalOrderSales')
   );
 
+orderRouter
+  .route('/:id')
+  .get(
+    Authenticate.isUser, validator.params(paramSchema),
+    OrderController.orderClose,
+    OrderController.select(orderController, 'getSingleOrder')
+  )
+  .put(
+    Authenticate.isUser, validator.params(paramSchema),
+    validator.query(querySchema),
+    validator.body(orderSchema),
+    OrderController.orderClose,
+    OrderController.select(orderController, 'updateOrder')
+  );
+
+orderRouter
+  .route('/:id/meals')
+  .get(
+    Authenticate.isUser, validator.params(paramSchema),
+    validator.query(querySchema),
+    OrderController.select(orderController, 'getMealsInOrder')
+  );
 
 export default orderRouter;

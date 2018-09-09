@@ -33,8 +33,10 @@ describe('Nav Component', () => {
     };
     const wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
+
     const wrapper2 = shallow(<Nav {...props2} />);
     expect(toJson(wrapper2)).toMatchSnapshot();
+
     const wrapper3 = shallow(<Nav {...props3} />);
     expect(toJson(wrapper3)).toMatchSnapshot();
 

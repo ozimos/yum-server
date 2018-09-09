@@ -109,26 +109,7 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
           "userId": "userId",
         },
         Object {
-          "Meals": Array [
-            Object {
-              "MealOrders": Object {
-                "quantity": 2,
-              },
-              "id": "meal1",
-              "price": 1200,
-              "subTotal": 2400,
-              "title": "Eba and Egusi",
-            },
-            Object {
-              "MealOrders": Object {
-                "quantity": 3,
-              },
-              "id": "meal2",
-              "price": 2000,
-              "subTotal": 6000,
-              "title": "Rice and Stew",
-            },
-          ],
+          "MealsURL": "url",
           "User": Object {
             "email": "asdf",
             "firstName": "first",
