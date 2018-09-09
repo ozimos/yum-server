@@ -55,9 +55,11 @@ export const order = {
     rows: [{ ...orderDetails }]
   }
 };
+
 export const newOrder = { ...orderMealDetails, id: 'order4' };
 
 export const modifiedOrder = { ...orderMealDetails, id: 'order1' };
+
 export const modifiedOrderResponse = {
   data: {
     ...mealsPagination,
@@ -68,19 +70,24 @@ export const modifiedOrderResponse = {
 export const previousOrders = [
   { ...orderDetails, id: 'order1' },
   { ...orderDetails, id: 'order2' },
-  { ...orderMealDetails, id: 'order3' },
+  { ...orderDetails, id: 'order3' },
 ];
+
 export const allOrders = {
   data: {
     ...pagination,
     rows: previousOrders
   }
 };
+
 export const updatedOrders = [
   { ...orderMealDetails, id: 'order1' },
   { ...orderDetails, id: 'order2' },
-  { ...orderMealDetails, id: 'order3' },
+  { ...orderDetails,
+    id: 'order3',
+    updatedAt: '2018-08-24T16:55:55.783Z' },
 ];
+
 export const updatedOrdersResponse = {
   data: {
     ...pagination,
@@ -91,9 +98,10 @@ export const updatedOrdersResponse = {
 export const newOrders = [
   { ...orderDetails, id: 'order1' },
   { ...orderDetails, id: 'order2' },
-  { ...orderMealDetails, id: 'order3' },
-  { ...orderMealDetails, id: 'order4' },
+  { ...orderDetails, id: 'order3' },
+  { ...orderDetails, id: 'order4' },
 ];
+
 export const newOrdersResponse = {
   data: {
     limit: 10,

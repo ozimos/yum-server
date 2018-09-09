@@ -9,6 +9,7 @@ const MealDisplayCard = ({
   description,
   ...props }) => {
   const meal = { id, title, imageUrl, price, description };
+
   return (
     <React.Fragment>
       <div className="card">
@@ -46,11 +47,13 @@ const MealDisplayCard = ({
     </React.Fragment>
   );
 };
+
 MealDisplayCard.defaultProps = {
   addToCollection: null,
   collection: null,
   removeFromCollection: null,
 };
+
 MealDisplayCard.propTypes = {
   title: PropTypes.string.isRequired,
   collection: PropTypes.string,
@@ -61,5 +64,6 @@ MealDisplayCard.propTypes = {
   addToCollection: PropTypes.func,
   removeFromCollection: PropTypes.func,
 };
+
 export default MealDisplayCard;
 

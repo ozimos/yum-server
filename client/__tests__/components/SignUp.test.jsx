@@ -8,6 +8,7 @@ const props = {
 };
 
 describe('SignUp Component', () => {
+
   const setup = () => shallow(<SignUp {...props} />);
 
   it('should render without throwing an error', () => {
@@ -18,6 +19,7 @@ describe('SignUp Component', () => {
   });
 
   it('renders correctly', () => {
+
     const props2 = {
       dispatch: jest.fn(),
       authenticated: true

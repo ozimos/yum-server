@@ -51,12 +51,15 @@ describe('Menu Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.instance().setState({ currentMenu: menuMeals });
     expect(toJson(wrapper)).toMatchSnapshot();
+
     setup2 = () => shallow(<Menu {...props2} />);
     wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();
+
     setup2 = () => shallow(<Menu {...props3} />);
     wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();
+
     setup2 = () => shallow(<Menu {...props4} />);
     wrapper = setup2();
     expect(toJson(wrapper)).toMatchSnapshot();

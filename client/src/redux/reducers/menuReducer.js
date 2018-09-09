@@ -15,26 +15,29 @@ export const initialMenuState = {
 
 export default (state = initialMenuState, action) => {
   switch (action.type) {
+
     case menuTypes.MENU_REQUEST:
       return {
         ...state,
         connecting: true,
         menuError: null
       };
+
     case menuTypes.GET_MENU_SUCCESS:
       return {
         ...state,
         connecting: false,
         menu: action.menu,
         pagination: action.pagination
-
       };
+
     case menuTypes.MENU_FAILURE:
       return {
         ...state,
         connecting: false,
         menuError: action.error
       };
+
     case menuTypes.POST_MENU_SUCCESS:
       return {
         ...state,
@@ -42,6 +45,7 @@ export default (state = initialMenuState, action) => {
         menu: action.menu,
         pagination: action.pagination
       };
+
     default:
       return state;
   }

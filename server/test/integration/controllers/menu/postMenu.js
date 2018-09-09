@@ -23,16 +23,19 @@ describe('Integration Controller Post Menu', () => {
       decoded: { userId: defaultUser.id }
     };
     const response = await menuController.postMenu(req);
+
     expect(response.message).to.be.a('string');
     expect(response.statusCode).to.equal(400);
   });
   it('postMenu sets the environment variables', async () => {
+
     const hour = new Date().getHours();
     const mins = new Date().getMinutes();
     await menuController.postMenu({
       body,
       decoded: { userId: defaultUser.id }
     });
+
     expect(process.env.ORDER_START_HOUR).to.equal(hour.toString());
     expect(parseInt(process.env.ORDER_START_MINS, 10)).to.be.closeTo(mins, 1);
   });

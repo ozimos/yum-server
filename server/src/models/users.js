@@ -37,5 +37,6 @@ export default (sequelize, DataTypes) => {
   });
 
   User.beforeCreate(hashPassword);
+
   return User;
 };

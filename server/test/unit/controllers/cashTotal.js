@@ -39,18 +39,24 @@ const sampleOrders = [
     ]
   }
 ];
+
 describe('CashTotal', () => {
+
   it('should return the total cash for all orders', () => {
     expect(cashTotal(sampleOrders)).to.equal(25000);
   });
+
   it('should return the 0 for no argument', () => {
     expect(cashTotal()).to.equal(0);
   });
+
 });
 describe('subTotal', () => {
+
   it('should return the total cash for an order', () => {
     expect(subTotal(sampleOrders[0].Meals)).to.equal(12500);
   });
+
   it('should return the 0 for no argument calls', () => {
     expect(subTotal()).to.equal(0);
   });

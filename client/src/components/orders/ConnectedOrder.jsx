@@ -38,7 +38,8 @@ export class Order extends React.Component {
       selectedOrderId: '',
       showOrderModal: false,
       showMealDetailModal: false,
-      currentPage: 0
+      currentPage: 0,
+      addOrder: false
     };
   }
 
@@ -46,6 +47,23 @@ export class Order extends React.Component {
     const { offset = 0, limit = 10 } = this.props.pagination;
     this.props.dispatch(menuActions.getMenu());
     this.props.dispatch(orderActions.getOrdersWithMealLinks({ limit, offset }));
+  }
+
+  componentDidUpdate() {
+    if (Object.keys(this.props.orderEditMeals).length && this.state.addOrder) {
+      const order = this.props.orderEditMeals;
+
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        currentOrder: order.Meals,
+        currentOrderId: order.id,
+        addOrder: false
+      });
+      toast(
+        'Meal has been added to cart for editing',
+        { className: 'toaster' }
+      );
+    }
   }
 
   onFetchMealData = (state) => {
@@ -97,9 +115,8 @@ export class Order extends React.Component {
   }
 
   addOrderToCart = (id) => {
-    const order = this.props.pendingOrders.find(elem => elem.id === id);
-    this.setState({ currentOrder: order.Meals, currentOrderId: id });
-    toast('Meal has been added to cart for editing', { className: 'toaster' });
+    this.props.dispatch(orderActions.getOrderForUpdate(id));
+    this.setState({ addOrder: true });
   }
 
   removeMealFromCart = (id) => {
@@ -248,6 +265,7 @@ export class Order extends React.Component {
                   { isTodayOrder ? <OrderTableContainer
                     orders={this.props.orders}
                     loading={this.props.orderConnecting}
+                    loadingMeals={this.props.loadingMeals}
                     pagination={this.props.pagination}
                     addOrderToCart={this.addOrderToCart}
                     onFetchData={this.onFetchOrderData}
@@ -323,7 +341,7 @@ export class Order extends React.Component {
 Order.defaultProps = {
   menu: [],
   orders: [],
-  pendingOrders: [],
+  orderEditMeals: {},
   orderMeals: [],
   orderConnecting: false,
   loadingMeals: false,
@@ -367,7 +385,10 @@ Order.propTypes = {
   }),
   orderConnecting: PropTypes.bool,
   loadingMeals: PropTypes.bool,
-  pendingOrders: PropTypes.arrayOf(PropTypes.object),
+  orderEditMeals: PropTypes.shape({
+    id: PropTypes.string,
+    Meals: PropTypes.arrayOf(PropTypes.object),
+  }),
   total: PropTypes.number,
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
@@ -388,7 +409,7 @@ export const mapStateToProps = state => ({
   menuConnecting: state.menuReducer.connecting,
   menu: state.menuReducer.menu,
   orders: state.orderReducer.orders,
-  pendingOrders: state.orderReducer.pendingOrders,
+  orderEditMeals: state.orderReducer.orderEditMeals,
   orderMeals: state.orderReducer.orderMeals,
   user: state.loginReducer.user
 });

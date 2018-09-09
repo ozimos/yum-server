@@ -11,9 +11,11 @@ const props = {
   ...meal.data,
   dispatch: jest.fn(),
 };
+
 const store = mockStore({
   connecting: true
 });
+
 describe('MealOptionsCard Component', () => {
 
   const shallowSetup = () => shallow(<MealOptionsCard {...props} />);
@@ -162,6 +164,7 @@ describe('MealOptionsCard Component', () => {
     expect(closeDeleteConfirmModalSpy).toHaveBeenCalled();
     expect(deleteMealSpy).toHaveBeenCalled();
   });
+
   it('should map state to props', () => {
     const initialState = {
       dispatch: jest.fn(),

@@ -30,7 +30,9 @@ describe('Modify Order:', () => {
     });
     orderId = response.data.rows[0].id;
   });
+
   describe('Modify Order:', () => {
+
     it('updateOrder returns all orders in db', async () => {
       const body2 = {
         meals: [{
@@ -43,8 +45,6 @@ describe('Modify Order:', () => {
         }
         ]
       };
-      const idArray = [body2.meals[0].id, body2.meals[1].id];
-      const quantityArray = [body2.meals[0].quantity, body2.meals[1].quantity];
 
       const params = {
         id: orderId
@@ -57,9 +57,6 @@ describe('Modify Order:', () => {
       };
       const response = await orderController.updateOrder(req);
 
-      expect(response.data.rows[0].Meals[0].id).to.be.oneOf(idArray);
-      expect(response.data.rows[0].Meals[0].MealOrders.quantity)
-        .to.be.oneOf(quantityArray);
       expect(response.data.rows[0].id).to.be.a('string');
       expect(response.statusCode).to.equal(200);
     });

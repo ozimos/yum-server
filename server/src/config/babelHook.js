@@ -5,4 +5,5 @@ require('babel-register')({
     'add-module-exports'
   ]
 });
+
 module.exports = require('./config.js');

@@ -10,12 +10,15 @@ const MealRow = ({
   removeFromCart
 }) => {
   const subTotal = price * (quantity || 1);
+
   return (
     <React.Fragment>
       <tr className="slim">
         <td>{title}</td>
         <td>{price}</td>
+
         <td>
+
           <input
             type="number"
             placeholder="1"
@@ -26,12 +29,16 @@ const MealRow = ({
             min="1"
             step="1"
           />
+
         </td>
+
         <td>{subTotal}</td>
         <td>
+
           <button className="btn btn-cart" onClick={() => removeFromCart(id)}>
                 &#10006;
           </button>
+
         </td>
       </tr>
     </React.Fragment>

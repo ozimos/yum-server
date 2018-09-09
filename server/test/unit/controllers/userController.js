@@ -21,21 +21,27 @@ describe('User Controllers', () => {
     },
     attributes: { exclude: ['createdAt', 'updatedAt'] }
   };
+
   beforeEach('Stub User model', () => {
     User = td.object();
     userController = new UserController(User);
   });
+
   afterEach('Remove stubbing', () => td.reset());
+
   describe('login(req)', () => {
+
     it('should return an error message if no data in database', () => {
       const expectedResponse = {
         email: 'Incorrect email or password'
       };
 
       td.when(User.findOne(input)).thenResolve(null);
+
       return userController.login(req)
         .then(response => expect(response.message).to.eql(expectedResponse));
     });
+
     it('should return an error message if password is incorrect', () => {
       const response = {
         password: 'some Hash'
@@ -50,9 +56,11 @@ describe('User Controllers', () => {
       td.when(User.findOne(input)).thenResolve(response);
       td.when(bcrypt.compareSync(req.body.password, response.password))
         .thenResolve(false);
+
       return userController.login(req)
         .then(response2 => expect(response2.message).to.eql(expectedResponse));
     });
+
     it(
       'should return an error message if error occurs when accessing database',
       () => {
@@ -61,6 +69,7 @@ describe('User Controllers', () => {
         };
 
         td.when(User.findOne(input)).thenReject(error);
+
         return userController.login(req)
           .catch(response => expect(response.message).to.equal(error.message));
       }
@@ -68,6 +77,7 @@ describe('User Controllers', () => {
   });
 
   describe('signUp(req)', () => {
+
     it('should return an error message if email already in database', () => {
       const expectedResponse = {
         email: 'Email is not available'
@@ -77,6 +87,7 @@ describe('User Controllers', () => {
       };
       td.when(User.findOrCreate(td.matchers.anything()))
         .thenResolve([dummyUser, false]);
+
       return userController.signUp(req)
         .then(response => expect(response.message).to.eql(expectedResponse));
     });
@@ -104,15 +115,16 @@ describe('User Controllers', () => {
       }
     };
     const inputMessage = 'Signup Successful, ';
+
     it('should create a token', () => {
 
       const response = UserController.sendResponseWithToken(data, inputMessage);
 
       expect(response.message).to.equal('Signup Successful, Login Successful');
       expect(response.statusCode).to.equal(200);
-      // eslint-disable-next-line
-      expect(response.token).to.exist;
+      expect(response.token).to.be.a('string');
     });
+
     it('should not return the password in the response', () => {
 
       const strippedData = { ...data.dataValues

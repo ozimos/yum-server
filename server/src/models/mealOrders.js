@@ -1,4 +1,5 @@
 export default (sequelize, DataTypes) => {
+
   const MealOrders = sequelize.define('MealOrders', {
     quantity: {
       type: DataTypes.INTEGER,
@@ -10,5 +11,6 @@ export default (sequelize, DataTypes) => {
       }
     }
   });
+
   return MealOrders;
 };

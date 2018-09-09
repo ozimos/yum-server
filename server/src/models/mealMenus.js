@@ -1,4 +1,5 @@
 export default (sequelize, DataTypes) => {
+
   const MealMenus = sequelize.define(
     'MealMenus', {
       userId: {

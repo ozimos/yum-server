@@ -58,6 +58,7 @@ const getMealsInOrder
 = (orderId, { offset = 0 } = {}) => (dispatch) => {
   const url = `${baseUrl}/${orderId}/meals?limit=5&offset=${offset}`;
   dispatch({ type: dashboardTypes.ORDER_MEALS_DASHBOARD_REQUEST });
+
   return requestServices(url)
     .then(
       response => dispatch({
@@ -70,7 +71,6 @@ const getMealsInOrder
           type: dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE,
           orderMealsError: error.response.data.message
         })
-
     );
 };
 
@@ -88,12 +88,13 @@ const getOrderTotal = orderId => (dispatch) => {
           type: dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE,
           orderMealsError: error.response.data.message
         })
-
     );
 };
+
 const getDaysOrdersTotal = () => (dispatch) => {
   const url = `${baseUrl}/total/date`;
   dispatch({ type: dashboardTypes.ORDER_DASHBOARD_REQUEST });
+
   return requestServices(url)
     .then(
       response => dispatch({

@@ -97,10 +97,8 @@ const postOrder = order => (dispatch) => {
     .then(
       response => dispatch({
         type: orderTypes.POST_ORDER_SUCCESS,
-        order: { ...response.data.data.rows[0],
-          pagination: paginationExtract(response.data.data),
-          connecting: false
-        }
+        orders: response.data.data.rows,
+        pagination: paginationExtract(response.data.data)
       }),
       error =>
         dispatch({
@@ -111,6 +109,23 @@ const postOrder = order => (dispatch) => {
     );
 };
 
+const getOrderForUpdate = orderId => (dispatch) => {
+  dispatch({ type: orderTypes.ORDER_MEALS_REQUEST });
+
+  return requestServices(`${baseUrl}/${orderId}`)
+    .then(
+      response => dispatch({
+        type: orderTypes.GET_ORDER_MEAL_EDIT_SUCCESS,
+        orderEditMeals: response.data.data,
+      }),
+      error =>
+        dispatch({
+          type: orderTypes.GET_ORDER_MEAL_FAILURE,
+          error: error.response.data.message
+        })
+
+    );
+};
 const updateOrder = (order, orderId) => (dispatch) => {
   dispatch({ type: orderTypes.ORDER_REQUEST });
 
@@ -118,10 +133,8 @@ const updateOrder = (order, orderId) => (dispatch) => {
     .then(
       response => dispatch({
         type: orderTypes.UPDATE_ORDER_SUCCESS,
-        order: { ...response.data.data.rows[0],
-          pagination: paginationExtract(response.data.data),
-          connecting: false
-        }
+        orders: response.data.data.rows,
+        pagination: paginationExtract(response.data.data)
       }),
       error =>
         dispatch({
@@ -135,6 +148,7 @@ const updateOrder = (order, orderId) => (dispatch) => {
 export default {
   getOrdersWithMealLinks,
   getOrdersWithMealLinksByDate,
+  getOrderForUpdate,
   getMealsInOrder,
   getOrderTotal,
   postOrder,

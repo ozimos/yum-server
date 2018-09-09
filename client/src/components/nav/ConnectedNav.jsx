@@ -7,10 +7,12 @@ import { userActions } from '../../redux/actions';
 import '../../../public/styles/nav.scss';
 
 class Nav extends React.Component {
+
    logoutHandler = () => {
      this.props.dispatch(userActions.logout());
      this.props.dispatch(push('/login'));
    }
+
    render() {
      const { user, authenticated } = this.props;
 
@@ -81,9 +83,11 @@ class Nav extends React.Component {
 
    }
 }
+
 Nav.defaultProps = {
   user: { isCaterer: false }
 };
+
 Nav.propTypes = {
   user: PropTypes.shape({
     isCaterer: PropTypes.bool,
@@ -91,9 +95,12 @@ Nav.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = state => ({
   user: state.loginReducer.user,
   authenticated: state.loginReducer.authenticated,
 });
+
 export { Nav };
+
 export default connect(mapStateToProps)(Nav);

@@ -82,6 +82,7 @@ class CartContainer extends React.Component {
      await this.props.dispatch(orderActions.postOrder({ meals: actualOrder }));
    }
    this.setState({ placingOrder: false });
+
    if (!this.props.orderError) {
      const message = this.props.orderId ? 'modified' : 'created';
      this.props.notify(`Order has been ${message}`);
@@ -104,14 +105,18 @@ class CartContainer extends React.Component {
 
    return (
      <div className={rest.addClass ? `${rest.addClass}` : ''}>
+
        <div className="flexbox cart">
          <h5>Order Cart</h5>
          {this.state.placingOrder && <p> ... Processing your order</p>}
+
          <button className="btn title-button" onClick={rest.closeCart}>
                 &#10006;
          </button>
+
        </div>
        <div className="responsive-table">
+
          <table className="table">
            <thead>
              <tr>
@@ -132,14 +137,18 @@ class CartContainer extends React.Component {
              />))
         }
            </tbody>
+
            <caption className="flexbox-cart">
              <div className="flexbox">
                <div className="flexbox info">
+
                  <p> Order Total </p>
                  <p > &#x20a6;{total}</p>
+
                </div>
 
                <div className="flexbox info">
+
                  <button
                    className="btn btn-cart"
                    onClick={this.placeOrder}
@@ -151,10 +160,13 @@ class CartContainer extends React.Component {
                  <button className="btn btn-cart" onClick={rest.clearCart}>
                    Clear Cart
                  </button>
+
                </div>
              </div>
            </caption>
+
          </table>
+
        </div>
      </div>
    );

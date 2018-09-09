@@ -9,14 +9,17 @@ const props = {
 };
 
 describe('PrivateRoute Component', () => {
+
   const catererToken = jwt.sign(
     { isCaterer: true, firstName: 'bla', userId: 'userId' },
     'secret', { expiresIn: '2h' }
   );
+
   const customerToken = jwt.sign(
     { isCaterer: false, firstName: 'bla', userId: 'userId' },
     'secret', { expiresIn: '2h' }
   );
+
   localStorage.setItem('token', JSON.stringify(catererToken));
 
   jest.mock('react-router-dom', () => (
@@ -26,6 +29,7 @@ describe('PrivateRoute Component', () => {
   ));
 
   it('renders correctly', () => {
+
     const options = rrcMock;
     const setup = () => mount(<PrivateRoute {...props} />, options.get());
     const wrapper = setup();

@@ -64,6 +64,7 @@ export default (state = dashboardInitialState, action) => {
         ...state,
         loadingMeals: true
       };
+
     case dashboardTypes.ORDER_MEALS_DASHBOARD_FAILURE:
       return {
         ...state,

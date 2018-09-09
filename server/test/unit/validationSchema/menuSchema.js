@@ -14,6 +14,7 @@ context('Validation with Joi schemas', () => {
       const modified = { ...menu };
       modified.volume = 'high';
       const result = schema.validate(modified);
+
       assert.notEqual(result.error, null, `Joi output: ${result.error}`);
     });
 
@@ -21,6 +22,7 @@ context('Validation with Joi schemas', () => {
       'does not throw error when all required fields are in request body',
       () => {
         const result = schema.validate(menu);
+
         assert.equal(result.error, null, `Joi output: ${result.error}`);
       }
     );

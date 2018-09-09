@@ -15,12 +15,14 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+
     case mealTypes.MEALS_REQUEST:
       return {
         ...state,
         connecting: true,
         mealError: null
       };
+
     case mealTypes.ALL_MEALS_SUCCESS:
       return {
         ...state,
@@ -28,18 +30,21 @@ export default (state = initialState, action) => {
         meals: action.meals,
         pagination: action.pagination
       };
+
     case mealTypes.MEALS_FAILURE:
       return {
         ...state,
         connecting: false,
         mealError: action.error
       };
+
     case mealTypes.CREATE_MEAL_SUCCESS:
       return {
         ...state,
         connecting: false,
         meals: [...state.meals, action.meal],
       };
+
     case mealTypes.UPDATE_MEAL_SUCCESS:
       return {
         ...state,
@@ -51,12 +56,14 @@ export default (state = initialState, action) => {
           return meal;
         })
       };
+
     case mealTypes.DELETE_MEAL_SUCCESS:
       return {
         ...state,
         connecting: false,
         meals: state.meals.filter(meal => meal.id !== action.id),
       };
+
     default:
       return state;
   }
