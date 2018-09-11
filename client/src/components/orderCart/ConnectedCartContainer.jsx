@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 import { connect } from 'react-redux';
 import { orderActions } from '../../redux/actions';
 
@@ -149,6 +151,8 @@ class CartContainer extends React.Component {
 
                <div className="flexbox info">
 
+                 {!this.state.placingOrder &&
+
                  <button
                    id="place-order"
                    className="btn btn-cart"
@@ -156,9 +160,20 @@ class CartContainer extends React.Component {
                    disabled={this.state.placingOrder}
                  >
                    {this.props.orderId ? 'Modify Order' : 'Place Order' }
-                 </button>
+                 </button>}
+                 {this.state.placingOrder &&
+                 <div style={{ width: '20%' }}>
+                   <LinearProgress
+                     style={{ height: '10px' }}
+                   />
+                 </div>
 
-                 <button className="btn btn-cart" onClick={rest.clearCart}>
+     }
+                 <button
+                   className="btn btn-cart"
+                   onClick={rest.clearCart}
+                   disabled={this.state.placingOrder}
+                 >
                    Clear Cart
                  </button>
 

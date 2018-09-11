@@ -107,6 +107,7 @@ exports[`CartContainer Component renders correctly 1`] = `
             </button>
             <button
               className="btn btn-cart"
+              disabled={false}
               onClick={[MockFunction]}
             >
               Clear Cart
@@ -226,6 +227,7 @@ exports[`CartContainer Component renders correctly 2`] = `
             </button>
             <button
               className="btn btn-cart"
+              disabled={false}
               onClick={[MockFunction]}
             >
               Clear Cart
