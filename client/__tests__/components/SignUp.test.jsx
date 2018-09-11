@@ -20,23 +20,23 @@ describe('SignUp Component', () => {
 
   it('renders correctly', () => {
 
-    const props2 = {
+    const propsAuthenticated = {
       dispatch: jest.fn(),
       authenticated: true
     };
-    const props3 = {
+    const propsSignUpError = {
       dispatch: jest.fn(),
       signupError: { password: 'wrong password' }
     };
     const wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    const wrapper2 = shallow(<SignUp {...props2} />);
-    expect(toJson(wrapper2)).toMatchSnapshot();
-    const wrapper3 = shallow(<SignUp {...props3} />);
-    expect(toJson(wrapper3)).toMatchSnapshot();
+    const wrapperAuthenticated = shallow(<SignUp {...propsAuthenticated} />);
+    expect(toJson(wrapperAuthenticated)).toMatchSnapshot();
+    const wrapperSignUpError = shallow(<SignUp {...propsSignUpError} />);
+    expect(toJson(wrapperSignUpError)).toMatchSnapshot();
   });
 
-  it('should call `componentDidUpdate`', () => {
+  it('should call `componentDidUpdate` on signup error', () => {
     const serverFeedbackSpy = jest.spyOn(
       SignUp.prototype,
       'serverFeedback'
@@ -53,7 +53,7 @@ describe('SignUp Component', () => {
     expect(componentDidUpdateSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleSignupSubmit`', () => {
+  it('should call `handleSignupSubmit` on signup form submit', () => {
     const wrapper = setup();
 
     const handleSignupSubmitSpy = jest.spyOn(
@@ -64,18 +64,21 @@ describe('SignUp Component', () => {
     expect(handleSignupSubmitSpy).toHaveBeenCalled();
   });
 
-  it('should call `disableSignupButton`', () => {
-    const wrapper = setup();
+  it(
+    'should call `disableSignupButton` on incorrect signup form input ',
+    () => {
+      const wrapper = setup();
 
-    const disableSignupButtonSpy = jest.spyOn(
-      wrapper.instance(),
-      'disableSignupButton'
-    );
-    wrapper.instance().disableSignupButton();
-    expect(disableSignupButtonSpy).toHaveBeenCalled();
-  });
+      const disableSignupButtonSpy = jest.spyOn(
+        wrapper.instance(),
+        'disableSignupButton'
+      );
+      wrapper.instance().disableSignupButton();
+      expect(disableSignupButtonSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `enableSignupButton`', () => {
+  it('should call `enableSignupButton` on correct signup form input', () => {
     const wrapper = setup();
 
     const enableSignupButtonSpy = jest.spyOn(

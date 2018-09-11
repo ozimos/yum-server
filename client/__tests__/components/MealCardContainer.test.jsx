@@ -14,9 +14,11 @@ describe('MealCardContainer Component', () => {
   it('renders correctly', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    const props2 = { ...props, addClass: 'string' };
-    const setup2 = () => shallow(<MealCardContainer {...props2} />);
-    wrapper = setup2();
+    const propsWithExtraClass = { ...props, addClass: 'string' };
+    const setupWithExtraClass = () => shallow(<MealCardContainer
+      {...propsWithExtraClass}
+    />);
+    wrapper = setupWithExtraClass();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });

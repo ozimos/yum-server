@@ -28,13 +28,15 @@ describe('MenuContainer Component', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const props2 = { ...props, addClass: 'string' };
-    const setup2 = () => shallow(<MenuContainer {...props2} />);
-    wrapper = setup2();
+    const propsWithExtraClass = { ...props, addClass: 'string' };
+    const setupWithExtraClass = () => shallow(<MenuContainer
+      {...propsWithExtraClass}
+    />);
+    wrapper = setupWithExtraClass();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `placeOrder`', () => {
+  it('should call `placeOrder` when the place order button is clicked', () => {
     const wrapper = setup();
 
     const placeOrderSpy = jest.spyOn(
@@ -45,12 +47,15 @@ describe('MenuContainer Component', () => {
     expect(placeOrderSpy).toHaveBeenCalled();
   });
 
-  it('should call `placeOrder`', () => {
+  it('should call `placeOrder` when there is menu error' +
+  ' and menu is not posted ', () => {
     const menuError = 'error';
-    const props2 = { ...props, menuError };
-    const setup2 = () => shallow(<MenuContainer {...props2} />);
+    const propsWithMenuError = { ...props, menuError };
+    const setupWithMenuError = () => shallow(<MenuContainer
+      {...propsWithMenuError}
+    />);
 
-    const wrapper = setup2();
+    const wrapper = setupWithMenuError();
 
     const placeOrderSpy = jest.spyOn(
       wrapper.instance(),

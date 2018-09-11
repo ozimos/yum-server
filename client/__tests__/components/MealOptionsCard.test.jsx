@@ -28,7 +28,7 @@ describe('MealOptionsCard Component', () => {
       .exists(<div className="card" />)).toBe(true);
   });
 
-  it('renders correctly', () => {
+  it('renders shallow component correctly', () => {
     const wrapper = shallowSetup();
 
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -40,7 +40,8 @@ describe('MealOptionsCard Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `setUploadPercent`', () => {
+  it('should call `setUploadPercent` when an image is selected' +
+   ' for upload', () => {
     const wrapper = shallowSetup();
 
     const setUploadPercentSpy = jest.spyOn(
@@ -51,7 +52,7 @@ describe('MealOptionsCard Component', () => {
     expect(setUploadPercentSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleDrop`', () => {
+  it('should call `handleDrop` when the upload image button is clicked', () => {
     const imageUploadSpy = jest.spyOn(imageUpload, 'default');
     imageUploadSpy.mockResolvedValue({ data: { secure_url: 'url' } });
     const wrapper = shallowSetup();
@@ -61,73 +62,91 @@ describe('MealOptionsCard Component', () => {
     expect(handleDropSpy).toHaveBeenCalled();
   });
 
-  it('should call `openMealEditorModal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `openMealEditorModal` when the edit button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const openMealEditorModalSpy = jest.spyOn(
-      wrapper.instance(),
-      'openMealEditorModal'
-    );
-    wrapper.instance().openMealEditorModal();
-    expect(openMealEditorModalSpy).toHaveBeenCalled();
-  });
+      const openMealEditorModalSpy = jest.spyOn(
+        wrapper.instance(),
+        'openMealEditorModal'
+      );
+      wrapper.instance().openMealEditorModal();
+      expect(openMealEditorModalSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `closeMealEditorModal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `closeMealEditorModal` when the close button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const closeMealEditorModalSpy = jest.spyOn(
-      wrapper.instance(),
-      'closeMealEditorModal'
-    );
-    wrapper.instance().closeMealEditorModal();
-    expect(closeMealEditorModalSpy).toHaveBeenCalled();
-  });
+      const closeMealEditorModalSpy = jest.spyOn(
+        wrapper.instance(),
+        'closeMealEditorModal'
+      );
+      wrapper.instance().closeMealEditorModal();
+      expect(closeMealEditorModalSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `openDeleteConfirmModal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `openDeleteConfirmModal` when the delete button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const openDeleteConfirmModalSpy = jest.spyOn(
-      wrapper.instance(),
-      'openDeleteConfirmModal'
-    );
-    wrapper.instance().openDeleteConfirmModal();
-    expect(openDeleteConfirmModalSpy).toHaveBeenCalled();
-  });
+      const openDeleteConfirmModalSpy = jest.spyOn(
+        wrapper.instance(),
+        'openDeleteConfirmModal'
+      );
+      wrapper.instance().openDeleteConfirmModal();
+      expect(openDeleteConfirmModalSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `closeDeleteConfirmModal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `closeDeleteConfirmModal` when the close button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const closeDeleteConfirmModalSpy = jest.spyOn(
-      wrapper.instance(),
-      'closeDeleteConfirmModal'
-    );
-    wrapper.instance().closeDeleteConfirmModal();
-    expect(closeDeleteConfirmModalSpy).toHaveBeenCalled();
-  });
+      const closeDeleteConfirmModalSpy = jest.spyOn(
+        wrapper.instance(),
+        'closeDeleteConfirmModal'
+      );
+      wrapper.instance().closeDeleteConfirmModal();
+      expect(closeDeleteConfirmModalSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `deleteMeal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `deleteMeal` when the confirm delete button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const deleteMealSpy = jest.spyOn(
-      wrapper.instance(),
-      'deleteMeal'
-    );
-    wrapper.instance().deleteMeal('abc');
-    expect(deleteMealSpy).toHaveBeenCalled();
-  });
+      const deleteMealSpy = jest.spyOn(
+        wrapper.instance(),
+        'deleteMeal'
+      );
+      wrapper.instance().deleteMeal('abc');
+      expect(deleteMealSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `handleUpdateMeal`', () => {
-    const wrapper = shallowSetup();
+  it(
+    'should call `handleUpdateMeal` when the continue button is clicked',
+    () => {
+      const wrapper = shallowSetup();
 
-    const handleUpdateMealSpy = jest.spyOn(
-      wrapper.instance(),
-      'handleUpdateMeal'
-    );
-    wrapper.instance().handleUpdateMeal(meal.data, 'abc');
-    expect(handleUpdateMealSpy).toHaveBeenCalled();
-  });
+      const handleUpdateMealSpy = jest.spyOn(
+        wrapper.instance(),
+        'handleUpdateMeal'
+      );
+      wrapper.instance().handleUpdateMeal(meal.data, 'abc');
+      expect(handleUpdateMealSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `disableButton`', () => {
+  it('should call `disableButton` when the form input data is wrong', () => {
     const wrapper = shallowSetup();
 
     const disableButtonSpy = jest.spyOn(
@@ -138,7 +157,7 @@ describe('MealOptionsCard Component', () => {
     expect(disableButtonSpy).toHaveBeenCalled();
   });
 
-  it('should call `enableButton`', () => {
+  it('should call `enableButton`when the form input data is correct', () => {
     const wrapper = shallowSetup();
 
     const enableButtonSpy = jest.spyOn(

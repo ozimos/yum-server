@@ -42,30 +42,31 @@ describe('Menu Component', () => {
     const mealsPagination = {
       pages: 1
     };
-    const props2 = { ...props, menu };
-    const props3 = { ...props, mealsPagination };
-    const props4 = { ...props, menuPagination };
-    let setup2 = () => shallow(<Menu {...props} />);
+    const propsEmptyMenu = { ...props, menu };
+    const propsNoMealPaginationParams = { ...props, mealsPagination };
+    const propsNoPaginationParams = { ...props, menuPagination };
+    let snapshotSetup = () => shallow(<Menu {...props} />);
 
-    let wrapper = setup2();
+    let wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
     wrapper.instance().setState({ currentMenu: menuMeals });
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    setup2 = () => shallow(<Menu {...props2} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Menu {...propsEmptyMenu} />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    setup2 = () => shallow(<Menu {...props3} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Menu {...propsNoMealPaginationParams} />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    setup2 = () => shallow(<Menu {...props4} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Menu {...propsNoPaginationParams} />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `notify`', () => {
+  it('should call `notify` on clicking the add button to add' +
+   ' a meal to the menu', () => {
     const wrapper = setup();
 
     const notifySpy = jest.spyOn(
@@ -76,7 +77,8 @@ describe('Menu Component', () => {
     expect(notifySpy).toHaveBeenCalled();
   });
 
-  it('should call `addToMenu`', () => {
+  it('should call `addToMenu`on clicking the add button to add' +
+  ' a meal to the menu', () => {
     const wrapper = setup();
     wrapper.instance().setState({ currentMenu: menuMeals });
 
@@ -88,7 +90,8 @@ describe('Menu Component', () => {
     expect(addToMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `addToMenu` when no meals are selected', () => {
+  it('should call `addToMenu` on clicking the add button' +
+   ' when no meals are selected', () => {
     const wrapper = setup();
     const addToMenuSpy = jest.spyOn(
       wrapper.instance(),
@@ -98,7 +101,7 @@ describe('Menu Component', () => {
     expect(addToMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `openMenuModal`', () => {
+  it('should call `openMenuModal` when the menu cart is clicked', () => {
     const wrapper = setup();
 
     const openMenuModalSpy = jest.spyOn(
@@ -109,7 +112,8 @@ describe('Menu Component', () => {
     expect(openMenuModalSpy).toHaveBeenCalled();
   });
 
-  it('should call `closeMenuModal`', () => {
+  it('should call `closeMenuModal` when the' +
+   ' menu cart close button is clicked', () => {
     const wrapper = setup();
 
     const closeMenuModalSpy = jest.spyOn(
@@ -120,7 +124,7 @@ describe('Menu Component', () => {
     expect(closeMenuModalSpy).toHaveBeenCalled();
   });
 
-  it('should call `postMenu`', () => {
+  it('should call `postMenu` when the post menu button is clicked', () => {
     const wrapper = setup();
 
     const postMenuSpy = jest.spyOn(
@@ -131,7 +135,8 @@ describe('Menu Component', () => {
     expect(postMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `postMenu` when there is error', () => {
+  it('should call `postMenu` when there is menu error' +
+   ' and menu is not posted ', () => {
     const props2 = { ...props, menuError: 'abc' };
     const setup2 = () => shallow(<Menu {...props2} />);
     const wrapper = setup2();
@@ -144,7 +149,7 @@ describe('Menu Component', () => {
     expect(postMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `removeFromMenu`', () => {
+  it('should call `removeFromMenu` when the delete button is clicked', () => {
     const wrapper = setup();
 
     const removeFromMenuSpy = jest.spyOn(
@@ -155,7 +160,7 @@ describe('Menu Component', () => {
     expect(removeFromMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `removeFromMenu` when there is no meal selected', () => {
+  it('should call `removeFromMenu` when there is no meal in the menu', () => {
     const wrapper = setup();
     wrapper.instance().setState({ currentMenu: [] });
 
@@ -167,7 +172,7 @@ describe('Menu Component', () => {
     expect(removeFromMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `removeFromMenu` when items are in menu', () => {
+  it('should call `removeFromMenu` when meals are in menu', () => {
     const wrapper = setup();
     wrapper.instance().setState({ currentMenu: menuMeals });
 
@@ -179,7 +184,8 @@ describe('Menu Component', () => {
     expect(removeFromMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleMealPaginationClick`', () => {
+  it('should call `handleMealPaginationClick` when ' +
+  'the meal pagination button is clicked', () => {
     const wrapper = setup();
 
     const handleMealPaginationClickSpy = jest.spyOn(
@@ -190,7 +196,7 @@ describe('Menu Component', () => {
     expect(handleMealPaginationClickSpy).toHaveBeenCalled();
   });
 
-  it('should call `clearMenu`', () => {
+  it('should call `clearMenu` when the clear menu button is clicked', () => {
     const wrapper = setup();
 
     const clearMenuSpy = jest.spyOn(
@@ -201,7 +207,8 @@ describe('Menu Component', () => {
     expect(clearMenuSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleMenuPaginationClick`', () => {
+  it('should call `handleMenuPaginationClick` when the menu' +
+   ' pagination button is clicked', () => {
     const wrapper = setup();
 
     const handleMenuPaginationClickSpy = jest.spyOn(

@@ -11,12 +11,12 @@ const props = {
 describe('PrivateRoute Component', () => {
 
   const catererToken = jwt.sign(
-    { isCaterer: true, firstName: 'bla', userId: 'userId' },
+    { isCaterer: true, firstName: 'Tovieye', userId: 'userId' },
     'secret', { expiresIn: '2h' }
   );
 
   const customerToken = jwt.sign(
-    { isCaterer: false, firstName: 'bla', userId: 'userId' },
+    { isCaterer: false, firstName: 'Tovieye', userId: 'userId' },
     'secret', { expiresIn: '2h' }
   );
 
@@ -32,16 +32,16 @@ describe('PrivateRoute Component', () => {
 
     const options = rrcMock;
     const setup = () => mount(<PrivateRoute {...props} />, options.get());
-    const wrapper = setup();
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const wrapperCaterer = setup();
+    expect(toJson(wrapperCaterer)).toMatchSnapshot();
     localStorage.setItem('token', JSON.stringify(customerToken));
-    const wrapper2 = setup();
 
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    const wrapperCustomer = setup();
+    expect(toJson(wrapperCustomer)).toMatchSnapshot();
     localStorage.removeItem('token');
-    const wrapper3 = setup();
 
-    expect(toJson(wrapper3)).toMatchSnapshot();
+    const wrapperNoToken = setup();
+    expect(toJson(wrapperNoToken)).toMatchSnapshot();
   });
 });
 

@@ -8,7 +8,7 @@ const props = {
   dispatch: jest.fn()
 };
 
-const props2 = {
+const propsCustomer = {
   user: { isCaterer: false },
   authenticated: true,
   dispatch: jest.fn()
@@ -26,7 +26,7 @@ describe('Nav Component', () => {
 
   it('renders correctly', () => {
 
-    const props3 = {
+    const propsUnAuthenticated = {
       user: { isCaterer: false },
       authenticated: false,
       dispatch: jest.fn()
@@ -34,11 +34,11 @@ describe('Nav Component', () => {
     const wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const wrapper2 = shallow(<Nav {...props2} />);
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    const wrapperCustomer = shallow(<Nav {...propsCustomer} />);
+    expect(toJson(wrapperCustomer)).toMatchSnapshot();
 
-    const wrapper3 = shallow(<Nav {...props3} />);
-    expect(toJson(wrapper3)).toMatchSnapshot();
+    const wrapperUnAuthenticated = shallow(<Nav {...propsUnAuthenticated} />);
+    expect(toJson(wrapperUnAuthenticated)).toMatchSnapshot();
 
   });
 

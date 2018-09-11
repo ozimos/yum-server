@@ -49,25 +49,28 @@ describe('Dashboard Component', () => {
     const mealsPagination = {
       pages: 1
     };
-    const props2 = { ...props, orders };
-    const props3 = { ...props, mealsPagination };
-    const props4 = { ...props, pagination };
-    let setup2 = () => shallow(<Dashboard {...props} />);
+    const propsEmptyOrders = { ...props, orders };
+    const propsNoMealPaginationParams = { ...props, mealsPagination };
+    const propsNoPaginationParams = { ...props, pagination };
+    let snapshotSetup = () => shallow(<Dashboard {...props} />);
 
-    let wrapper = setup2();
+    let wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    setup2 = () => shallow(<Dashboard {...props2} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Dashboard {...propsEmptyOrders} />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    setup2 = () => shallow(<Dashboard {...props3} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Dashboard
+      {...propsNoMealPaginationParams}
+    />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    setup2 = () => shallow(<Dashboard {...props4} />);
-    wrapper = setup2();
+    snapshotSetup = () => shallow(<Dashboard {...propsNoPaginationParams} />);
+    wrapper = snapshotSetup();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `onFetchMealData`', () => {
+  it('should call `onFetchMealData` when order' +
+  ' details table pagination is clicked', () => {
     const wrapper = setup();
 
     const onFetchMealDataSpy = jest.spyOn(
@@ -78,7 +81,8 @@ describe('Dashboard Component', () => {
     expect(onFetchMealDataSpy).toHaveBeenCalled();
   });
 
-  it('should call `onFetchOrderData`', () => {
+  it('should call `onFetchOrderData`when order ' +
+  'table pagination is clicked', () => {
     const wrapper = setup();
 
     const onFetchOrderDataSpy = jest.spyOn(
@@ -89,7 +93,8 @@ describe('Dashboard Component', () => {
     expect(onFetchOrderDataSpy).toHaveBeenCalled();
   });
 
-  it('should call `getOrderMealsTotals`', () => {
+  it('should call `getOrderMealsTotals` when the' +
+  ' order details table is mounted', () => {
     const wrapper = setup();
 
     const getOrderMealsTotalsSpy = jest.spyOn(
@@ -100,7 +105,8 @@ describe('Dashboard Component', () => {
     expect(getOrderMealsTotalsSpy).toHaveBeenCalled();
   });
 
-  it('should call `getOrderMeals`', () => {
+  it('should call `getOrderMeals` when the' +
+  ' order details table is mounted', () => {
     const wrapper = setup();
 
     const getOrderMealsSpy = jest.spyOn(
@@ -111,7 +117,8 @@ describe('Dashboard Component', () => {
     expect(getOrderMealsSpy).toHaveBeenCalled();
   });
 
-  it('should call `closeMealDetailModal`', () => {
+  it('should call `closeMealDetailModal`when the' +
+  ' order details table is close  button is clicked', () => {
     const wrapper = setup();
 
     const closeMealDetailModalSpy = jest.spyOn(
@@ -122,7 +129,8 @@ describe('Dashboard Component', () => {
     expect(closeMealDetailModalSpy).toHaveBeenCalled();
   });
 
-  it('should call `searchUpdated`', () => {
+  it('should call `searchUpdated` when a search term is' +
+   ' entered into the search bar', () => {
     const wrapper = setup();
 
     const searchUpdatedSpy = jest.spyOn(
