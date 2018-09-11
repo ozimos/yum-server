@@ -16,21 +16,25 @@ describe('MealsDisplayCard Component', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const props2 = { ...props, addToCollection: jest.fn() };
-    const setup2 = () => shallow(<MealsDisplayCard {...props2} />);
-    wrapper = setup2();
+    const propsWithAddButton = { ...props, addToCollection: jest.fn() };
+    const setupWithAddButton = () => shallow(<MealsDisplayCard
+      {...propsWithAddButton}
+    />);
+    wrapper = setupWithAddButton();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const props3 = { ...props, removeFromCollection: jest.fn() };
-    const setup3 = () => shallow(<MealsDisplayCard {...props3} />);
-    wrapper = setup3();
+    const propsWithRemoveButton = { ...props, removeFromCollection: jest.fn() };
+    const setupWithRemoveButton = () => shallow(<MealsDisplayCard
+      {...propsWithRemoveButton}
+    />);
+    wrapper = setupWithRemoveButton();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    wrapper = setup2();
+    wrapper = setupWithAddButton();
     wrapper.find('button.btn.title-button').simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    wrapper = setup3();
+    wrapper = setupWithRemoveButton();
     wrapper.find('button.btn.title-button').simulate('click');
     expect(toJson(wrapper)).toMatchSnapshot();
   });

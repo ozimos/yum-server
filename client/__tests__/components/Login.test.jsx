@@ -18,25 +18,25 @@ describe('Login Component', () => {
   });
 
   it('renders correctly', () => {
-    const props2 = {
+    const propsWithAuthentication = {
       dispatch: jest.fn(),
       authenticated: true
     };
-    const props3 = {
+    const propsWrongPassword = {
       dispatch: jest.fn(),
       loginError: { password: 'wrong password' }
     };
-    const wrapper = setup();
+    let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const wrapper2 = shallow(<Login {...props2} />);
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    wrapper = shallow(<Login {...propsWithAuthentication} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
 
-    const wrapper3 = shallow(<Login {...props3} />);
-    expect(toJson(wrapper3)).toMatchSnapshot();
+    wrapper = shallow(<Login {...propsWrongPassword} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `componentDidUpdate`', () => {
+  it('should call `componentDidUpdate` on login error', () => {
     const serverFeedbackSpy = jest.spyOn(
       Login.prototype,
       'serverFeedback'
@@ -53,7 +53,7 @@ describe('Login Component', () => {
     expect(componentDidUpdateSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleLoginSubmit`', () => {
+  it('should call `handleLoginSubmit` on login form submit', () => {
     const wrapper = setup();
 
     const handleLoginSubmitSpy = jest.spyOn(
@@ -64,7 +64,7 @@ describe('Login Component', () => {
     expect(handleLoginSubmitSpy).toHaveBeenCalled();
   });
 
-  it('should call `disableLoginButton`', () => {
+  it('should call `disableLoginButton` on incorrect login form input ', () => {
     const wrapper = setup();
 
     const disableLoginButtonSpy = jest.spyOn(
@@ -75,7 +75,7 @@ describe('Login Component', () => {
     expect(disableLoginButtonSpy).toHaveBeenCalled();
   });
 
-  it('should call `enableLoginButton`', () => {
+  it('should call `enableLoginButton` on correct login form input', () => {
     const wrapper = setup();
 
     const enableLoginButtonSpy = jest.spyOn(

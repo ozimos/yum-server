@@ -28,8 +28,8 @@ describe('MealManager Component', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
 
-    const newProps = { ...props, meals: [], connecting: true };
-    wrapper = shallow(<MealManager {...newProps} />);
+    const propsWhenConnecting = { ...props, meals: [], connecting: true };
+    wrapper = shallow(<MealManager {...propsWhenConnecting} />);
     expect(toJson(wrapper)).toMatchSnapshot();
 
     wrapper.setState({
@@ -39,7 +39,7 @@ describe('MealManager Component', () => {
 
   });
 
-  it('should call `setUploadPercent`', () => {
+  it('should call `setUploadPercent` when an image is selected', () => {
     const wrapper = setup();
 
     const setUploadPercentSpy = jest.spyOn(
@@ -51,33 +51,39 @@ describe('MealManager Component', () => {
     expect(setUploadPercentSpy).toHaveBeenCalled();
   });
 
-  it('should call `handleImageDrop`', () => {
+  it(
+    'should call `handleImageDrop` when the upload image button is clicked',
+    () => {
 
-    const imageUploadSpy = jest.spyOn(imageUpload, 'default');
-    imageUploadSpy.mockResolvedValue({ data: { secure_url: 'url' } });
-    const wrapper = setup();
+      const imageUploadSpy = jest.spyOn(imageUpload, 'default');
+      imageUploadSpy.mockResolvedValue({ data: { secure_url: 'url' } });
+      const wrapper = setup();
 
-    const handleImageDropSpy = jest.spyOn(
-      wrapper.instance(),
-      'handleImageDrop'
-    );
+      const handleImageDropSpy = jest.spyOn(
+        wrapper.instance(),
+        'handleImageDrop'
+      );
 
-    wrapper.instance().handleImageDrop([]);
-    expect(handleImageDropSpy).toHaveBeenCalled();
-  });
+      wrapper.instance().handleImageDrop([]);
+      expect(handleImageDropSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `openNewMealModal`', () => {
-    const wrapper = setup();
+  it(
+    'should call `openNewMealModal`when the add meal button is clicked',
+    () => {
+      const wrapper = setup();
 
-    const openNewMealModalSpy = jest.spyOn(
-      wrapper.instance(),
-      'openNewMealModal'
-    );
-    wrapper.instance().openNewMealModal();
-    expect(openNewMealModalSpy).toHaveBeenCalled();
-  });
+      const openNewMealModalSpy = jest.spyOn(
+        wrapper.instance(),
+        'openNewMealModal'
+      );
+      wrapper.instance().openNewMealModal();
+      expect(openNewMealModalSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `closeNewMealModal`', () => {
+  it('should call `closeNewMealModal` when the close button is clicked', () => {
 
     const wrapper = setup();
 

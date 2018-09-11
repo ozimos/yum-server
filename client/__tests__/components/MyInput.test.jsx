@@ -31,7 +31,7 @@ describe('MyInput Component', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `changeValue`', () => {
+  it('should call `changeValue` when the input is changed', () => {
     const wrapper = setup();
 
     const changeValueSpy = jest.spyOn(wrapper.instance(), 'changeValue');

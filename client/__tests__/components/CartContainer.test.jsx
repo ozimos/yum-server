@@ -28,29 +28,38 @@ describe('CartContainer Component', () => {
   it('renders correctly', () => {
     let wrapper = setup();
     expect(toJson(wrapper)).toMatchSnapshot();
-    const props2 = { ...props, addClass: 'string' };
-    const setup2 = () => shallow(<CartContainer {...props2} />);
-    wrapper = setup2();
+    const propsWithExtraClass = { ...props, addClass: 'string' };
+    const setupExtraClass = () => shallow(<CartContainer
+      {...propsWithExtraClass}
+    />);
+    wrapper = setupExtraClass();
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
-  it('should call `placeOrder`', () => {
-    const wrapper = setup();
+  it(
+    'should call `placeOrder` for new orders' +
+    ' when the place order button is clicked',
+    () => {
+      const wrapper = setup();
 
-    const placeOrderSpy = jest.spyOn(
-      wrapper.instance(),
-      'placeOrder'
-    );
-    wrapper.instance().placeOrder();
-    expect(placeOrderSpy).toHaveBeenCalled();
-  });
+      const placeOrderSpy = jest.spyOn(
+        wrapper.instance(),
+        'placeOrder'
+      );
+      wrapper.instance().placeOrder();
+      expect(placeOrderSpy).toHaveBeenCalled();
+    }
+  );
 
-  it('should call `placeOrder`', () => {
+  it('should call `placeOrder` for existing orders ' +
+  'when the place order button is clicked', () => {
     const orderId = '';
-    const props2 = { ...props, orderId };
-    const setup2 = () => shallow(<CartContainer {...props2} />);
+    const propsWithOrderId = { ...props, orderId };
+    const setupWithOrderId = () => shallow(<CartContainer
+      {...propsWithOrderId}
+    />);
 
-    const wrapper = setup2();
+    const wrapper = setupWithOrderId();
 
     const placeOrderSpy = jest.spyOn(
       wrapper.instance(),
@@ -60,7 +69,8 @@ describe('CartContainer Component', () => {
     expect(placeOrderSpy).toHaveBeenCalled();
   });
 
-  it('should call `setQuantity` for negative values', () => {
+  it('should call `setQuantity` when the meal quantity is changed' +
+  ' to a negative value', () => {
     const wrapper = setup();
 
     const setQuantitySpy = jest.spyOn(
@@ -71,7 +81,8 @@ describe('CartContainer Component', () => {
     expect(setQuantitySpy).toHaveBeenCalled();
   });
 
-  it('should call `setQuantity` for high values', () => {
+  it('should call `setQuantity` when the meal quantity is changed' +
+  ' above max values', () => {
     const wrapper = setup();
 
     const setQuantitySpy = jest.spyOn(
@@ -82,7 +93,8 @@ describe('CartContainer Component', () => {
     expect(setQuantitySpy).toHaveBeenCalled();
   });
 
-  it('should call `setQuantity`', () => {
+  it('should call `setQuantity`when the meal quantity is changed ' +
+  'to a value in the normal range', () => {
     const wrapper = setup();
 
     const setQuantitySpy = jest.spyOn(

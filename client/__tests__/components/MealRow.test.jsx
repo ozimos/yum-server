@@ -5,7 +5,7 @@ import MealRow from '../../src/components/orderCart/MealRow';
 describe('MealRow Component', () => {
 
   it('renders correctly', () => {
-    const wrapper = shallow(<MealRow
+    const wrapperWithAllProps = shallow(<MealRow
       id="abc"
       title="abc"
       price={4}
@@ -13,22 +13,22 @@ describe('MealRow Component', () => {
       removeFromCart={jest.fn()}
       setQuantity={jest.fn()}
     />);
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(toJson(wrapperWithAllProps)).toMatchSnapshot();
 
-    const wrapper2 = shallow(<MealRow
+    const wrapper = shallow(<MealRow
       id="abc"
       title="abc"
       price={4}
       removeFromCart={jest.fn()}
       setQuantity={jest.fn()}
     />);
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    expect(toJson(wrapper)).toMatchSnapshot();
 
-    wrapper2.find('.btn.btn-cart').simulate('click');
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    wrapper.find('.btn.btn-cart').simulate('click');
+    expect(toJson(wrapper)).toMatchSnapshot();
 
-    wrapper2.find('input').simulate('change');
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    wrapper.find('input').simulate('change');
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 
 });
