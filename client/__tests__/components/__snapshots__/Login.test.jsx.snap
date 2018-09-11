@@ -67,7 +67,7 @@ exports[`Login Component renders correctly 1`] = `
             name="email"
             placeholder="Email"
             required={false}
-            typeOfInput="text"
+            typeOfInput="email"
             validationError="This is not a valid email"
             validationErrors={
               Object {
@@ -117,7 +117,7 @@ exports[`Login Component renders correctly 1`] = `
             }
           />
           <button
-            className="btn btn-disabled"
+            className="btn login btn-disabled"
             disabled={true}
             type="submit"
           >
@@ -131,7 +131,9 @@ exports[`Login Component renders correctly 1`] = `
             replace={false}
             to="/signup"
           >
-            <p>
+            <p
+              id="signup"
+            >
               Don't have an account? Click here to create one
             </p>
           </Link>
@@ -209,7 +211,7 @@ exports[`Login Component renders correctly 2`] = `
             name="email"
             placeholder="Email"
             required={false}
-            typeOfInput="text"
+            typeOfInput="email"
             validationError="This is not a valid email"
             validationErrors={
               Object {
@@ -259,7 +261,7 @@ exports[`Login Component renders correctly 2`] = `
             }
           />
           <button
-            className="btn btn-disabled"
+            className="btn login btn-disabled"
             disabled={true}
             type="submit"
           >
@@ -273,7 +275,9 @@ exports[`Login Component renders correctly 2`] = `
             replace={false}
             to="/signup"
           >
-            <p>
+            <p
+              id="signup"
+            >
               Don't have an account? Click here to create one
             </p>
           </Link>
@@ -351,7 +355,7 @@ exports[`Login Component renders correctly 3`] = `
             name="email"
             placeholder="Email"
             required={false}
-            typeOfInput="text"
+            typeOfInput="email"
             validationError="This is not a valid email"
             validationErrors={
               Object {
@@ -401,7 +405,7 @@ exports[`Login Component renders correctly 3`] = `
             }
           />
           <button
-            className="btn btn-disabled"
+            className="btn login btn-disabled"
             disabled={true}
             type="submit"
           >
@@ -415,7 +419,9 @@ exports[`Login Component renders correctly 3`] = `
             replace={false}
             to="/signup"
           >
-            <p>
+            <p
+              id="signup"
+            >
               Don't have an account? Click here to create one
             </p>
           </Link>

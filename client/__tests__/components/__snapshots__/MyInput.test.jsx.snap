@@ -3,6 +3,7 @@
 exports[`MyInput Component renders correctly 1`] = `
 <React.Fragment>
   <input
+    className="formsy-input"
     max="99999"
     maxLength="50"
     onChange={[Function]}
@@ -12,6 +13,7 @@ exports[`MyInput Component renders correctly 1`] = `
     value=""
   />
   <div
+    className="error"
     style={
       Object {
         "color": "red",

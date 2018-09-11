@@ -283,7 +283,7 @@ exports[`MealManager Component renders correctly 1`] = `
         </div>
       </div>
       <button
-        className="btn"
+        className="btn btn-disabled"
         disabled={true}
         onClick={[Function]}
         type="submit"
@@ -534,16 +534,13 @@ exports[`MealManager Component renders correctly 2`] = `
           </div>
         </div>
       </div>
-      <button
-        className="btn btn-disabled"
-        disabled={true}
-        onClick={[Function]}
-        type="submit"
-      >
-        <p>
-          Continue
-        </p>
-      </button>
+      <WithStyles(LinearProgress)
+        style={
+          Object {
+            "height": "10px",
+          }
+        }
+      />
     </div>
   </Modal>
 </div>
@@ -776,16 +773,13 @@ exports[`MealManager Component renders correctly 3`] = `
           />
         </div>
       </div>
-      <button
-        className="btn btn-disabled"
-        disabled={true}
-        onClick={[Function]}
-        type="submit"
-      >
-        <p>
-          Continue
-        </p>
-      </button>
+      <WithStyles(LinearProgress)
+        style={
+          Object {
+            "height": "10px",
+          }
+        }
+      />
     </div>
   </Modal>
 </div>

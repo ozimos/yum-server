@@ -2,7 +2,7 @@
 
 exports[`SignUp Component renders correctly 1`] = `
 <div
-  className="canvas"
+  className="canvas signup"
 >
   <div
     className="container2 container2-height"
@@ -203,6 +203,7 @@ exports[`SignUp Component renders correctly 1`] = `
           <button
             className="btn btn-disabled"
             disabled={true}
+            id="signup-button"
             type="submit"
           >
             Continue
@@ -228,7 +229,7 @@ exports[`SignUp Component renders correctly 1`] = `
 
 exports[`SignUp Component renders correctly 2`] = `
 <div
-  className="canvas"
+  className="canvas signup"
 >
   <div
     className="container2 container2-height"
@@ -429,6 +430,7 @@ exports[`SignUp Component renders correctly 2`] = `
           <button
             className="btn btn-disabled"
             disabled={true}
+            id="signup-button"
             type="submit"
           >
             Continue
@@ -454,7 +456,7 @@ exports[`SignUp Component renders correctly 2`] = `
 
 exports[`SignUp Component renders correctly 3`] = `
 <div
-  className="canvas"
+  className="canvas signup"
 >
   <div
     className="container2 container2-height"
@@ -655,6 +657,7 @@ exports[`SignUp Component renders correctly 3`] = `
           <button
             className="btn btn-disabled"
             disabled={true}
+            id="signup-button"
             type="submit"
           >
             Continue

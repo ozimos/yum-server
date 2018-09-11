@@ -11,8 +11,11 @@ exports[`MealRow Component renders correctly 1`] = `
     <td>
       4
     </td>
-    <td>
+    <td
+      className="quantity-cell"
+    >
       <input
+        className="meal-quantity"
         max="99"
         maxLength="4"
         min="1"
@@ -49,8 +52,11 @@ exports[`MealRow Component renders correctly 2`] = `
     <td>
       4
     </td>
-    <td>
+    <td
+      className="quantity-cell"
+    >
       <input
+        className="meal-quantity"
         max="99"
         maxLength="4"
         min="1"
@@ -86,8 +92,11 @@ exports[`MealRow Component renders correctly 3`] = `
     <td>
       4
     </td>
-    <td>
+    <td
+      className="quantity-cell"
+    >
       <input
+        className="meal-quantity"
         max="99"
         maxLength="4"
         min="1"
@@ -123,8 +132,11 @@ exports[`MealRow Component renders correctly 4`] = `
     <td>
       4
     </td>
-    <td>
+    <td
+      className="quantity-cell"
+    >
       <input
+        className="meal-quantity"
         max="99"
         maxLength="4"
         min="1"

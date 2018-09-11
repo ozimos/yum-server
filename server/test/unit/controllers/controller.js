@@ -81,18 +81,19 @@ describe('Controllers', () => {
         price: 2000,
       };
 
-      td.when(Table.findById(req.params.id)).thenResolve(expectedResponse);
+      td.when(Table.findById(req.params.id, undefined))
+        .thenResolve(expectedResponse);
 
 
-      return controller.getSingleRecord(req)
+      return controller.getSingleRecord(req, undefined)
         .then(response => expect(response.data).to.eql(expectedResponse));
     });
 
     it('should return an error message if no data in database', () => {
       const expectedResponse = 'no records available';
 
-      td.when(Table.findById(req.params.id)).thenResolve(null);
-      return controller.getSingleRecord(req)
+      td.when(Table.findById(req.params.id, undefined)).thenResolve(null);
+      return controller.getSingleRecord(req, undefined)
         .then(response => expect(response.message).to.equal(expectedResponse));
     });
 
@@ -102,8 +103,8 @@ describe('Controllers', () => {
         const error = {
           message: 'database error'
         };
-        td.when(Table.findById(req.params.id)).thenReject(error);
-        return controller.getSingleRecord(req)
+        td.when(Table.findById(req.params.id, undefined)).thenReject(error);
+        return controller.getSingleRecord(req, undefined)
           .catch(response => expect(response.message).to.equal(error.message));
       }
     );

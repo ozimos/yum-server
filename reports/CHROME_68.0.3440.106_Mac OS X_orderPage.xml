@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="1"
+            failures="1"
+            tests="9">
+
+  <testsuite name="orderPage"
+    errors="1" failures="1" hostname="" id="" package="orderPage" skipped="6"
+    tests="9" time="14.15" timestamp="Mon, 10 Sep 2018 23:58:07 GMT">
+  
+    <testcase name="It should login customer" classname="orderPage" time="5.864" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="It should show today&#39;s menu on meal order page" classname="orderPage" time="2.091" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="It should add meal to cart if meal&#39;s add button is clicked" classname="orderPage" time="6.200" assertions="1">  <failure message="Timed out while waiting for element &lt;.Toastify__toast-body&gt; to be present for 3000 milliseconds.">    at Object.ItShouldAddMealToCartIfMealSAddButtonIsClicked [as It should add meal to cart if meal&#39;s add button is clicked] (/Users/ozimos/Documents/projects/Book-A-Meal/e2e-tests/orderPage.js:41:8)
+    at process._tickCallback (internal/process/next_tick.js:61:11)</failure>
+
+    
+    </testcase>
+  
+
+  
+    <system-err>
+      ERROR: Unable to locate element: &#34;.scroll.gallery &gt; .card:nth-child(2) &gt; button&#34; using: css selector
+    at Object.ItShouldAddMealToCartIfMealSAddButtonIsClicked [as It should add meal to cart if meal&#39;s add button is clicked] (/Users/ozimos/Documents/projects/Book-A-Meal/e2e-tests/orderPage.js:40:8)
+    at Module.call (/Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/lib/runner/module.js:62:34)
+    at /Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/lib/runner/testcase.js:70:29
+    at _fulfilled (/Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:834:54)
+    at /Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:863:30
+    at Promise.promise.promiseDispatch (/Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:796:13)
+    at /Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:556:49
+    at runSingle (/Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:137:13)
+    at flush (/Users/ozimos/Documents/projects/Book-A-Meal/node_modules/nightwatch/node_modules/q/q.js:125:13)
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+    </system-err>
+  
+
+  
+    
+    <testcase
+      name="It should not add meal to cart if meal has already been added to cart" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="It should navigate to cart and place order" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="It should not remove meal from cart if only one meal is left" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="It should remove meal from cart if delete is clicked" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="It should navigate to order history section and show order details when table row is clicked" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+    <testcase
+      name="It should show add order to cart when order edit button is clicked" classname="orderPage">
+      <skipped />
+    </testcase>
+    
+  
+  </testsuite>
+</testsuites>

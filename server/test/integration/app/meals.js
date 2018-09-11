@@ -5,6 +5,7 @@ import {
   rootURL,
   defaultMeal,
   tovieyeCatererToken,
+  catererTovieye,
   templateTest
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
@@ -12,8 +13,8 @@ import db from '../../../../server/src/models';
 
 
 const deletedMeal = {
-  id: '7ded55d7-ef6e-4848-8d03-c0f0fbaaa716',
-  userId: 'db5e4fa9-d4df-4352-a2e4-bc57f6b68e9b',
+  id: 'e71e6f38-a794-4bfb-b9a2-f28f8ff0aab5',
+  userId: catererTovieye.id,
   title: 'Starch and Something',
   description: 'affordable',
   // eslint-disable-next-line max-len

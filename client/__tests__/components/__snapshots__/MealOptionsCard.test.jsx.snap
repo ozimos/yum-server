@@ -231,7 +231,7 @@ exports[`MealOptionsCard Component renders correctly 1`] = `
         </div>
       </div>
       <button
-        className="btn"
+        className="btn btn-disabled"
         disabled={true}
         onClick={[Function]}
         type="submit"

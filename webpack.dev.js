@@ -6,7 +6,8 @@ import common from './webpack.common.js';
 
 export default merge(common, {
   entry: {
-    index: ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true']
+    index: [`webpack-hot-middleware/client?path=
+    /__webpack_hmr&timeout=20000&reload=true`]
   },
   mode: 'development',
   module: {

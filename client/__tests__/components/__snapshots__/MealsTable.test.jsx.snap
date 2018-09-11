@@ -3,15 +3,19 @@
 exports[`MealsTable Component renders correctly 1`] = `
 <div
   className="order-meal-modal"
+  id="order-meal-modal"
 >
   <div
     className="flexbox top"
   >
-    <h5>
+    <h5
+      id="order-details"
+    >
       Order Details
     </h5>
     <button
       className="btn title-button"
+      id="order-details-close"
       onClick={[MockFunction]}
     >
       ✖
