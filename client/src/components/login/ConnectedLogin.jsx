@@ -46,7 +46,7 @@ class Login extends React.Component {
   componentDidUpdate() {
     const { prevLoginError, newError } = this.state;
 
-    if (newError && Object.keys(prevLoginError).length !== 0) {
+    if (newError && Object.keys(prevLoginError).length) {
       this.serverFeedback(prevLoginError);
       // eslint-disable-next-line
       this.setState({ newError: false });
@@ -102,7 +102,7 @@ class Login extends React.Component {
                 ref={(form) => { this.formEl = form; }}
               >
                 <MyInput
-                  typeOfInput="text"
+                  typeOfInput="email"
                   name="email"
                   placeholder="Email"
                   validations={{ isEmail: true, minLength: 5, maxLength: 48 }}
@@ -146,7 +146,8 @@ class Login extends React.Component {
                 />
 
                 <button
-                  className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+                  className={this.state.canSubmit ?
+                     'btn login' : 'btn login btn-disabled'}
                   type="submit"
                   disabled={!this.state.canSubmit}
                 >
@@ -157,7 +158,7 @@ class Login extends React.Component {
               <div className="stacked-text">
 
                 <Link to="/signup">
-                  <p>
+                  <p id="signup">
                     Don&#39;t have an account?
                      Click here to create one
                   </p>

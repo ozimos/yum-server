@@ -29,13 +29,14 @@ class MealsTable extends Component {
     ];
 
     return (
-      <div className="order-meal-modal">
+      <div className="order-meal-modal" id="order-meal-modal">
 
         <div className="flexbox top">
 
-          <h5>Order Details</h5>
+          <h5 id="order-details">Order Details</h5>
 
           <button
+            id="order-details-close"
             className="btn title-button"
             onClick={this.props.closeMealDetailModal}
           >

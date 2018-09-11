@@ -6,7 +6,7 @@ import OrderController from '../src/controllers/OrderController';
 import MealController from '../src/controllers/MealController';
 import MenuController from '../src/controllers/MenuController';
 import {
-  seedUsers, seedMeals
+  seedUsers, seedMeals, seedPassword
 } from '../src/seedFiles';
 import db from '../src/models';
 
@@ -18,7 +18,7 @@ export const defaultMeal2 = seedMeals[1];
 export const defaultMeal3 = seedMeals[4];
 export const defaultMeal4 = seedMeals[5];
 export const deleteMeal = seedMeals[3];
-export const defaultPassword = 'test';
+export const defaultPassword = seedPassword;
 export const userController = new UserController(db.User);
 export const orderController = new OrderController(db.Order);
 export const mealController = new MealController(db.Meal);

@@ -60,7 +60,7 @@ export class Order extends React.Component {
         addOrder: false
       });
       toast(
-        'Meal has been added to cart for editing',
+        'Order has been added to cart for editing',
         { className: 'toaster' }
       );
     }
@@ -174,6 +174,7 @@ export class Order extends React.Component {
           <Greeting isCaterer={isCaterer} firstName={firstName} />
           <button
             className="btn title-button"
+            id="cart-button"
             onClick={this.openCartModal}
             disabled={!isMealSelected}
           >
@@ -195,7 +196,7 @@ export class Order extends React.Component {
               <AccordionItem expanded>
                 <AccordionItemTitle>
                   <div className="title-element flexbox">
-                    <h4 className="long_string">
+                    <h4 className="long_string" id="menu-title">
                   Today&#39;s Menu
                     </h4>
                     <div

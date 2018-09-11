@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 import Dropzone from 'react-dropzone';
@@ -219,15 +220,23 @@ export class MealOptionsCard extends React.Component {
                 />}
               </div>
             </div>
+            { !this.props.connecting &&
             <button
-              className={(this.state.canSubmit || !this.props.connecting)
+              className={this.state.canSubmit
               ? 'btn' : 'btn btn-disabled'}
               onClick={() => this.formEl.submit()}
               type="submit"
-              disabled={!this.state.canSubmit || this.props.connecting}
+              disabled={!this.state.canSubmit}
             >
               <p>Continue</p>
-            </button>
+            </button>}
+
+            {this.props.connecting &&
+            <LinearProgress
+              style={{ height: '10px' }}
+            />
+            }
+
           </div>
 
 

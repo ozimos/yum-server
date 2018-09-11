@@ -26,7 +26,7 @@ class UserController extends Controller {
       }).then((response) => {
         if (!response) {
           return UserController.errorResponse({
-            email: 'Incorrect email or password'
+            password: 'Incorrect email or password'
           }, 404);
         }
         // check if password is correct

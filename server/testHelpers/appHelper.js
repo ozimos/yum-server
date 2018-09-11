@@ -4,13 +4,15 @@ import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
 import app from '../src/app';
-import { seedUsers, seedMeals } from '../src/seedFiles';
+import { seedUsers, seedMeals, seedPassword } from '../src/seedFiles';
+
 
 chai.use(chaiHttp);
 export const {
   expect, request
 } = chai;
 
+export const defaultPassword = seedPassword;
 
 export const catererTovieye = seedUsers[0];
 export const catererDouglas = seedUsers[1];
@@ -23,18 +25,21 @@ export const extraMeal = seedMeals[3];
 export const payloadTovieye = {
   isCaterer: catererTovieye.isCaterer,
   userId: catererTovieye.id,
-  firstName: catererTovieye.firstName
+  firstName: catererTovieye.firstName,
+  email: catererTovieye.email
 };
 export const payloadDouglas = {
   isCaterer: catererTovieye.isCaterer,
   userId: catererTovieye.id,
-  firstName: catererTovieye.firstName
+  firstName: catererTovieye.firstName,
+  email: catererTovieye.email
 };
 
 const payloadCustomer = {
   isCaterer: customerDienebi.isCaterer,
   userId: customerDienebi.id,
-  firstName: customerDienebi.firstName
+  firstName: customerDienebi.firstName,
+  email: customerDienebi.email
 };
 
 export const tovieyeCatererToken = jwt.sign(

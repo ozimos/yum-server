@@ -3,9 +3,11 @@
 exports[`CartContainer Component renders correctly 1`] = `
 <div
   className=""
+  id="order-cart"
 >
   <div
     className="flexbox cart"
+    id="order-cart-heading"
   >
     <h5>
       Order Cart
@@ -98,6 +100,7 @@ exports[`CartContainer Component renders correctly 1`] = `
             <button
               className="btn btn-cart"
               disabled={false}
+              id="place-order"
               onClick={[Function]}
             >
               Modify Order
@@ -119,9 +122,11 @@ exports[`CartContainer Component renders correctly 1`] = `
 exports[`CartContainer Component renders correctly 2`] = `
 <div
   className="string"
+  id="order-cart"
 >
   <div
     className="flexbox cart"
+    id="order-cart-heading"
   >
     <h5>
       Order Cart
@@ -214,6 +219,7 @@ exports[`CartContainer Component renders correctly 2`] = `
             <button
               className="btn btn-cart"
               disabled={false}
+              id="place-order"
               onClick={[Function]}
             >
               Modify Order

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="sample"
+    errors="0" failures="1" hostname="" id="" package="sample" skipped="0"
+    tests="1" time="2.910" timestamp="Mon, 10 Sep 2018 03:47:14 GMT">
+  
+    <testcase name="Demo test Google" classname="sample" time="2.910" assertions="2">
+
+      <failure message="Timed out while waiting for element &lt;button[name=btnG]&gt; to be visible for 1000 milliseconds.">    at Object.DemoTestGoogle [as Demo test Google] (/Users/ozimos/Documents/projects/Book-A-Meal/e2e-tests/sample.js:7:8)
+    at process._tickCallback (internal/process/next_tick.js:61:11)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

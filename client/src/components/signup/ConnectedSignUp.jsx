@@ -47,7 +47,7 @@ export class SignUp extends React.Component {
   componentDidUpdate() {
     const { prevSignupError, newError } = this.state;
 
-    if (newError && Object.keys(prevSignupError).length !== 0) {
+    if (newError && Object.keys(prevSignupError).length) {
       this.serverFeedback(prevSignupError);
       // eslint-disable-next-line
       this.setState({ newError: false });
@@ -75,7 +75,7 @@ export class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="canvas">
+      <div className="canvas signup">
         <div className="container2 container2-height">
           <header className="header">
             <h2 className="heading">Book A Meal</h2>
@@ -199,6 +199,7 @@ export class SignUp extends React.Component {
 
                 <button
                   className={this.state.canSubmit ? 'btn' : 'btn btn-disabled'}
+                  id="signup-button"
                   type="submit"
                   disabled={!this.state.canSubmit}
                 >

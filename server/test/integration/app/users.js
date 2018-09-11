@@ -2,6 +2,7 @@ import {
   expect,
   request,
   catererTovieye,
+  defaultPassword,
   rootURL
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
@@ -9,7 +10,7 @@ import app from '../../../src/app';
 describe('Routes Users', () => {
   const signUpUrl = `${rootURL}/auth/signup`;
   const logInUrl = `${rootURL}/auth/login`;
-  const defaultPassword = 'test';
+  const testPassword = 'test';
 
   // SignUp A User
   describe('POST /auth/signup', () => {
@@ -18,8 +19,8 @@ describe('Routes Users', () => {
       firstName: 'Tovieye',
       lastName: 'Ozi',
       email: 'tovieye.ozi@gmail.com',
-      password: 'test',
-      confirmPassword: 'test',
+      password: testPassword,
+      confirmPassword: testPassword,
     };
 
     it('should signup a new user', () => request(app).post(signUpUrl)

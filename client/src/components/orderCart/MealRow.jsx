@@ -17,9 +17,10 @@ const MealRow = ({
         <td>{title}</td>
         <td>{price}</td>
 
-        <td>
+        <td className="quantity-cell">
 
           <input
+            className="meal-quantity"
             type="number"
             placeholder="1"
             onChange={event => setQuantity(event, id)}

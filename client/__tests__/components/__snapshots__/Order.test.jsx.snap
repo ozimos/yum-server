@@ -19,6 +19,7 @@ exports[`Order Component renders correctly 1`] = `
     <button
       className="btn title-button"
       disabled={true}
+      id="cart-button"
       onClick={[Function]}
     >
       <p
@@ -92,6 +93,7 @@ exports[`Order Component renders correctly 1`] = `
             >
               <h4
                 className="long_string"
+                id="menu-title"
               >
                 Today's Menu
               </h4>
@@ -379,6 +381,7 @@ exports[`Order Component renders correctly 2`] = `
     <button
       className="btn title-button"
       disabled={true}
+      id="cart-button"
       onClick={[Function]}
     >
       <p
@@ -452,6 +455,7 @@ exports[`Order Component renders correctly 2`] = `
             >
               <h4
                 className="long_string"
+                id="menu-title"
               >
                 Today's Menu
               </h4>
@@ -692,6 +696,7 @@ exports[`Order Component renders correctly 3`] = `
     <button
       className="btn title-button"
       disabled={true}
+      id="cart-button"
       onClick={[Function]}
     >
       <p
@@ -765,6 +770,7 @@ exports[`Order Component renders correctly 3`] = `
             >
               <h4
                 className="long_string"
+                id="menu-title"
               >
                 Today's Menu
               </h4>
@@ -1001,6 +1007,7 @@ exports[`Order Component renders correctly 4`] = `
     <button
       className="btn title-button"
       disabled={true}
+      id="cart-button"
       onClick={[Function]}
     >
       <p
@@ -1074,6 +1081,7 @@ exports[`Order Component renders correctly 4`] = `
             >
               <h4
                 className="long_string"
+                id="menu-title"
               >
                 Today's Menu
               </h4>
@@ -1263,6 +1271,7 @@ exports[`Order Component renders correctly 5`] = `
     <button
       className="btn title-button"
       disabled={true}
+      id="cart-button"
       onClick={[Function]}
     >
       <p
@@ -1336,6 +1345,7 @@ exports[`Order Component renders correctly 5`] = `
             >
               <h4
                 className="long_string"
+                id="menu-title"
               >
                 Today's Menu
               </h4>
@@ -1618,7 +1628,7 @@ Object {
     "pages": 1,
   },
   "orderConnecting": false,
-  "orderEditMeals": Array [],
+  "orderEditMeals": Object {},
   "orderError": null,
   "orderMeals": Array [],
   "orderMealsError": null,

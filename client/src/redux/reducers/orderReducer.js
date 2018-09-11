@@ -9,7 +9,7 @@ export const initialOrderState = {
   orderMealsError: null,
   orders: [],
   orderMeals: [],
-  orderEditMeals: [],
+  orderEditMeals: {},
   total: 0,
   mealsPagination: {
     limit: 5,

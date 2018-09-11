@@ -134,8 +134,8 @@ class Controller {
    * @returns {obj} Model
    * @memberof Controller
    */
-  getSingleRecord(req) {
-    return this.Model.findById(req.params.id)
+  getSingleRecord(req, options) {
+    return this.Model.findById(req.params.id, options)
       .then((result) => {
         if (!result) {
           return Controller.errorResponse('no records available', 404);

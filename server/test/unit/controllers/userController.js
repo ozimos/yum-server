@@ -33,7 +33,7 @@ describe('User Controllers', () => {
 
     it('should return an error message if no data in database', () => {
       const expectedResponse = {
-        email: 'Incorrect email or password'
+        password: 'Incorrect email or password'
       };
 
       td.when(User.findOne(input)).thenResolve(null);

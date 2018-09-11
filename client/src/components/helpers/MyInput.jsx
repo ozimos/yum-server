@@ -22,6 +22,7 @@ class Input extends React.Component {
       <React.Fragment>
 
         <input
+          className="formsy-input"
           style={this.props.style}
           ref={this.props.myRef}
           onChange={this.changeValue}
@@ -33,6 +34,7 @@ class Input extends React.Component {
         />
 
         <div
+          className="error"
           style={{
             color: 'red', fontSize: '1rem'
           }}

@@ -57,7 +57,7 @@ const OrderTableContainer = ({ orders, ...props }) => {
         data={orders}
         columns={columns}
         className="-striped -highlight clickable"
-        minRows={0}
+        minRows={5}
         defaultPageSize={props.pagination.limit}
         loading={props.loading}
         pages={props.pagination.pages}

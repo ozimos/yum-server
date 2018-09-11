@@ -3,6 +3,7 @@ import ReactModal from 'react-modal';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import SearchInput, { createFilter } from 'react-search-input';
 import Formsy from 'formsy-react';
 import ReactPaginate from 'react-paginate';
@@ -281,15 +282,22 @@ export class MealManager extends React.Component {
               </div>
             </div>
 
+            { !this.props.connecting &&
             <button
-              className={(this.state.canSubmit || !this.props.connecting)
+              className={this.state.canSubmit
               ? 'btn' : 'btn btn-disabled'}
               onClick={() => this.formEl.submit()}
               type="submit"
-              disabled={!this.state.canSubmit || this.props.connecting}
+              disabled={!this.state.canSubmit}
             >
               <p>Continue</p>
-            </button>
+            </button>}
+
+            {this.props.connecting &&
+            <LinearProgress
+              style={{ height: '10px' }}
+            />
+            }
 
           </div>
 

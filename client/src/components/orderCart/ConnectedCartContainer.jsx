@@ -104,9 +104,9 @@ class CartContainer extends React.Component {
    const total = calcTotal();
 
    return (
-     <div className={rest.addClass ? `${rest.addClass}` : ''}>
+     <div id="order-cart" className={rest.addClass ? `${rest.addClass}` : ''}>
 
-       <div className="flexbox cart">
+       <div className="flexbox cart" id="order-cart-heading">
          <h5>Order Cart</h5>
          {this.state.placingOrder && <p> ... Processing your order</p>}
 
@@ -150,6 +150,7 @@ class CartContainer extends React.Component {
                <div className="flexbox info">
 
                  <button
+                   id="place-order"
                    className="btn btn-cart"
                    onClick={this.placeOrder}
                    disabled={this.state.placingOrder}
