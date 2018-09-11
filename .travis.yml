@@ -15,6 +15,9 @@ env:
 cache:
   directories:
     - "node_modules"
+before_install:
+  - npm i -g node-gyp node-pre-gyp
+  - npm install -g codecov
 install:
   - npm install
 before_script:
@@ -37,3 +40,4 @@ script:
 after_success:
   - npm run coverage
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - codecov
