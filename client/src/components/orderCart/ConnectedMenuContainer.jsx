@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { menuActions } from '../../redux/actions';
+
 
 import '../../../public/styles/cart_layout.scss';
 
@@ -61,11 +63,28 @@ class MenuContainer extends React.Component {
 
        <div className="flexbox">
 
-         <button className="btn btn-cart" onClick={this.placeOrder}>
+         { !this.props.connecting &&
+         <button
+           className="btn btn-cart"
+           onClick={this.placeOrder}
+           disabled={this.props.connecting}
+         >
               Post meals to Menu
          </button>
+       }
+         {this.props.connecting &&
+         <div style={{ width: '20%' }}>
+           <LinearProgress
+             style={{ height: '10px' }}
+           />
+         </div>
 
-         <button className="btn btn-cart" onClick={rest.clearMenu}>
+            }
+         <button
+           className="btn btn-cart"
+           onClick={rest.clearMenu}
+           disabled={this.props.connecting}
+         >
                    Clear Menu
          </button>
 
@@ -79,12 +98,14 @@ class MenuContainer extends React.Component {
 MenuContainer.defaultProps = {
   addClass: '',
   menuError: '',
+  connecting: false,
 };
 
 MenuContainer.propTypes = {
   menu: PropTypes.arrayOf(PropTypes.object).isRequired,
   addClass: PropTypes.string,
   menuError: PropTypes.string,
+  connecting: PropTypes.bool,
   clearMenu: PropTypes.func.isRequired,
   notify: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,

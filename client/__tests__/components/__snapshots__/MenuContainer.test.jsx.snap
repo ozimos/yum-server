@@ -59,12 +59,14 @@ exports[`MenuContainer Component renders correctly 1`] = `
   >
     <button
       className="btn btn-cart"
+      disabled={false}
       onClick={[Function]}
     >
       Post meals to Menu
     </button>
     <button
       className="btn btn-cart"
+      disabled={false}
       onClick={[MockFunction]}
     >
       Clear Menu
@@ -132,12 +134,14 @@ exports[`MenuContainer Component renders correctly 2`] = `
   >
     <button
       className="btn btn-cart"
+      disabled={false}
       onClick={[Function]}
     >
       Post meals to Menu
     </button>
     <button
       className="btn btn-cart"
+      disabled={false}
       onClick={[MockFunction]}
     >
       Clear Menu
