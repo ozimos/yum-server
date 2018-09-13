@@ -55,7 +55,7 @@ export const seedMeals = [{
   id: '5422b66c-09a2-4413-81b1-a8ceed0a66bb',
   userId: catererTovieye.id,
   title: 'Spaghetti and Sauce',
-  description: 'plain rice with ground beef',
+  description: 'Filling and Tasty',
   // eslint-disable-next-line max-len
   imageUrl: 'https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532701830/hz2fmblixkuvbfnt4vvv.jpg',
   price: 1500,
@@ -159,3 +159,117 @@ export const seedMealMenus = [{
   createdAt: new Date(),
   updatedAt: new Date()
 }];
+
+export const seedOrders = [
+  {
+    id: '1b977331-743a-446b-9609-4d9ad0f708eb',
+    userId: customerDienebi.id,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: 'e4d5fd31-0f5c-4bd1-9961-c04ffdcce761',
+    userId: customerDienebi.id,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: '896eb33f-5e2d-4845-8721-a7650970323c',
+    userId: customerDienebi.id,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: '1bb42c5b-6f75-4ee6-b2e1-e2642518c20c',
+    userId: customerDienebi.id,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
+
+export const seedMealOrders = [
+  {
+    orderId: seedOrders[0].id,
+    mealId: seedMeals[0].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[0].id,
+    mealId: seedMeals[1].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[0].id,
+    mealId: seedMeals[5].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[1].id,
+    mealId: seedMeals[0].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[1].id,
+    mealId: seedMeals[1].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[1].id,
+    mealId: seedMeals[4].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[2].id,
+    mealId: seedMeals[2].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[2].id,
+    mealId: seedMeals[3].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[2].id,
+    mealId: seedMeals[4].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[3].id,
+    mealId: seedMeals[0].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[3].id,
+    mealId: seedMeals[4].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    orderId: seedOrders[3].id,
+    mealId: seedMeals[5].id,
+    quantity: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+];

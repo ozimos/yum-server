@@ -64,8 +64,9 @@ export default class MenuController extends Controller {
           });
 
         }
-
-        if (!newRows[0].Meals.length) {
+        const isEmptyMenu = req.body && req.body.meals &&
+         !req.body.meals.length;
+        if (!newRows[0].Meals.length && !isEmptyMenu) {
           return MenuController.errorResponse(message, 404);
         }
 

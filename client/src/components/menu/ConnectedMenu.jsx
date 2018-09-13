@@ -148,6 +148,7 @@ addToMenu(meal) {
             <Greeting isCaterer={isCaterer} firstName={firstName} />
 
             <button
+              id="menu-cart-button"
               className="btn title-button"
               onClick={this.openMenuModal}
               disabled={!isMealSelected}

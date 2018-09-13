@@ -89,7 +89,7 @@ Given you manage a catering business, this app will help you manage meals and me
      * Install `Java JDK` on your Local machine
      * `npm run e2e:setup` to install the test utilities
      *  `npm run e2e:server` to start the app before testing
-     * `npm run e2e:start` to run the end to end tests
+     * In a separate terminal window execute `npm run e2e:start` to run the end to end tests
 
 ## Release
 * Version 1.0.0
