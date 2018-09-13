@@ -63,6 +63,7 @@ const OrderTableContainer = ({ orders, ...props }) => {
         pages={props.pagination.pages}
         onFetchData={props.onFetchData}
         sortable={false}
+        resizable={false}
         manual
         getTdProps={(state, rowInfo, column) => ({
             onClick: () => {

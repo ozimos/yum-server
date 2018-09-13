@@ -203,7 +203,7 @@ export class Dashboard extends React.Component {
                       currentOrderId={this.state.currentOrderId}
                     /> :
                     <div>
-                  You have not placed an order today
+                  No orders have been placed for your meals today
                     </div>
                 }
                 </AccordionItemBody>

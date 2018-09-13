@@ -7,7 +7,7 @@ module.exports = {
   beforeEach: (browser) => {
     browser.maximizeWindow();
   },
-  'It should login customer': (browser) => {
+  'It should login customer and navigate to meal ordering page': (browser) => {
     browser
       .url('http://localhost:3500')
       .waitForElementVisible('body', 1000)
@@ -38,6 +38,7 @@ module.exports = {
     browser
       .pause(3000)
       .click('.scroll.gallery > .card:nth-child(2) > button')
+      .pause(1000)
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .assert.containsText(
         '.Toastify__toast-body',
@@ -54,11 +55,11 @@ module.exports = {
        .waitForElementVisible('.Toastify__toast-body', 3000)
        .pause(1000)
        .click('.scroll.gallery > .card:nth-child(3) > button')
+       .pause(1000)
        .waitForElementVisible(
          'div.Toastify > div > div:nth-child(2) > div.Toastify__toast-body',
          3000
        )
-
        .assert.containsText(
          'div.Toastify > div > div:nth-child(2) > div.Toastify__toast-body',
          'Meal is already in cart'
@@ -67,6 +68,7 @@ module.exports = {
 
   'It should navigate to cart and place order': (browser) => {
     browser
+      .pause(2000)
       .click('.scroll.gallery > .card:nth-child(3) > button')
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .waitForElementVisible('#cart-button', 3000)
@@ -85,6 +87,7 @@ module.exports = {
 
   'It should not remove meal from cart if only one meal is left': (browser) => {
     browser
+      .pause(2000)
       .click('.scroll.gallery > .card:nth-child(3) > button')
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .pause(2000)
@@ -103,15 +106,14 @@ module.exports = {
 
   'It should remove meal from cart if delete is clicked': (browser) => {
     browser
+      .pause(2000)
       .click('#order-cart-heading > button')
       .pause(2000)
       .click('.scroll.gallery > .card:nth-child(2) > button')
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .pause(2000)
-      .click('.scroll.gallery > .card:nth-child(3) > button')
-      .waitForElementVisible('.Toastify__toast-body', 3000)
-      .pause(2000)
       .click('#cart-button')
+      .pause(2000)
       .waitForElementVisible('body > .ReactModalPortal .flexbox.cart', 1000)
       .click('#order-cart > div.responsive-table > table > tbody >' +
        'tr:nth-child(1) > td:nth-child(5) > button')
@@ -134,16 +136,17 @@ module.exports = {
        .click('.rt-tr-group:first-of-type > .rt-tr.-odd > .rt-td:nth-child(1)')
        .pause(2000)
        .assert.containsText('#order-details', 'Order Details')
-       .pause(1000)
+       .pause(3000)
        .click('#order-details-close');
    },
 
-  'It should show add order to cart when order edit button is clicked':
+  'It should add order to cart when order edit button is clicked':
   (browser) => {
     browser
       .pause(2000)
       .click('.rt-tr-group:first-of-type > .rt-tr.-odd >' +
        '.rt-td.normal-cursor > button')
+      .pause(1000)
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .assert.containsText(
         '.Toastify__toast-body',
@@ -151,12 +154,14 @@ module.exports = {
       )
       .pause(2000)
       .click('#cart-button')
+      .pause(2000)
       .waitForElementVisible('body > .ReactModalPortal .flexbox.cart', 1000)
       .pause(1000)
       .setValue('body > .ReactModalPortal tr.slim:first-of-type >' +
-       '.quantity-cell > .meal-quantity', 3)
+       '.quantity-cell > .meal-quantity', 0)
       .pause(2000)
-      .click('#place-order')
+      .click('#place-order ')
+      .pause(1000)
       .waitForElementVisible('.Toastify__toast-body', 3000)
       .assert.containsText('.Toastify__toast-body', 'Order has been modified')
       .end();

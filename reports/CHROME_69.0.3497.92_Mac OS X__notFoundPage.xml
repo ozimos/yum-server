@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="0"
+            tests="2">
+
+  <testsuite name="_notFoundPage"
+    errors="0" failures="0" hostname="" id="" package="_notFoundPage" skipped="0"
+    tests="2" time="14.31" timestamp="Wed, 12 Sep 2018 19:52:26 GMT">
+  
+    <testcase name="It should redirect to `not found page` if route does not exist" classname="_notFoundPage" time="9.073" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="It should redirect to login page if `Go home` is clicked" classname="_notFoundPage" time="5.239" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>

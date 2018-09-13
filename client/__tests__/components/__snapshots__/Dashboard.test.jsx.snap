@@ -418,7 +418,7 @@ exports[`Dashboard Component renders correctly 2`] = `
           >
             <div />
             <div>
-              You have not placed an order today
+              No orders have been placed for your meals today
             </div>
           </AccordionItemBodyWrapper>
         </AccordionItemWrapper>
