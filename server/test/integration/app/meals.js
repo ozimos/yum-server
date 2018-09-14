@@ -6,7 +6,7 @@ import {
   defaultMeal,
   tovieyeCatererToken,
   catererTovieye,
-  templateTest
+  templateTest,
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
 import db from '../../../../server/src/models';
@@ -17,9 +17,11 @@ const deletedMeal = {
   userId: catererTovieye.id,
   title: 'Starch and Something',
   description: 'affordable',
-  // eslint-disable-next-line max-len
-  imageUrl: 'https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532723402/ifzj4ynikksdo6tdtvko.jpg',
-  price: 1800, };
+  imageUrl: 'https://res.cloudinary.com/tovieyeozim/image/' +
+  'upload/c_fill,w_200,h_200/v1532723402/ifzj4ynikksdo6tdtvko.jpg',
+  price: 1800,
+  deletedAt: new Date(2100, 0)
+};
 const mealsUrl = `${rootURL}/meals`;
 const getMealsUrl = `${rootURL}/meals?offset=0&limit=8`;
 const mealIdUrl = `${rootURL}/meals/${defaultMeal.id}`;
@@ -72,6 +74,30 @@ context('meals integration test', () => {
     templateTest(
       'Modify Meal', 'put',
       mealIdUrl, updatedMeal, 'price', 'object'
+    );
+  });
+
+  // Delete A Meal
+  describe('DELETE /meals/:id', () => {
+
+    it(
+      'should delete a meal',
+      () => request(app).delete(`${mealsUrl}/${deletedMeal.id}`)
+        .set('authorization', `JWT ${tovieyeCatererToken}`)
+        .then((res) => {
+          expect(res).to.have.status(200);
+          expect(res.body.data.rows[0].id).to.not.equal(deletedMeal.id);
+          expect(res.body.data.rows[0].price).to.not.equal(deletedMeal.price);
+        })
+    );
+    it(
+      'should return error if deleted meal id does not exist',
+      () => request(app).delete(`${mealsUrl}/${deletedMeal.id}`)
+        .set('authorization', `JWT ${tovieyeCatererToken}`)
+        .then((res) => {
+          expect(res).to.have.status(404);
+          expect(res.body.message).to.equal('meal was not deleted');
+        })
     );
   });
 

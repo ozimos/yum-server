@@ -20,17 +20,6 @@ const body = {
 
 describe('Integration Controller Meal AddMeal', () => {
 
-  it('does not add meal without userId', async () => {
-
-    const expected = {
-      message: 'userId not supplied',
-      statusCode: 400
-    };
-    const response = await mealController.addMeal({ body });
-
-    expect(response).to.eql(expected);
-  });
-
   it('does add duplicate meal title by different user', async () => {
 
     const decoded2 = { ...decoded

@@ -147,6 +147,8 @@ a {
     margin-left: 10px;
     margin-right: 10px;
     .descrip{
+      margin-top: 5px;
+      margin-bottom: 5px;
       max-height: 20px;
       padding-left: 5px;
       padding-right: 5px;
@@ -407,7 +409,7 @@ textarea{
     .gallery {
       grid-template-columns: repeat(4, 1fr);
       .card{
-        width: 250px
+        width: 200px
       }
     }
     .form3-grid {

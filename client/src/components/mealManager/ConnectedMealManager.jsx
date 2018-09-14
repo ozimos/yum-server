@@ -28,24 +28,25 @@ export class MealManager extends React.Component {
     this.state = {
       canSubmit: false,
       showNewMealModal: false,
-      displayImage: '',
+      defaultImage: 'https://res.cloudinary.com/tovieyeozim/image/upload/' +
+      'c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg',
+      displayImage: 'https://res.cloudinary.com/tovieyeozim/image/upload/' +
+      'c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg',
       searchTerm: '',
       uploading: false,
-      uploadPercent: 0
+      uploadPercent: 0,
     };
-    this.handleImageDrop = this.handleImageDrop.bind(this);
-    this.setUploadPercent = this.setUploadPercent.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatch(mealActions.getAllMeals());
   }
 
-  setUploadPercent(percentProgress) {
+  setUploadPercent = (percentProgress) => {
     this.setState({ uploadPercent: percentProgress });
   }
 
-  handleImageDrop(files) {
+  handleImageDrop = (files) => {
     this.setState({ uploading: true });
     imageUpload(files, this.setUploadPercent).then((response) => {
       const { data } = response;
@@ -58,11 +59,13 @@ export class MealManager extends React.Component {
     });
   }
 
-  openNewMealModal = () =>
+  openNewMealModal = () => {
     this.setState({ showNewMealModal: true });
+  }
 
   closeNewMealModal = () =>
-    this.setState({ showNewMealModal: false, displayImage: '' });
+    this.setState({ showNewMealModal: false,
+      displayImage: this.state.defaultImage });
 
   handleCreateMeal = async (meal) => {
     await this.props.dispatch(mealActions.createMeal(meal));
@@ -232,20 +235,22 @@ export class MealManager extends React.Component {
 
                 <MyFormsyInput
                   innerRef={(c) => { this.urlInput = c; }}
-                  style={{ display: 'none' }}
+                  style={{ visibility: 'hidden', height: 0, margin: 0 }}
                   required
                   typeOfInput="url"
                   name="imageUrl"
-                  validations={{ isUrl: true, minLength: 5, maxLength: 98 }}
+                  value={this.state.defaultImage}
+                  validations={{ isUrl: true, minLength: 5, maxLength: 148 }}
                   validationError="Please select an image"
                   validationErrors={{
                 isUrl: 'A valid url was not supplied',
                 minLength: 'input must be longer than 5 characters',
-                maxLength: 'input must be shorter than 100 characters',
+                maxLength: 'input must be shorter than 150 characters',
               }}
                 />
               </Formsy>
             </div>
+
             <div className="overlay-container">
 
               <div className="overlay full" >

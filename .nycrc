@@ -18,5 +18,6 @@
   "check-coverage": false,
   "cache": true,
   "sourceMap": true,
-  "instrument": true
+  "instrument": true,
+  "report-dir": "./server-coverage"
 }

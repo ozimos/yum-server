@@ -4,7 +4,11 @@ import chaiHttp from 'chai-http';
 import jwt from 'jsonwebtoken';
 
 import app from '../src/app';
-import { seedUsers, seedMeals, seedPassword } from '../src/seedFiles';
+import { seedUsers,
+  seedMeals,
+  seedPassword,
+  seedOrders,
+  seedMealOrders } from '../src/seedFiles';
 
 
 chai.use(chaiHttp);
@@ -13,6 +17,8 @@ export const {
 } = chai;
 
 export const defaultPassword = seedPassword;
+export const defaultOrders = seedOrders;
+export const defaultMealOrders = seedMealOrders;
 
 export const catererTovieye = seedUsers[0];
 export const catererDouglas = seedUsers[1];

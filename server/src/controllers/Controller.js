@@ -34,6 +34,7 @@ class Controller {
       });
     };
   }
+
   /**
    *
    *
@@ -53,6 +54,7 @@ class Controller {
       token
     };
   }
+
   /**
    *
    *
@@ -83,6 +85,7 @@ class Controller {
       .then(result => Controller.defaultResponse(result, 201))
       .catch(error => Controller.errorResponse(error.message));
   }
+
   /**
    *
    *
@@ -144,6 +147,7 @@ class Controller {
       })
       .catch(error => Controller.errorResponse(error.message));
   }
+
   /**
    *
    *
@@ -166,6 +170,7 @@ class Controller {
     })
       .catch(error => Controller.errorResponse(error.message, 422));
   }
+
   /**
    *
    *
@@ -177,13 +182,10 @@ class Controller {
   deleteRecord(req) {
     return this.Model
       .destroy({
-        where: {
-          id: req.params.id,
-          deletedAt: new Date('2100')
-        },
+        where: { id: req.params.id }
       })
       .then((result) => {
-        if (result) { return Controller.defaultResponse(result); }
+        if (result) { return this.getAllRecords(req); }
         return Controller.errorResponse('no records available', 404);
       })
       .catch(error => Controller.errorResponse(error.message));

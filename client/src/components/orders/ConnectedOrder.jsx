@@ -11,6 +11,7 @@ import {
 } from 'react-accessible-accordion';
 import SearchInput, { createFilter } from 'react-search-input';
 import { ToastContainer, toast } from 'react-toastify';
+import swal from 'sweetalert';
 import ReactPaginate from 'react-paginate';
 import 'react-toastify/dist/ReactToastify.css';
 import MealDisplayCard from '../mealCard/MealDisplayCard';
@@ -117,6 +118,19 @@ export class Order extends React.Component {
   addOrderToCart = (id) => {
     this.props.dispatch(orderActions.getOrderForUpdate(id));
     this.setState({ addOrder: true });
+  }
+
+  deleteOrder = (id) => {
+    swal({
+      title: 'Delete Order',
+      text: 'Are you sure you want to delete this order',
+      icon: 'warning',
+      buttons: [true, 'Delete'],
+      dangerMode: true
+    })
+      .then(() => {
+        this.props.dispatch(orderActions.deleteOrder(id));
+      });
   }
 
   removeMealFromCart = (id) => {
@@ -269,6 +283,7 @@ export class Order extends React.Component {
                     loadingMeals={this.props.loadingMeals}
                     pagination={this.props.pagination}
                     addOrderToCart={this.addOrderToCart}
+                    deleteOrder={this.deleteOrder}
                     onFetchData={this.onFetchOrderData}
                     getOrderMeals={this.getOrderMeals}
                     getOrderMealsTotals={this.getOrderMealsTotals}

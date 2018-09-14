@@ -24,7 +24,6 @@ class Input extends React.Component {
         <input
           className="formsy-input"
           style={this.props.style}
-          ref={this.props.myRef}
           onChange={this.changeValue}
           type={this.props.typeOfInput}
           value={this.props.getValue() || ''}

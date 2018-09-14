@@ -75,7 +75,15 @@ export default (state = initialOrderState, action) => {
         connecting: false,
         orders: action.orders,
         pagination: action.pagination,
-        orderEditMeals: [],
+        orderEditMeals: {},
+      };
+
+    case orderTypes.DELETE_ORDER_SUCCESS:
+      return {
+        ...state,
+        connecting: false,
+        orders: action.orders,
+        pagination: action.pagination,
       };
 
     case orderTypes.GET_ORDER_MEAL_SUCCESS:

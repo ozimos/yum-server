@@ -198,29 +198,13 @@ describe('Controllers', () => {
   });
 
   describe('deleteRecord()', () => {
+
     const req = {
       params: {
         id: 'c848bf5c-27ab-4882-9e43-ffe178c82602'
-      }
+      },
     };
 
-    it('should delete a row', () => {
-      const req = {
-        params: {
-          id: 'c848bf5c-27ab-4882-9e43-ffe178c82602'
-        }
-      };
-      const result = 1;
-      td.when(Table.destroy({
-        where: {
-          id: req.params.id,
-          deletedAt: new Date('2100')
-        },
-      })).thenResolve(result);
-      return controller.deleteRecord(req)
-        .then(response =>
-          expect(response.data).to.equal(result));
-    });
 
     it(
       'should return an error message if error occurs when accessing database',
@@ -230,8 +214,7 @@ describe('Controllers', () => {
         };
         td.when(Table.destroy({
           where: {
-            id: req.params.id,
-            deletedAt: new Date('2100')
+            id: req.params.id
           },
         })).thenReject(error);
         return controller.deleteRecord(req)

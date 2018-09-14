@@ -59,6 +59,12 @@ orderRouter
     validator.body(orderSchema),
     OrderController.orderClose,
     OrderController.select(orderController, 'updateOrder')
+  )
+  .delete(
+    Authenticate.isUser, validator.params(paramSchema),
+    validator.body(orderSchema),
+    OrderController.orderClose,
+    OrderController.select(orderController, 'deleteOrder')
   );
 
 orderRouter

@@ -51,7 +51,37 @@ module.exports = {
       'div:nth-child(3) > div > div > div > span:nth-child(2)', '\u20a6500')
       .pause(2000);
   },
+  'It should not allow caterer to create a new meal': (browser) => {
+    browser
+      .click('#root > div > main > div.title-element.flexbox > button')
+      .pause(1000)
+      .waitForElementVisible('body > div:nth-child(6) > div > div >' +
+      'div.title.flexbox.navbar-fixed', 1000)
+      .assert.containsText('body > div:nth-child(6) > div > div >' +
+       'div.title.flexbox.navbar-fixed > h4', 'Meal Editor')
+      .pause(1000)
 
+      .setValue('body > div:nth-child(6) > div > div > div.form3-grid >' +
+      ' div:nth-child(1) > form > input:nth-child(1)', 'Fruit Basket')
+      .pause(2000)
+      .setValue('body > div:nth-child(6) > div > div > div.form3-grid >' +
+       'div:nth-child(1) > form > input:nth-child(3)', 500)
+      .pause(2000)
+      .setValue('body > div:nth-child(6) > div > div > div.form3-grid >' +
+       'div:nth-child(1) > form > textarea', 'Healthy Living')
+      .pause(2000)
+      .click('body > div:nth-child(6) > div > div > div.form3-grid > button')
+      .pause(2000)
+      .waitForElementVisible(
+        '#root > div > main > div.scroll2.gallery > div:nth-child(1) > p',
+        3000
+      )
+      .assert.containsText(
+        '#root > div > main > div.scroll2.gallery > div:nth-child(1) > p',
+        'Healthy Living'
+      )
+      .pause(2000);
+  },
   'It should navigate to menu page and show caterer meals ': (browser) => {
     browser
 
@@ -81,6 +111,7 @@ module.exports = {
       )
       .pause(1000);
   },
+
   'It should allow the caterer to clear the menu for the day': (browser) => {
     browser
       .click('#accordion__body-1 > div.title-element.flexbox > button')
@@ -92,7 +123,8 @@ module.exports = {
       )
       .pause(2000);
   },
-  'It should add meal to menu cart if meal\'s add to menu button is clicked':
+  [`It should add a meal to the menu cart if the meal's add 
+  to menu button is clicked`]:
    (browser) => {
      browser
        .pause(2000)
@@ -108,7 +140,8 @@ module.exports = {
        )
        .pause(2000);
    },
-  'It should not add meal to menu cart if meal has already been added to cart':
+  [`It should not add a meal to the menu cart if the meal has already
+   been added to the menu cart`]:
    (browser) => {
      browser
        .pause(3000)

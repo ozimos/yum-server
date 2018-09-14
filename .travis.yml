@@ -30,12 +30,10 @@ before_script:
 script:
   - npm run migrate:test
   - npm run test:client
-  - mv ./coverage/lcov.info ./coverage/lcov.client.info
-  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.client.info  --output ./coverage/codeclimate.client.json
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info  --output ./coverage/codeclimate.json
   - npm run test:server
-  - cp ./coverage/lcov.info ./coverage/lcov.server.info
-  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.server.info --output ./coverage/codeclimate.server.json
-  - ./cc-test-reporter sum-coverage -p 2 ./coverage/codeclimate.server.json ./coverage/codeclimate.client.json
+  - ./cc-test-reporter format-coverage -t lcov ./server-coverage/lcov.info --output ./server-coverage/codeclimate.json
+  - ./cc-test-reporter sum-coverage -p 2 ./server-coverage/codeclimate.json ./coverage/codeclimate.json
   - ./cc-test-reporter upload-coverage
 after_success:
   - npm run coverage
