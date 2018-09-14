@@ -142,7 +142,7 @@ export default class OrderController extends Controller {
    * @returns {obj}
    */
 
-  getOrdersWithMealLinks(req, newOptions, successCode = 200, message) {
+  getOrdersWithMealLinks(req, newOptions = {}, successCode = 200, message) {
 
     let scope;
     const { userId, isCaterer } = req.decoded;
@@ -348,5 +348,25 @@ export default class OrderController extends Controller {
     } catch (error) {
       return OrderController.errorResponse(error.message);
     }
+  }
+
+  /**
+   * delete an order from the database
+   * @param {obj} req express request object
+   * @returns {obj}
+   *
+   */
+  deleteOrder(req) {
+    return this.Model
+      .destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      .then((result) => {
+        if (result) { return this.getOrdersWithMealLinks(req); }
+        return OrderController.errorResponse('order was not deleted', 404);
+      })
+      .catch(error => OrderController.errorResponse(error.message));
   }
 }

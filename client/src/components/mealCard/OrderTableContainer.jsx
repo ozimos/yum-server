@@ -30,14 +30,26 @@ const OrderTableContainer = ({ orders, ...props }) => {
       Cell: columnProps => isToday(columnProps.value) &&
       canEdit(columnProps.value) &&
       (
-      <button
-        className="btn title-button"
-        onClick={() => props.addOrderToCart(columnProps.row.id)}
-        disabled={props.loadingMeals ||
+        <div className="flexbox">
+          <button
+            className="btn title-button"
+            onClick={() => props.addOrderToCart(columnProps.row.id)}
+            disabled={props.loadingMeals ||
           (props.currentOrderId === columnProps.row.id)}
-      >
+          >
       Edit
-      </button>
+          </button>
+
+          <button
+            className="btn title-button"
+            onClick={() => props.deleteOrder(columnProps.row.id)}
+            disabled={props.loading ||
+         (props.currentOrderId === columnProps.row.id)}
+          >
+     Delete
+          </button>
+        </div>
+
       ),
       getProps: () => ({
         style: {
@@ -47,7 +59,7 @@ const OrderTableContainer = ({ orders, ...props }) => {
         }
       }),
       className: 'normal-cursor',
-      width: 50
+      width: 200
     }
   ];
   return (
@@ -95,6 +107,7 @@ OrderTableContainer.propTypes = {
 
   orders: PropTypes.arrayOf(PropTypes.object).isRequired,
   addOrderToCart: PropTypes.func.isRequired,
+  deleteOrder: PropTypes.func.isRequired,
   getOrderMeals: PropTypes.func.isRequired,
   getOrderMealsTotals: PropTypes.func.isRequired,
   onFetchData: PropTypes.func.isRequired,

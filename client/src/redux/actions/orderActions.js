@@ -144,6 +144,24 @@ const updateOrder = (order, orderId) => (dispatch) => {
 
     );
 };
+const deleteOrder = orderId => (dispatch) => {
+  dispatch({ type: orderTypes.ORDER_REQUEST });
+
+  return requestServices(`${baseUrl}/${orderId}`, 'delete')
+    .then(
+      response => dispatch({
+        type: orderTypes.DELETE_ORDER_SUCCESS,
+        orders: response.data.data.rows,
+        pagination: paginationExtract(response.data.data)
+      }),
+      error =>
+        dispatch({
+          type: orderTypes.ORDER_FAILURE,
+          error: error.response.data.message
+        })
+
+    );
+};
 
 export default {
   getOrdersWithMealLinks,
@@ -152,5 +170,6 @@ export default {
   getMealsInOrder,
   getOrderTotal,
   postOrder,
-  updateOrder
+  updateOrder,
+  deleteOrder
 };

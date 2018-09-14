@@ -11,6 +11,7 @@ export default (sequelize, DataTypes) => {
   Order.associate = (models) => {
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
+      onDelete: 'CASCADE'
     });
     Order.belongsToMany(models.Meal, {
       through: 'MealOrders',

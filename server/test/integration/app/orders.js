@@ -5,8 +5,11 @@ import {
   rootURL,
   tovieyeCatererToken,
   defaultMeal,
+  defaultOrders,
+  defaultMealOrders
 } from '../../../testHelpers/appHelper';
 import app from '../../../src/app';
+import db from '../../../src/models';
 
 const ordersUrl = `${rootURL}/orders`;
 const getOrdersUrl = `${rootURL}/orders?offset=0&limit=5`;
@@ -162,6 +165,31 @@ describe('orders integration test', () => {
       () => request(app).put(`${rootURL}/orders/${orderId}`)
         .set('authorization', `JWT ${tovieyeCatererToken}`)
         .send(updatedOrder)
+        .then((res) => {
+          expect(res).to.have.status(200);
+        })
+    );
+  });
+
+
+  // Delete An Order
+  describe('DELETE /orders/:id', () => {
+    before('add orders to db', async () => {
+      await db.Order.bulkCreate(defaultOrders);
+      await db.MealOrders.bulkCreate(defaultMealOrders);
+    });
+    let orderId;
+    before('create an order', async () => {
+      const response = await request(app).post(ordersUrl)
+        .set('authorization', `JWT ${tovieyeCatererToken}`).send(newOrder);
+
+      orderId = response.body.data.rows[0].id;
+    });
+
+    it(
+      'should update an order',
+      () => request(app).delete(`${rootURL}/orders/${orderId}`)
+        .set('authorization', `JWT ${tovieyeCatererToken}`)
         .then((res) => {
           expect(res).to.have.status(200);
         })

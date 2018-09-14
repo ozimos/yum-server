@@ -45,7 +45,7 @@ mealRouter.route('/:id')
     Authenticate.isUser,
     Authenticate.isAdmin, validator.params(paramSchema),
     validator.query(querySchema),
-    MealController.select(mealController, 'deleteRecord')
+    MealController.select(mealController, 'deleteMeal')
   );
 
 

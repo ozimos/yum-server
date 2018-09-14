@@ -215,7 +215,9 @@ exports[`MealManager Component renders correctly 1`] = `
             required={true}
             style={
               Object {
-                "display": "none",
+                "height": 0,
+                "margin": 0,
+                "visibility": "hidden",
               }
             }
             typeOfInput="url"
@@ -223,17 +225,18 @@ exports[`MealManager Component renders correctly 1`] = `
             validationErrors={
               Object {
                 "isUrl": "A valid url was not supplied",
-                "maxLength": "input must be shorter than 100 characters",
+                "maxLength": "input must be shorter than 150 characters",
                 "minLength": "input must be longer than 5 characters",
               }
             }
             validations={
               Object {
                 "isUrl": true,
-                "maxLength": 98,
+                "maxLength": 148,
                 "minLength": 5,
               }
             }
+            value="https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg"
           />
         </Formsy>
       </div>
@@ -265,21 +268,11 @@ exports[`MealManager Component renders correctly 1`] = `
         <div
           id="meal_image"
         >
-          <div
-            className="dropzone"
-            style={
-              Object {
-                "alignItems": "center",
-                "display": "flex",
-              }
-            }
-          >
-            <button
-              className="btn"
-            >
-               Select an Image
-            </button>
-          </div>
+          <img
+            alt="meal"
+            className="fluid-img"
+            src="https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg"
+          />
         </div>
       </div>
       <button
@@ -467,7 +460,9 @@ exports[`MealManager Component renders correctly 2`] = `
             required={true}
             style={
               Object {
-                "display": "none",
+                "height": 0,
+                "margin": 0,
+                "visibility": "hidden",
               }
             }
             typeOfInput="url"
@@ -475,17 +470,18 @@ exports[`MealManager Component renders correctly 2`] = `
             validationErrors={
               Object {
                 "isUrl": "A valid url was not supplied",
-                "maxLength": "input must be shorter than 100 characters",
+                "maxLength": "input must be shorter than 150 characters",
                 "minLength": "input must be longer than 5 characters",
               }
             }
             validations={
               Object {
                 "isUrl": true,
-                "maxLength": 98,
+                "maxLength": 148,
                 "minLength": 5,
               }
             }
+            value="https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg"
           />
         </Formsy>
       </div>
@@ -517,21 +513,11 @@ exports[`MealManager Component renders correctly 2`] = `
         <div
           id="meal_image"
         >
-          <div
-            className="dropzone"
-            style={
-              Object {
-                "alignItems": "center",
-                "display": "flex",
-              }
-            }
-          >
-            <button
-              className="btn"
-            >
-               Select an Image
-            </button>
-          </div>
+          <img
+            alt="meal"
+            className="fluid-img"
+            src="https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg"
+          />
         </div>
       </div>
       <WithStyles(LinearProgress)
@@ -716,7 +702,9 @@ exports[`MealManager Component renders correctly 3`] = `
             required={true}
             style={
               Object {
-                "display": "none",
+                "height": 0,
+                "margin": 0,
+                "visibility": "hidden",
               }
             }
             typeOfInput="url"
@@ -724,17 +712,18 @@ exports[`MealManager Component renders correctly 3`] = `
             validationErrors={
               Object {
                 "isUrl": "A valid url was not supplied",
-                "maxLength": "input must be shorter than 100 characters",
+                "maxLength": "input must be shorter than 150 characters",
                 "minLength": "input must be longer than 5 characters",
               }
             }
             validations={
               Object {
                 "isUrl": true,
-                "maxLength": 98,
+                "maxLength": 148,
                 "minLength": 5,
               }
             }
+            value="https://res.cloudinary.com/tovieyeozim/image/upload/c_fill,w_200,h_200/v1532706744/hbj4qsguzdi78xcksws8.jpg"
           />
         </Formsy>
       </div>

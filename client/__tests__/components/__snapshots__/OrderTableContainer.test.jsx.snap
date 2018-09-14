@@ -80,7 +80,7 @@ exports[`OrderTableContainer Component renders correctly 1`] = `
           "accessor": "createdAt",
           "className": "normal-cursor",
           "getProps": [Function],
-          "width": 50,
+          "width": 200,
         },
       ]
     }

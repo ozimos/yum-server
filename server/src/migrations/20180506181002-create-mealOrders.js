@@ -16,6 +16,7 @@ export default {
             model: 'Orders',
             key: 'id',
           },
+          onDelete: 'CASCADE'
         },
         quantity: {
           type: Sequelize.INTEGER,
