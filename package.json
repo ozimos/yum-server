@@ -6,21 +6,18 @@
     },
     "scripts": {
         "start:dev": "dotenv -e .env -e .env.dev -- nodemon -r esm --harmony ./src/app.js",
-        "start:prod": "yarn node -r esm --harmony ./src/app.js",
-        "start:babel": "dotenv nodemon --watch . --exec babel-node ./src/app.js",
-        "build:.": "babel ./src -d ./lib --copy-files",
+        "start": " node -r esm --harmony ./src/app.js",
         "server:setup": "sequelize db:migrate:undo:all --env=production && sequelize db:migrate --env=production",
         "test": "run-s refresh:test test:server",
         "debug": "dotenv -e .env.dev -e .env -- nodemon -r esm --inspect  --harmony ./src/app.js",
         "test:server": "dotenv -e .env.test -e .env -- nyc mocha ./test",
-        "test:babel": "dotenv -e .env.test -e .env -- nyc mocha ./test --exit --recursive",
         "report": "nyc report --reporter=text-lcov",
         "lint": "eslint ./src/** --fix --ext .js,.ts",
         "migrate": "sequelize db:migrate",
         "drop": "sequelize db:migrate:undo:all",
         "seed": "sequelize db:seed:all",
         "refresh": "run-s \"drop --env={1}\" \"migrate --env={1}\" --",
-        "refresh:test": "yarn run refresh test"
+        "refresh:test": "npm run refresh test"
     },
     "devDependencies": {
         "@istanbuljs/nyc-config-typescript": "^1.0.1",
