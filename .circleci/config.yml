@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+
+executors:
+  node-postgres:
+    docker:
+      - image: circleci/node:13.12.0-buster
+        environment:
+          DB_CONNECTION: pgsql
+          DB_NAME: circle_test
+          DB_USER: root
+          DB_PASS: password
+          NODE_ENV: test
+          TOKEN_PASSWORD: notsecret
+      - image: circleci/postgres:12.2-postgis-ram
+        environment:
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: password
+
+jobs:
+  build-and-test:
+    executor:
+      name: node-postgres
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
+workflows:
+    build-and-test:
+      jobs:
+        - build-and-test
