@@ -5,7 +5,7 @@ export default function gitwebhook(req, res) {
     const hmac = crypto.createHmac('sha1', process.env.SECRET);
     const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest('hex')}`;
     if (
-        req.body.hook.events.includes('push') &&
+        req.headers['x-github-event'] === 'push' &&
         crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(req.headers['x-hub-signature']))
     ) {
         res.sendStatus(200);
