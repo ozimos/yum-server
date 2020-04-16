@@ -54,8 +54,8 @@ Given you manage a catering business, this app will help you manage meals and me
 
 ## Getting Started
 
--   [View the full application hosted on Glitch](https://assortedfoods.glitch.me)
--   [View the application API Documentation](https://assortedfoods.glitch.me/api/v1/docs)
+-   [View the full application hosted on Glitch](https://ozimos-yum-server.glitch.me)
+-   [View the application API Documentation](https://ozimos-yum-server.glitch.me/api/v1/docs)
 
 ### Requirements
 
@@ -105,7 +105,7 @@ Given you manage a catering business, this app will help you manage meals and me
 
 ## API Documentation
 
-The API documentation is powered by OpenAPI v3. View the [API](https://assortedfoods.glitch.me/api/v1/docs)
+The API documentation is powered by OpenAPI v3. View the [API](https://ozimos-yum-server.glitch.me/api/v1/docs)
 
 ## Contributing
 
