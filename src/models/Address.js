@@ -1,43 +1,44 @@
-import bcrypt from 'bcryptjs';
-
-const hashPassword = (user) =>
-    bcrypt.hash(user.password, 10).then((hash) => user.setDataValue('password', hash));
-
 export default (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
+    const Address = sequelize.define('Address', {
         id: {
             type: DataTypes.UUID,
-            primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: 'email',
-        },
-        firstName: {
+        street1: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        lastName: {
+        street2: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
+        lga: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        isCaterer: {
+        areaCode: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        state: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        defaultAddress: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
     });
 
-    User.beforeCreate(hashPassword);
-    User.associate = (models) => {
-        User.hasMany(models.Address, {
-            as: 'Addresses',
+    // Relations
+    Address.associate = (models) => {
+        Address.belongsTo(models.User, {
+            as: 'User',
+            foreignKey: 'userId',
+            onDelete: 'CASCADE',
         });
     };
-    return User;
+
+    return Address;
 };

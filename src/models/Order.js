@@ -9,6 +9,12 @@ export default (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
+            status: {
+                allowNull: false,
+                type: DataTypes.ENUM(),
+                values: ['pending', 'processing', 'dispatched', 'fulfilled'],
+                defaultValue: 'pending',
+            },
         },
         {
             scopes: {

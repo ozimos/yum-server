@@ -1,5 +1,6 @@
 version: 2.1
 orbs:
+  codecov: codecov/codecov@1.0.2
   node: circleci/node@1.1.6
 
 executors:
@@ -24,10 +25,24 @@ jobs:
       name: node-postgres
     steps:
       - checkout
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run: 
+          name: Notify Code Climate before tests
+          command:  ./cc-test-reporter before-build
       - node/with-cache:
           steps:
             - run: npm install
             - run: npm test
+      - run: 
+          name: Upload test result to Code Climate
+          command:  ./cc-test-reporter after-build
+      - codecov/upload:
+          file: coverage/lcov.info
+          flags: api
 workflows:
     build-and-test:
       jobs:
