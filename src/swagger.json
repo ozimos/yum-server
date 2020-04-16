@@ -305,7 +305,7 @@
         } ]
       }
     },
-    "/api/v1/orders/total/date" : {
+    "/api/v1/orders/total" : {
       "get" : {
         "parameters" : [ {
           "name" : "date",
@@ -329,41 +329,6 @@
             },
             "schema" : {
               "$ref" : "#/definitions/Totals"
-            }
-          },
-          "400" : {
-            "description" : "Bad Request",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorObject"
-            }
-          },
-          "404" : {
-            "description" : "No records available",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorString"
-            }
-          }
-        },
-        "security" : [ {
-          "jwt" : [ ]
-        } ]
-      }
-    },
-    "/api/v1/orders/date/{date}" : {
-      "get" : {
-        "parameters" : [ {
-          "name" : "date",
-          "in" : "path",
-          "description" : "Date",
-          "required" : true,
-          "type" : "string",
-          "format" : "date"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Return paginated orders for user for selected date",
-            "schema" : {
-              "$ref" : "#/definitions/AllOrderPostResponse"
             }
           },
           "400" : {
