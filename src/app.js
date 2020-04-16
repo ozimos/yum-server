@@ -5,6 +5,7 @@ import cors from 'cors';
 import swaggerDocument from './swagger.json';
 import routers from './routes';
 import validationErrors from './middleware/validationErrors';
+import gitwebhook from './routes/gitwebhook';
 
 const app = express();
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(
         extended: true,
     }),
 );
-
+app.post('/git', gitwebhook);
 app.use('/api/v1/meals', routers.mealRouter);
 app.use('/api/v1/menu', routers.menuRouter);
 app.use('/api/v1/orders', routers.orderRouter);

@@ -14,6 +14,12 @@ module.exports = {
                     as: 'userId',
                 },
             },
+            status: {
+                allowNull: false,
+                type: Sequelize.ENUM(),
+                values: ['pending', 'processing', 'dispatched', 'fulfilled'],
+                defaultValue: 'pending',
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
