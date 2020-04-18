@@ -25,7 +25,11 @@ app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(validationErrors);
 // Get port from environment and store in Express.
 const PORT = parseInt(process.env.PORT, 10) || 5300;
+function defaultGetHandler(req, res) {
+    res.status(200).send(`server running on port ${PORT}`);
+}
 app.set('port', PORT);
+app.get('/', defaultGetHandler);
 
 if (!module.parent) {
     app.listen(PORT, () => {

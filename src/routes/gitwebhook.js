@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { execSync } from 'child_process';
 /* eslint-disable no-console */
 export default function gitwebhook(req, res) {
-    const hmac = crypto.createHmac('sha1', process.env.SECRET);
+    const hmac = crypto.createHmac('sha1', process.env.SECRET || 'gitwebhook');
     const sig = `sha1=${hmac.update(JSON.stringify(req.body)).digest('hex')}`;
     if (
         req.headers['request url'].includes('glitch.me') &&
