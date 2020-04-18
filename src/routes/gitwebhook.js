@@ -10,8 +10,12 @@ export default function gitwebhook(req, res) {
         crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(req.headers['x-hub-signature']))
     ) {
         res.sendStatus(200);
-        const { state, merged } = req.body.pull_request;
-        if (state === 'closed' && merged) {
+        const {
+            state,
+            merged,
+            base: { ref },
+        } = req.body.pull_request;
+        if (state === 'closed' && merged && ref === 'master') {
             const commands = [
                 'git fetch origin master',
                 'git reset --hard origin/master',
