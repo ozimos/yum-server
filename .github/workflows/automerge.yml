@@ -26,5 +26,5 @@ jobs:
         env:
           MERGE_RETRY_SLEEP: 3600000
           MERGE_FORKS: false
-          MERGE_LABELS: automerge,!wip,!work in progress 
+          MERGE_LABELS: automerge,!wip,!work in progress,!deploy 
           GITHUB_TOKEN: "${{ secrets.AUTOMERGE_TOKEN }}"
