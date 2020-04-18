@@ -24,7 +24,6 @@ jobs:
       - name: automerge
         uses: "pascalgn/automerge-action@135f0bdb927d9807b5446f7ca9ecc2c51de03c4a"
         env:
-          MERGE_RETRY_SLEEP: 3600000
           MERGE_FORKS: false
           MERGE_LABELS: automerge,!wip,!work in progress,!deploy 
           GITHUB_TOKEN: "${{ secrets.AUTOMERGE_TOKEN }}"
