@@ -1,0 +1,53 @@
+name: Deploy with AWS BeanStalk
+on:
+  pull_request:
+    types: closed
+    
+    branches:
+    - master
+
+jobs:
+  build:
+    if: github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      
+    - name: Generate deployment package
+      run: git archive -v -o deploy.zip --format=zip HEAD
+
+    - name: Get timestamp
+      uses: gerred/actions/current-time@master
+      id: current-time
+
+    - name: Run string replace
+      uses: frabert/replace-string-action@master
+      id: format-time
+      with:
+        pattern: '[:\.]+'
+        string: "${{ steps.current-time.outputs.time }}"
+        replace-with: '-'
+        flags: 'g'
+
+    - name: Beanstalk Deploy for app
+      uses: einaregilsson/beanstalk-deploy@v3
+      with:
+        aws_access_key: ${{secrets.AWS_ACCESS_KEY}}
+        aws_secret_key: ${{secrets.AWS_SECRET_KEY}}
+        application_name: dailyeats
+        environment_name: Dailyeats-env
+        region: eu-central-1
+        version_label: "my-app-${{ steps.format-time.outputs.replaced }}"
+        deployment_package: deploy.zip
+
+    - name: Deployed!
+      run: echo App deployed to ELB
