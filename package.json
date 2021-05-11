@@ -65,7 +65,7 @@
         "jest-cli": "^25.3.0",
         "joi-extract-type": "^15.0.2",
         "jsonwebtoken": "^8.5.1",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "pg": "^8.0.0",
         "pg-hstore": "^2.3.3",
         "sequelize": "^5.21.6",
